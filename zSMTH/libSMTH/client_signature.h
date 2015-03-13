@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 newsmth. All rights reserved.
 //
 
-#ifndef BBSAdmin_client_signature_h
-#define BBSAdmin_client_signature_h
+//#ifndef BBSAdmin_client_signature_h
+//#define BBSAdmin_client_signature_h
 
 
 // TO BE UPDATED
@@ -15,4 +15,4 @@
 #define CLIENT_SECRET @"0055a40712ee09f74f70d193c5e8dbc3"
 #define CLIENT_USERID @"testapp"
 
-#endif
+//#endif

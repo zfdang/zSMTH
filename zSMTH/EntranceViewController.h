@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SMTHURLConnection.h"
 
-@interface ViewController : UIViewController
+@interface EntranceViewController : UIViewController <SMTHURLConnectionDelegate>
 
 
 @end

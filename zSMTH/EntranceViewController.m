@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Zhengfa. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "EntranceViewController.h"
 
-@interface ViewController ()
+@interface EntranceViewController ()
 
 @end
 
-@implementation ViewController
+@implementation EntranceViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,5 +23,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end
