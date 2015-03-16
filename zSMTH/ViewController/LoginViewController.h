@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyViewController.h"
+#import "ExtendedUIViewController.h"
 
-@interface LoginViewController : MyViewController
+@interface LoginViewController : ExtendedUIViewController
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 - (IBAction)login:(id)sender;
@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *editUsername;
 @property (strong, nonatomic) IBOutlet UITextField *editPassword;
 
+- (IBAction)showLeftMenu:(id)sender;
 
 
 

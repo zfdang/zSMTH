@@ -24,5 +24,7 @@
 - (int) login:(NSString*)username password:(NSString*)password;
 - (int) checkVersion;
 
+- (NSArray*) getFavorites:(long)fid;
+- (NSArray*) getGuidancePosts;
 
 @end

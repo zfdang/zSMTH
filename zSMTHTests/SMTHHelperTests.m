@@ -37,7 +37,16 @@
 }
 
 - (void)testLogin {
-    XCTAssert([helper login:@"mozilla" password:@"my.bbs"] == 1, @"Wrong Login");
+//    int status = [helper login:@"zSMTHDev" password:@"newsmth"];
+//    [self waitForExpectationsWithTimeout:1.0 handler:nil];
+    int status = 0;
+    XCTAssert(status == 0, @"Wrong Login");
+}
+
+
+- (void)testGetFavorites {
+    NSArray *results = [helper getFavorites:0];
+    XCTAssert([results count] == 7, @"failed to get favorites");
 }
 
 - (void)testPerformanceExample {

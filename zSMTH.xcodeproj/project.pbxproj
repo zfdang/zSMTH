@@ -9,22 +9,33 @@
 /* Begin PBXBuildFile section */
 		58A4F5D48E429C8662E18489 /* libPods-zSMTH.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA120C3EDD82A397C7762E47 /* libPods-zSMTH.a */; };
 		6915D4A01AB2785C00B3FB53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6915D49F1AB2785C00B3FB53 /* Foundation.framework */; };
-		695226961AB2D4140060E5B3 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 695226951AB2D4140060E5B3 /* MyViewController.m */; };
+		695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */; };
+		6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */; };
+		6984F6EF1AB3D3F700548BD2 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EE1AB3D3F700548BD2 /* LeftMenuViewController.m */; };
+		6984F6F21AB3DC1D00548BD2 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F11AB3DC1D00548BD2 /* NavigationViewController.m */; };
+		6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F41AB48FA400548BD2 /* FavoriteTableViewController.m */; };
+		6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F71AB4927600548BD2 /* ExtendedTableViewController.m */; };
+		6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6FA1AB579E900548BD2 /* SMTHBoard.m */; };
+		6984F6FE1AB5D53800548BD2 /* BoardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */; };
 		69F4EAA31AAFF9FF00A82B50 /* libSMTH_0.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAA51AAFFA5100A82B50 /* client_signature.m */; };
 		69F4EAA91AB06D1D00A82B50 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAA81AB06D1D00A82B50 /* LoginViewController.m */; };
 		69F4EAAD1AB1780A00A82B50 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAAC1AB1780A00A82B50 /* Reachability.m */; };
 		69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */; };
-		69F4EAB31AB19FFB00A82B50 /* ZSMTHSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAB21AB19FFB00A82B50 /* ZSMTHSetting.m */; };
 		69F4EAB51AB1C13C00A82B50 /* SMTHHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAB41AB1C13C00A82B50 /* SMTHHelperTests.m */; };
 		69F4EAB71AB1EFE800A82B50 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */; };
 		69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF2D1AA9CE97007C9EFB /* main.m */; };
 		69FCBF311AA9CE97007C9EFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF301AA9CE97007C9EFB /* AppDelegate.m */; };
-		69FCBF341AA9CE97007C9EFB /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF331AA9CE97007C9EFB /* EntranceViewController.m */; };
+		69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF331AA9CE97007C9EFB /* REFrostedRootViewController.m */; };
 		69FCBF371AA9CE97007C9EFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69FCBF351AA9CE97007C9EFB /* Main.storyboard */; };
 		69FCBF391AA9CE98007C9EFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69FCBF381AA9CE98007C9EFB /* Images.xcassets */; };
 		69FCBF3C1AA9CE98007C9EFB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FCBF3A1AA9CE98007C9EFB /* LaunchScreen.xib */; };
 		69FCBF481AA9CE98007C9EFB /* zSMTHTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF471AA9CE98007C9EFB /* zSMTHTests.m */; };
+		69FE90AA1AB66EC400E72720 /* BoardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */; };
+		69FE90B61AB6FCD700E72720 /* GuidanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90B51AB6FCD700E72720 /* GuidanceViewController.m */; };
+		69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90B81AB71A7700E72720 /* SMTHPost.m */; };
+		69FE90BC1AB727B700E72720 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FE90BA1AB727B700E72720 /* PostTableViewCell.xib */; };
+		69FE90BF1AB7296200E72720 /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90BE1AB7296200E72720 /* PostTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +52,21 @@
 		13FB643B10FFC65DDD7CF5C4 /* Pods-zSMTH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zSMTH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zSMTH/Pods-zSMTH.debug.xcconfig"; sourceTree = "<group>"; };
 		48F951DFD4F05230EF38D92E /* Pods-zSMTH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zSMTH.release.xcconfig"; path = "Pods/Target Support Files/Pods-zSMTH/Pods-zSMTH.release.xcconfig"; sourceTree = "<group>"; };
 		6915D49F1AB2785C00B3FB53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		695226941AB2D4140060E5B3 /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
-		695226951AB2D4140060E5B3 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		695226941AB2D4140060E5B3 /* ExtendedUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedUIViewController.h; sourceTree = "<group>"; };
+		695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedUIViewController.m; sourceTree = "<group>"; };
+		6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSMTHSetting.h; sourceTree = "<group>"; };
+		6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSMTHSetting.m; sourceTree = "<group>"; };
+		6984F6ED1AB3D3F700548BD2 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftMenuViewController.h; path = ViewController/LeftMenuViewController.h; sourceTree = "<group>"; };
+		6984F6EE1AB3D3F700548BD2 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftMenuViewController.m; path = ViewController/LeftMenuViewController.m; sourceTree = "<group>"; };
+		6984F6F01AB3DC1D00548BD2 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
+		6984F6F11AB3DC1D00548BD2 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		6984F6F31AB48FA400548BD2 /* FavoriteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteTableViewController.h; path = ViewController/FavoriteTableViewController.h; sourceTree = "<group>"; };
+		6984F6F41AB48FA400548BD2 /* FavoriteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavoriteTableViewController.m; path = ViewController/FavoriteTableViewController.m; sourceTree = "<group>"; };
+		6984F6F61AB4927600548BD2 /* ExtendedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedTableViewController.h; sourceTree = "<group>"; };
+		6984F6F71AB4927600548BD2 /* ExtendedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedTableViewController.m; sourceTree = "<group>"; };
+		6984F6F91AB579E900548BD2 /* SMTHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHBoard.h; sourceTree = "<group>"; };
+		6984F6FA1AB579E900548BD2 /* SMTHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHBoard.m; sourceTree = "<group>"; };
+		6984F6FD1AB5D53800548BD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = zSMTH/Base.lproj/BoardTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSMTH_0.2.3.a; sourceTree = "<group>"; };
 		69F4EAA11AAFF9FF00A82B50 /* smth_netop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smth_netop.h; sourceTree = "<group>"; };
 		69F4EAA21AAFF9FF00A82B50 /* SMTHURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHURLConnection.h; sourceTree = "<group>"; };
@@ -54,8 +78,6 @@
 		69F4EAAC1AB1780A00A82B50 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		69F4EAAE1AB1792000A82B50 /* SMTHHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMTHHelper.h; path = zSMTH/libSMTH/SMTHHelper.h; sourceTree = SOURCE_ROOT; };
 		69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMTHHelper.m; path = zSMTH/libSMTH/SMTHHelper.m; sourceTree = SOURCE_ROOT; };
-		69F4EAB11AB19FFB00A82B50 /* ZSMTHSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSMTHSetting.h; sourceTree = "<group>"; };
-		69F4EAB21AB19FFB00A82B50 /* ZSMTHSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSMTHSetting.m; sourceTree = "<group>"; };
 		69F4EAB41AB1C13C00A82B50 /* SMTHHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHHelperTests.m; sourceTree = "<group>"; };
 		69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		69FCBF281AA9CE97007C9EFB /* zSMTH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zSMTH.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,14 +85,23 @@
 		69FCBF2D1AA9CE97007C9EFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		69FCBF2F1AA9CE97007C9EFB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		69FCBF301AA9CE97007C9EFB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		69FCBF321AA9CE97007C9EFB /* EntranceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntranceViewController.h; sourceTree = "<group>"; };
-		69FCBF331AA9CE97007C9EFB /* EntranceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntranceViewController.m; sourceTree = "<group>"; };
+		69FCBF321AA9CE97007C9EFB /* REFrostedRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = REFrostedRootViewController.h; sourceTree = "<group>"; };
+		69FCBF331AA9CE97007C9EFB /* REFrostedRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = REFrostedRootViewController.m; sourceTree = "<group>"; };
 		69FCBF361AA9CE97007C9EFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		69FCBF381AA9CE98007C9EFB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		69FCBF3B1AA9CE98007C9EFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		69FCBF411AA9CE98007C9EFB /* zSMTHTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zSMTHTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69FCBF461AA9CE98007C9EFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69FCBF471AA9CE98007C9EFB /* zSMTHTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zSMTHTests.m; sourceTree = "<group>"; };
+		69FE90A81AB66EC400E72720 /* BoardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardTableViewCell.h; path = ViewController/BoardTableViewCell.h; sourceTree = "<group>"; };
+		69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardTableViewCell.m; path = ViewController/BoardTableViewCell.m; sourceTree = "<group>"; };
+		69FE90B41AB6FCD700E72720 /* GuidanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuidanceViewController.h; path = ViewController/GuidanceViewController.h; sourceTree = "<group>"; };
+		69FE90B51AB6FCD700E72720 /* GuidanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuidanceViewController.m; path = ViewController/GuidanceViewController.m; sourceTree = "<group>"; };
+		69FE90B71AB71A7700E72720 /* SMTHPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHPost.h; sourceTree = "<group>"; };
+		69FE90B81AB71A7700E72720 /* SMTHPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHPost.m; sourceTree = "<group>"; };
+		69FE90BB1AB727B700E72720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PostTableViewCell.xib; sourceTree = "<group>"; };
+		69FE90BD1AB7296200E72720 /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostTableViewCell.h; path = ViewController/PostTableViewCell.h; sourceTree = "<group>"; };
+		69FE90BE1AB7296200E72720 /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostTableViewCell.m; path = ViewController/PostTableViewCell.m; sourceTree = "<group>"; };
 		AA120C3EDD82A397C7762E47 /* libPods-zSMTH.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-zSMTH.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,9 +130,40 @@
 		1710DEAB67675146326055AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */,
+				6915D49F1AB2785C00B3FB53 /* Foundation.framework */,
 				AA120C3EDD82A397C7762E47 /* libPods-zSMTH.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6984F6E51AB3D28300548BD2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */,
+				69FE90BA1AB727B700E72720 /* PostTableViewCell.xib */,
+				69FCBF381AA9CE98007C9EFB /* Images.xcassets */,
+				69FCBF351AA9CE97007C9EFB /* Main.storyboard */,
+				69FCBF3A1AA9CE98007C9EFB /* LaunchScreen.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		6984F6EC1AB3D3B300548BD2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				69FE90B41AB6FCD700E72720 /* GuidanceViewController.h */,
+				69FE90B51AB6FCD700E72720 /* GuidanceViewController.m */,
+				6984F6F31AB48FA400548BD2 /* FavoriteTableViewController.h */,
+				6984F6F41AB48FA400548BD2 /* FavoriteTableViewController.m */,
+				69F4EAA71AB06D1D00A82B50 /* LoginViewController.h */,
+				69F4EAA81AB06D1D00A82B50 /* LoginViewController.m */,
+				69FE90A81AB66EC400E72720 /* BoardTableViewCell.h */,
+				69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */,
+				69FE90BD1AB7296200E72720 /* PostTableViewCell.h */,
+				69FE90BE1AB7296200E72720 /* PostTableViewCell.m */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 		69F4EA9F1AAFF9FF00A82B50 /* libSMTH */ = {
@@ -114,6 +176,10 @@
 				69F4EAAE1AB1792000A82B50 /* SMTHHelper.h */,
 				69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */,
 				69F4EAA21AAFF9FF00A82B50 /* SMTHURLConnection.h */,
+				6984F6F91AB579E900548BD2 /* SMTHBoard.h */,
+				6984F6FA1AB579E900548BD2 /* SMTHBoard.m */,
+				69FE90B71AB71A7700E72720 /* SMTHPost.h */,
+				69FE90B81AB71A7700E72720 /* SMTHPost.m */,
 			);
 			path = libSMTH;
 			sourceTree = "<group>";
@@ -123,6 +189,8 @@
 			children = (
 				69F4EAAB1AB1780A00A82B50 /* Reachability.h */,
 				69F4EAAC1AB1780A00A82B50 /* Reachability.m */,
+				6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */,
+				6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -130,8 +198,6 @@
 		69FCBF1F1AA9CE97007C9EFB = {
 			isa = PBXGroup;
 			children = (
-				6915D49F1AB2785C00B3FB53 /* Foundation.framework */,
-				69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */,
 				69FCBF2A1AA9CE97007C9EFB /* zSMTH */,
 				69FCBF441AA9CE98007C9EFB /* zSMTHTests */,
 				69FCBF291AA9CE97007C9EFB /* Products */,
@@ -154,19 +220,18 @@
 			children = (
 				69F4EAAA1AB1780A00A82B50 /* Utilities */,
 				69F4EA9F1AAFF9FF00A82B50 /* libSMTH */,
-				69F4EAB11AB19FFB00A82B50 /* ZSMTHSetting.h */,
-				69F4EAB21AB19FFB00A82B50 /* ZSMTHSetting.m */,
-				695226941AB2D4140060E5B3 /* MyViewController.h */,
-				695226951AB2D4140060E5B3 /* MyViewController.m */,
-				69FCBF2F1AA9CE97007C9EFB /* AppDelegate.h */,
-				69FCBF301AA9CE97007C9EFB /* AppDelegate.m */,
-				69FCBF321AA9CE97007C9EFB /* EntranceViewController.h */,
-				69FCBF331AA9CE97007C9EFB /* EntranceViewController.m */,
-				69FCBF351AA9CE97007C9EFB /* Main.storyboard */,
-				69F4EAA71AB06D1D00A82B50 /* LoginViewController.h */,
-				69F4EAA81AB06D1D00A82B50 /* LoginViewController.m */,
-				69FCBF381AA9CE98007C9EFB /* Images.xcassets */,
-				69FCBF3A1AA9CE98007C9EFB /* LaunchScreen.xib */,
+				6984F6EC1AB3D3B300548BD2 /* ViewController */,
+				695226941AB2D4140060E5B3 /* ExtendedUIViewController.h */,
+				695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */,
+				6984F6F61AB4927600548BD2 /* ExtendedTableViewController.h */,
+				6984F6F71AB4927600548BD2 /* ExtendedTableViewController.m */,
+				69FCBF321AA9CE97007C9EFB /* REFrostedRootViewController.h */,
+				69FCBF331AA9CE97007C9EFB /* REFrostedRootViewController.m */,
+				6984F6ED1AB3D3F700548BD2 /* LeftMenuViewController.h */,
+				6984F6EE1AB3D3F700548BD2 /* LeftMenuViewController.m */,
+				6984F6F01AB3DC1D00548BD2 /* NavigationViewController.h */,
+				6984F6F11AB3DC1D00548BD2 /* NavigationViewController.m */,
+				6984F6E51AB3D28300548BD2 /* Resources */,
 				69FCBF2B1AA9CE97007C9EFB /* Supporting Files */,
 			);
 			path = zSMTH;
@@ -176,6 +241,8 @@
 			isa = PBXGroup;
 			children = (
 				69FCBF2C1AA9CE97007C9EFB /* Info.plist */,
+				69FCBF2F1AA9CE97007C9EFB /* AppDelegate.h */,
+				69FCBF301AA9CE97007C9EFB /* AppDelegate.m */,
 				69FCBF2D1AA9CE97007C9EFB /* main.m */,
 			);
 			name = "Supporting Files";
@@ -291,8 +358,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				69FCBF371AA9CE97007C9EFB /* Main.storyboard in Resources */,
+				69FE90BC1AB727B700E72720 /* PostTableViewCell.xib in Resources */,
 				69FCBF3C1AA9CE98007C9EFB /* LaunchScreen.xib in Resources */,
 				69FCBF391AA9CE98007C9EFB /* Images.xcassets in Resources */,
+				6984F6FE1AB5D53800548BD2 /* BoardTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,15 +412,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69FCBF341AA9CE97007C9EFB /* EntranceViewController.m in Sources */,
+				69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */,
+				69FE90BF1AB7296200E72720 /* PostTableViewCell.m in Sources */,
+				6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */,
+				69FE90B61AB6FCD700E72720 /* GuidanceViewController.m in Sources */,
 				69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */,
 				69FCBF311AA9CE97007C9EFB /* AppDelegate.m in Sources */,
-				695226961AB2D4140060E5B3 /* MyViewController.m in Sources */,
+				695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */,
+				6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */,
 				69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */,
+				6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */,
 				69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */,
-				69F4EAB31AB19FFB00A82B50 /* ZSMTHSetting.m in Sources */,
+				69FE90AA1AB66EC400E72720 /* BoardTableViewCell.m in Sources */,
+				69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */,
+				6984F6F21AB3DC1D00548BD2 /* NavigationViewController.m in Sources */,
 				69F4EAAD1AB1780A00A82B50 /* Reachability.m in Sources */,
+				6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */,
 				69F4EAA91AB06D1D00A82B50 /* LoginViewController.m in Sources */,
+				6984F6EF1AB3D3F700548BD2 /* LeftMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +453,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6984F6FD1AB5D53800548BD2 /* Base */,
+			);
+			name = BoardTableViewCell.xib;
+			path = libSMTH;
+			sourceTree = "<group>";
+		};
 		69FCBF351AA9CE97007C9EFB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -389,6 +476,14 @@
 				69FCBF3B1AA9CE98007C9EFB /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		69FE90BA1AB727B700E72720 /* PostTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69FE90BB1AB727B700E72720 /* Base */,
+			);
+			name = PostTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
