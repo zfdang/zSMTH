@@ -133,7 +133,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-bO-I7T">
                                 <rect key="frame" x="210" y="250" width="80" height="30"/>
-                                <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="CVp-gW-kti"/>
                                     <constraint firstAttribute="width" constant="80" id="F8S-ui-mwd"/>

@@ -65,12 +65,12 @@
     setting.username = [self.editUsername text];
     setting.password = [self.editPassword text];
     
-    int status = [helper login:[self.editUsername text] password:[self.editPassword text]];
-    NSLog(@"Login result: %d", status);
+    [helper login:[self.editUsername text] password:[self.editPassword text]];
 }
 
 - (void)finishAsyncTask
 {
+//    NSLog(@"Login result: %d", status);
     
 }
 

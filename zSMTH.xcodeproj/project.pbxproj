@@ -10,6 +10,7 @@
 		58A4F5D48E429C8662E18489 /* libPods-zSMTH.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA120C3EDD82A397C7762E47 /* libPods-zSMTH.a */; };
 		690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */; };
 		6915D4A01AB2785C00B3FB53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6915D49F1AB2785C00B3FB53 /* Foundation.framework */; };
+		691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 691B0AD51AB8882500010FC3 /* SMTHUser.m */; };
 		695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */; };
 		6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */; };
 		6984F6EF1AB3D3F700548BD2 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EE1AB3D3F700548BD2 /* LeftMenuViewController.m */; };
@@ -55,6 +56,8 @@
 		690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = ViewController/UserInfoViewController.h; sourceTree = "<group>"; };
 		690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = ViewController/UserInfoViewController.m; sourceTree = "<group>"; };
 		6915D49F1AB2785C00B3FB53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		691B0AD41AB8882500010FC3 /* SMTHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHUser.h; sourceTree = "<group>"; };
+		691B0AD51AB8882500010FC3 /* SMTHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHUser.m; sourceTree = "<group>"; };
 		695226941AB2D4140060E5B3 /* ExtendedUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedUIViewController.h; sourceTree = "<group>"; };
 		695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedUIViewController.m; sourceTree = "<group>"; };
 		6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSMTHSetting.h; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 				69F4EAA51AAFFA5100A82B50 /* client_signature.m */,
 				69F4EAAE1AB1792000A82B50 /* SMTHHelper.h */,
 				69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */,
+				691B0AD41AB8882500010FC3 /* SMTHUser.h */,
+				691B0AD51AB8882500010FC3 /* SMTHUser.m */,
 				69F4EAA21AAFF9FF00A82B50 /* SMTHURLConnection.h */,
 				6984F6F91AB579E900548BD2 /* SMTHBoard.h */,
 				6984F6FA1AB579E900548BD2 /* SMTHBoard.m */,
@@ -429,6 +434,7 @@
 				6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */,
 				690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */,
 				69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */,
+				691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */,
 				69FE90AA1AB66EC400E72720 /* BoardTableViewCell.m in Sources */,
 				69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */,
 				6984F6F21AB3DC1D00548BD2 /* NavigationViewController.m in Sources */,

@@ -48,6 +48,25 @@
 {
     [smth reset_status];
     int status = [smth net_LoginBBS:username :password];
+    if( status == 1)
+    {
+//        age = 35;
+//        faceurl = "";
+//        "first_login" = 1426471523;
+//        gender = 0;
+//        id = zSMTHDev;
+//        "last_login" = 1426608072;
+//        level = 1;
+//        life = "\U840c\U82bd";
+//        logins = 208;
+//        nick = zSMTHDev;
+//        posts = 0;
+//        score = 0;
+//        title = "\U7528\U6237";
+//        uid = 409391;
+        NSDictionary *users = [smth net_QueryUser:username];
+        NSLog(@"%@", users);
+    }
     NSLog(@"Login Status %d", status);
 
     return status;
