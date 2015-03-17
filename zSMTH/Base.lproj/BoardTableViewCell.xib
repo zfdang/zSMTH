@@ -14,20 +14,20 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VBc-Y0-mE0" id="1nu-iY-M69">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adx-9g-7DZ" userLabel="英文版名" colorLabel="IBBuiltInLabel-Blue">
-                        <rect key="frame" x="62" y="9" width="30.5" height="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adx-9g-7DZ" userLabel="英文版名" colorLabel="IBBuiltInLabel-Blue">
+                        <rect key="frame" x="62" y="9" width="30.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJh-Ck-CAj" userLabel="中文版名">
-                        <rect key="frame" x="62" y="38" width="42" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJh-Ck-CAj" userLabel="中文版名">
+                        <rect key="frame" x="62" y="28.5" width="42" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1f-DA-YpG" userLabel="版主">
-                        <rect key="frame" x="112.5" y="10" width="197.5" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1f-DA-YpG" userLabel="版主">
+                        <rect key="frame" x="102.5" y="10" width="207.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -57,6 +57,7 @@
                 <constraints>
                     <constraint firstItem="eJh-Ck-CAj" firstAttribute="leading" secondItem="1nu-iY-M69" secondAttribute="leadingMargin" constant="54" id="0Zf-BQ-udY"/>
                     <constraint firstItem="R1f-DA-YpG" firstAttribute="top" secondItem="1nu-iY-M69" secondAttribute="topMargin" constant="2" id="1Db-kk-uYV"/>
+                    <constraint firstItem="eJh-Ck-CAj" firstAttribute="top" secondItem="adx-9g-7DZ" secondAttribute="bottom" constant="5" id="B2d-zr-Gyb"/>
                     <constraint firstItem="Sem-RL-J5o" firstAttribute="leading" secondItem="1nu-iY-M69" secondAttribute="leadingMargin" constant="2" id="B8w-Hx-zTt"/>
                     <constraint firstAttribute="trailingMargin" secondItem="R1f-DA-YpG" secondAttribute="trailing" constant="2" id="BYS-lk-A0H"/>
                     <constraint firstItem="eJh-Ck-CAj" firstAttribute="top" secondItem="adx-9g-7DZ" secondAttribute="bottom" constant="10" id="Fec-KQ-ktL"/>
@@ -66,6 +67,7 @@
                     <constraint firstItem="R1f-DA-YpG" firstAttribute="top" secondItem="1nu-iY-M69" secondAttribute="topMargin" constant="4" id="N28-J5-aud"/>
                     <constraint firstItem="R1f-DA-YpG" firstAttribute="leading" secondItem="adx-9g-7DZ" secondAttribute="trailing" constant="20" id="N5d-pY-X3A"/>
                     <constraint firstAttribute="centerY" secondItem="Sem-RL-J5o" secondAttribute="centerY" id="NFb-ZV-C3b"/>
+                    <constraint firstItem="R1f-DA-YpG" firstAttribute="leading" secondItem="adx-9g-7DZ" secondAttribute="trailing" constant="10" id="Rh4-gC-URa"/>
                     <constraint firstItem="eJh-Ck-CAj" firstAttribute="top" secondItem="adx-9g-7DZ" secondAttribute="bottom" constant="5" id="SQc-Yb-nIc"/>
                     <constraint firstAttribute="bottomMargin" secondItem="eJh-Ck-CAj" secondAttribute="bottom" constant="1" id="mV2-tj-sXe"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UD8-65-748" secondAttribute="trailing" constant="2" id="ttL-q1-oLh"/>
@@ -76,8 +78,10 @@
                     <mask key="constraints">
                         <exclude reference="Fec-KQ-ktL"/>
                         <exclude reference="JOr-VG-Ji5"/>
+                        <exclude reference="SQc-Yb-nIc"/>
                         <exclude reference="JKw-GI-Aa2"/>
                         <exclude reference="N28-J5-aud"/>
+                        <exclude reference="N5d-pY-X3A"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

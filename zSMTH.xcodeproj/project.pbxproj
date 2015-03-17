@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		58A4F5D48E429C8662E18489 /* libPods-zSMTH.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA120C3EDD82A397C7762E47 /* libPods-zSMTH.a */; };
+		690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */; };
 		6915D4A01AB2785C00B3FB53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6915D49F1AB2785C00B3FB53 /* Foundation.framework */; };
 		695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */; };
 		6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */; };
@@ -51,6 +52,8 @@
 /* Begin PBXFileReference section */
 		13FB643B10FFC65DDD7CF5C4 /* Pods-zSMTH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zSMTH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zSMTH/Pods-zSMTH.debug.xcconfig"; sourceTree = "<group>"; };
 		48F951DFD4F05230EF38D92E /* Pods-zSMTH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zSMTH.release.xcconfig"; path = "Pods/Target Support Files/Pods-zSMTH/Pods-zSMTH.release.xcconfig"; sourceTree = "<group>"; };
+		690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = ViewController/UserInfoViewController.h; sourceTree = "<group>"; };
+		690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = ViewController/UserInfoViewController.m; sourceTree = "<group>"; };
 		6915D49F1AB2785C00B3FB53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		695226941AB2D4140060E5B3 /* ExtendedUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedUIViewController.h; sourceTree = "<group>"; };
 		695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedUIViewController.m; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */,
 				69FE90BD1AB7296200E72720 /* PostTableViewCell.h */,
 				69FE90BE1AB7296200E72720 /* PostTableViewCell.m */,
+				690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */,
+				690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 				6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */,
 				69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */,
 				6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */,
+				690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */,
 				69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */,
 				69FE90AA1AB66EC400E72720 /* BoardTableViewCell.m in Sources */,
 				69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */,

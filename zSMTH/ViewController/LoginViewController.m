@@ -69,6 +69,10 @@
     NSLog(@"Login result: %d", status);
 }
 
+- (void)finishAsyncTask
+{
+    
+}
 
 
 - (IBAction)cancel:(id)sender {

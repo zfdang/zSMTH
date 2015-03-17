@@ -16,16 +16,30 @@
 
 
 @interface LeftMenuViewController ()
+{
+    NSArray *leftMenu;
+}
 
 @end
 
 @implementation LeftMenuViewController
 
+typedef enum {
+    VIEW_GUIDANCE = 0,
+    VIEW_FAVORITE,
+    VIEW_LOGIN,
+    VIEW_USER_INFO
+} SMTHVIEW;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    // init left menu
+    leftMenu = @[@[@"节名", @"首页导读", @"个人收藏夹",  @"全部讨论区"],
+                 @[@"我的水木", @"邮箱", @"短信息",@"文章提醒"]];
+    
+    // create table view
     self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:1.0f];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -33,50 +47,77 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = ({
 
-        // http://images.newsmth.net/nForum/uploadFace/M/mozilla.jpg
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
+        
+        
+        // user avatar
+        // http://images.newsmth.net/nForum/uploadFace/M/mozilla.jpg
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        imageView.image = [UIImage imageNamed:@"avatar.jpg"];
+        imageView.image = [UIImage imageNamed:@"avatar"];
         imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 50.0;
+        imageView.layer.cornerRadius = 30.0;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         imageView.layer.borderWidth = 3.0f;
         imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.layer.shouldRasterize = YES;
         imageView.clipsToBounds = YES;
         
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected)];
+        // user name
+        UILabel *labelUser = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
+        labelUser.text = @"点击登录";
+        labelUser.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
+        labelUser.backgroundColor = [UIColor clearColor];
+        labelUser.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
+        [labelUser sizeToFit];
+        labelUser.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+
+        
+        // enable single tap on imager
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userAvatarClicked)];
         singleTap.numberOfTapsRequired = 1;
         [imageView setUserInteractionEnabled:YES];
         [imageView addGestureRecognizer:singleTap];
 
-        //        imageView.
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
-        label.text = @"Roman Efimov";
-        label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
-        [label sizeToFit];
-        label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        // enable single tap on user name
+        UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userAvatarClicked)];
+        singleTap1.numberOfTapsRequired = 1;
+        [labelUser setUserInteractionEnabled:YES];
+        [labelUser addGestureRecognizer:singleTap1];
         
         [view addSubview:imageView];
-        [view addSubview:label];
+        [view addSubview:labelUser];
         view;
     });
 }
 
--(void)tapDetected{
+-(void)userAvatarClicked{
     NSLog(@"single Tap on imageview");
+    [self switchViewto:VIEW_LOGIN];
+}
+
+-(void)switchViewto:(SMTHVIEW)target
+{
     NavigationViewController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
     
-    LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-    navigationController.viewControllers = @[login];
+    if (target == VIEW_GUIDANCE) {
+        GuidanceViewController *guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
+        navigationController.viewControllers = @[guidance];
+    } else if (target == VIEW_FAVORITE) {
+        FavoriteTableViewController *favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
+        navigationController.viewControllers = @[favorite];
+    } else if (target == VIEW_LOGIN) {
+        LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+        navigationController.viewControllers = @[login];
+    } else if (target == VIEW_USER_INFO) {
+        LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+        navigationController.viewControllers = @[login];
+    }
     
     self.frostedViewController.contentViewController = navigationController;
     [self.frostedViewController hideMenuViewController];
 }
+
 
 #pragma mark -
 #pragma mark UITableView Delegate
@@ -93,11 +134,13 @@
     if (sectionIndex == 0)
         return nil;
     
+    NSString *sectionLabel = [[leftMenu objectAtIndex:sectionIndex] objectAtIndex:0];
+    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 34)];
     view.backgroundColor = [UIColor colorWithRed:167/255.0f green:167/255.0f blue:167/255.0f alpha:0.6f];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 0, 0)];
-    label.text = @"我的水木";
+    label.text = sectionLabel;
     label.font = [UIFont systemFontOfSize:15];
     label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
@@ -118,21 +161,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NavigationViewController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
-    
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        GuidanceViewController *guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
-        navigationController.viewControllers = @[guidance];
-    } else if (indexPath.section == 0 && indexPath.row == 1) {
-        FavoriteTableViewController *favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
-        navigationController.viewControllers = @[favorite];
-    } else if (indexPath.section == 0 && indexPath.row == 2) {
-        LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-        navigationController.viewControllers = @[login];
-    }
 
-    self.frostedViewController.contentViewController = navigationController;
-    [self.frostedViewController hideMenuViewController];
+    // switch view
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        [self switchViewto:VIEW_GUIDANCE];
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        [self switchViewto:VIEW_FAVORITE];
+    } else if (indexPath.section == 0 && indexPath.row == 2) {
+        [self switchViewto:VIEW_GUIDANCE];
+    }
 }
 
 #pragma mark -
@@ -145,12 +182,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return [leftMenu count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 3;
+    NSArray *sections = [leftMenu objectAtIndex:sectionIndex];
+    return [sections count] - 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -162,14 +200,12 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
-    if (indexPath.section == 0) {
-        NSArray *titles = @[@"首页导读", @"个人收藏夹",  @"全部讨论区"];
-        cell.textLabel.text = titles[indexPath.row];
-    } else {
-        NSArray *titles = @[@"邮箱", @"短信息",@"文章提醒"];
-        cell.textLabel.text = titles[indexPath.row];
-    }
+
+    NSLog(@"%@", indexPath);
+
+    NSArray *sections = [leftMenu objectAtIndex:indexPath.section];
+    NSString *menuString = [sections objectAtIndex:(indexPath.row  + 1)];
+    cell.textLabel.text = menuString;
     
     return cell;
 }

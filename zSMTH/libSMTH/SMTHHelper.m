@@ -15,6 +15,8 @@
 
 @synthesize nNetworkStatus;
 @synthesize smth;
+@synthesize sectionList;
+@synthesize isLogined;
 
 + (id)sharedManager {
     static SMTHHelper *helper = nil;
@@ -29,11 +31,15 @@
 {
     self = [super init];
     if (self) {
-        // network initial status
-        self.nNetworkStatus = -1;
+        // init smth library
         smth = [[SMTHURLConnection alloc] init];
         [smth init_smth];
         smth.delegate = self;
+        isLogined = false;
+        // network initial status
+        self.nNetworkStatus = -1;
+        // init sections
+        sectionList = @[@"全站热点", @"国内院校", @"休闲娱乐", @"五湖四海", @"游戏运动", @"社会信息", @"知性感性", @"文化人文", @"学术科学", @"电脑技术"];
     }
     return self;
 }
@@ -86,7 +92,6 @@
         } else
         {
             board.type = GROUP;
-            
         }
         board.engName = engName;
         board.boardID = [bid longValue];
@@ -99,30 +104,41 @@
 
 - (NSArray *)getGuidancePosts
 {
-    NSMutableArray *posts = [[NSMutableArray alloc] init];
-    
-    NSArray *results = [smth net_LoadSectionHot:0];
-    for(id result in results)
-    {
-//        "author_id" = GuoTie;
-//        board = Universal;
-//        count = 70;
-//        id = 39889;
-//        subject = "\U6211\U521a\U624d\U5728\U5783\U573e\U7bb1\U91cc\U6361\U4e86\U4e00\U5957\U56db\U672c\U8d27\U5e01\U6218\U4e89";
-//        time = 1426511802;
-        SMTHPost *post = [[SMTHPost alloc] init];
-        post.author = [result objectForKey:@"author_id"];
-        post.postBoard = [result objectForKey:@"board"];
-        post.postID = [result objectForKey:@"id"];
-        post.postSubject = [result objectForKey:@"subject"];
-        post.postCount = [result objectForKey:@"count"];
-        NSDate *d = [[NSDate alloc] initWithTimeIntervalSince1970:[[result objectForKey:@"time"] doubleValue]];
-        post.postDate = [d description];
-        NSLog(@"%@", post);
-        
-        [posts addObject:post];
+    NSMutableArray *sections = [[NSMutableArray alloc] init];
+
+    for (int i = 0; i < [self.sectionList count]; i++) {
+        NSMutableArray *posts = [[NSMutableArray alloc] init];
+
+        // find all posts in one section
+        NSArray *results;
+        if( i == 0)
+            results = [smth net_LoadSectionHot:i];
+        else
+            results = [smth net_LoadSectionHot:i+1];
+//        NSLog(@"--------- %@ ---------", [self.sectionList objectAtIndex:i]);
+        for (id result in results) {
+            //        "author_id" = GuoTie;
+            //        board = Universal;
+            //        count = 70;
+            //        id = 39889;
+            //        subject = "";
+            //        time = 1426511802;
+
+            SMTHPost *post = [[SMTHPost alloc] init];
+            post.author = [result objectForKey:@"author_id"];
+            post.postBoard = [result objectForKey:@"board"];
+            post.postID = [result objectForKey:@"id"];
+            post.postSubject = [result objectForKey:@"subject"];
+            post.postCount = [result objectForKey:@"count"];
+            NSDate *d = [[NSDate alloc] initWithTimeIntervalSince1970:[[result objectForKey:@"time"] doubleValue]];
+            post.postDate = [d description];
+
+            [posts addObject:post];
+        }
+        [sections addObject:posts];
     }
-    return posts;
+
+    return sections;
 }
 
 - (int) checkVersion

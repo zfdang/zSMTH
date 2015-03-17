@@ -12,7 +12,7 @@
 
 @interface GuidanceViewController ()
 {
-    NSArray *m_posts;
+    NSArray *m_sections;
 }
 
 @end
@@ -28,7 +28,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    m_posts = nil;
+    m_sections = nil;
     [self startAsyncTask];
 }
 
@@ -36,7 +36,7 @@
 - (void)asyncTask
 {
     [helper login:@"zSMTHDev" password:@"newsmth2012"];
-    m_posts = [helper getGuidancePosts];
+    m_sections = [helper getGuidancePosts];
     
 }
 
@@ -55,15 +55,35 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return [m_sections count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if(m_posts)
-        return [m_posts count];
+    if(m_sections)
+        return [[m_sections objectAtIndex:section ] count];
     else
         return 0;
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 40.0;
+//}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    static NSString *headerReuseIdentifier = @"TableViewSectionHeaderViewIdentifier";
+    
+    UITableViewHeaderFooterView *sectionHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerReuseIdentifier];
+    if(sectionHeaderView == nil)
+    {
+        sectionHeaderView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:headerReuseIdentifier];
+    }
+    sectionHeaderView.textLabel.text = [helper.sectionList objectAtIndex:section];
+    
+    return sectionHeaderView;
 }
 
 
@@ -77,8 +97,9 @@
         cell = (PostTableViewCell*)[nibArray objectAtIndex:0];
     }
     
-    if (indexPath.section == 0 && m_posts !=nil) {
-        SMTHPost* post = (SMTHPost*)[m_posts objectAtIndex:indexPath.row];
+    if (m_sections !=nil) {
+        NSArray *posts = [m_sections objectAtIndex:indexPath.section];
+        SMTHPost* post = (SMTHPost*)[posts objectAtIndex:indexPath.row];
         cell.postBoard.text = [post postBoard];
         cell.postSubject.text = [post postSubject];
         cell.author.text = [post author];

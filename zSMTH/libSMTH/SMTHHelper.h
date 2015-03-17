@@ -19,6 +19,8 @@
 
 @property (strong, nonatomic) SMTHURLConnection *smth;
 @property (nonatomic) int nNetworkStatus;
+@property (strong, nonatomic) NSArray *sectionList;
+@property BOOL isLogined;
 
 - (void) updateNetworkStatus;
 - (int) login:(NSString*)username password:(NSString*)password;
