@@ -27,4 +27,9 @@
 @synthesize totalPosts;
 @synthesize userScore;
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"ID=%@, Nick=%@, last_login=%@, posts=%@, title=%@",
+            self.userID, self.userNick, self.lastLogin, self.totalPosts, self.userTitle];
+}
 @end

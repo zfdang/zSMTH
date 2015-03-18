@@ -71,12 +71,15 @@
 - (void)finishAsyncTask
 {
 //    NSLog(@"Login result: %d", status);
-    
 }
 
 
 - (IBAction)cancel:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSLog(@"topViewController = %@",self.navigationController.topViewController);
 }
+
+
 - (IBAction)showLeftMenu:(id)sender {
     [self.view endEditing:YES];
     [self.frostedViewController.view endEditing:YES];

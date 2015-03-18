@@ -19,17 +19,9 @@
 {
     NSArray *leftMenu;
 }
-
 @end
 
 @implementation LeftMenuViewController
-
-typedef enum {
-    VIEW_GUIDANCE = 0,
-    VIEW_FAVORITE,
-    VIEW_LOGIN,
-    VIEW_USER_INFO
-} SMTHVIEW;
 
 - (void)viewDidLoad
 {
@@ -92,29 +84,28 @@ typedef enum {
 }
 
 -(void)userAvatarClicked{
-    NSLog(@"single Tap on imageview");
+//    NSLog(@"single Tap on user avatar or username");
     [self switchViewto:VIEW_LOGIN];
 }
 
 -(void)switchViewto:(SMTHVIEW)target
 {
-    NavigationViewController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
+    NavigationViewController *navigationController = (NavigationViewController*)self.frostedViewController.contentViewController;
     
     if (target == VIEW_GUIDANCE) {
-        GuidanceViewController *guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
-        navigationController.viewControllers = @[guidance];
+        // top view is guidance view
+        [navigationController popToRootViewControllerAnimated:YES];
     } else if (target == VIEW_FAVORITE) {
         FavoriteTableViewController *favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
-        navigationController.viewControllers = @[favorite];
+        [navigationController popToRootViewControllerAnimated:NO];
+        [navigationController pushViewController:favorite animated:YES];
     } else if (target == VIEW_LOGIN) {
         LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-        navigationController.viewControllers = @[login];
+        [navigationController popToRootViewControllerAnimated:NO];
+        [navigationController pushViewController:login animated:YES];
     } else if (target == VIEW_USER_INFO) {
-        LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-        navigationController.viewControllers = @[login];
     }
     
-    self.frostedViewController.contentViewController = navigationController;
     [self.frostedViewController hideMenuViewController];
 }
 

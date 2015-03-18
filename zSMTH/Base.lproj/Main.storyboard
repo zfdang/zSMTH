@@ -155,13 +155,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPN-sc-Lji" userLabel="networkStatus">
-                                <rect key="frame" x="131" y="510" width="42" height="20.5"/>
+                                <rect key="frame" x="288" y="510" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="网络状态：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRx-Dd-yaE">
-                                <rect key="frame" x="26" y="510" width="85" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前网络:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRx-Dd-yaE">
+                                <rect key="frame" x="213" y="510" width="73" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -207,12 +207,11 @@
                             <constraint firstItem="DA4-Z2-yxY" firstAttribute="top" secondItem="4oi-Md-zJj" secondAttribute="top" constant="-10" id="DOT-g0-OOB"/>
                             <constraint firstItem="JMg-Pa-ziv" firstAttribute="leading" secondItem="NqN-uq-h8a" secondAttribute="trailing" constant="20" id="DjF-Sd-vNL"/>
                             <constraint firstItem="DA4-Z2-yxY" firstAttribute="centerY" secondItem="4oi-Md-zJj" secondAttribute="centerY" constant="-4.25" id="E1f-Ap-BJe"/>
+                            <constraint firstItem="HPN-sc-Lji" firstAttribute="centerY" secondItem="wRx-Dd-yaE" secondAttribute="centerY" id="FEd-WF-kP0"/>
                             <constraint firstItem="DA4-Z2-yxY" firstAttribute="leading" secondItem="4oi-Md-zJj" secondAttribute="trailing" constant="10" id="JNs-li-cOv"/>
                             <constraint firstItem="DA4-Z2-yxY" firstAttribute="leading" secondItem="4oi-Md-zJj" secondAttribute="trailing" constant="60" id="MBb-fw-A5W"/>
                             <constraint firstItem="JMg-Pa-ziv" firstAttribute="leading" secondItem="NqN-uq-h8a" secondAttribute="trailing" constant="20" id="MH1-Yc-zRC"/>
-                            <constraint firstItem="HPN-sc-Lji" firstAttribute="centerY" secondItem="wRx-Dd-yaE" secondAttribute="centerY" id="MNA-82-7zD"/>
                             <constraint firstItem="wAQ-15-P1A" firstAttribute="centerX" secondItem="4oi-Md-zJj" secondAttribute="centerX" constant="4.5" id="MlS-dq-8qF"/>
-                            <constraint firstItem="iqx-yk-L5O" firstAttribute="top" secondItem="wRx-Dd-yaE" secondAttribute="bottom" constant="25.5" id="NV4-oO-Vyl"/>
                             <constraint firstItem="4oi-Md-zJj" firstAttribute="top" secondItem="wAQ-15-P1A" secondAttribute="bottom" constant="5" id="Oke-Ou-dcl"/>
                             <constraint firstItem="4oi-Md-zJj" firstAttribute="top" secondItem="wAQ-15-P1A" secondAttribute="bottom" constant="49" id="PUr-9S-XJO"/>
                             <constraint firstItem="H9c-sD-YH3" firstAttribute="width" secondItem="DA4-Z2-yxY" secondAttribute="width" id="Pv6-P7-PAA"/>
@@ -228,13 +227,14 @@
                             <constraint firstItem="fa9-bO-I7T" firstAttribute="leading" secondItem="OrC-VB-lBU" secondAttribute="leadingMargin" constant="25" id="XBW-2z-hSJ"/>
                             <constraint firstItem="H9c-sD-YH3" firstAttribute="leading" secondItem="wAQ-15-P1A" secondAttribute="trailing" constant="25" id="Xxp-pb-ySt"/>
                             <constraint firstAttribute="centerX" secondItem="fa9-bO-I7T" secondAttribute="centerX" id="YCm-UL-mAe"/>
+                            <constraint firstAttribute="centerX" secondItem="wRx-Dd-yaE" secondAttribute="centerX" constant="50" id="YkF-Dl-wwh"/>
                             <constraint firstItem="DA4-Z2-yxY" firstAttribute="leading" secondItem="H9c-sD-YH3" secondAttribute="leading" id="bWK-LH-mlR"/>
                             <constraint firstItem="fa9-bO-I7T" firstAttribute="leading" secondItem="4Mx-wr-FJw" secondAttribute="trailing" constant="20" id="clq-H0-4AK"/>
                             <constraint firstItem="DA4-Z2-yxY" firstAttribute="centerY" secondItem="4oi-Md-zJj" secondAttribute="centerY" constant="-4.5" id="dGV-m6-kgf"/>
                             <constraint firstItem="4oi-Md-zJj" firstAttribute="centerX" secondItem="wAQ-15-P1A" secondAttribute="centerX" id="dZG-Zb-PtM"/>
                             <constraint firstItem="4oi-Md-zJj" firstAttribute="width" secondItem="wAQ-15-P1A" secondAttribute="width" id="ebc-kc-VFy"/>
+                            <constraint firstItem="iqx-yk-L5O" firstAttribute="top" secondItem="wRx-Dd-yaE" secondAttribute="bottom" constant="25.5" id="fKQ-sQ-mzz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4Mx-wr-FJw" secondAttribute="trailing" constant="401" id="fwp-Sb-7WJ"/>
-                            <constraint firstItem="HPN-sc-Lji" firstAttribute="leading" secondItem="wRx-Dd-yaE" secondAttribute="trailing" constant="20" id="gis-Bl-Mct"/>
                             <constraint firstItem="4oi-Md-zJj" firstAttribute="centerY" secondItem="DA4-Z2-yxY" secondAttribute="centerY" id="hOj-lr-mFk"/>
                             <constraint firstItem="MsE-Ct-UGS" firstAttribute="leading" secondItem="NqN-uq-h8a" secondAttribute="leading" id="hVq-Hv-HXP"/>
                             <constraint firstItem="MsE-Ct-UGS" firstAttribute="top" secondItem="NqN-uq-h8a" secondAttribute="bottom" constant="20" id="hhr-Ju-Ao7"/>
@@ -250,12 +250,12 @@
                             <constraint firstItem="JMg-Pa-ziv" firstAttribute="centerY" secondItem="MsE-Ct-UGS" secondAttribute="centerY" constant="5" id="qXl-aB-eGC"/>
                             <constraint firstAttribute="centerX" secondItem="4Mx-wr-FJw" secondAttribute="centerX" constant="185" id="rMp-iH-PGP"/>
                             <constraint firstItem="wAQ-15-P1A" firstAttribute="leading" secondItem="OrC-VB-lBU" secondAttribute="leadingMargin" constant="5" id="rXp-Mf-KfU"/>
-                            <constraint firstItem="wRx-Dd-yaE" firstAttribute="leading" secondItem="OrC-VB-lBU" secondAttribute="leadingMargin" constant="10" id="sM9-TD-C8l"/>
                             <constraint firstItem="wAQ-15-P1A" firstAttribute="top" secondItem="pcH-YZ-mhM" secondAttribute="bottom" constant="20" id="sxk-pl-AGm"/>
                             <constraint firstItem="eJ2-ND-sjm" firstAttribute="top" secondItem="MsE-Ct-UGS" secondAttribute="bottom" constant="20" id="tZu-nv-S8D"/>
                             <constraint firstItem="DA4-Z2-yxY" firstAttribute="centerY" secondItem="4oi-Md-zJj" secondAttribute="centerY" constant="-5.25" id="tlv-KL-32O"/>
                             <constraint firstItem="DA4-Z2-yxY" firstAttribute="leading" secondItem="4oi-Md-zJj" secondAttribute="trailing" constant="106" id="uRY-XC-WRH"/>
                             <constraint firstItem="fa9-bO-I7T" firstAttribute="top" secondItem="MsE-Ct-UGS" secondAttribute="bottom" constant="30" id="uxY-XN-Ugd"/>
+                            <constraint firstItem="HPN-sc-Lji" firstAttribute="leading" secondItem="wRx-Dd-yaE" secondAttribute="trailing" constant="2" id="yfS-Tm-A40"/>
                             <constraint firstItem="JMg-Pa-ziv" firstAttribute="centerY" secondItem="NqN-uq-h8a" secondAttribute="centerY" id="yiy-gm-6yv"/>
                             <constraint firstItem="H9c-sD-YH3" firstAttribute="centerX" secondItem="DA4-Z2-yxY" secondAttribute="centerX" id="yp3-PG-ugY"/>
                             <constraint firstItem="eJ2-ND-sjm" firstAttribute="centerY" secondItem="MsE-Ct-UGS" secondAttribute="centerY" id="z6V-rL-Q1g"/>

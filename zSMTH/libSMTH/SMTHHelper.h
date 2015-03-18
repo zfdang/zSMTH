@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Reachability.h"
 #import "SMTHURLConnection.h"
+#import "SMTHUser.h"
 
 @interface SMTHHelper : NSObject <SMTHURLConnectionDelegate>
 {
@@ -20,7 +21,7 @@
 @property (strong, nonatomic) SMTHURLConnection *smth;
 @property (nonatomic) int nNetworkStatus;
 @property (strong, nonatomic) NSArray *sectionList;
-@property BOOL isLogined;
+@property (strong, nonatomic) SMTHUser *user;
 
 - (void) updateNetworkStatus;
 - (int) login:(NSString*)username password:(NSString*)password;

@@ -16,7 +16,7 @@
 @synthesize nNetworkStatus;
 @synthesize smth;
 @synthesize sectionList;
-@synthesize isLogined;
+@synthesize user;
 
 + (id)sharedManager {
     static SMTHHelper *helper = nil;
@@ -35,7 +35,8 @@
         smth = [[SMTHURLConnection alloc] init];
         [smth init_smth];
         smth.delegate = self;
-        isLogined = false;
+        // 未登录
+        self.user = nil;
         // network initial status
         self.nNetworkStatus = -1;
         // init sections
@@ -47,29 +48,53 @@
 - (int) login:(NSString*)username password:(NSString*)password
 {
     [smth reset_status];
+    self.user = nil;
     int status = [smth net_LoginBBS:username :password];
     if( status == 1)
     {
-//        age = 35;
-//        faceurl = "";
-//        "first_login" = 1426471523;
-//        gender = 0;
-//        id = zSMTHDev;
-//        "last_login" = 1426608072;
-//        level = 1;
-//        life = "\U840c\U82bd";
-//        logins = 208;
-//        nick = zSMTHDev;
-//        posts = 0;
-//        score = 0;
-//        title = "\U7528\U6237";
-//        uid = 409391;
-        NSDictionary *users = [smth net_QueryUser:username];
-        NSLog(@"%@", users);
-    }
-    NSLog(@"Login Status %d", status);
+        NSDictionary *infos = [smth net_QueryUser:username];
+//        NSLog(@"%@", infos);
+        if(infos != nil){
+            //        uid = 409391;
+            //        id = zSMTHDev;
+            //        nick = zSMTHDev;
+            //        gender = 0;
+            //        age = 35;
+            //        faceurl = "";
+            
+            //        logins = 208;
+            //        "first_login" = 1426471523;
+            //        "last_login" = 1426608072;
 
-    return status;
+            //        level = 1;
+            //        life = "\U840c\U82bd";
+            //        posts = 0;
+            //        score = 0;
+            //        title = "\U7528\U6237";
+            self.user = [[SMTHUser alloc] init];
+            
+            self.user.uID = [infos objectForKey:@"uid"];
+            self.user.userID = [infos objectForKey:@"id"];
+            self.user.userNick = [infos objectForKey:@"nick"];
+            self.user.userGender = [infos objectForKey:@"gender"];
+            self.user.userAge = [infos objectForKey:@"age"];
+            self.user.faceURL = [infos objectForKey:@"faceurl"];
+
+            self.user.totalLogins = [infos objectForKey:@"logins"];
+            self.user.firstLogin = [[[NSDate alloc] initWithTimeIntervalSince1970:[[infos objectForKey:@"first_login"] doubleValue]] description];
+            self.user.lastLogin = [[[NSDate alloc] initWithTimeIntervalSince1970:[[infos objectForKey:@"last_login"] doubleValue]] description];
+
+            self.user.userLevel = [infos objectForKey:@"level"];
+            self.user.userLife = [infos objectForKey:@"life"];
+            self.user.totalPosts = [infos objectForKey:@"posts"];
+            self.user.userScore = [infos objectForKey:@"score"];
+            self.user.userTitle = [infos objectForKey:@"title"];
+//            NSLog(@"%@", self.user);
+        }
+    }
+    NSLog(@"Login Status %d", user != nil);
+
+    return user != nil;
 }
 
 - (NSArray *)getFavorites: (long) fid
@@ -97,6 +122,7 @@
         //total = 93186;
         //type = board;
         //unread = 1;
+
         NSDictionary *dict = (NSDictionary*) result;
         NSNumber *bid = [dict objectForKey:@"bid"];
         NSString *engName = [dict objectForKey:@"id"];

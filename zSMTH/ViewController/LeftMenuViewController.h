@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    VIEW_GUIDANCE = 0,
+    VIEW_FAVORITE,
+    VIEW_LOGIN,
+    VIEW_USER_INFO
+} SMTHVIEW;
+
 @interface LeftMenuViewController : UITableViewController
+
+-(void)switchViewto:(SMTHVIEW)target;
 
 @end

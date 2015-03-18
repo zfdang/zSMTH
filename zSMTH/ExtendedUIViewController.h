@@ -12,6 +12,7 @@
 #import "ZSMTHSetting.h"
 #import "REFrostedViewController.h"
 
+
 @interface ExtendedUIViewController : UIViewController <MBProgressHUDDelegate>
 {
     SMTHHelper *helper;
