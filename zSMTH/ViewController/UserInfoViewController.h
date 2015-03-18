@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExtendedUIViewController.h"
 
-@interface UserInfoViewController : UIViewController
+@interface UserInfoViewController : ExtendedUIViewController
+- (IBAction)showLeftMenu:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *userID;
+@property (weak, nonatomic) IBOutlet UILabel *userGender;
+@property (weak, nonatomic) IBOutlet UILabel *userLevel;
+@property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
 
 @end

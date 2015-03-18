@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExtendedTableViewController.h"
 
 typedef enum {
     VIEW_GUIDANCE = 0,
@@ -15,7 +16,7 @@ typedef enum {
     VIEW_USER_INFO
 } SMTHVIEW;
 
-@interface LeftMenuViewController : UITableViewController
+@interface LeftMenuViewController : ExtendedTableViewController
 
 -(void)switchViewto:(SMTHVIEW)target;
 

@@ -35,20 +35,20 @@
 
 - (void)asyncTask
 {
+    // to do, we should login or not, by settings
     [helper login:@"zSMTHDev" password:@"newsmth2012"];
     m_sections = [helper getGuidancePosts];
-    
 }
 
 - (void)finishAsyncTask
 {
+    
     [self.tableView reloadData];
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source

@@ -89,7 +89,6 @@
             self.user.totalPosts = [infos objectForKey:@"posts"];
             self.user.userScore = [infos objectForKey:@"score"];
             self.user.userTitle = [infos objectForKey:@"title"];
-//            NSLog(@"%@", self.user);
         }
     }
     NSLog(@"Login Status %d", user != nil);
@@ -99,8 +98,9 @@
 
 - (NSArray *)getFavorites: (long) fid
 {
-    NSMutableArray *favorites = [[NSMutableArray alloc] init];
     [smth reset_status];
+
+    NSMutableArray *favorites = [[NSMutableArray alloc] init];
     NSArray *results = [smth net_LoadFavorites:fid];
     for(id result in results)
     {
@@ -149,8 +149,9 @@
 
 - (NSArray *)getGuidancePosts
 {
-    NSMutableArray *sections = [[NSMutableArray alloc] init];
+    [smth reset_status];
 
+    NSMutableArray *sections = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.sectionList count]; i++) {
         NSMutableArray *posts = [[NSMutableArray alloc] init];
 

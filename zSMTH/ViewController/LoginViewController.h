@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *netStatus;
 @property (strong, nonatomic) IBOutlet UITextField *editUsername;
 @property (strong, nonatomic) IBOutlet UITextField *editPassword;
+@property (strong, nonatomic) IBOutlet UIView *loginStatus;
 
 - (IBAction)showLeftMenu:(id)sender;
 

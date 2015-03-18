@@ -13,6 +13,8 @@
 #import "GuidanceViewController.h"
 #import "LoginViewController.h"
 #import "FavoriteTableViewController.h"
+#import "UserInfoViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 @interface LeftMenuViewController ()
@@ -41,12 +43,15 @@
 
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
         
-        
         // user avatar
         // http://images.newsmth.net/nForum/uploadFace/M/mozilla.jpg
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        imageView.image = [UIImage imageNamed:@"avatar"];
+        if(helper.user != nil){
+            [imageView sd_setImageWithURL:[helper.user getFaceURL]];
+        } else {
+            imageView.image = [UIImage imageNamed:@"avatar"];
+        }
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 30.0;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -85,7 +90,7 @@
 
 -(void)userAvatarClicked{
 //    NSLog(@"single Tap on user avatar or username");
-    [self switchViewto:VIEW_LOGIN];
+    [self switchViewto:VIEW_USER_INFO];
 }
 
 -(void)switchViewto:(SMTHVIEW)target
@@ -94,16 +99,24 @@
     
     if (target == VIEW_GUIDANCE) {
         // top view is guidance view
-        [navigationController popToRootViewControllerAnimated:YES];
+        GuidanceViewController *guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
+        [navigationController popToRootViewControllerAnimated:NO];
+        [navigationController pushViewController:guidance animated:YES];
     } else if (target == VIEW_FAVORITE) {
         FavoriteTableViewController *favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:favorite animated:YES];
-    } else if (target == VIEW_LOGIN) {
-        LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-        [navigationController popToRootViewControllerAnimated:NO];
-        [navigationController pushViewController:login animated:YES];
     } else if (target == VIEW_USER_INFO) {
+        UserInfoViewController *user = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
+        [navigationController popToRootViewControllerAnimated:NO];
+        [navigationController pushViewController:user animated:YES];
+
+        // user logined?
+        if(helper.user == nil)
+        {
+            LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+            [navigationController pushViewController:login animated:YES];
+        }
     }
     
     [self.frostedViewController hideMenuViewController];
@@ -159,7 +172,7 @@
     } else if (indexPath.section == 0 && indexPath.row == 1) {
         [self switchViewto:VIEW_FAVORITE];
     } else if (indexPath.section == 0 && indexPath.row == 2) {
-        [self switchViewto:VIEW_GUIDANCE];
+        [self switchViewto:VIEW_USER_INFO];
     }
 }
 

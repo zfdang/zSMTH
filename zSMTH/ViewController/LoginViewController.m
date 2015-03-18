@@ -70,7 +70,15 @@
 
 - (void)finishAsyncTask
 {
-//    NSLog(@"Login result: %d", status);
+    SMTHUser *user = helper.user;
+    if(user == nil)
+    {
+        [self.loginStatus setHidden:false];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    //    NSLog(@"Login result: %d", status);
 }
 
 
@@ -85,7 +93,6 @@
     [self.frostedViewController.view endEditing:YES];
     
     // Present the view controller
-    //
     [self.frostedViewController presentMenuViewController];
 }
 @end

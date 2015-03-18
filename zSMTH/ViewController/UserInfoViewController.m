@@ -7,6 +7,7 @@
 //
 
 #import "UserInfoViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface UserInfoViewController ()
 
@@ -17,6 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    [helper.user getFaceURL]
+    [self.userAvatar sd_setImageWithURL:[helper.user getFaceURL]];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,4 +38,11 @@
 }
 */
 
+- (IBAction)showLeftMenu:(id)sender {
+    [self.view endEditing:YES];
+    [self.frostedViewController.view endEditing:YES];
+    
+    // Present the view controller
+    [self.frostedViewController presentMenuViewController];    
+}
 @end
