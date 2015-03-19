@@ -207,6 +207,14 @@
     return sections;
 }
 
+
+- (NSURL*) getFaceURLByUserID:(NSString*)userID
+{
+    SMTHUser *u = [[SMTHUser alloc] init];
+    u.userID = userID;
+    return [u getFaceURL];
+}
+
 - (int) checkVersion
 {
     NSDictionary* dict = [smth net_GetVersion];

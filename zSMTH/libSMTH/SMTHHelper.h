@@ -36,4 +36,6 @@
 - (NSArray*) getFavorites:(long)fid;
 - (NSArray*) getGuidancePosts;
 
+- (NSURL*) getFaceURLByUserID:(NSString*)userID;
+
 @end

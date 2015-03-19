@@ -9,6 +9,7 @@
 #import "GuidanceViewController.h"
 #import "PostTableViewCell.h"
 #import "SMTHPost.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GuidanceViewController ()
 {
@@ -107,6 +108,24 @@
     if (m_sections !=nil) {
         NSArray *posts = [m_sections objectAtIndex:indexPath.section];
         SMTHPost* post = (SMTHPost*)[posts objectAtIndex:indexPath.row];
+
+//        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+//        [manager downloadImageWithURL:[helper getFaceURLByUserID:[post author]]
+//                              options:0
+//                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//                             }
+//                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+//                                if (image) {
+//                                    cell.avatar.image = [image imageByScalingAndCroppingForSize:CGSizeMake(cell.avatar.frame.size.width, cell.avatar.frame.size.height)];
+//                                }
+//                            }];
+        
+        
+        [cell.avatar sd_setImageWithURL:[helper getFaceURLByUserID:[post author]] placeholderImage:[UIImage imageNamed:@"anonymous"]];
+        cell.avatar.layer.cornerRadius = 10.0;
+        cell.avatar.layer.borderWidth = 0;
+        cell.avatar.clipsToBounds = YES;
+
         cell.postBoard.text = [post postBoard];
         cell.postSubject.text = [post postSubject];
         cell.author.text = [post author];

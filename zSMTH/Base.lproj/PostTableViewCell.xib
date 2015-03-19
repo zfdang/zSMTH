@@ -14,54 +14,54 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WUc-5L-uCh" id="mtN-tG-h7e">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boardIcon" translatesAutoresizingMaskIntoConstraints="NO" id="igt-nh-T1W">
+                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="igt-nh-T1W" userLabel="avatar">
                         <rect key="frame" x="10" y="8" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="Uyc-bU-mPh"/>
                             <constraint firstAttribute="width" constant="40" id="n1r-UO-Lzk"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SO4-cb-6T6" userLabel="Subject">
-                        <rect key="frame" x="55" y="12" width="377" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是一个非常长的主题，应该没有比这个更长的主题了吧？测试用目的" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SO4-cb-6T6" userLabel="Subject">
+                        <rect key="frame" x="54" y="8" width="378" height="41"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTb-JF-7Fg" userLabel="Board">
-                        <rect key="frame" x="85" y="38.5" width="22" height="14.5"/>
+                        <rect key="frame" x="84" y="51" width="22" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="3GA-da-M0u" userLabel="Author">
                         <rect key="frame" x="8" y="48" width="44" height="28.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="128" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNH-um-IeO" userLabel="Count">
-                        <rect key="frame" x="401" y="38.5" width="21" height="14.5"/>
+                        <rect key="frame" x="401" y="51" width="21" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回帖:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-jA-SUy">
-                        <rect key="frame" x="368" y="38.5" width="28" height="14.5"/>
+                        <rect key="frame" x="368" y="51" width="28" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版面:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qm2-1D-u80">
-                        <rect key="frame" x="55" y="38.5" width="28" height="14.5"/>
+                        <rect key="frame" x="54" y="51" width="28" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Qm2-1D-u80" firstAttribute="leading" secondItem="3GA-da-M0u" secondAttribute="trailing" constant="110" id="3L1-Zf-dO0"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" constant="15" id="3oU-p9-Rf7"/>
-                    <constraint firstItem="SO4-cb-6T6" firstAttribute="top" secondItem="mtN-tG-h7e" secondAttribute="topMargin" constant="4" id="3ut-WG-Wu7"/>
+                    <constraint firstItem="SO4-cb-6T6" firstAttribute="top" secondItem="mtN-tG-h7e" secondAttribute="topMargin" id="3ut-WG-Wu7"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iNH-um-IeO" secondAttribute="trailing" constant="12" id="68N-C9-vCx"/>
                     <constraint firstItem="Qm2-1D-u80" firstAttribute="centerY" secondItem="3GA-da-M0u" secondAttribute="centerY" constant="-8.5" id="7T9-3B-tIV"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" constant="2" id="G1W-xd-b5x"/>
@@ -76,7 +76,7 @@
                     <constraint firstItem="3GA-da-M0u" firstAttribute="leading" secondItem="mtN-tG-h7e" secondAttribute="leadingMargin" id="bYd-Wm-3MA"/>
                     <constraint firstItem="3GA-da-M0u" firstAttribute="top" secondItem="igt-nh-T1W" secondAttribute="bottom" id="dAi-yt-7py"/>
                     <constraint firstAttribute="bottomMargin" secondItem="igt-nh-T1W" secondAttribute="bottom" constant="28" id="ehT-Vu-ZrM"/>
-                    <constraint firstItem="SO4-cb-6T6" firstAttribute="leading" secondItem="igt-nh-T1W" secondAttribute="trailing" constant="5" id="fmd-jG-myD"/>
+                    <constraint firstItem="SO4-cb-6T6" firstAttribute="leading" secondItem="igt-nh-T1W" secondAttribute="trailing" constant="4" id="fmd-jG-myD"/>
                     <constraint firstItem="5wb-jA-SUy" firstAttribute="centerY" secondItem="qTb-JF-7Fg" secondAttribute="centerY" id="hQ0-lB-P01"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="centerY" secondItem="Qm2-1D-u80" secondAttribute="centerY" id="lxA-6O-bXS"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iNH-um-IeO" secondAttribute="trailing" constant="12" id="psT-9z-lrJ"/>
@@ -86,7 +86,7 @@
                     <constraint firstItem="igt-nh-T1W" firstAttribute="centerX" secondItem="3GA-da-M0u" secondAttribute="centerX" id="vux-di-62X"/>
                     <constraint firstItem="5wb-jA-SUy" firstAttribute="leading" secondItem="qTb-JF-7Fg" secondAttribute="trailing" constant="122" id="x68-lu-lWm"/>
                     <constraint firstItem="Qm2-1D-u80" firstAttribute="leading" secondItem="SO4-cb-6T6" secondAttribute="leading" id="ycz-7N-R8c"/>
-                    <constraint firstItem="Qm2-1D-u80" firstAttribute="top" secondItem="SO4-cb-6T6" secondAttribute="bottom" constant="6" id="zzA-Og-aAg"/>
+                    <constraint firstItem="Qm2-1D-u80" firstAttribute="top" secondItem="SO4-cb-6T6" secondAttribute="bottom" constant="2" id="zzA-Og-aAg"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -113,7 +113,4 @@
             <point key="canvasLocation" x="582" y="171.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="boardIcon" width="50" height="50"/>
-    </resources>
 </document>
