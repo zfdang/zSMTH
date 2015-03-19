@@ -27,7 +27,7 @@
 @synthesize totalPosts;
 @synthesize userScore;
 
--(NSString *)getFaceURL
+-(NSURL *)getFaceURL
 {
     NSString *_userID;
     int forcemode = 0;
@@ -50,7 +50,7 @@
     }
     NSLog(@"userID = %@, URL=%@", self.userID, url);
 
-    return url;
+    return [NSURL URLWithString:url];
 }
 
 - (NSString *)description

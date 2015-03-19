@@ -43,6 +43,6 @@
 @property (strong, nonatomic) NSString *totalPosts;
 @property (strong, nonatomic) NSString *userScore;
 
--(NSString*) getFaceURL;
+-(NSURL*) getFaceURL;
 
 @end

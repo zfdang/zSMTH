@@ -23,6 +23,7 @@
 - (void)awakeFromNib {
     self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
     self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"menuController"];
+    [self setMenuViewSize:CGSizeMake(self.contentViewController.view.frame.size.width - 100.0f, self.contentViewController.view.frame.size.height)];
 }
 
 

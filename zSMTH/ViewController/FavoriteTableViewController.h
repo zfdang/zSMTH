@@ -11,5 +11,4 @@
 
 @interface FavoriteTableViewController : ExtendedTableViewController
 
-- (IBAction)showLeftMenu:(id)sender;
 @end

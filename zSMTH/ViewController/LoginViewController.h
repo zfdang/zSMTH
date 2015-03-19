@@ -19,8 +19,4 @@
 @property (strong, nonatomic) IBOutlet UITextField *editPassword;
 @property (strong, nonatomic) IBOutlet UIView *loginStatus;
 
-- (IBAction)showLeftMenu:(id)sender;
-
-
-
 @end

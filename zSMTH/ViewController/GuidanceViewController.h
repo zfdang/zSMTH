@@ -10,6 +10,5 @@
 #import "ExtendedTableViewController.h"
 
 @interface GuidanceViewController : ExtendedTableViewController
-- (IBAction)showLeftMenu:(id)sender;
 
 @end

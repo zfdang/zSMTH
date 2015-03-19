@@ -10,7 +10,7 @@
 #import "ExtendedUIViewController.h"
 
 @interface UserInfoViewController : ExtendedUIViewController
-- (IBAction)showLeftMenu:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UILabel *userID;
 @property (weak, nonatomic) IBOutlet UILabel *userGender;
 @property (weak, nonatomic) IBOutlet UILabel *userLevel;

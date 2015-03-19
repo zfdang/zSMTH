@@ -7,6 +7,7 @@
 //
 
 #import "ExtendedUIViewController.h"
+#import "LeftMenuViewController.h"
 
 @interface ExtendedUIViewController ()
 {
@@ -69,6 +70,15 @@
     [self finishAsyncTask];
 }
 
+- (IBAction)showLeftMenu:(id)sender {
+    [self.view endEditing:YES];
+    [self.frostedViewController.view endEditing:YES];
+    
+    // Present the view controller
+    LeftMenuViewController *menuController = (LeftMenuViewController*)self.frostedViewController.menuViewController;
+    [menuController refreshTableHeadView];
+    [self.frostedViewController presentMenuViewController];
+}
 
 /*
 #pragma mark - Navigation

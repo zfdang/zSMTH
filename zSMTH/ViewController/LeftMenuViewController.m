@@ -20,6 +20,8 @@
 @interface LeftMenuViewController ()
 {
     NSArray *leftMenu;
+    UIImageView *imageView;
+    UILabel *labelUser;
 }
 @end
 
@@ -45,13 +47,9 @@
         
         // user avatar
         // http://images.newsmth.net/nForum/uploadFace/M/mozilla.jpg
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        if(helper.user != nil){
-            [imageView sd_setImageWithURL:[helper.user getFaceURL]];
-        } else {
-            imageView.image = [UIImage imageNamed:@"avatar"];
-        }
+        imageView.image = [UIImage imageNamed:@"avatar"];
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 30.0;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -61,7 +59,7 @@
         imageView.clipsToBounds = YES;
         
         // user name
-        UILabel *labelUser = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
+        labelUser = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
         labelUser.text = @"点击登录";
         labelUser.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
         labelUser.backgroundColor = [UIColor clearColor];
@@ -117,11 +115,24 @@
             LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
             [navigationController pushViewController:login animated:YES];
         }
+        [self refreshTableHeadView];
     }
     
     [self.frostedViewController hideMenuViewController];
 }
 
+- (void)refreshTableHeadView
+{
+    if(helper.user != nil){
+        NSComparisonResult result = [labelUser.text compare:helper.user.userID];
+        if(result != NSOrderedSame){
+            NSLog(@"Label=%@, userID=%@", labelUser.text, helper.user.userID);
+            // update avatar & userID when necessary
+            [imageView sd_setImageWithURL:[helper.user getFaceURL]];
+            labelUser.text = helper.user.userID;
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark UITableView Delegate
@@ -205,7 +216,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
 
-    NSLog(@"%@", indexPath);
+//    NSLog(@"%@", indexPath);
 
     NSArray *sections = [leftMenu objectAtIndex:indexPath.section];
     NSString *menuString = [sections objectAtIndex:(indexPath.row  + 1)];
@@ -213,7 +224,6 @@
     
     return cell;
 }
-
 
 /*
 #pragma mark - Navigation

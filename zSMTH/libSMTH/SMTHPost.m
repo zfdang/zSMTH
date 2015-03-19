@@ -27,7 +27,7 @@
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"Board=%@, Author=%@, id=%ld, subject=%@, time=%@",
+    return [NSString stringWithFormat:@"Board=%@, Author=%@, id=%@, subject=%@, time=%@",
             self.postBoard, self.author, self.postID, self.postSubject, self.postDate];
 }
 

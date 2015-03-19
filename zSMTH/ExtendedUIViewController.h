@@ -42,5 +42,6 @@
  */
 - (void)finishAsyncTask;
 
+- (IBAction)showLeftMenu:(id)sender;
 
 @end
