@@ -41,12 +41,14 @@
 
 - (void)asyncTask
 {
-    favorites = [helper getFavorites:0];
+    if(helper.isLogined)
+        favorites = [helper getFavorites:0];
 }
 
 - (void)finishAsyncTask
 {
-    [self.tableView reloadData];
+    if(helper.isLogined)
+        [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -146,5 +148,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - LoginCompletionProtocol
+
+- (void)refreshViewAfterLogin
+{
+    [self startAsyncTask];
+}
 
 @end

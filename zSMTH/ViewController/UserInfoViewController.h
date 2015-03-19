@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ExtendedUIViewController.h"
+#import "LoginCompletionProtocol.h"
 
-
-@interface UserInfoViewController : ExtendedUIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface UserInfoViewController : ExtendedUIViewController <UITableViewDataSource, UITableViewDelegate, LoginCompletionProtocol>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *labelID;
@@ -19,5 +19,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+- (IBAction)logout:(id)sender;
 
 @end

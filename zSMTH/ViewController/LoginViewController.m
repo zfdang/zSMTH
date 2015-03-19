@@ -76,8 +76,10 @@
         [self performSelector:@selector(hideLoginFeedbackLater) withObject:nil afterDelay:2.0f];
     }
     else {
-        // refresh upstream view
-        [self.presentingViewController.view setNeedsDisplay];
+        if(self.delegate){
+            [self.delegate refreshViewAfterLogin];
+        }
+        
         // return to upstream view
         [self.navigationController popViewControllerAnimated:YES];
     }

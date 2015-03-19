@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ExtendedTableViewController.h"
+#import "LoginCompletionProtocol.h"
 
-@interface FavoriteTableViewController : ExtendedTableViewController
+@interface FavoriteTableViewController : ExtendedTableViewController <LoginCompletionProtocol>
 
 @end

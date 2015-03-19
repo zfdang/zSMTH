@@ -97,6 +97,14 @@
     return user != nil;
 }
 
+- (void) logout
+{
+    [smth net_LogoutBBS];
+    // 退出成功
+    user = nil;
+}
+
+
 - (BOOL)isLogined
 {
     // 由于API的限制，必须得登录之后才能查看首页导读，所以内置了zSMTHDev的帐号
@@ -228,7 +236,7 @@
 
 -(void)smth_update_progress:(SMTHURLConnection *)con
 {
-    int percent = con->net_progress;
+//    int percent = con->net_progress;
     
     //    if(net_ops == 0){
     //        net_ops = 1;

@@ -109,23 +109,25 @@
         {
             [navigationController pushViewController:favorite animated:NO];
             LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+            login.delegate = favorite;
             [navigationController pushViewController:login animated:YES];
         } else {
             [navigationController pushViewController:favorite animated:YES];
         }
 
     } else if (target == VIEW_USER_INFO) {
-        UserInfoViewController *user = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
+        UserInfoViewController *userinfo = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
         [navigationController popToRootViewControllerAnimated:NO];
 
         // user logined?
         if(! helper.isLogined)
         {
-            [navigationController pushViewController:user animated:NO];
+            [navigationController pushViewController:userinfo animated:NO];
             LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+            login.delegate = userinfo;
             [navigationController pushViewController:login animated:YES];
         } else {
-            [navigationController pushViewController:user animated:YES];
+            [navigationController pushViewController:userinfo animated:YES];
         }
     }
     

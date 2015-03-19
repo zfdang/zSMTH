@@ -9,6 +9,8 @@
 #import "UserInfoViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserInfoTableViewCell.h"
+#import "LoginViewController.h"
+
 
 @interface UserInfoViewController ()
 
@@ -19,13 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    NSLog(@"viewDidLoad");
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -35,12 +30,20 @@
         self.imageAvatar.layer.cornerRadius = 30.0;
         self.imageAvatar.layer.borderWidth = 0;
         self.imageAvatar.clipsToBounds = YES;
-
+        
         self.labelID.text = helper.user.userID;
         self.labelNick.text = helper.user.userNick;
         self.labelLevel.text = [helper.user getLifeLevel];
     }
+    
+    NSLog(@"viewDidLoad");
 }
+
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//}
 
 
 - (void)didReceiveMemoryWarning {
@@ -107,4 +110,42 @@
 }
 */
 
+#pragma mark - LoginCompletionProtocol
+
+- (void)refreshViewAfterLogin
+{
+    // refresh UserInformation
+    if (helper.isLogined) {
+        [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL]];
+        self.imageAvatar.layer.cornerRadius = 30.0;
+        self.imageAvatar.layer.borderWidth = 0;
+        self.imageAvatar.clipsToBounds = YES;
+        
+        self.labelID.text = helper.user.userID;
+        self.labelNick.text = helper.user.userNick;
+        self.labelLevel.text = [helper.user getLifeLevel];
+        
+        [self.tableView reloadData];
+    }
+    
+}
+
+- (IBAction)logout:(id)sender {
+    [self startAsyncTask];
+}
+
+- (void)asyncTask
+{
+    self.progressTitle = @"退出中...";
+    [helper logout];
+}
+
+- (void)finishAsyncTask
+{
+    if(!helper.isLogined){
+        LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+        login.delegate = self;
+        [self.navigationController pushViewController:login animated:YES];
+    }
+}
 @end

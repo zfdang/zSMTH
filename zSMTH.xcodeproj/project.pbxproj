@@ -58,6 +58,7 @@
 		690B922A1ABADDD800AAED0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UserInfoTableViewCell.xib; sourceTree = "<group>"; };
 		690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoTableViewCell.h; path = ViewController/UserInfoTableViewCell.h; sourceTree = "<group>"; };
 		690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoTableViewCell.m; path = ViewController/UserInfoTableViewCell.m; sourceTree = "<group>"; };
+		690B922F1ABB266D00AAED0D /* LoginCompletionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LoginCompletionProtocol.h; path = ViewController/LoginCompletionProtocol.h; sourceTree = "<group>"; };
 		690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = ViewController/UserInfoViewController.h; sourceTree = "<group>"; };
 		690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = ViewController/UserInfoViewController.m; sourceTree = "<group>"; };
 		6915D49F1AB2785C00B3FB53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -178,6 +179,7 @@
 				69FE90BE1AB7296200E72720 /* PostTableViewCell.m */,
 				690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */,
 				690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */,
+				690B922F1ABB266D00AAED0D /* LoginCompletionProtocol.h */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";

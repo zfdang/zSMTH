@@ -26,13 +26,13 @@
 
 - (void) updateNetworkStatus;
 
+- (int) checkVersion;
+
 // returned value should not be used to judge whether user is logined or not.
 // 有的时候会用内置帐号登录，但是应该认为真正用户还没有登录
 // 使用isLogined来判断真实用户是否登录
 - (int) login:(NSString*)username password:(NSString*)password;
-
-- (int) checkVersion;
-
+- (void) logout;
 - (NSArray*) getFavorites:(long)fid;
 - (NSArray*) getGuidancePosts;
 
