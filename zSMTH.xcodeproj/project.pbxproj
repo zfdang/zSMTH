@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		58A4F5D48E429C8662E18489 /* libPods-zSMTH.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA120C3EDD82A397C7762E47 /* libPods-zSMTH.a */; };
+		690B922B1ABADDD800AAED0D /* UserInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690B92291ABADDD800AAED0D /* UserInfoTableViewCell.xib */; };
+		690B922E1ABADEA300AAED0D /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */; };
 		690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */; };
 		6915D4A01AB2785C00B3FB53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6915D49F1AB2785C00B3FB53 /* Foundation.framework */; };
 		691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 691B0AD51AB8882500010FC3 /* SMTHUser.m */; };
@@ -53,6 +55,9 @@
 /* Begin PBXFileReference section */
 		13FB643B10FFC65DDD7CF5C4 /* Pods-zSMTH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zSMTH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zSMTH/Pods-zSMTH.debug.xcconfig"; sourceTree = "<group>"; };
 		48F951DFD4F05230EF38D92E /* Pods-zSMTH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zSMTH.release.xcconfig"; path = "Pods/Target Support Files/Pods-zSMTH/Pods-zSMTH.release.xcconfig"; sourceTree = "<group>"; };
+		690B922A1ABADDD800AAED0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UserInfoTableViewCell.xib; sourceTree = "<group>"; };
+		690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoTableViewCell.h; path = ViewController/UserInfoTableViewCell.h; sourceTree = "<group>"; };
+		690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoTableViewCell.m; path = ViewController/UserInfoTableViewCell.m; sourceTree = "<group>"; };
 		690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = ViewController/UserInfoViewController.h; sourceTree = "<group>"; };
 		690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = ViewController/UserInfoViewController.m; sourceTree = "<group>"; };
 		6915D49F1AB2785C00B3FB53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -148,6 +153,7 @@
 			children = (
 				6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */,
 				69FE90BA1AB727B700E72720 /* PostTableViewCell.xib */,
+				690B92291ABADDD800AAED0D /* UserInfoTableViewCell.xib */,
 				69FCBF381AA9CE98007C9EFB /* Images.xcassets */,
 				69FCBF351AA9CE97007C9EFB /* Main.storyboard */,
 				69FCBF3A1AA9CE98007C9EFB /* LaunchScreen.xib */,
@@ -166,6 +172,8 @@
 				69F4EAA81AB06D1D00A82B50 /* LoginViewController.m */,
 				69FE90A81AB66EC400E72720 /* BoardTableViewCell.h */,
 				69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */,
+				690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */,
+				690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */,
 				69FE90BD1AB7296200E72720 /* PostTableViewCell.h */,
 				69FE90BE1AB7296200E72720 /* PostTableViewCell.m */,
 				690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */,
@@ -371,6 +379,7 @@
 				69FE90BC1AB727B700E72720 /* PostTableViewCell.xib in Resources */,
 				69FCBF3C1AA9CE98007C9EFB /* LaunchScreen.xib in Resources */,
 				69FCBF391AA9CE98007C9EFB /* Images.xcassets in Resources */,
+				690B922B1ABADDD800AAED0D /* UserInfoTableViewCell.xib in Resources */,
 				6984F6FE1AB5D53800548BD2 /* BoardTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,6 +436,7 @@
 				6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */,
 				69FE90B61AB6FCD700E72720 /* GuidanceViewController.m in Sources */,
 				69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */,
+				690B922E1ABADEA300AAED0D /* UserInfoTableViewCell.m in Sources */,
 				69FCBF311AA9CE97007C9EFB /* AppDelegate.m in Sources */,
 				695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */,
 				6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */,
@@ -465,6 +475,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		690B92291ABADDD800AAED0D /* UserInfoTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				690B922A1ABADDD800AAED0D /* Base */,
+			);
+			name = UserInfoTableViewCell.xib;
+			sourceTree = "<group>";
+		};
 		6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

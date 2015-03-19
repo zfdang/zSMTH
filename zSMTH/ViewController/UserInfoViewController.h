@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "ExtendedUIViewController.h"
 
-@interface UserInfoViewController : ExtendedUIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *userID;
-@property (weak, nonatomic) IBOutlet UILabel *userGender;
-@property (weak, nonatomic) IBOutlet UILabel *userLevel;
-@property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
+@interface UserInfoViewController : ExtendedUIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
+@property (weak, nonatomic) IBOutlet UILabel *labelID;
+@property (weak, nonatomic) IBOutlet UILabel *labelNick;
+@property (weak, nonatomic) IBOutlet UILabel *labelLevel;
+
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

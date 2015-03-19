@@ -44,5 +44,6 @@
 @property (strong, nonatomic) NSString *userScore;
 
 -(NSURL*) getFaceURL;
+-(NSString*) getLifeLevel;
 
 @end

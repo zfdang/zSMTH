@@ -53,6 +53,11 @@
     return [NSURL URLWithString:url];
 }
 
+- (NSString *)getLifeLevel
+{
+    return [NSString stringWithFormat:@"%@(%@)",self.userLife, self.userLevel ];
+}
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"ID=%@, Nick=%@, last_login=%@, posts=%@, title=%@",

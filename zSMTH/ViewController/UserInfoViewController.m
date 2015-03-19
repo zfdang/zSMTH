@@ -8,6 +8,7 @@
 
 #import "UserInfoViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UserInfoTableViewCell.h"
 
 @interface UserInfoViewController ()
 
@@ -25,21 +26,75 @@
 {
     [super viewWillAppear:animated];
     
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
     // set userinfo
     if (helper.isLogined) {
-        [self.userAvatar sd_setImageWithURL:[helper.user getFaceURL]];
-        NSLog(@"%@, %@, %@", helper.user.userID, helper.user.userGender, helper.user.userLevel);
-        self.userID.text = helper.user.userID;
-//        self.userGender.text = helper.user.userGender;
-//        self.userLevel.text = helper.user.userLevel;
+        [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL]];
+        self.imageAvatar.layer.cornerRadius = 30.0;
+        self.imageAvatar.layer.borderWidth = 0;
+        self.imageAvatar.clipsToBounds = YES;
+
+        self.labelID.text = helper.user.userID;
+        self.labelNick.text = helper.user.userNick;
+        self.labelLevel.text = [helper.user getLifeLevel];
     }
-    
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITableViewDelegate
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    return nil;
+//}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)sectionIndex
+{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 30;
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 8;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"UserInfoTableViewCell";
+    
+    UserInfoTableViewCell *cell = (UserInfoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
+        cell = (UserInfoTableViewCell*)[nibArray objectAtIndex:0];
+    }
+    
+    if (indexPath.section == 0) {
+        cell.rowLabel.text = @"标题";
+        cell.rowValue.text = @"内容";
+    }
+    
+    return cell;
 }
 
 /*
