@@ -35,8 +35,10 @@
 
 - (void)asyncTask
 {
-    // to do, we should login or not, by settings
-    [helper login:@"zSMTHDev" password:@"newsmth2012"];
+    if(helper.user == nil){
+        // 因为API的限制，想看10大必须得登录，如果用户没有登录，则用内置的帐号获取10大
+        [helper login:@"zSMTHDev" password:@"newsmth2012"];
+    }
     m_sections = [helper getGuidancePosts];
 }
 

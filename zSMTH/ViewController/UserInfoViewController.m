@@ -17,11 +17,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-//    [helper.user getFaceURL]
-    [self.userAvatar sd_setImageWithURL:[helper.user getFaceURL]];
+
+    NSLog(@"viewDidLoad");
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // set userinfo
+    if (helper.isLogined) {
+        [self.userAvatar sd_setImageWithURL:[helper.user getFaceURL]];
+        NSLog(@"%@, %@, %@", helper.user.userID, helper.user.userGender, helper.user.userLevel);
+        self.userID.text = helper.user.userID;
+//        self.userGender.text = helper.user.userGender;
+//        self.userLevel.text = helper.user.userLevel;
+    }
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

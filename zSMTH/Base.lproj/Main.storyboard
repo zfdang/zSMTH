@@ -99,7 +99,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DA4-Z2-yxY" userLabel="password">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="password" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DA4-Z2-yxY" userLabel="password">
                                 <rect key="frame" x="126" y="114" width="438" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="qeX-s5-rwr"/>
@@ -154,8 +154,14 @@
                                     <action selector="cancel:" destination="IdG-nZ-lWU" eventType="touchUpInside" id="CxT-Cy-g8w"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录失败，请重试..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32Y-Y2-Mfk">
+                                <rect key="frame" x="224" y="320.5" width="151" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPN-sc-Lji" userLabel="networkStatus">
-                                <rect key="frame" x="288" y="510" width="42" height="20.5"/>
+                                <rect key="frame" x="288" y="510.5" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -186,12 +192,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="bOB-3Y-coj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录失败，请重试..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32Y-Y2-Mfk">
-                                <rect key="frame" x="224" y="320" width="151" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -326,9 +326,8 @@
                     <connections>
                         <outlet property="editPassword" destination="DA4-Z2-yxY" id="mnz-qO-oAE"/>
                         <outlet property="editUsername" destination="H9c-sD-YH3" id="kxB-Or-S4l"/>
-                        <outlet property="loginStatus" destination="OrC-VB-lBU" id="VIx-ea-xwZ"/>
+                        <outlet property="loginFeedback" destination="32Y-Y2-Mfk" id="4Rb-Tc-cuL"/>
                         <outlet property="netStatus" destination="HPN-sc-Lji" id="ui6-Ex-94K"/>
-                        <outlet property="password" destination="OrC-VB-lBU" id="Znk-Wc-BKF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="upc-rz-nXg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -354,7 +353,7 @@
                                     <constraint firstAttribute="height" constant="100" id="xcQ-GL-ade"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8h-gk-f0H" userLabel="userID">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8h-gk-f0H" userLabel="ID">
                                 <rect key="frame" x="156" y="74" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -372,13 +371,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9u-e2-y4o" userLabel="userGender">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9u-e2-y4o" userLabel="Gender">
                                 <rect key="frame" x="205" y="104" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FyL-XS-0Tv" userLabel="userLevel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FyL-XS-0Tv" userLabel="Level">
                                 <rect key="frame" x="205" y="135" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -409,12 +408,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="pIq-7u-RLM"/>
-                        <barButtonItem title="Item" id="83S-gZ-zBr"/>
-                        <barButtonItem title="Item" id="CKZ-Id-bPy"/>
-                        <barButtonItem title="Item" id="fWK-Nb-tgS"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="个人信息" id="V3g-gv-0s0">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="z7Z-AI-s4o">
                             <connections>
@@ -424,10 +418,10 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="userAvatar" destination="1j3-lG-jcT" id="iq7-Yw-FaT"/>
-                        <outlet property="userGender" destination="G9u-e2-y4o" id="jjU-vT-9lZ"/>
-                        <outlet property="userID" destination="s8h-gk-f0H" id="nst-eK-os4"/>
-                        <outlet property="userLevel" destination="FyL-XS-0Tv" id="XKe-nv-o7M"/>
+                        <outlet property="userAvatar" destination="1j3-lG-jcT" id="w0F-9X-ZrK"/>
+                        <outlet property="userGender" destination="G9u-e2-y4o" id="eeD-dq-pCR"/>
+                        <outlet property="userID" destination="s8h-gk-f0H" id="Eea-SX-mzG"/>
+                        <outlet property="userLevel" destination="FyL-XS-0Tv" id="Pba-8I-xYU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ykb-06-Aya" userLabel="First Responder" sceneMemberID="firstResponder"/>

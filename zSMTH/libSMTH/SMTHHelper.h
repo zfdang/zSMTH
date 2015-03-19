@@ -18,13 +18,19 @@
 
 + (id)sharedManager;
 
-@property (strong, nonatomic) SMTHURLConnection *smth;
-@property (nonatomic) int nNetworkStatus;
-@property (strong, nonatomic) NSArray *sectionList;
-@property (strong, nonatomic) SMTHUser *user;
+@property (readonly, strong, nonatomic) SMTHURLConnection *smth;
+@property (readonly, nonatomic) int nNetworkStatus;
+@property (readonly, strong, nonatomic) NSArray *sectionList;
+@property (readonly, strong, nonatomic) SMTHUser *user;
+@property (readonly) BOOL isLogined;
 
 - (void) updateNetworkStatus;
+
+// returned value should not be used to judge whether user is logined or not.
+// 有的时候会用内置帐号登录，但是应该认为真正用户还没有登录
+// 使用isLogined来判断真实用户是否登录
 - (int) login:(NSString*)username password:(NSString*)password;
+
 - (int) checkVersion;
 
 - (NSArray*) getFavorites:(long)fid;

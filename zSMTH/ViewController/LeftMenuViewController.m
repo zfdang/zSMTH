@@ -53,7 +53,7 @@
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 30.0;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        imageView.layer.borderWidth = 3.0f;
+        imageView.layer.borderWidth = 0;
         imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
         imageView.layer.shouldRasterize = YES;
         imageView.clipsToBounds = YES;
@@ -103,19 +103,30 @@
     } else if (target == VIEW_FAVORITE) {
         FavoriteTableViewController *favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
         [navigationController popToRootViewControllerAnimated:NO];
-        [navigationController pushViewController:favorite animated:YES];
+
+        // user logined?
+        if(! helper.isLogined)
+        {
+            [navigationController pushViewController:favorite animated:NO];
+            LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+            [navigationController pushViewController:login animated:YES];
+        } else {
+            [navigationController pushViewController:favorite animated:YES];
+        }
+
     } else if (target == VIEW_USER_INFO) {
         UserInfoViewController *user = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
         [navigationController popToRootViewControllerAnimated:NO];
-        [navigationController pushViewController:user animated:YES];
 
         // user logined?
-        if(helper.user == nil)
+        if(! helper.isLogined)
         {
+            [navigationController pushViewController:user animated:NO];
             LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
             [navigationController pushViewController:login animated:YES];
+        } else {
+            [navigationController pushViewController:user animated:YES];
         }
-        [self refreshTableHeadView];
     }
     
     [self.frostedViewController hideMenuViewController];
@@ -123,7 +134,7 @@
 
 - (void)refreshTableHeadView
 {
-    if(helper.user != nil){
+    if(helper.isLogined){
         NSComparisonResult result = [labelUser.text compare:helper.user.userID];
         if(result != NSOrderedSame){
             NSLog(@"Label=%@, userID=%@", labelUser.text, helper.user.userID);

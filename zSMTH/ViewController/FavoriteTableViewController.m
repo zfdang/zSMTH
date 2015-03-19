@@ -41,9 +41,7 @@
 
 - (void)asyncTask
 {
-    [helper login:@"zSMTHDev" password:@"newsmth2012"];
     favorites = [helper getFavorites:0];
-    NSLog(@"asyncTask");
 }
 
 - (void)finishAsyncTask
@@ -68,6 +66,11 @@
             return 0;
     }
     return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
 
 

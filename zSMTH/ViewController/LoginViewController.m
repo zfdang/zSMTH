@@ -70,21 +70,24 @@
 
 - (void)finishAsyncTask
 {
-    SMTHUser *user = helper.user;
-    if(user == nil)
+//    SMTHUser *user = helper.user;
+    if(!helper.isLogined)
     {
-        [self.loginStatus setHidden:false];
+        NSLog(@"loginStatus = %@", self.loginFeedback.text);
+        [self.loginFeedback setHidden:NO];
     }
     else {
+        // refresh upstream view
+        [self.presentingViewController.view setNeedsDisplay];
+        // return to upstream view
         [self.navigationController popViewControllerAnimated:YES];
     }
-    //    NSLog(@"Login result: %d", status);
 }
 
 
 - (IBAction)cancel:(id)sender {
+    // 回到rootView
     [self.navigationController popToRootViewControllerAnimated:YES];
-    NSLog(@"topViewController = %@",self.navigationController.topViewController);
 }
 
 @end

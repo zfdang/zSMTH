@@ -36,21 +36,22 @@
         [smth init_smth];
         smth.delegate = self;
         // 未登录
-        self.user = nil;
+        user = nil;
         // network initial status
-        self.nNetworkStatus = -1;
+        nNetworkStatus = -1;
         // init sections
         sectionList = @[@"全站热点", @"国内院校", @"休闲娱乐", @"五湖四海", @"游戏运动", @"社会信息", @"知性感性", @"文化人文", @"学术科学", @"电脑技术"];
     }
     return self;
 }
 
+
 - (int) login:(NSString*)username password:(NSString*)password
 {
     [smth reset_status];
-    self.user = nil;
+    user = nil;
     int status = [smth net_LoginBBS:username :password];
-    if( status == 1)
+    if(status == 1)
     {
         NSDictionary *infos = [smth net_QueryUser:username];
 //        NSLog(@"%@", infos);
@@ -71,7 +72,7 @@
             //        posts = 0;
             //        score = 0;
             //        title = "\U7528\U6237";
-            self.user = [[SMTHUser alloc] init];
+            user = [[SMTHUser alloc] init];
             
             self.user.uID = [infos objectForKey:@"uid"];
             self.user.userID = [infos objectForKey:@"id"];
@@ -94,6 +95,17 @@
     NSLog(@"Login Status %d", user != nil);
 
     return user != nil;
+}
+
+- (BOOL)isLogined
+{
+    // 由于API的限制，必须得登录之后才能查看首页导读，所以内置了zSMTHDev的帐号
+    // 但是如果是zSMTHDev的用户名，我们认为是未登录
+    if( user == nil)
+        return NO;
+    if([@"zSMTHDev" compare:user.userID] == NSOrderedSame)
+        return NO;
+    return YES;
 }
 
 - (NSArray *)getFavorites: (long) fid
@@ -254,7 +266,7 @@
     //        net_ops = 1;
     //    }
     //    net_ops_percent = (net_ops_done * 100 + percent) / net_ops;
-    NSLog(@"percentage %d", percent);
+//    NSLog(@"percentage %d", percent);
 }
 
 
@@ -265,13 +277,13 @@
     
     switch ([reach currentReachabilityStatus]) {
         case NotReachable:
-            self.nNetworkStatus = -1;
+            nNetworkStatus = -1;
             break;
         case ReachableViaWiFi:
-            self.nNetworkStatus = 0;
+            nNetworkStatus = 0;
             break;
         case ReachableViaWWAN:
-            self.nNetworkStatus = 1;
+            nNetworkStatus = 1;
             break;
         default:
             break;
