@@ -10,13 +10,13 @@
 #import "ExtendedUIViewController.h"
 
 @interface LoginViewController : ExtendedUIViewController
-@property (weak, nonatomic) IBOutlet UITextField *username;
-@property (weak, nonatomic) IBOutlet UITextField *password;
-- (IBAction)login:(id)sender;
-- (IBAction)cancel:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UILabel *netStatus;
 @property (strong, nonatomic) IBOutlet UITextField *editUsername;
 @property (strong, nonatomic) IBOutlet UITextField *editPassword;
 @property (weak, nonatomic) IBOutlet UILabel *loginFeedback;
+
+- (IBAction)login:(id)sender;
+- (IBAction)cancel:(id)sender;
 
 @end

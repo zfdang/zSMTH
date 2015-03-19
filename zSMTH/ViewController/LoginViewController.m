@@ -30,11 +30,11 @@
 //    SMTHHelper *helper = [SMTHHelper sharedManager];
     [helper updateNetworkStatus];
     if(helper.nNetworkStatus == -1){
-        [self.netStatus setText:@"没有网络连接"];
+        [self.netStatus setText:@"没有网络"];
     } else if(helper.nNetworkStatus == 0){
-        [self.netStatus setText:@"连接到WIFI"];
+        [self.netStatus setText:@"WLAN"];
     } else if(helper.nNetworkStatus == 1){
-        [self.netStatus setText:@"连接到移动网络"];
+        [self.netStatus setText:@"移动网络"];
     }
 }
 
@@ -54,10 +54,10 @@
 }
 */
 
-- (IBAction)login:(id)sender {
-    
+- (IBAction)login:(id)sender
+{
+    self.progressTitle = @"登录中...";
     [self startAsyncTask];
-
 }
 
 - (void)asyncTask
@@ -70,11 +70,10 @@
 
 - (void)finishAsyncTask
 {
-//    SMTHUser *user = helper.user;
     if(!helper.isLogined)
     {
-        NSLog(@"loginStatus = %@", self.loginFeedback.text);
         [self.loginFeedback setHidden:NO];
+        [self performSelector:@selector(hideLoginFeedbackLater) withObject:nil afterDelay:2.0f];
     }
     else {
         // refresh upstream view
@@ -83,6 +82,12 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+- (void)hideLoginFeedbackLater
+{
+    [self.loginFeedback setHidden:YES];
+}
+
 
 
 - (IBAction)cancel:(id)sender {
