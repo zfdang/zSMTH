@@ -10,4 +10,11 @@
 
 @interface PostListTableViewController : ExtendedTableViewController
 
+@property (strong, nonatomic) NSString *boardID;
+@property (strong, nonatomic) NSString *boardName;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
+
+- (IBAction)return:(id)sender;
+- (IBAction)newPost:(id)sender;
+
 @end

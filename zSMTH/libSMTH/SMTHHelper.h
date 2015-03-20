@@ -13,7 +13,8 @@
 
 @interface SMTHHelper : NSObject <SMTHURLConnectionDelegate>
 {
-    
+    int postNumberinOnePage;
+    int brcmode;
 }
 
 + (id)sharedManager;
@@ -35,6 +36,7 @@
 - (void) logout;
 - (NSArray*) getFavorites:(long)fid;
 - (NSArray*) getGuidancePosts;
+- (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from;
 
 - (NSURL*) getFaceURLByUserID:(NSString*)userID;
 

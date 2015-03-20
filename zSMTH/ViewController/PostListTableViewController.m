@@ -8,25 +8,56 @@
 
 #import "PostListTableViewController.h"
 #import "PostListTableViewCell.h"
+#import "SMTHPost.h"
 
 @interface PostListTableViewController ()
+{
+    NSMutableArray *mPosts;
+}
 
 @end
 
 @implementation PostListTableViewController
 
+@synthesize boardID;
+@synthesize boardName;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"boardID = %@, boardName = %@", boardID, boardName);
+    self.navItem.title = [NSString stringWithFormat:@"%@(%@)", boardName, boardID];
+    
+    mPosts = [[NSMutableArray alloc] init];
+    [self startAsyncTask];
 }
+
+- (void)asyncTask
+{
+    NSArray *posts = [helper getPostsFromBoard:boardID from:0];
+    [mPosts addObjectsFromArray:posts];
+}
+
+- (void)finishAsyncTask
+{
+    [self.tableView reloadData];
+}
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    NSLog(@"boardID = %@, boardName = %@", boardID, boardName);
+//}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 10;
+    return [mPosts count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -47,8 +78,12 @@
     }
     
     if (indexPath.section == 0) {
-        cell.labelSubject.text = @"测试帖子测试帖子测试帖子测试帖子测试帖子测试帖子测试帖子测试帖子测试帖子测试帖子测试帖子测试帖子测试帖子";
-        cell.labelUserID.text = @"Mozilla";
+        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        cell.labelSubject.text = post.postSubject;
+        cell.labelUserID.text = post.author;
+        cell.labelPostTime.text = post.postDate;
+        cell.labelReplyTime.text = post.replyPostDate;
+        cell.labelCount.text = post.postCount;
     }
     
     return cell;
@@ -64,4 +99,11 @@
 }
 */
 
+- (IBAction)return:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)newPost:(id)sender {
+    NSLog(@"New Post");
+}
 @end

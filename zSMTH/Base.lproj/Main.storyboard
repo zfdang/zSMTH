@@ -81,8 +81,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="文章列表" id="13t-ZQ-bF2">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="3Bu-pp-8ic"/>
+                        <barButtonItem key="leftBarButtonItem" image="return" id="vVj-5G-a1r" userLabel="返回">
+                            <connections>
+                                <action selector="return:" destination="Zhi-IQ-lfz" id="fFS-2e-S7I"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="compose" id="Ayb-iv-KPp" userLabel="新文章">
+                            <connections>
+                                <action selector="newPost:" destination="Zhi-IQ-lfz" id="Z0L-23-erS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="navItem" destination="13t-ZQ-bF2" id="fr3-T7-yRm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNH-es-W7H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -563,6 +575,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="menu" width="40" height="40"/>
+        <image name="compose" width="20" height="20"/>
+        <image name="menu" width="20" height="20"/>
+        <image name="return" width="20" height="20"/>
     </resources>
 </document>

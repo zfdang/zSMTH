@@ -20,7 +20,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="igt-nh-T1W" userLabel="avatar">
+                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="anonymous" translatesAutoresizingMaskIntoConstraints="NO" id="igt-nh-T1W" userLabel="avatar">
                         <rect key="frame" x="10" y="8" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="Uyc-bU-mPh"/>
@@ -28,37 +28,37 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qm2-1D-u80">
-                        <rect key="frame" x="54" y="51" width="28" height="14.5"/>
+                        <rect key="frame" x="54" y="60" width="28" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12天前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTb-JF-7Fg" userLabel="发布时间">
-                        <rect key="frame" x="84" y="51" width="38" height="14.5"/>
+                        <rect key="frame" x="82" y="60" width="38" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回复:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jc7-hn-fEB">
-                        <rect key="frame" x="142" y="51" width="28" height="14.5"/>
+                        <rect key="frame" x="130" y="60" width="28" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12天前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbW-dU-8JW" userLabel="回复时间">
-                        <rect key="frame" x="172" y="51" width="38" height="14.5"/>
+                        <rect key="frame" x="158" y="60" width="38" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回帖:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-jA-SUy">
-                        <rect key="frame" x="230" y="51" width="28" height="14.5"/>
+                        <rect key="frame" x="206" y="60" width="28" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="128" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNH-um-IeO" userLabel="回帖数">
-                        <rect key="frame" x="260" y="51" width="21" height="14.5"/>
+                        <rect key="frame" x="236" y="60" width="21" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -70,7 +70,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attachment" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-OZ-UDj" userLabel="attachment">
-                        <rect key="frame" x="404" y="48.5" width="20" height="20"/>
+                        <rect key="frame" x="404" y="57.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="qBA-9o-ANk"/>
                             <constraint firstAttribute="height" constant="20" id="tAr-b9-885"/>
@@ -84,11 +84,12 @@
                     <constraint firstAttribute="trailingMargin" secondItem="vBy-OZ-UDj" secondAttribute="trailing" constant="10" id="43x-H7-LhZ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iNH-um-IeO" secondAttribute="trailing" constant="12" id="68N-C9-vCx"/>
                     <constraint firstItem="Qm2-1D-u80" firstAttribute="centerY" secondItem="3GA-da-M0u" secondAttribute="centerY" constant="-8.5" id="7T9-3B-tIV"/>
-                    <constraint firstItem="5wb-jA-SUy" firstAttribute="leading" secondItem="qbW-dU-8JW" secondAttribute="trailing" constant="20" id="AAp-mH-nSd"/>
+                    <constraint firstItem="5wb-jA-SUy" firstAttribute="leading" secondItem="qbW-dU-8JW" secondAttribute="trailing" constant="10" id="AAp-mH-nSd"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="centerY" secondItem="Jc7-hn-fEB" secondAttribute="centerY" id="ApX-u2-u4c"/>
-                    <constraint firstItem="qTb-JF-7Fg" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" constant="2" id="G1W-xd-b5x"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Qm2-1D-u80" secondAttribute="bottom" constant="2" id="F6s-qe-MJb"/>
+                    <constraint firstItem="qTb-JF-7Fg" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" id="G1W-xd-b5x"/>
                     <constraint firstItem="iNH-um-IeO" firstAttribute="leading" secondItem="5wb-jA-SUy" secondAttribute="trailing" constant="34" id="Jhi-pd-niV"/>
-                    <constraint firstItem="qbW-dU-8JW" firstAttribute="leading" secondItem="Jc7-hn-fEB" secondAttribute="trailing" constant="2" id="JiJ-ng-8BU"/>
+                    <constraint firstItem="qbW-dU-8JW" firstAttribute="leading" secondItem="Jc7-hn-fEB" secondAttribute="trailing" id="JiJ-ng-8BU"/>
                     <constraint firstItem="5wb-jA-SUy" firstAttribute="centerY" secondItem="iNH-um-IeO" secondAttribute="centerY" id="Lj6-9w-ciK"/>
                     <constraint firstItem="5wb-jA-SUy" firstAttribute="centerY" secondItem="qTb-JF-7Fg" secondAttribute="centerY" id="Nmd-Vn-5Gu"/>
                     <constraint firstItem="igt-nh-T1W" firstAttribute="leading" secondItem="mtN-tG-h7e" secondAttribute="leadingMargin" constant="2" id="SKp-yt-NmM"/>
@@ -103,7 +104,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="igt-nh-T1W" secondAttribute="bottom" constant="28" id="ehT-Vu-ZrM"/>
                     <constraint firstItem="SO4-cb-6T6" firstAttribute="leading" secondItem="igt-nh-T1W" secondAttribute="trailing" constant="4" id="fmd-jG-myD"/>
                     <constraint firstItem="5wb-jA-SUy" firstAttribute="centerY" secondItem="qTb-JF-7Fg" secondAttribute="centerY" id="hQ0-lB-P01"/>
-                    <constraint firstItem="Jc7-hn-fEB" firstAttribute="leading" secondItem="qTb-JF-7Fg" secondAttribute="trailing" constant="20" id="jZB-qM-5Gz"/>
+                    <constraint firstItem="Jc7-hn-fEB" firstAttribute="leading" secondItem="qTb-JF-7Fg" secondAttribute="trailing" constant="10" id="jZB-qM-5Gz"/>
                     <constraint firstItem="qbW-dU-8JW" firstAttribute="centerY" secondItem="Jc7-hn-fEB" secondAttribute="centerY" id="lbg-sg-yfA"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="centerY" secondItem="Qm2-1D-u80" secondAttribute="centerY" id="lxA-6O-bXS"/>
                     <constraint firstItem="vBy-OZ-UDj" firstAttribute="centerY" secondItem="iNH-um-IeO" secondAttribute="centerY" id="p7k-Ta-sfm"/>
@@ -122,6 +123,7 @@
                         <exclude reference="3L1-Zf-dO0"/>
                         <exclude reference="7T9-3B-tIV"/>
                         <exclude reference="e01-sS-Jmx"/>
+                        <exclude reference="zzA-Og-aAg"/>
                         <exclude reference="3oU-p9-Rf7"/>
                         <exclude reference="acw-5o-y4M"/>
                         <exclude reference="btb-T1-FE8"/>
@@ -148,6 +150,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="anonymous" width="40" height="40"/>
         <image name="attachment" width="20" height="20"/>
     </resources>
 </document>

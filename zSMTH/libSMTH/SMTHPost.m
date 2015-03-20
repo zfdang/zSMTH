@@ -11,19 +11,16 @@
 @implementation SMTHPost
 
 @synthesize author;
-@synthesize postBoard;
 @synthesize postID;
 @synthesize postSubject;
-@synthesize postCount;
 @synthesize postDate;
+@synthesize postCount;
+@synthesize postFlags;
 
-
-//        "author_id" = GuoTie;
-//        board = Universal;
-//        count = 70;
-//        id = 39889;
-//        subject = "\U6211\U521a\U624d\U5728\U5783\U573e\U7bb1\U91cc\U6361\U4e86\U4e00\U5957\U56db\U672c\U8d27\U5e01\U6218\U4e89";
-//        time = 1426511802;
+@synthesize postBoard;
+@synthesize replyPostID;
+@synthesize replyPostDate;
+@synthesize replyAuthor;
 
 -(NSString *)description
 {

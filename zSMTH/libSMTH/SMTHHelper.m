@@ -41,6 +41,9 @@
         nNetworkStatus = -1;
         // init sections
         sectionList = @[@"全站热点", @"国内院校", @"休闲娱乐", @"五湖四海", @"游戏运动", @"社会信息", @"知性感性", @"文化人文", @"学术科学", @"电脑技术"];
+        // init load post information
+        brcmode = 0;
+        postNumberinOnePage = 15;
     }
     return self;
 }
@@ -111,7 +114,8 @@
     // 但是如果是zSMTHDev的用户名，我们认为是未登录
     if( user == nil)
         return NO;
-    if([@"zSMTHDev" compare:user.userID] == NSOrderedSame)
+//    if([@"zSMTHDev" compare:user.userID] == NSOrderedSame)
+      if([@"zSMTHDevAA" compare:user.userID] == NSOrderedSame)
         return NO;
     return YES;
 }
@@ -215,6 +219,47 @@
     return [u getFaceURL];
 }
 
+- (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from
+{
+    [smth reset_status];
+    NSMutableArray *posts = [[NSMutableArray alloc] init];
+    NSArray *results = [smth net_LoadThreadList:boardID :from :postNumberinOnePage :brcmode];
+    for (id result in results) {
+//        "author_id" = Kazoo;
+//        id = 410834;
+//        subject = "这个是一个测试的帖子";
+//        time = 1424611727;
+//        count = 18;
+//        flags = "Dnn d";   -- 置顶帖子的flag
+//        flags = " nn  ";   -- 普通帖子的flag
+//        "board_id" = DigiHome;
+//        "board_name" = "\U6570\U5b57\U5bb6\U5ead";
+//        "last_reply_id" = 415457;
+//        "last_time" = 1425600260;
+//        "last_user_id" = shanzai12;
+
+        NSLog(@"%@", result);
+        NSDictionary *dict = (NSDictionary*) result;
+        SMTHPost *post = [[SMTHPost alloc] init];
+        post.author = [dict objectForKey:@"author_id"];
+        post.postID = [dict objectForKey:@"id"];
+        post.postSubject = [dict objectForKey:@"subject"];
+        post.postDate = [self getDateString:[[result objectForKey:@"time"] doubleValue]];
+        post.postCount = [[dict objectForKey:@"count"] description];
+        post.postFlags = [dict objectForKey:@"flags"];
+        
+        post.postBoard = [dict objectForKey:@"board_id"];
+        post.replyPostID = [dict objectForKey:@"last_reply_id"];
+        post.replyAuthor = [dict objectForKey:@"last_user_id"];
+        post.replyPostDate = [self getDateString:[[result objectForKey:@"last_time"] doubleValue]];
+
+        [posts addObject:post];
+    }
+    
+    return posts;
+}
+
+
 - (int) checkVersion
 {
     NSDictionary* dict = [smth net_GetVersion];
@@ -254,7 +299,6 @@
 }
 
 
-
 - (void) updateNetworkStatus
 {
     Reachability *reach = [Reachability reachabilityWithHostName:@"www.baidu.com"];
@@ -273,4 +317,70 @@
             break;
     }
 }
+
+
+- (NSString*) getDateString_internal:(NSTimeInterval) time :(NSTimeInterval)cur_time :(int)after
+{
+    if(cur_time == 0){
+        cur_time = [[NSDate date] timeIntervalSince1970];
+    }
+    
+    long long int ts = (long long int)time;
+    long long int c_ts = (long long int)cur_time;
+    
+    if(after){
+        if(ts <= c_ts){
+            return @"现在";
+        }
+    }else{
+        if(ts >= c_ts){
+            return @"现在";
+        }
+    }
+    if(ts == 0){
+        return @"";
+    }
+    long long int d;
+    NSString * post;
+    if(after){
+        d = ts - c_ts;
+        post = @"后";
+    }else{
+        d = c_ts - ts;
+        post = @"前";
+    }
+    
+    if(d < 60){
+        return [NSString stringWithFormat:@"%lld秒%@", d, post];
+    }
+    d /= 60;
+    if(d < 60){
+        return [NSString stringWithFormat:@"%lld分钟%@", d, post];
+    }
+    d /= 60;
+    if(d < 24){
+        return [NSString stringWithFormat:@"%lld小时%@", d, post];
+    }
+    d /= 24; //天数
+    if(d < 7){
+        return [NSString stringWithFormat:@"%lld天%@", d, post];
+    }
+    if(d < 30){
+        return [NSString stringWithFormat:@"%lld周%@", d/7, post];
+    }
+    if(d < 365){
+        return [NSString stringWithFormat:@"%lld月%@", d/30, post];
+    }
+    d /= 365;
+    return [NSString stringWithFormat:@"%lld年%@", d, post];
+}
+
+
+- (NSString*) getDateString:(NSTimeInterval) time
+{
+    NSTimeInterval cur_time = [[NSDate date] timeIntervalSince1970];
+
+    return [self getDateString_internal:time :cur_time :0];
+}
+
 @end

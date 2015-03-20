@@ -10,6 +10,7 @@
 #import "REFrostedViewController.h"
 #import "SMTHBoard.h"
 #import "BoardTableViewCell.h"
+#import "PostListTableViewController.h"
 
 @interface FavoriteTableViewController ()
 {
@@ -104,6 +105,20 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 0)
+    {
+        SMTHBoard* board = (SMTHBoard*)[favorites objectAtIndex:indexPath.row];
+        
+        PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
+        postlist.boardName = board.chsName;
+        postlist.boardID = board.engName;
+        [self.navigationController pushViewController:postlist animated:YES];
+
+    }
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -139,15 +154,16 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//    UIViewController* view = segue.destinationViewController;
+//    if ([view respondsToSelector:@selector(setBoardID:)]) {
+//        [view setValue:nil forKey:@"boardID"];
+//    }
 }
-*/
+
 
 #pragma mark - LoginCompletionProtocol
 
