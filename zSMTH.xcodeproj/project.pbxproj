@@ -11,6 +11,7 @@
 		690B922B1ABADDD800AAED0D /* UserInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690B92291ABADDD800AAED0D /* UserInfoTableViewCell.xib */; };
 		690B922E1ABADEA300AAED0D /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */; };
 		690B92321ABB92B100AAED0D /* UIImage+RoundedResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 690B92311ABB92B100AAED0D /* UIImage+RoundedResize.m */; };
+		690B92351ABB99ED00AAED0D /* PostInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690B92331ABB99ED00AAED0D /* PostInfoTableViewCell.xib */; };
 		690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */; };
 		6915D4A01AB2785C00B3FB53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6915D49F1AB2785C00B3FB53 /* Foundation.framework */; };
 		691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 691B0AD51AB8882500010FC3 /* SMTHUser.m */; };
@@ -39,8 +40,8 @@
 		69FE90AA1AB66EC400E72720 /* BoardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */; };
 		69FE90B61AB6FCD700E72720 /* GuidanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90B51AB6FCD700E72720 /* GuidanceViewController.m */; };
 		69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90B81AB71A7700E72720 /* SMTHPost.m */; };
-		69FE90BC1AB727B700E72720 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FE90BA1AB727B700E72720 /* PostTableViewCell.xib */; };
-		69FE90BF1AB7296200E72720 /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90BE1AB7296200E72720 /* PostTableViewCell.m */; };
+		69FE90BC1AB727B700E72720 /* PostGuidanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FE90BA1AB727B700E72720 /* PostGuidanceTableViewCell.xib */; };
+		69FE90BF1AB7296200E72720 /* PostGuidanceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90BE1AB7296200E72720 /* PostGuidanceTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		690B922F1ABB266D00AAED0D /* LoginCompletionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LoginCompletionProtocol.h; path = ViewController/LoginCompletionProtocol.h; sourceTree = "<group>"; };
 		690B92301ABB92B100AAED0D /* UIImage+RoundedResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedResize.h"; sourceTree = "<group>"; };
 		690B92311ABB92B100AAED0D /* UIImage+RoundedResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedResize.m"; sourceTree = "<group>"; };
+		690B92341ABB99ED00AAED0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PostInfoTableViewCell.xib; sourceTree = "<group>"; };
 		690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = ViewController/UserInfoViewController.h; sourceTree = "<group>"; };
 		690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = ViewController/UserInfoViewController.m; sourceTree = "<group>"; };
 		6915D49F1AB2785C00B3FB53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -114,9 +116,9 @@
 		69FE90B51AB6FCD700E72720 /* GuidanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuidanceViewController.m; path = ViewController/GuidanceViewController.m; sourceTree = "<group>"; };
 		69FE90B71AB71A7700E72720 /* SMTHPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHPost.h; sourceTree = "<group>"; };
 		69FE90B81AB71A7700E72720 /* SMTHPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHPost.m; sourceTree = "<group>"; };
-		69FE90BB1AB727B700E72720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PostTableViewCell.xib; sourceTree = "<group>"; };
-		69FE90BD1AB7296200E72720 /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostTableViewCell.h; path = ViewController/PostTableViewCell.h; sourceTree = "<group>"; };
-		69FE90BE1AB7296200E72720 /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostTableViewCell.m; path = ViewController/PostTableViewCell.m; sourceTree = "<group>"; };
+		69FE90BB1AB727B700E72720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PostGuidanceTableViewCell.xib; sourceTree = "<group>"; };
+		69FE90BD1AB7296200E72720 /* PostGuidanceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostGuidanceTableViewCell.h; path = ViewController/PostGuidanceTableViewCell.h; sourceTree = "<group>"; };
+		69FE90BE1AB7296200E72720 /* PostGuidanceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostGuidanceTableViewCell.m; path = ViewController/PostGuidanceTableViewCell.m; sourceTree = "<group>"; };
 		AA120C3EDD82A397C7762E47 /* libPods-zSMTH.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-zSMTH.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -156,7 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */,
-				69FE90BA1AB727B700E72720 /* PostTableViewCell.xib */,
+				690B92331ABB99ED00AAED0D /* PostInfoTableViewCell.xib */,
+				69FE90BA1AB727B700E72720 /* PostGuidanceTableViewCell.xib */,
 				690B92291ABADDD800AAED0D /* UserInfoTableViewCell.xib */,
 				69FCBF381AA9CE98007C9EFB /* Images.xcassets */,
 				69FCBF351AA9CE97007C9EFB /* Main.storyboard */,
@@ -178,8 +181,8 @@
 				69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */,
 				690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */,
 				690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */,
-				69FE90BD1AB7296200E72720 /* PostTableViewCell.h */,
-				69FE90BE1AB7296200E72720 /* PostTableViewCell.m */,
+				69FE90BD1AB7296200E72720 /* PostGuidanceTableViewCell.h */,
+				69FE90BE1AB7296200E72720 /* PostGuidanceTableViewCell.m */,
 				690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */,
 				690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */,
 				690B922F1ABB266D00AAED0D /* LoginCompletionProtocol.h */,
@@ -383,11 +386,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				69FCBF371AA9CE97007C9EFB /* Main.storyboard in Resources */,
-				69FE90BC1AB727B700E72720 /* PostTableViewCell.xib in Resources */,
+				69FE90BC1AB727B700E72720 /* PostGuidanceTableViewCell.xib in Resources */,
 				69FCBF3C1AA9CE98007C9EFB /* LaunchScreen.xib in Resources */,
 				69FCBF391AA9CE98007C9EFB /* Images.xcassets in Resources */,
 				690B922B1ABADDD800AAED0D /* UserInfoTableViewCell.xib in Resources */,
 				6984F6FE1AB5D53800548BD2 /* BoardTableViewCell.xib in Resources */,
+				690B92351ABB99ED00AAED0D /* PostInfoTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,7 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */,
-				69FE90BF1AB7296200E72720 /* PostTableViewCell.m in Sources */,
+				69FE90BF1AB7296200E72720 /* PostGuidanceTableViewCell.m in Sources */,
 				6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */,
 				69FE90B61AB6FCD700E72720 /* GuidanceViewController.m in Sources */,
 				69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */,
@@ -491,6 +495,14 @@
 			name = UserInfoTableViewCell.xib;
 			sourceTree = "<group>";
 		};
+		690B92331ABB99ED00AAED0D /* PostInfoTableViewCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				690B92341ABB99ED00AAED0D /* Base */,
+			);
+			name = PostInfoTableViewCell.xib;
+			sourceTree = "<group>";
+		};
 		6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -516,12 +528,12 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
-		69FE90BA1AB727B700E72720 /* PostTableViewCell.xib */ = {
+		69FE90BA1AB727B700E72720 /* PostGuidanceTableViewCell.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				69FE90BB1AB727B700E72720 /* Base */,
 			);
-			name = PostTableViewCell.xib;
+			name = PostGuidanceTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

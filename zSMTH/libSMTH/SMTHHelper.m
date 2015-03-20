@@ -149,7 +149,7 @@
         NSString *chsName = [dict objectForKey:@"name"];
         NSString *manager = [dict objectForKey:@"manager"];
 
-        NSLog(@"English board name:%@", engName);
+//        NSLog(@"English board name:%@", engName);
         SMTHBoard *board = [[SMTHBoard alloc] init];
         if (engName != nil && engName.length > 0)
         {

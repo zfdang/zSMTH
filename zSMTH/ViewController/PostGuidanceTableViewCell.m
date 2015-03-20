@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Zhengfa. All rights reserved.
 //
 
-#import "PostTableViewCell.h"
+#import "PostGuidanceTableViewCell.h"
 
-@implementation PostTableViewCell
+@implementation PostGuidanceTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code

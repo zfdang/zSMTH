@@ -48,7 +48,7 @@
     }else{
         url = [NSString stringWithFormat:@"http://images.newsmth.net/nForum/uploadFace/%@/%@", [[_userID substringToIndex:1] uppercaseString], _userID];
     }
-    NSLog(@"userID = %@, URL=%@", self.userID, url);
+//    NSLog(@"userID = %@, URL=%@", self.userID, url);
 
     return [NSURL URLWithString:url];
 }
