@@ -14,6 +14,7 @@
 #import "LoginViewController.h"
 #import "FavoriteTableViewController.h"
 #import "UserInfoViewController.h"
+#import "PostListTableViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 
@@ -129,6 +130,11 @@
         } else {
             [navigationController pushViewController:userinfo animated:YES];
         }
+    } else if (target == VIEW_POST_LIST) {
+        PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
+        [navigationController popToRootViewControllerAnimated:NO];
+        
+        [navigationController pushViewController:postlist animated:YES];
     }
     
     [self.frostedViewController hideMenuViewController];
@@ -196,7 +202,7 @@
     } else if (indexPath.section == 0 && indexPath.row == 1) {
         [self switchViewto:VIEW_FAVORITE];
     } else if (indexPath.section == 0 && indexPath.row == 2) {
-        [self switchViewto:VIEW_USER_INFO];
+        [self switchViewto:VIEW_POST_LIST];
     }
 }
 

@@ -13,7 +13,8 @@ typedef enum {
     VIEW_GUIDANCE = 0,
     VIEW_FAVORITE,
     VIEW_LOGIN,
-    VIEW_USER_INFO
+    VIEW_USER_INFO,
+    VIEW_POST_LIST,
 } SMTHVIEW;
 
 @interface LeftMenuViewController : ExtendedTableViewController

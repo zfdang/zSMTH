@@ -11,7 +11,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="85" id="WUc-5L-uCh" customClass="PostGuidanceTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="442" height="85"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WUc-5L-uCh" id="mtN-tG-h7e">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WUc-5L-uCh" id="mtN-tG-h7e" userLabel="Post in Guidance">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="igt-nh-T1W" userLabel="avatar">
