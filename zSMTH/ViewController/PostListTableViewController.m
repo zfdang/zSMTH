@@ -9,6 +9,7 @@
 #import "PostListTableViewController.h"
 #import "PostListTableViewCell.h"
 #import "SMTHPost.h"
+#import "SVPullToRefresh.h"
 
 @interface PostListTableViewController ()
 {
@@ -30,11 +31,57 @@
     
     mPosts = [[NSMutableArray alloc] init];
     [self startAsyncTask];
+
+    self.navigationController.navigationBar.translucent = NO;
+    
+    // add pull to refresh function at the top & bottom
+    __weak typeof(self) weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshPostList];
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMorePostList];
+    }];
 }
+
+- (void) refreshPostList {
+    __weak typeof(self) weakSelf = self;
+    
+    int64_t delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [weakSelf.tableView.pullToRefreshView stopAnimating];
+
+        weakSelf.progressTitle = @"刷新中...";
+        [weakSelf startAsyncTask];
+    });
+}
+
+
+- (void) loadMorePostList {
+    __weak typeof(self) weakSelf = self;
+    
+    int64_t delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [weakSelf.tableView beginUpdates];
+        SMTHPost *post = [[SMTHPost alloc] init];
+        post.postSubject = @"新发现的帖子";
+        [mPosts addObject:post];
+        [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:mPosts.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+        [weakSelf.tableView endUpdates];
+        
+        [weakSelf.tableView.infiniteScrollingView stopAnimating];
+    });
+}
+
 
 - (void)asyncTask
 {
+    // this function will only load first page
     NSArray *posts = [helper getPostsFromBoard:boardID from:0];
+    [mPosts removeAllObjects];
     [mPosts addObjectsFromArray:posts];
 }
 
