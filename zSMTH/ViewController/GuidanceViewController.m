@@ -121,10 +121,10 @@
 //                            }];
         
         
-        [cell.avatar sd_setImageWithURL:[helper getFaceURLByUserID:[post author]] placeholderImage:[UIImage imageNamed:@"anonymous"]];
-        cell.avatar.layer.cornerRadius = 10.0;
-        cell.avatar.layer.borderWidth = 0;
-        cell.avatar.clipsToBounds = YES;
+        [cell.imageAvatar sd_setImageWithURL:[helper getFaceURLByUserID:[post author]] placeholderImage:[UIImage imageNamed:@"anonymous"]];
+        cell.imageAvatar.layer.cornerRadius = 10.0;
+        cell.imageAvatar.layer.borderWidth = 0;
+        cell.imageAvatar.clipsToBounds = YES;
 
         cell.postBoard.text = [post postBoard];
         cell.postSubject.text = [post postSubject];

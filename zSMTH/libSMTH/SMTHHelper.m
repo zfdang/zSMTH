@@ -35,15 +35,19 @@
         smth = [[SMTHURLConnection alloc] init];
         [smth init_smth];
         smth.delegate = self;
+        
         // 未登录
         user = nil;
+        
         // network initial status
         nNetworkStatus = -1;
+        
         // init sections
         sectionList = @[@"全站热点", @"国内院校", @"休闲娱乐", @"五湖四海", @"游戏运动", @"社会信息", @"知性感性", @"文化人文", @"学术科学", @"电脑技术"];
+
         // init load post information
         brcmode = 0;
-        postNumberinOnePage = 15;
+        postNumberinOnePage = 20;
     }
     return self;
 }
@@ -223,7 +227,7 @@
 {
     [smth reset_status];
     NSMutableArray *posts = [[NSMutableArray alloc] init];
-    NSArray *results = [smth net_LoadThreadList:boardID :from :postNumberinOnePage :brcmode];
+    NSArray *results = [smth net_LoadThreadList:boardID :from*postNumberinOnePage :postNumberinOnePage :brcmode];
     for (id result in results) {
 //        "author_id" = Kazoo;
 //        id = 410834;

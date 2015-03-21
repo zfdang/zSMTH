@@ -10,10 +10,12 @@
 #import "PostListTableViewCell.h"
 #import "SMTHPost.h"
 #import "SVPullToRefresh.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PostListTableViewController ()
 {
     NSMutableArray *mPosts;
+    int mPageIndex;
 }
 
 @end
@@ -30,6 +32,7 @@
     self.navItem.title = [NSString stringWithFormat:@"%@(%@)", boardName, boardID];
     
     mPosts = [[NSMutableArray alloc] init];
+    self.progressTitle = @"加载中...";
     [self startAsyncTask];
 
     self.navigationController.navigationBar.translucent = NO;
@@ -47,7 +50,6 @@
 
 - (void) refreshPostList {
     __weak typeof(self) weakSelf = self;
-    
     int64_t delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -61,18 +63,21 @@
 
 - (void) loadMorePostList {
     __weak typeof(self) weakSelf = self;
-    
-    int64_t delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [weakSelf.tableView beginUpdates];
-        SMTHPost *post = [[SMTHPost alloc] init];
-        post.postSubject = @"新发现的帖子";
-        [mPosts addObject:post];
-        [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:mPosts.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-        [weakSelf.tableView endUpdates];
-        
-        [weakSelf.tableView.infiniteScrollingView stopAnimating];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        mPageIndex += 1;
+        NSArray *posts = [helper getPostsFromBoard:boardID from:mPageIndex];
+        long currentNumber = [mPosts count];
+        if (posts != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [mPosts addObjectsFromArray:posts];
+                [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                [weakSelf.tableView beginUpdates];
+                for (int i = 0; i < [posts count]; i++) {
+                    [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                }
+                [weakSelf.tableView endUpdates];
+            });
+        }
     });
 }
 
@@ -80,6 +85,7 @@
 - (void)asyncTask
 {
     // this function will only load first page
+    mPageIndex = 0;
     NSArray *posts = [helper getPostsFromBoard:boardID from:0];
     [mPosts removeAllObjects];
     [mPosts addObjectsFromArray:posts];
@@ -126,6 +132,11 @@
     
     if (indexPath.section == 0) {
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        [cell.imageAvatar sd_setImageWithURL:[helper getFaceURLByUserID:[post author]] placeholderImage:[UIImage imageNamed:@"anonymous"]];
+        cell.imageAvatar.layer.cornerRadius = 10.0;
+        cell.imageAvatar.layer.borderWidth = 0;
+        cell.imageAvatar.clipsToBounds = YES;
+
         cell.labelSubject.text = post.postSubject;
         cell.labelUserID.text = post.author;
         cell.labelPostTime.text = post.postDate;
