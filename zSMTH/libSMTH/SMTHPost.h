@@ -24,8 +24,11 @@
 //        subject = "这个是一个测试的帖子";*
 //        time = 1424611727;*
 //        count = 18;*
+//        flag的含义: 第一位如果是*, 表示未读；第一位是d或者D, 表示置顶；第四位是@, 表示有附件
 //        flags = "Dnn d";   -- 置顶帖子的flag *
 //        flags = " nn  ";   -- 普通帖子的flag *
+//        flags = "*nn@ ";
+
 //        "board_id" = DigiHome;*
 //        "board_name" = "\U6570\U5b57\U5bb6\U5ead";
 //        "last_reply_id" = 415457;
@@ -45,5 +48,7 @@
 @property (strong, nonatomic) NSString* replyPostDate;
 @property (strong, nonatomic) NSString* replyAuthor;
 
-
+-(BOOL) isDing;
+-(BOOL) isUnread;
+-(BOOL) hasAttachment;
 @end

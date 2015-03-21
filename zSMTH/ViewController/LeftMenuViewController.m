@@ -132,8 +132,8 @@
         }
     } else if (target == VIEW_POST_LIST) {
         PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
-        postlist.boardID = @"DigiHome";
-        postlist.boardName = @"数字家庭";
+        postlist.boardID = @"Picture";
+        postlist.boardName = @"贴图";
         [navigationController popToRootViewControllerAnimated:NO];
 
         [navigationController pushViewController:postlist animated:YES];

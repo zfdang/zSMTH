@@ -138,10 +138,17 @@
         cell.imageAvatar.clipsToBounds = YES;
 
         cell.labelSubject.text = post.postSubject;
+        if([post isDing]){
+            cell.backgroundColor = [UIColor lightGrayColor];
+        }
         cell.labelUserID.text = post.author;
         cell.labelPostTime.text = post.postDate;
         cell.labelReplyTime.text = post.replyPostDate;
         cell.labelCount.text = post.postCount;
+        
+        if(![post hasAttachment]){
+            [cell.imageAttachs setHidden:YES];
+        }
     }
     
     return cell;
