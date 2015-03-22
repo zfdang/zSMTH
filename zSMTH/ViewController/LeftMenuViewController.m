@@ -10,7 +10,7 @@
 #import "LeftMenuViewController.h"
 #import "NavigationViewController.h"
 #import "REFrostedRootViewController.h"
-#import "GuidanceViewController.h"
+#import "GuidanceTableViewController.h"
 #import "LoginViewController.h"
 #import "FavoriteTableViewController.h"
 #import "UserInfoViewController.h"
@@ -98,7 +98,7 @@
     
     if (target == VIEW_GUIDANCE) {
         // top view is guidance view
-        GuidanceViewController *guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
+        GuidanceTableViewController *guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:guidance animated:YES];
     } else if (target == VIEW_FAVORITE) {

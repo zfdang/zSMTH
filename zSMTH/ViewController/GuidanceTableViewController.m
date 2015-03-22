@@ -6,19 +6,19 @@
 //  Copyright (c) 2015 Zhengfa. All rights reserved.
 //
 
-#import "GuidanceViewController.h"
+#import "GuidanceTableViewController.h"
 #import "PostGuidanceTableViewCell.h"
 #import "SMTHPost.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface GuidanceViewController ()
+@interface GuidanceTableViewController ()
 {
     NSArray *m_sections;
 }
 
 @end
 
-@implementation GuidanceViewController
+@implementation GuidanceTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

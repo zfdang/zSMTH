@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ExtendedTableViewController.h"
 
-@interface GuidanceViewController : ExtendedTableViewController
+@interface GuidanceTableViewController : ExtendedTableViewController
 
 @end
