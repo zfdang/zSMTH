@@ -10,4 +10,10 @@
 
 @interface PostContentTableViewController : ExtendedTableViewController
 
+@property (strong, nonatomic) NSString *boardName;
+@property (nonatomic) long postID;
+
+
+- (IBAction)return:(id)sender;
+
 @end

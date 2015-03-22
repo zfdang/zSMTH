@@ -45,9 +45,13 @@
         // init sections
         sectionList = @[@"全站热点", @"国内院校", @"休闲娱乐", @"五湖四海", @"游戏运动", @"社会信息", @"知性感性", @"文化人文", @"学术科学", @"电脑技术"];
 
-        // init load post information
+        // init setting to load post list
         brcmode = 0;
         postNumberinOnePage = 20;
+        
+        // init setting to load post details & replies
+        replyNumberinOnePost = 20;
+        replyOrder = 1;
     }
     return self;
 }
@@ -248,14 +252,14 @@
         post.author = [dict objectForKey:@"author_id"];
         post.postID = [dict objectForKey:@"id"];
         post.postSubject = [dict objectForKey:@"subject"];
-        post.postDate = [self getDateString:[[result objectForKey:@"time"] doubleValue]];
+        post.postDate = [self getRelativeDateString:[[result objectForKey:@"time"] doubleValue]];
         post.postCount = [[dict objectForKey:@"count"] description];
         post.postFlags = [dict objectForKey:@"flags"];
         
         post.postBoard = [dict objectForKey:@"board_id"];
         post.replyPostID = [dict objectForKey:@"last_reply_id"];
         post.replyAuthor = [dict objectForKey:@"last_user_id"];
-        post.replyPostDate = [self getDateString:[[result objectForKey:@"last_time"] doubleValue]];
+        post.replyPostDate = [self getRelativeDateString:[[result objectForKey:@"last_time"] doubleValue]];
 
         [posts addObject:post];
     }
@@ -263,6 +267,50 @@
     return posts;
 }
 
+- (NSArray *)getPostContents:(NSString *)board_id postID:(long)article_id from:(long)from
+{
+    [smth reset_status];
+    NSMutableArray *posts = [[NSMutableArray alloc] init];
+    NSArray *results = [smth net_GetThread:board_id :article_id :from*replyNumberinOnePost :replyNumberinOnePost :replyOrder];
+    long replyIndex = from*replyNumberinOnePost;
+    for (id result in results) {
+//        "attachment_list" =     (
+//                                 {
+//                                     name = "634fd979gw1eqb6sjvvorj20m80etwmk.jpg";
+//                                     pos = 651;
+//                                     size = 308191;
+//                                 },
+//                                 );
+//        attachments = 2;
+//        "author_id" = confinement;
+//        body = ";
+//        effsize = 288;
+//        flags = "*nn@ ";
+//        id = 19680;
+//        subject = "\U6b66\U5927\U6a31\U82b1\U56fe";
+//        time = 1426868596;
+        NSLog(@"%@", result);
+        
+        NSDictionary *dict = (NSDictionary*) result;
+        SMTHPost *post = [[SMTHPost alloc] init];
+
+        post.postID = [dict objectForKey:@"id"];
+        post.postSubject = [dict objectForKey:@"subject"];
+        post.author = [dict objectForKey:@"author_id"];
+        post.postDate = [self getAbsoluteDateString:[[result objectForKey:@"time"] doubleValue]];
+        
+        post.postContent = [dict objectForKey:@"body"];
+
+        post.postFlags = [dict objectForKey:@"flags"];
+        post.replyIndex = replyIndex;
+
+        [posts addObject:post];
+
+        replyIndex += 1;
+    }
+    
+    return posts;
+}
 
 - (int) checkVersion
 {
@@ -380,11 +428,20 @@
 }
 
 
-- (NSString*) getDateString:(NSTimeInterval) time
+- (NSString*) getRelativeDateString:(NSTimeInterval) time
 {
     NSTimeInterval cur_time = [[NSDate date] timeIntervalSince1970];
 
     return [self getDateString_internal:time :cur_time :0];
+}
+
+- (NSString*) getAbsoluteDateString:(NSTimeInterval) time
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+
+    NSDate *d = [[NSDate alloc] initWithTimeIntervalSince1970:time];
+    return [dateFormatter stringFromDate:d];
 }
 
 @end

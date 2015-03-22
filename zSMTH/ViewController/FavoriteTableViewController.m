@@ -115,7 +115,6 @@
         postlist.boardName = board.chsName;
         postlist.boardID = board.engName;
         [self.navigationController pushViewController:postlist animated:YES];
-
     }
 }
 

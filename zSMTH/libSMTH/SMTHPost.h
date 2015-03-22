@@ -43,12 +43,19 @@
 @property (strong, nonatomic) NSString* postCount;
 @property (strong, nonatomic) NSString* postFlags;
 
+@property (strong, nonatomic) NSString* postContent;
+@property (strong, nonatomic) NSArray* attachments;
+
 @property (strong, nonatomic) NSString* postBoard;
 @property (strong, nonatomic) NSString* replyPostID;
 @property (strong, nonatomic) NSString* replyPostDate;
 @property (strong, nonatomic) NSString* replyAuthor;
 
+
+@property (nonatomic) long replyIndex;
+
 -(BOOL) isDing;
 -(BOOL) isUnread;
 -(BOOL) hasAttachment;
+
 @end

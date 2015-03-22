@@ -10,6 +10,7 @@
 #import "PostGuidanceTableViewCell.h"
 #import "SMTHPost.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "PostContentTableViewController.h"
 
 @interface GuidanceTableViewController ()
 {
@@ -108,18 +109,6 @@
     if (m_sections !=nil) {
         NSArray *posts = [m_sections objectAtIndex:indexPath.section];
         SMTHPost* post = (SMTHPost*)[posts objectAtIndex:indexPath.row];
-
-//        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//        [manager downloadImageWithURL:[helper getFaceURLByUserID:[post author]]
-//                              options:0
-//                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//                             }
-//                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-//                                if (image) {
-//                                    cell.avatar.image = [image imageByScalingAndCroppingForSize:CGSizeMake(cell.avatar.frame.size.width, cell.avatar.frame.size.height)];
-//                                }
-//                            }];
-        
         
         [cell.imageAvatar sd_setImageWithURL:[helper getFaceURLByUserID:[post author]] placeholderImage:[UIImage imageNamed:@"anonymous"]];
         cell.imageAvatar.layer.cornerRadius = 10.0;
@@ -136,6 +125,18 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *posts = [m_sections objectAtIndex:indexPath.section];
+    SMTHPost* post = (SMTHPost*)[posts objectAtIndex:indexPath.row];
+    NSLog(@"Click on Post: Board = %@, Post = %@", post.postBoard, post.postID);
+
+    PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
+    postcontent.boardName = post.postBoard;
+    postcontent.postID = [post.postID doubleValue];
+    [self.navigationController pushViewController:postcontent animated:YES];
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

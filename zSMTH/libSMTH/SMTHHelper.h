@@ -13,7 +13,9 @@
 
 @interface SMTHHelper : NSObject <SMTHURLConnectionDelegate>
 {
-    int postNumberinOnePage;
+    int postNumberinOnePage;  // 版面列表：一页显示多少个帖子数
+    int replyNumberinOnePost; // 文章内容：一页显示多少回复数
+    int replyOrder;
     int brcmode;
 }
 
@@ -26,7 +28,7 @@
 @property (readonly) BOOL isLogined;
 
 - (void) updateNetworkStatus;
-
+- (NSURL*) getFaceURLByUserID:(NSString*)userID;
 - (int) checkVersion;
 
 // returned value should not be used to judge whether user is logined or not.
@@ -37,7 +39,6 @@
 - (NSArray*) getFavorites:(long)fid;
 - (NSArray*) getGuidancePosts;
 - (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from;
-
-- (NSURL*) getFaceURLByUserID:(NSString*)userID;
+- (NSArray *)getPostContents:(NSString *)board_id postID:(long)article_id from:(long)from;
 
 @end

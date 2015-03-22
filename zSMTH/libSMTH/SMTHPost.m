@@ -17,10 +17,15 @@
 @synthesize postCount;
 @synthesize postFlags;
 
+@synthesize postContent;
+@synthesize attachments;
+
 @synthesize postBoard;
 @synthesize replyPostID;
 @synthesize replyPostDate;
 @synthesize replyAuthor;
+
+@synthesize replyIndex;
 
 -(BOOL) isDing
 {

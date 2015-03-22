@@ -42,6 +42,7 @@
                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xxX-rE-RVE" userLabel="Content">
                         <rect key="frame" x="10" y="55" width="300" height="80.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                     </webView>
                 </subviews>
                 <constraints>
@@ -69,6 +70,13 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="imageAvatar" destination="zFC-p5-qHm" id="TUg-Rs-14J"/>
+                <outlet property="postAuthor" destination="MFX-9g-6Qd" id="ZJF-pJ-Nyv"/>
+                <outlet property="postIndex" destination="j5D-01-p60" id="Qr3-eA-HPX"/>
+                <outlet property="postTime" destination="dAv-79-F0z" id="li8-tI-mw9"/>
+                <outlet property="webContent" destination="xxX-rE-RVE" id="KXC-Eo-L2I"/>
+            </connections>
             <point key="canvasLocation" x="207" y="196"/>
         </tableViewCell>
     </objects>
