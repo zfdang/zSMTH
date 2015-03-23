@@ -11,6 +11,7 @@
 #import "SMTHPost.h"
 #import "SVPullToRefresh.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "PostContentTableViewController.h"
 
 @interface PostListTableViewController ()
 {
@@ -152,6 +153,18 @@
     }
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+    NSLog(@"Click on Post: Board = %@, Post = %@", post.postBoard, post.postID);
+    
+    PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
+    postcontent.boardName = post.postBoard;
+    postcontent.postID = [post.postID doubleValue];
+    postcontent.postSubject = post.postSubject;    
+    [self.navigationController pushViewController:postcontent animated:YES];
 }
 
 /*

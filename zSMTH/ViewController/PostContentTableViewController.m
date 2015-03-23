@@ -12,9 +12,13 @@
 #import "PostContentTableViewCell.h"
 #import "SMTHPost.h"
 
+#define LABEL_WIDTH 300
+
 @interface PostContentTableViewController ()
 {
-    NSArray *mPosts;
+    NSMutableArray *mPosts;
+    UIFont *textFont;
+    NSMutableArray *mWebViews;
 }
 
 @end
@@ -23,20 +27,25 @@
 
 @synthesize postID;
 @synthesize boardName;
+@synthesize postSubject;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     // load first page
     mPosts = [[NSMutableArray alloc] init];
+    mWebViews = [[NSMutableArray alloc] init];
+    self.navigationController.navigationItem.title = self.postSubject;
+
     self.progressTitle = @"加载中...";
-    
     [self startAsyncTask];
 }
 
 - (void)asyncTask
 {
-    mPosts = [helper getPostContents:boardName postID:postID from:0];
+    NSArray *results = [helper getPostContents:boardName postID:postID from:0];
+    [mPosts removeAllObjects];
+    [mPosts addObjectsFromArray:results];
 }
 
 
@@ -52,28 +61,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"PostContentTableViewCell";
-    
-    PostContentTableViewCell *cell = (PostContentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil)
+    CGFloat height = 0;
+    if(indexPath.row >= [mWebViews count])
+        return height;
+    NSValue *value = [mWebViews objectAtIndex:indexPath.row];
+    id webview = [value nonretainedObjectValue];
+    if(webview != nil)
     {
-        NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
-        cell = (PostContentTableViewCell*)[nibArray objectAtIndex:0];
+        height = ((UIWebView*)webview).frame.size.height;
     }
-
-    SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
-
-    UIWebView *aWebView = cell.webContent;
-    aWebView.scrollView.scrollEnabled = NO;
-    [aWebView loadHTMLString:post.postContent baseURL:nil];
-    
-    CGRect frame = aWebView.frame;
-    frame.size.height = 1;
-
-    CGSize fittingSize = [aWebView sizeThatFits:frame.size];
-//    frame.size.height = aWebView.scrollView.contentSize.height;
-    
-    return fittingSize.height + 50;
+    return height;
 }
 
 
@@ -90,7 +87,7 @@
     
     if (indexPath.section == 0) {
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
-        
+       
         [cell.imageAvatar sd_setImageWithURL:[helper getFaceURLByUserID:[post author]] placeholderImage:[UIImage imageNamed:@"anonymous"]];
         cell.imageAvatar.layer.cornerRadius = 10.0;
         cell.imageAvatar.layer.borderWidth = 0;
@@ -105,14 +102,47 @@
             cell.postIndex.text = [NSString stringWithFormat:@"%ld楼",post.replyIndex];
         }
         
+        UIWebView *aWebView = cell.webContent;
+
+        // save this webview as an weak reference in mWebViews array
+        NSValue *value = [NSValue valueWithNonretainedObject:aWebView];
+        [mWebViews insertObject:value atIndex:indexPath.row];
         
-        [cell.webContent loadHTMLString:post.postContent baseURL:nil];
-        cell.webContent.scrollView.scrollEnabled = NO;
+        CGRect rect = CGRectMake(5.0f, 0.0f, 320.0f, [self minHeightForText:post.postContent]);
+        NSLog(@"Rect in row: %f", rect.size.height);
+        aWebView.frame = rect;
+        [aWebView loadHTMLString:post.postContent baseURL:nil];
+//        aWebView.delegate = self;
+        aWebView.layer.cornerRadius = 0;
+        aWebView.userInteractionEnabled = YES;
+        aWebView.multipleTouchEnabled = YES;
+        aWebView.clipsToBounds = YES;
+        aWebView.scalesPageToFit = NO;
+        aWebView.backgroundColor = [UIColor clearColor];
+        aWebView.scrollView.scrollEnabled = NO;
+        aWebView.scrollView.bounces = NO;
+//        [showCell addSubview:aWebView];
+        
+//        [cell.webContent loadHTMLString:post.postContent baseURL:nil];
+//        cell.webContent.scrollView.scrollEnabled = NO;
     }
     
     return cell;
 }
 
+- (CGFloat)minHeightForText:(NSString *)_text {
+    if (! textFont) {
+        textFont = [UIFont boldSystemFontOfSize:16];
+    }
+    
+    CGFloat height = [_text
+                      sizeWithFont:textFont
+                      constrainedToSize:CGSizeMake(LABEL_WIDTH, 999999)
+                      lineBreakMode:NSLineBreakByWordWrapping
+                      ].height;
+    
+    return height;
+}
 
 
 - (void)didReceiveMemoryWarning {

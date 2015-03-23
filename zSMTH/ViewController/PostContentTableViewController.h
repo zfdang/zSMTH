@@ -11,6 +11,7 @@
 @interface PostContentTableViewController : ExtendedTableViewController
 
 @property (strong, nonatomic) NSString *boardName;
+@property (strong, nonatomic) NSString *postSubject;
 @property (nonatomic) long postID;
 
 
