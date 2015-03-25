@@ -35,6 +35,7 @@
 		69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */; };
 		69F4EAB51AB1C13C00A82B50 /* SMTHHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAB41AB1C13C00A82B50 /* SMTHHelperTests.m */; };
 		69F4EAB71AB1EFE800A82B50 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */; };
+		69F5E3C31AC0DFE4000F394D /* ContentLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F5E3C21AC0DFE4000F394D /* ContentLabel.m */; };
 		69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF2D1AA9CE97007C9EFB /* main.m */; };
 		69FCBF311AA9CE97007C9EFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF301AA9CE97007C9EFB /* AppDelegate.m */; };
 		69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF331AA9CE97007C9EFB /* REFrostedRootViewController.m */; };
@@ -111,6 +112,8 @@
 		69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMTHHelper.m; path = zSMTH/libSMTH/SMTHHelper.m; sourceTree = SOURCE_ROOT; };
 		69F4EAB41AB1C13C00A82B50 /* SMTHHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHHelperTests.m; sourceTree = "<group>"; };
 		69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		69F5E3C11AC0DFE4000F394D /* ContentLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentLabel.h; path = ViewController/ContentLabel.h; sourceTree = "<group>"; };
+		69F5E3C21AC0DFE4000F394D /* ContentLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentLabel.m; path = ViewController/ContentLabel.m; sourceTree = "<group>"; };
 		69FCBF281AA9CE97007C9EFB /* zSMTH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zSMTH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69FCBF2C1AA9CE97007C9EFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69FCBF2D1AA9CE97007C9EFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 				690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */,
 				690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */,
 				690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */,
+				69F5E3C11AC0DFE4000F394D /* ContentLabel.h */,
+				69F5E3C21AC0DFE4000F394D /* ContentLabel.m */,
 				693FACE11ABE50D900BD8200 /* PostContentTableViewController.h */,
 				693FACE21ABE50D900BD8200 /* PostContentTableViewController.m */,
 				693FACDE1ABE4FA700BD8200 /* PostContentTableViewCell.h */,
@@ -486,6 +491,7 @@
 				69FE90AA1AB66EC400E72720 /* BoardTableViewCell.m in Sources */,
 				69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */,
 				6984F6F21AB3DC1D00548BD2 /* NavigationViewController.m in Sources */,
+				69F5E3C31AC0DFE4000F394D /* ContentLabel.m in Sources */,
 				693FACE31ABE50D900BD8200 /* PostContentTableViewController.m in Sources */,
 				69F4EAAD1AB1780A00A82B50 /* Reachability.m in Sources */,
 				6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */,

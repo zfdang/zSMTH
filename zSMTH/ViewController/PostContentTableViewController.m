@@ -17,8 +17,7 @@
 @interface PostContentTableViewController ()
 {
     NSMutableArray *mPosts;
-    UIFont *textFont;
-    NSMutableArray *mWebViews;
+    NSMutableDictionary *mHeights;
 }
 
 @end
@@ -34,7 +33,7 @@
 
     // load first page
     mPosts = [[NSMutableArray alloc] init];
-    mWebViews = [[NSMutableArray alloc] init];
+    mHeights = [[NSMutableDictionary alloc] init];
     self.navigationController.navigationItem.title = self.postSubject;
 
     self.progressTitle = @"加载中...";
@@ -61,18 +60,22 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 0;
-    if(indexPath.row >= [mWebViews count])
-        return height;
-    NSValue *value = [mWebViews objectAtIndex:indexPath.row];
-    id webview = [value nonretainedObjectValue];
-    if(webview != nil)
+
+    CGFloat height = 150.0;
+    
+    id result = [mHeights objectForKey:indexPath];
+    if(result != nil)
     {
-        height = ((UIWebView*)webview).frame.size.height;
+        height = [((NSNumber*)result) floatValue];
     }
     return height;
 }
 
+- (NSString*) getIndexPathDesc:(NSIndexPath*) indexPath
+{
+    NSString *result = [NSString stringWithFormat:@"%ld-%ld", indexPath.section, indexPath.row];
+    return result;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -102,46 +105,14 @@
             cell.postIndex.text = [NSString stringWithFormat:@"%ld楼",post.replyIndex];
         }
         
-        UIWebView *aWebView = cell.webContent;
-
-        // save this webview as an weak reference in mWebViews array
-        NSValue *value = [NSValue valueWithNonretainedObject:aWebView];
-        [mWebViews insertObject:value atIndex:indexPath.row];
-        
-        CGRect rect = CGRectMake(5.0f, 0.0f, 320.0f, [self minHeightForText:post.postContent]);
-        NSLog(@"Rect in row: %f", rect.size.height);
-        aWebView.frame = rect;
-        [aWebView loadHTMLString:post.postContent baseURL:nil];
-//        aWebView.delegate = self;
-        aWebView.layer.cornerRadius = 0;
-        aWebView.userInteractionEnabled = YES;
-        aWebView.multipleTouchEnabled = YES;
-        aWebView.clipsToBounds = YES;
-        aWebView.scalesPageToFit = NO;
-        aWebView.backgroundColor = [UIColor clearColor];
-        aWebView.scrollView.scrollEnabled = NO;
-        aWebView.scrollView.bounces = NO;
-//        [showCell addSubview:aWebView];
-        
-//        [cell.webContent loadHTMLString:post.postContent baseURL:nil];
-//        cell.webContent.scrollView.scrollEnabled = NO;
+        // set content
+        [cell.postContent setContentInfo:post.postContent];
+        CGFloat pos = [cell.postContent get_height] + cell.postContent.frame.origin.y + 10;
+        NSNumber *height = [NSNumber numberWithFloat:pos];
+        [mHeights setObject:height forKey:indexPath];
     }
     
     return cell;
-}
-
-- (CGFloat)minHeightForText:(NSString *)_text {
-    if (! textFont) {
-        textFont = [UIFont boldSystemFontOfSize:16];
-    }
-    
-    CGFloat height = [_text
-                      sizeWithFont:textFont
-                      constrainedToSize:CGSizeMake(LABEL_WIDTH, 999999)
-                      lineBreakMode:NSLineBreakByWordWrapping
-                      ].height;
-    
-    return height;
 }
 
 

@@ -39,27 +39,28 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xxX-rE-RVE" userLabel="Content">
-                        <rect key="frame" x="10" y="55" width="300" height="80.5"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
-                    </webView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmF-YF-qje" userLabel="Content" customClass="ContentLabel">
+                        <rect key="frame" x="10" y="60" width="300" height="75.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="MFX-9g-6Qd" firstAttribute="leading" secondItem="zFC-p5-qHm" secondAttribute="trailing" constant="5" id="3cQ-dz-eJZ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="j5D-01-p60" secondAttribute="trailing" constant="2" id="4FO-8Y-gOb"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qmF-YF-qje" secondAttribute="trailing" constant="2" id="7Gq-RA-EBd"/>
+                    <constraint firstItem="qmF-YF-qje" firstAttribute="top" secondItem="zFC-p5-qHm" secondAttribute="bottom" constant="10" id="7sX-j1-IGc"/>
                     <constraint firstItem="MFX-9g-6Qd" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="topMargin" constant="2" id="9KO-So-ibh"/>
                     <constraint firstItem="j5D-01-p60" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="topMargin" constant="2" id="EXz-lj-bkj"/>
                     <constraint firstItem="zFC-p5-qHm" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="topMargin" constant="2" id="Lbv-Vr-X0M"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="xxX-rE-RVE" secondAttribute="trailing" constant="2" id="NC7-8t-YnZ"/>
                     <constraint firstItem="zFC-p5-qHm" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" constant="2" id="O3A-9L-ubu"/>
-                    <constraint firstItem="xxX-rE-RVE" firstAttribute="top" secondItem="zFC-p5-qHm" secondAttribute="bottom" constant="5" id="VQ9-bf-dJq"/>
                     <constraint firstItem="j5D-01-p60" firstAttribute="centerY" secondItem="MFX-9g-6Qd" secondAttribute="centerY" id="WhZ-Fo-ZfD"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="xxX-rE-RVE" secondAttribute="bottom" constant="2" id="YQe-DE-KiU"/>
                     <constraint firstItem="dAv-79-F0z" firstAttribute="bottom" secondItem="zFC-p5-qHm" secondAttribute="bottom" id="Yyk-Fw-LZm"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="qmF-YF-qje" secondAttribute="bottom" constant="2" id="Zd9-Vt-B10"/>
+                    <constraint firstItem="qmF-YF-qje" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" constant="2" id="ZtE-hf-j6x"/>
                     <constraint firstItem="j5D-01-p60" firstAttribute="centerY" secondItem="dAv-79-F0z" secondAttribute="centerY" id="pHm-LI-Rdl"/>
                     <constraint firstItem="dAv-79-F0z" firstAttribute="top" secondItem="MFX-9g-6Qd" secondAttribute="bottom" constant="2" id="pNY-CG-Y9D"/>
-                    <constraint firstItem="xxX-rE-RVE" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" constant="2" id="sYe-NT-2UB"/>
                     <constraint firstItem="dAv-79-F0z" firstAttribute="leading" secondItem="MFX-9g-6Qd" secondAttribute="leading" id="vPs-oX-ENA"/>
                 </constraints>
                 <variation key="default">
@@ -73,9 +74,9 @@
             <connections>
                 <outlet property="imageAvatar" destination="zFC-p5-qHm" id="TUg-Rs-14J"/>
                 <outlet property="postAuthor" destination="MFX-9g-6Qd" id="ZJF-pJ-Nyv"/>
+                <outlet property="postContent" destination="qmF-YF-qje" id="1VT-Mx-J4k"/>
                 <outlet property="postIndex" destination="j5D-01-p60" id="Qr3-eA-HPX"/>
                 <outlet property="postTime" destination="dAv-79-F0z" id="li8-tI-mw9"/>
-                <outlet property="webContent" destination="xxX-rE-RVE" id="KXC-Eo-L2I"/>
             </connections>
             <point key="canvasLocation" x="207" y="196"/>
         </tableViewCell>
