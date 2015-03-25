@@ -34,7 +34,7 @@
     // load first page
     mPosts = [[NSMutableArray alloc] init];
     mHeights = [[NSMutableDictionary alloc] init];
-    self.navigationController.navigationItem.title = self.postSubject;
+    self.title = self.postSubject;
 
     self.progressTitle = @"加载中...";
     [self startAsyncTask];
