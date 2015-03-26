@@ -8,7 +8,6 @@
 
 #import "PostContentTableViewController.h"
 #import "SVPullToRefresh.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "PostContentTableViewCell.h"
 #import "SMTHPost.h"
 
@@ -36,6 +35,7 @@
     mHeights = [[NSMutableDictionary alloc] init];
     self.title = self.postSubject;
 
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.progressTitle = @"加载中...";
     [self startAsyncTask];
 }
@@ -90,25 +90,10 @@
     
     if (indexPath.section == 0) {
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        
+        [cell setCellContent:post];
        
-        [cell.imageAvatar sd_setImageWithURL:[helper getFaceURLByUserID:[post author]] placeholderImage:[UIImage imageNamed:@"anonymous"]];
-        cell.imageAvatar.layer.cornerRadius = 10.0;
-        cell.imageAvatar.layer.borderWidth = 0;
-        cell.imageAvatar.clipsToBounds = YES;
-        
-        cell.postAuthor.text = post.author;
-        cell.postTime.text = post.postDate;
-        
-        if(post.replyIndex == 0){
-            cell.postIndex.text = @"楼主";
-        } else {
-            cell.postIndex.text = [NSString stringWithFormat:@"%ld楼",post.replyIndex];
-        }
-        
-        // set content
-        [cell.postContent setContentInfo:post.postContent];
-        CGFloat pos = [cell.postContent get_height] + cell.postContent.frame.origin.y + 10;
-        NSNumber *height = [NSNumber numberWithFloat:pos];
+        NSNumber *height = [NSNumber numberWithFloat:[cell getCellHeight]];
         [mHeights setObject:height forKey:indexPath];
     }
     

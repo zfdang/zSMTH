@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ContentLabel.h"
+#import "SMTHPost.h"
 
 @interface PostContentTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
@@ -15,5 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *postIndex;
 @property (weak, nonatomic) IBOutlet UILabel *postAuthor;
 @property (weak, nonatomic) IBOutlet ContentLabel *postContent;
+@property (weak, nonatomic) IBOutlet UIView *cellView;
 
+-(void) setCellContent:(SMTHPost*)post;
+-(CGFloat) getCellHeight;
 @end
