@@ -17,6 +17,7 @@
 {
     NSMutableArray *mPosts;
     NSMutableDictionary *mHeights;
+    int mPageIndex;
 }
 
 @end
@@ -38,11 +39,44 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.progressTitle = @"加载中...";
     [self startAsyncTask];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    
+    // add pull to refresh function at the top & bottom
+    __weak typeof(self) weakSelf = self;
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf loadMorePostList];
+    }];
+
+    
 }
+
+- (void) loadMorePostList {
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        mPageIndex += 1;
+        NSArray *posts = [helper getPostContents:boardName postID:postID from:mPageIndex];
+        long currentNumber = [mPosts count];
+        if (posts != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                [mPosts addObjectsFromArray:posts];
+                [weakSelf.tableView beginUpdates];
+                for (int i = 0; i < [posts count]; i++) {
+                    [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                }
+                [weakSelf.tableView endUpdates];
+//                [weakSelf.tableView reloadData];
+            });
+        }
+    });
+}
+
 
 - (void)asyncTask
 {
-    NSArray *results = [helper getPostContents:boardName postID:postID from:0];
+    mPageIndex = 0;
+    NSArray *results = [helper getPostContents:boardName postID:postID from:mPageIndex];
     [mPosts removeAllObjects];
     [mPosts addObjectsFromArray:results];
 }
@@ -61,7 +95,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    CGFloat height = 150.0;
+    CGFloat height = 0.0;
     
     id result = [mHeights objectForKey:indexPath];
     if(result != nil)

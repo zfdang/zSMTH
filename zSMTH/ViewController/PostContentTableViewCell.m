@@ -9,6 +9,7 @@
 #import "PostContentTableViewCell.h"
 #import "SMTHHelper.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "SVPullToRefresh.h"
 
 
 @implementation PostContentTableViewCell
@@ -44,14 +45,6 @@
     [self.postContent setContentInfo:post.postContent];
     
     // set cell border
-    CGRect rect = self.cellView.frame;
-    if(post.replyIndex == 0){
-        rect.origin.y += 5;
-    }
-    CGFloat height = [self getCellHeight];
-    rect.size.height = height - 1;
-    [self.cellView setFrame:rect];
-
     [self.cellView.layer setBorderColor:[UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1.0].CGColor];
     [self.cellView.layer setBorderWidth:2.0f];
 }
@@ -59,7 +52,7 @@
 -(CGFloat) getCellHeight
 {
     CGRect rect = self.postContent.frame;
-    CGFloat height = [self.postContent get_height] + rect.origin.y + 10;
+    CGFloat height = [self.postContent get_height] + rect.origin.y + 20;
     return height;
 }
 

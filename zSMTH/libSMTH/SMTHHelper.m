@@ -289,7 +289,7 @@
 //        id = 19680;
 //        subject = "\U6b66\U5927\U6a31\U82b1\U56fe";
 //        time = 1426868596;
-        NSLog(@"%@", result);
+//        NSLog(@"%@", result);
         
         NSDictionary *dict = (NSDictionary*) result;
         SMTHPost *post = [[SMTHPost alloc] init];

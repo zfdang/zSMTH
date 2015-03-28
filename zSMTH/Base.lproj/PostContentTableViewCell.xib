@@ -43,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmF-YF-qje" userLabel="Content" customClass="ContentLabel">
-                                <rect key="frame" x="2" y="44" width="300" height="83.5"/>
+                                <rect key="frame" x="1" y="43" width="302" height="86.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -51,24 +51,28 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="qmF-YF-qje" secondAttribute="trailing" constant="2" id="023-zK-Nj2"/>
-                            <constraint firstItem="qmF-YF-qje" firstAttribute="leading" secondItem="IxX-FN-eEl" secondAttribute="leading" constant="2" id="F4n-3c-hi2"/>
+                            <constraint firstAttribute="trailing" secondItem="qmF-YF-qje" secondAttribute="trailing" constant="1" id="023-zK-Nj2"/>
+                            <constraint firstItem="qmF-YF-qje" firstAttribute="leading" secondItem="IxX-FN-eEl" secondAttribute="leading" constant="1" id="F4n-3c-hi2"/>
                             <constraint firstItem="zFC-p5-qHm" firstAttribute="top" secondItem="MFX-9g-6Qd" secondAttribute="top" constant="2" id="GFm-lF-oza"/>
                             <constraint firstItem="qmF-YF-qje" firstAttribute="leading" secondItem="zFC-p5-qHm" secondAttribute="trailing" constant="2" id="HBe-Kg-Iyo"/>
                             <constraint firstItem="dAv-79-F0z" firstAttribute="bottom" secondItem="zFC-p5-qHm" secondAttribute="bottom" constant="2" id="JWZ-a5-cj2"/>
                             <constraint firstItem="dAv-79-F0z" firstAttribute="leading" secondItem="MFX-9g-6Qd" secondAttribute="leading" id="LH0-Pr-pPq"/>
                             <constraint firstItem="j5D-01-p60" firstAttribute="leading" secondItem="zFC-p5-qHm" secondAttribute="trailing" constant="2" id="MDZ-Xn-GMC"/>
-                            <constraint firstAttribute="bottom" secondItem="qmF-YF-qje" secondAttribute="bottom" constant="2" id="MdY-hD-UcJ"/>
+                            <constraint firstAttribute="bottom" secondItem="qmF-YF-qje" secondAttribute="bottom" id="MdY-hD-UcJ"/>
+                            <constraint firstItem="zFC-p5-qHm" firstAttribute="top" secondItem="IxX-FN-eEl" secondAttribute="top" constant="2" id="T5v-xS-H5u"/>
                             <constraint firstItem="qmF-YF-qje" firstAttribute="leading" secondItem="zFC-p5-qHm" secondAttribute="trailing" constant="2" id="VP4-rT-jdw"/>
                             <constraint firstItem="MFX-9g-6Qd" firstAttribute="leading" secondItem="zFC-p5-qHm" secondAttribute="trailing" constant="2" id="ZZE-Ej-AeD"/>
                             <constraint firstItem="j5D-01-p60" firstAttribute="top" secondItem="zFC-p5-qHm" secondAttribute="top" constant="2" id="dUc-y7-gcH"/>
                             <constraint firstItem="zFC-p5-qHm" firstAttribute="top" secondItem="IxX-FN-eEl" secondAttribute="top" constant="2" id="fb5-KH-rIL"/>
+                            <constraint firstItem="zFC-p5-qHm" firstAttribute="leading" secondItem="IxX-FN-eEl" secondAttribute="leading" constant="2" id="kRb-fx-blH"/>
                             <constraint firstItem="zFC-p5-qHm" firstAttribute="leading" secondItem="IxX-FN-eEl" secondAttribute="leading" constant="2" id="qpl-al-8jb"/>
                             <constraint firstAttribute="trailing" secondItem="j5D-01-p60" secondAttribute="trailing" constant="10" id="uea-ng-aIO"/>
-                            <constraint firstItem="qmF-YF-qje" firstAttribute="top" secondItem="zFC-p5-qHm" secondAttribute="bottom" constant="2" id="z13-os-C8r"/>
+                            <constraint firstItem="qmF-YF-qje" firstAttribute="top" secondItem="zFC-p5-qHm" secondAttribute="bottom" constant="1" id="z13-os-C8r"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="fb5-KH-rIL"/>
+                                <exclude reference="qpl-al-8jb"/>
                                 <exclude reference="HBe-Kg-Iyo"/>
                                 <exclude reference="VP4-rT-jdw"/>
                                 <exclude reference="MDZ-Xn-GMC"/>
