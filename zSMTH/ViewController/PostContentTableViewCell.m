@@ -10,7 +10,7 @@
 #import "SMTHHelper.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVPullToRefresh.h"
-
+#import "SMTHAttachment.h"
 
 @implementation PostContentTableViewCell
 
@@ -43,6 +43,37 @@
     
     // set content
     [self.postContent setContentInfo:post.postContent];
+
+    imageHeights = 0;
+    //show image
+    CGRect rect = self.postContent.frame;
+    CGFloat imgOffset = [self.postContent get_height] + rect.origin.y + 5;
+    NSArray* attachs = post.attachments;
+    for(int i=0; i<[attachs count]; i++){
+        SMTHAttachment *att = (SMTHAttachment*)[attachs objectAtIndex:i];
+
+        UIImageView * imageview = [[UIImageView alloc] init];
+        NSString * url = [NSString stringWithFormat:@"http://att.newsmth.net/nForum/att/%@/%@/%ld", post.postBoard, post.postID, att.attPos];
+        NSLog(@"Image URL: %@", url);
+
+        // Here we use the new provided sd_setImageWithURL: method to load the web image
+        [imageview sd_setImageWithURL:[NSURL URLWithString:url]
+                          placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                     CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;
+                                     att.imgHeight = curImageHeight;
+                                     CGFloat curImageOffset = imgOffset;
+                                     for (int j = 0; j < i; j++) {
+                                         SMTHAttachment *at = (SMTHAttachment*)[attachs objectAtIndex:j];
+                                         curImageOffset += at.imgHeight + 5;
+                                     }
+                                     imageview.frame = CGRectMake(rect.origin.x, curImageOffset, rect.size.width, curImageHeight);
+                                     imageHeights += curImageHeight + 10;
+                                     [self setNeedsDisplay];
+                                 }];
+//        imageview.frame = CGRectMake(rect.origin.x, imgOffset + i * 10, rect.size.width, 10);
+        [self.cellView addSubview:imageview];
+}
     
     // set cell border
     [self.cellView.layer setBorderColor:[UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1.0].CGColor];
@@ -53,7 +84,7 @@
 {
     CGRect rect = self.postContent.frame;
     CGFloat height = [self.postContent get_height] + rect.origin.y + 20;
-    return height;
+    return height + imageHeights;
 }
 
 @end

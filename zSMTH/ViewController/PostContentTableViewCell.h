@@ -11,6 +11,10 @@
 #import "SMTHPost.h"
 
 @interface PostContentTableViewCell : UITableViewCell
+{
+    long imageHeights;
+}
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *postTime;
 @property (weak, nonatomic) IBOutlet UILabel *postIndex;

@@ -60,8 +60,8 @@
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf.tableView.infiniteScrollingView stopAnimating];
-                [mPosts addObjectsFromArray:posts];
                 [weakSelf.tableView beginUpdates];
+                [mPosts addObjectsFromArray:posts];
                 for (int i = 0; i < [posts count]; i++) {
                     [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
                 }
@@ -95,7 +95,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    CGFloat height = 0.0;
+    CGFloat height = 100.0;
     
     id result = [mHeights objectForKey:indexPath];
     if(result != nil)
@@ -105,11 +105,6 @@
     return height;
 }
 
-- (NSString*) getIndexPathDesc:(NSIndexPath*) indexPath
-{
-    NSString *result = [NSString stringWithFormat:@"%ld-%ld", indexPath.section, indexPath.row];
-    return result;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -125,6 +120,7 @@
     if (indexPath.section == 0) {
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
         
+        post.postBoard = self.boardName;
         [cell setCellContent:post];
        
         NSNumber *height = [NSNumber numberWithFloat:[cell getCellHeight]];

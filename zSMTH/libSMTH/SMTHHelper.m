@@ -10,6 +10,7 @@
 #import "Reachability.h"
 #import "SMTHBoard.h"
 #import "SMTHPost.h"
+#import "SMTHAttachment.h"
 
 @implementation SMTHHelper
 
@@ -305,6 +306,22 @@
         post.replyIndex = replyIndex;
 
         [posts addObject:post];
+        
+        NSArray *attachs = [dict objectForKey:@"attachment_list"];
+        if(attachs != nil && [attachs count] > 0){
+            post.attachments = [[NSMutableArray alloc] init];
+
+            for (id attach in attachs) {
+                NSDictionary *items = (NSDictionary*) attach;
+                SMTHAttachment *att = [[SMTHAttachment alloc] init];
+                att.attName = [items objectForKey:@"name"];
+                att.attPos = [[items objectForKey:@"pos"] longValue];
+                att.attSize = [[items objectForKey:@"size"] longValue];
+                
+                [post.attachments addObject:att];
+            }
+            
+        }
 
         replyIndex += 1;
     }

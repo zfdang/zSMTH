@@ -28,6 +28,7 @@
 		6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F71AB4927600548BD2 /* ExtendedTableViewController.m */; };
 		6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6FA1AB579E900548BD2 /* SMTHBoard.m */; };
 		6984F6FE1AB5D53800548BD2 /* BoardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */; };
+		69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */; };
 		69F4EAA31AAFF9FF00A82B50 /* libSMTH_0.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAA51AAFFA5100A82B50 /* client_signature.m */; };
 		69F4EAA91AB06D1D00A82B50 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAA81AB06D1D00A82B50 /* LoginViewController.m */; };
@@ -99,6 +100,8 @@
 		6984F6F91AB579E900548BD2 /* SMTHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHBoard.h; sourceTree = "<group>"; };
 		6984F6FA1AB579E900548BD2 /* SMTHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHBoard.m; sourceTree = "<group>"; };
 		6984F6FD1AB5D53800548BD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = zSMTH/Base.lproj/BoardTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHAttachment.h; sourceTree = "<group>"; };
+		69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHAttachment.m; sourceTree = "<group>"; };
 		69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSMTH_0.2.3.a; sourceTree = "<group>"; };
 		69F4EAA11AAFF9FF00A82B50 /* smth_netop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smth_netop.h; sourceTree = "<group>"; };
 		69F4EAA21AAFF9FF00A82B50 /* SMTHURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHURLConnection.h; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 				6984F6FA1AB579E900548BD2 /* SMTHBoard.m */,
 				69FE90B71AB71A7700E72720 /* SMTHPost.h */,
 				69FE90B81AB71A7700E72720 /* SMTHPost.m */,
+				69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */,
+				69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */,
 			);
 			path = libSMTH;
 			sourceTree = "<group>";
@@ -483,6 +488,7 @@
 				6925766A1ABBDDC800097DBC /* PostListTableViewController.m in Sources */,
 				6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */,
 				69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */,
+				69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */,
 				6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */,
 				690B92321ABB92B100AAED0D /* UIImage+RoundedResize.m in Sources */,
 				690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */,

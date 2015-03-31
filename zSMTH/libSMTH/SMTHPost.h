@@ -44,7 +44,7 @@
 @property (strong, nonatomic) NSString* postFlags;
 
 @property (strong, nonatomic) NSString* postContent;
-@property (strong, nonatomic) NSArray* attachments;
+@property (strong, nonatomic) NSMutableArray* attachments;
 
 @property (strong, nonatomic) NSString* postBoard;
 @property (strong, nonatomic) NSString* replyPostID;
