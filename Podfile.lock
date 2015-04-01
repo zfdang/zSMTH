@@ -5,17 +5,20 @@ PODS:
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
   - SVPullToRefresh (0.4.1)
+  - Toast (2.4)
 
 DEPENDENCIES:
   - MBProgressHUD (~> 0.9.1)
   - REFrostedViewController (~> 2.4.7)
   - SDWebImage (~> 3.6)
   - SVPullToRefresh
+  - Toast (~> 2.4)
 
 SPEC CHECKSUMS:
-  MBProgressHUD: f3747dcbd45a9e855a6b0674550651e0b7ed250c
-  REFrostedViewController: 08870a24788191339608b80b2bd4fce549858f0d
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  REFrostedViewController: 0adda479a71c0e603faa801282994bee23362504
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  SVPullToRefresh: d5161ebc833a38b465364412e5e307ca80bbb190
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
+  Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
 
 COCOAPODS: 0.36.0

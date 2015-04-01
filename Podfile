@@ -6,6 +6,7 @@ pod 'MBProgressHUD', '~> 0.9.1'
 pod 'REFrostedViewController', '~> 2.4.7'
 pod 'SVPullToRefresh'
 pod 'SDWebImage', '~>3.6'
+pod 'Toast', '~> 2.4'
 end
 
 target 'zSMTHTests' do

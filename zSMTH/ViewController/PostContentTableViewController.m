@@ -10,6 +10,7 @@
 #import "SVPullToRefresh.h"
 #import "PostContentTableViewCell.h"
 #import "SMTHPost.h"
+#import "UIView+Toast.h"
 
 #define LABEL_WIDTH 300
 
@@ -37,6 +38,7 @@
     self.title = self.postSubject;
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
     self.progressTitle = @"加载中...";
     [self startAsyncTask];
     
@@ -59,14 +61,21 @@
         long currentNumber = [mPosts count];
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.tableView.infiniteScrollingView stopAnimating];
-                [weakSelf.tableView beginUpdates];
-                [mPosts addObjectsFromArray:posts];
-                for (int i = 0; i < [posts count]; i++) {
-                    [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                if ([posts count] > 0) {
+                    [weakSelf.tableView beginUpdates];
+//                    [mPosts addObjectsFromArray:posts];
+                    for (int i = 0; i < [posts count]; i++) {
+                        [mPosts addObject:[posts objectAtIndex:i]];
+                        [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                    }
+                    [weakSelf.tableView endUpdates];
+                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                    
+                    // scroll to the new location
+//                    [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:currentNumber+1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                } else {
+                    [self.view makeToast:@"没有更多的帖子了..."];
                 }
-                [weakSelf.tableView endUpdates];
-//                [weakSelf.tableView reloadData];
             });
         }
     });
@@ -75,7 +84,7 @@
 
 - (void)asyncTask
 {
-    mPageIndex = 0;
+    mPageIndex = 10.0;
     NSArray *results = [helper getPostContents:boardName postID:postID from:mPageIndex];
     [mPosts removeAllObjects];
     [mPosts addObjectsFromArray:results];
@@ -95,13 +104,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    CGFloat height = 100.0;
+    CGFloat height = 0.0;
     
     id result = [mHeights objectForKey:indexPath];
     if(result != nil)
     {
         height = [((NSNumber*)result) floatValue];
     }
+    
+    NSLog(@"%@ height=%f", indexPath, height);
     return height;
 }
 
@@ -121,6 +132,7 @@
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
         
         post.postBoard = self.boardName;
+        cell.delegate = self;
         [cell setCellContent:post];
        
         NSNumber *height = [NSNumber numberWithFloat:[cell getCellHeight]];
@@ -149,4 +161,12 @@
 - (IBAction)return:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark - RefreshTableViewProtocol
+- (void)RefreshTableView
+{
+//    [self.tableView setNeedsDisplay];
+    [self.tableView reloadData];
+}
+
 @end

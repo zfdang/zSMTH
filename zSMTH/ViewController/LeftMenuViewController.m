@@ -205,6 +205,11 @@
         [self switchViewto:VIEW_FAVORITE];
     } else if (indexPath.section == 0 && indexPath.row == 2) {
         [self switchViewto:VIEW_POST_LIST];
+    } else if (indexPath.section == 1 && indexPath.row == 1){
+        NSLog(@"Clear SDWebImage Cache");
+        SDImageCache *imageCache = [SDImageCache sharedImageCache];
+        [imageCache clearMemory];
+        [imageCache clearDisk];
     }
 }
 

@@ -7,8 +7,9 @@
 //
 
 #import "ExtendedTableViewController.h"
+#import "RefreshTableViewProtocol.h"
 
-@interface PostContentTableViewController : ExtendedTableViewController
+@interface PostContentTableViewController : ExtendedTableViewController <RefreshTableViewProtocol>
 
 @property (strong, nonatomic) NSString *boardName;
 @property (strong, nonatomic) NSString *postSubject;

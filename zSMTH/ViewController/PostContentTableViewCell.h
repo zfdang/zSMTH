@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ContentLabel.h"
 #import "SMTHPost.h"
+#import "RefreshTableViewProtocol.h"
 
 @interface PostContentTableViewCell : UITableViewCell
 {
-    long imageHeights;
+    NSMutableArray *mImgHeights;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *postAuthor;
 @property (weak, nonatomic) IBOutlet ContentLabel *postContent;
 @property (weak, nonatomic) IBOutlet UIView *cellView;
+@property (weak, nonatomic) id delegate;
 
 -(void) setCellContent:(SMTHPost*)post;
 -(CGFloat) getCellHeight;

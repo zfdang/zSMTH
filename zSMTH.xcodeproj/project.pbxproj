@@ -64,6 +64,7 @@
 /* Begin PBXFileReference section */
 		13FB643B10FFC65DDD7CF5C4 /* Pods-zSMTH.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zSMTH.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zSMTH/Pods-zSMTH.debug.xcconfig"; sourceTree = "<group>"; };
 		48F951DFD4F05230EF38D92E /* Pods-zSMTH.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zSMTH.release.xcconfig"; path = "Pods/Target Support Files/Pods-zSMTH/Pods-zSMTH.release.xcconfig"; sourceTree = "<group>"; };
+		690196501ACBED6200D0819C /* RefreshTableViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RefreshTableViewProtocol.h; path = ViewController/RefreshTableViewProtocol.h; sourceTree = "<group>"; };
 		690B922A1ABADDD800AAED0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UserInfoTableViewCell.xib; sourceTree = "<group>"; };
 		690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoTableViewCell.h; path = ViewController/UserInfoTableViewCell.h; sourceTree = "<group>"; };
 		690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoTableViewCell.m; path = ViewController/UserInfoTableViewCell.m; sourceTree = "<group>"; };
@@ -193,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				690B922F1ABB266D00AAED0D /* LoginCompletionProtocol.h */,
+				690196501ACBED6200D0819C /* RefreshTableViewProtocol.h */,
 				69FE90B41AB6FCD700E72720 /* GuidanceTableViewController.h */,
 				69FE90B51AB6FCD700E72720 /* GuidanceTableViewController.m */,
 				69FE90BD1AB7296200E72720 /* PostGuidanceTableViewCell.h */,
