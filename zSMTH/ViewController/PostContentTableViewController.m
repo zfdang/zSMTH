@@ -84,7 +84,7 @@
 
 - (void)asyncTask
 {
-    mPageIndex = 10.0;
+    mPageIndex = 0;
     NSArray *results = [helper getPostContents:boardName postID:postID from:mPageIndex];
     [mPosts removeAllObjects];
     [mPosts addObjectsFromArray:results];
@@ -104,7 +104,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    CGFloat height = 0.0;
+    CGFloat height = 10.0;
     
     id result = [mHeights objectForKey:indexPath];
     if(result != nil)
