@@ -123,8 +123,8 @@
     // 但是如果是zSMTHDev的用户名，我们认为是未登录
     if( user == nil)
         return NO;
-//    if([@"zSMTHDev" compare:user.userID] == NSOrderedSame)
-      if([@"zSMTHDevAA" compare:user.userID] == NSOrderedSame)
+    if([@"zSMTHDev" compare:user.userID] == NSOrderedSame)
+//      if([@"zSMTHDevAA" compare:user.userID] == NSOrderedSame)
         return NO;
     return YES;
 }

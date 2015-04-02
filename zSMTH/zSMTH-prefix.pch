@@ -1,0 +1,19 @@
+//
+//  zSMTH-prefix.pch
+//  zSMTH
+//
+//  Created by Zhengfa DANG on 2015-4-2.
+//  Copyright (c) 2015 Zhengfa. All rights reserved.
+//
+
+#ifndef zSMTH_zSMTH_prefix_pch
+#define zSMTH_zSMTH_prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifndef DEBUG
+    #define NSLog(...);
+#endif
+
+#endif

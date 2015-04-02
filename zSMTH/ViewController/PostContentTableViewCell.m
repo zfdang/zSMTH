@@ -71,7 +71,7 @@
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                     CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;
                                     // update the exact image height
-                                    [mImgHeights insertObject:[NSNumber numberWithFloat:curImageHeight] atIndex:i];
+                                    [mImgHeights replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:curImageHeight]];
                                     
                                     // find current image offset
                                     CGFloat curImageOffset = imgOffset;
@@ -105,7 +105,7 @@
     
     // set cell border
     [self.cellView.layer setBorderColor:[UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1.0].CGColor];
-    [self.cellView.layer setBorderWidth:2.0f];
+    [self.cellView.layer setBorderWidth:0.5f];
 }
 
 -(CGFloat) getCellHeight
@@ -113,19 +113,22 @@
     CGRect rect = self.postContent.frame;
     
     // this is the image offset to post content
-    CGFloat height = [self.postContent get_height] + rect.origin.y + 5;
+    CGFloat content_height = [self.postContent get_height];
+    CGFloat result = rect.origin.y + content_height + 10;
     
+//    NSLog(@"header height is %f, content height = %f", rect.origin.y, content_height);
     if(mImgHeights != nil){
-        CGFloat imageHeights = 0;
+        CGFloat imageHeight = 0;
         for (int i = 0; i < [mImgHeights count]; i++) {
             // calculate sum of previous images's height
-            imageHeights += [[mImgHeights objectAtIndex:i] floatValue];
-            imageHeights += 5;
+            imageHeight = [[mImgHeights objectAtIndex:i] floatValue];
+//            NSLog(@"image index %d, height = %f", i, imageHeight);
+            result += imageHeight + 5;
         }
-        height += imageHeights;
+        result += 10;
     }
-    return height + 10;
-    
+//    NSLog(@"Final result is %f", result);
+    return result + 10;
 }
 
 @end

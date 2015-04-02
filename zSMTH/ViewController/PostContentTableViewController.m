@@ -38,7 +38,7 @@
     self.title = self.postSubject;
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
     self.progressTitle = @"加载中...";
     [self startAsyncTask];
     
@@ -63,17 +63,19 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([posts count] > 0) {
                     [weakSelf.tableView beginUpdates];
-//                    [mPosts addObjectsFromArray:posts];
+                    [mPosts addObjectsFromArray:posts];
                     for (int i = 0; i < [posts count]; i++) {
-                        [mPosts addObject:[posts objectAtIndex:i]];
+//                        [mPosts addObject:[posts objectAtIndex:i]];
                         [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
                     }
                     [weakSelf.tableView endUpdates];
                     [weakSelf.tableView.infiniteScrollingView stopAnimating];
                     
                     // scroll to the new location
-//                    [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:currentNumber+1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//                    [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:currentNumber inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
                 } else {
+                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
                     [self.view makeToast:@"没有更多的帖子了..."];
                 }
             });
@@ -103,7 +105,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     CGFloat height = 10.0;
     
     id result = [mHeights objectForKey:indexPath];
@@ -126,13 +127,14 @@
     {
         NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
         cell = (PostContentTableViewCell*)[nibArray objectAtIndex:0];
+        cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     
     if (indexPath.section == 0) {
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
         
         post.postBoard = self.boardName;
-        cell.delegate = self;
         [cell setCellContent:post];
        
         NSNumber *height = [NSNumber numberWithFloat:[cell getCellHeight]];

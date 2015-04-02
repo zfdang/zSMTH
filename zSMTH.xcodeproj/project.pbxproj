@@ -88,6 +88,7 @@
 		693FACE21ABE50D900BD8200 /* PostContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostContentTableViewController.m; path = ViewController/PostContentTableViewController.m; sourceTree = "<group>"; };
 		695226941AB2D4140060E5B3 /* ExtendedUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedUIViewController.h; sourceTree = "<group>"; };
 		695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedUIViewController.m; sourceTree = "<group>"; };
+		6979903F1ACCC5DC002570EE /* zSMTH-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zSMTH-prefix.pch"; sourceTree = "<group>"; };
 		6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSMTHSetting.h; sourceTree = "<group>"; };
 		6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSMTHSetting.m; sourceTree = "<group>"; };
 		6984F6ED1AB3D3F700548BD2 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftMenuViewController.h; path = ViewController/LeftMenuViewController.h; sourceTree = "<group>"; };
@@ -304,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				69FCBF2C1AA9CE97007C9EFB /* Info.plist */,
+				6979903F1ACCC5DC002570EE /* zSMTH-prefix.pch */,
 				69FCBF2F1AA9CE97007C9EFB /* AppDelegate.h */,
 				69FCBF301AA9CE97007C9EFB /* AppDelegate.m */,
 				69FCBF2D1AA9CE97007C9EFB /* main.m */,
@@ -684,6 +686,7 @@
 					"$(PROJECT_DIR)/zSMTH/libSMTH",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SHARED_PRECOMPS_DIR = "zSMTH/zSMTH-prefix.pch";
 			};
 			name = Debug;
 		};
@@ -702,6 +705,7 @@
 					"$(PROJECT_DIR)/zSMTH/libSMTH",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SHARED_PRECOMPS_DIR = "zSMTH/zSMTH-prefix.pch";
 			};
 			name = Release;
 		};
