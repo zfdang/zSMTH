@@ -42,14 +42,14 @@
     self.progressTitle = @"加载中...";
     [self startAsyncTask];
     
-    self.navigationController.navigationBar.translucent = NO;
     
     // add pull to refresh function at the top & bottom
     __weak typeof(self) weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMorePostList];
     }];
-
+    // change translucent, otherwise, tableview will be partially hidden
+    self.navigationController.navigationBar.translucent = NO;
     
 }
 

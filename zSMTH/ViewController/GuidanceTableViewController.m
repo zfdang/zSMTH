@@ -11,6 +11,9 @@
 #import "SMTHPost.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PostContentTableViewController.h"
+#import "SVPullToRefresh.h"
+
+
 
 @interface GuidanceTableViewController ()
 {
@@ -32,6 +35,15 @@
     
     m_sections = nil;
     [self startAsyncTask];
+    
+    // add pull to refresh function at the top & bottom
+    __weak typeof(self) weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshPostList];
+    }];
+    // change translucent, otherwise, tableview will be partially hidden
+    self.navigationController.navigationBar.translucent = NO;
+
 }
 
 
@@ -48,6 +60,18 @@
 {
     
     [self.tableView reloadData];
+}
+
+- (void) refreshPostList {
+    __weak typeof(self) weakSelf = self;
+    int64_t delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [weakSelf.tableView.pullToRefreshView stopAnimating];
+        
+        weakSelf.progressTitle = @"刷新中...";
+        [weakSelf startAsyncTask];
+    });
 }
 
 
