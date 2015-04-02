@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 newsmth. All rights reserved.
 //
 
-#import "ContentLabel.h"
+#import "PostContentLabel.h"
 
-@implementation ContentLabel
+@implementation PostContentLabel
 
 - (id)initWithFrame:(CGRect)frame
 {

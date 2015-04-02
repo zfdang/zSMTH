@@ -9,7 +9,7 @@
 #import "FavoriteTableViewController.h"
 #import "REFrostedViewController.h"
 #import "SMTHBoard.h"
-#import "BoardTableViewCell.h"
+#import "BoardListTableViewCell.h"
 #import "PostListTableViewController.h"
 
 @interface FavoriteTableViewController ()
@@ -79,13 +79,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"BoardTableViewCell";
+    static NSString *cellIdentifier = @"BoardListTableViewCell";
     
-    BoardTableViewCell *cell = (BoardTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    BoardListTableViewCell *cell = (BoardListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil)
     {
         NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
-        cell = (BoardTableViewCell*)[nibArray objectAtIndex:0];
+        cell = (BoardListTableViewCell*)[nibArray objectAtIndex:0];
     }
     
     if (indexPath.section == 0) {

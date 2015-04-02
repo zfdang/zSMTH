@@ -27,7 +27,7 @@
 		6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F41AB48FA400548BD2 /* FavoriteTableViewController.m */; };
 		6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F71AB4927600548BD2 /* ExtendedTableViewController.m */; };
 		6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6FA1AB579E900548BD2 /* SMTHBoard.m */; };
-		6984F6FE1AB5D53800548BD2 /* BoardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */; };
+		6984F6FE1AB5D53800548BD2 /* BoardListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6984F6FC1AB5D53800548BD2 /* BoardListTableViewCell.xib */; };
 		69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */; };
 		69F4EAA31AAFF9FF00A82B50 /* libSMTH_0.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAA51AAFFA5100A82B50 /* client_signature.m */; };
@@ -36,7 +36,7 @@
 		69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */; };
 		69F4EAB51AB1C13C00A82B50 /* SMTHHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAB41AB1C13C00A82B50 /* SMTHHelperTests.m */; };
 		69F4EAB71AB1EFE800A82B50 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */; };
-		69F5E3C31AC0DFE4000F394D /* ContentLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F5E3C21AC0DFE4000F394D /* ContentLabel.m */; };
+		69F5E3C31AC0DFE4000F394D /* PostContentLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F5E3C21AC0DFE4000F394D /* PostContentLabel.m */; };
 		69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF2D1AA9CE97007C9EFB /* main.m */; };
 		69FCBF311AA9CE97007C9EFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF301AA9CE97007C9EFB /* AppDelegate.m */; };
 		69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF331AA9CE97007C9EFB /* REFrostedRootViewController.m */; };
@@ -44,11 +44,11 @@
 		69FCBF391AA9CE98007C9EFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69FCBF381AA9CE98007C9EFB /* Images.xcassets */; };
 		69FCBF3C1AA9CE98007C9EFB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FCBF3A1AA9CE98007C9EFB /* LaunchScreen.xib */; };
 		69FCBF481AA9CE98007C9EFB /* zSMTHTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF471AA9CE98007C9EFB /* zSMTHTests.m */; };
-		69FE90AA1AB66EC400E72720 /* BoardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */; };
+		69FE90AA1AB66EC400E72720 /* BoardListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90A91AB66EC400E72720 /* BoardListTableViewCell.m */; };
 		69FE90B61AB6FCD700E72720 /* GuidanceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90B51AB6FCD700E72720 /* GuidanceTableViewController.m */; };
 		69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90B81AB71A7700E72720 /* SMTHPost.m */; };
-		69FE90BC1AB727B700E72720 /* PostGuidanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FE90BA1AB727B700E72720 /* PostGuidanceTableViewCell.xib */; };
-		69FE90BF1AB7296200E72720 /* PostGuidanceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90BE1AB7296200E72720 /* PostGuidanceTableViewCell.m */; };
+		69FE90BC1AB727B700E72720 /* GuidancePostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FE90BA1AB727B700E72720 /* GuidancePostTableViewCell.xib */; };
+		69FE90BF1AB7296200E72720 /* GuidancePostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FE90BE1AB7296200E72720 /* GuidancePostTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,7 +101,7 @@
 		6984F6F71AB4927600548BD2 /* ExtendedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedTableViewController.m; sourceTree = "<group>"; };
 		6984F6F91AB579E900548BD2 /* SMTHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHBoard.h; sourceTree = "<group>"; };
 		6984F6FA1AB579E900548BD2 /* SMTHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHBoard.m; sourceTree = "<group>"; };
-		6984F6FD1AB5D53800548BD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = zSMTH/Base.lproj/BoardTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		6984F6FD1AB5D53800548BD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = zSMTH/Base.lproj/BoardListTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHAttachment.h; sourceTree = "<group>"; };
 		69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHAttachment.m; sourceTree = "<group>"; };
 		69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSMTH_0.2.3.a; sourceTree = "<group>"; };
@@ -117,8 +117,8 @@
 		69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMTHHelper.m; path = zSMTH/libSMTH/SMTHHelper.m; sourceTree = SOURCE_ROOT; };
 		69F4EAB41AB1C13C00A82B50 /* SMTHHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHHelperTests.m; sourceTree = "<group>"; };
 		69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		69F5E3C11AC0DFE4000F394D /* ContentLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentLabel.h; path = ViewController/ContentLabel.h; sourceTree = "<group>"; };
-		69F5E3C21AC0DFE4000F394D /* ContentLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentLabel.m; path = ViewController/ContentLabel.m; sourceTree = "<group>"; };
+		69F5E3C11AC0DFE4000F394D /* PostContentLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostContentLabel.h; path = ViewController/PostContentLabel.h; sourceTree = "<group>"; };
+		69F5E3C21AC0DFE4000F394D /* PostContentLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostContentLabel.m; path = ViewController/PostContentLabel.m; sourceTree = "<group>"; };
 		69FCBF281AA9CE97007C9EFB /* zSMTH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zSMTH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69FCBF2C1AA9CE97007C9EFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69FCBF2D1AA9CE97007C9EFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -132,15 +132,15 @@
 		69FCBF411AA9CE98007C9EFB /* zSMTHTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zSMTHTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		69FCBF461AA9CE98007C9EFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69FCBF471AA9CE98007C9EFB /* zSMTHTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zSMTHTests.m; sourceTree = "<group>"; };
-		69FE90A81AB66EC400E72720 /* BoardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardTableViewCell.h; path = ViewController/BoardTableViewCell.h; sourceTree = "<group>"; };
-		69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardTableViewCell.m; path = ViewController/BoardTableViewCell.m; sourceTree = "<group>"; };
+		69FE90A81AB66EC400E72720 /* BoardListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardListTableViewCell.h; path = ViewController/BoardListTableViewCell.h; sourceTree = "<group>"; };
+		69FE90A91AB66EC400E72720 /* BoardListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardListTableViewCell.m; path = ViewController/BoardListTableViewCell.m; sourceTree = "<group>"; };
 		69FE90B41AB6FCD700E72720 /* GuidanceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuidanceTableViewController.h; path = ViewController/GuidanceTableViewController.h; sourceTree = "<group>"; };
 		69FE90B51AB6FCD700E72720 /* GuidanceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuidanceTableViewController.m; path = ViewController/GuidanceTableViewController.m; sourceTree = "<group>"; };
 		69FE90B71AB71A7700E72720 /* SMTHPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHPost.h; sourceTree = "<group>"; };
 		69FE90B81AB71A7700E72720 /* SMTHPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHPost.m; sourceTree = "<group>"; };
-		69FE90BB1AB727B700E72720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PostGuidanceTableViewCell.xib; sourceTree = "<group>"; };
-		69FE90BD1AB7296200E72720 /* PostGuidanceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostGuidanceTableViewCell.h; path = ViewController/PostGuidanceTableViewCell.h; sourceTree = "<group>"; };
-		69FE90BE1AB7296200E72720 /* PostGuidanceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostGuidanceTableViewCell.m; path = ViewController/PostGuidanceTableViewCell.m; sourceTree = "<group>"; };
+		69FE90BB1AB727B700E72720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GuidancePostTableViewCell.xib; sourceTree = "<group>"; };
+		69FE90BD1AB7296200E72720 /* GuidancePostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuidancePostTableViewCell.h; path = ViewController/GuidancePostTableViewCell.h; sourceTree = "<group>"; };
+		69FE90BE1AB7296200E72720 /* GuidancePostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GuidancePostTableViewCell.m; path = ViewController/GuidancePostTableViewCell.m; sourceTree = "<group>"; };
 		AA120C3EDD82A397C7762E47 /* libPods-zSMTH.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-zSMTH.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -179,10 +179,10 @@
 		6984F6E51AB3D28300548BD2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */,
+				6984F6FC1AB5D53800548BD2 /* BoardListTableViewCell.xib */,
 				690B92331ABB99ED00AAED0D /* PostListTableViewCell.xib */,
 				693FACDB1ABE4F7900BD8200 /* PostContentTableViewCell.xib */,
-				69FE90BA1AB727B700E72720 /* PostGuidanceTableViewCell.xib */,
+				69FE90BA1AB727B700E72720 /* GuidancePostTableViewCell.xib */,
 				690B92291ABADDD800AAED0D /* UserInfoTableViewCell.xib */,
 				69FCBF381AA9CE98007C9EFB /* Images.xcassets */,
 				69FCBF351AA9CE97007C9EFB /* Main.storyboard */,
@@ -198,20 +198,20 @@
 				690196501ACBED6200D0819C /* RefreshTableViewProtocol.h */,
 				69FE90B41AB6FCD700E72720 /* GuidanceTableViewController.h */,
 				69FE90B51AB6FCD700E72720 /* GuidanceTableViewController.m */,
-				69FE90BD1AB7296200E72720 /* PostGuidanceTableViewCell.h */,
-				69FE90BE1AB7296200E72720 /* PostGuidanceTableViewCell.m */,
+				69FE90BD1AB7296200E72720 /* GuidancePostTableViewCell.h */,
+				69FE90BE1AB7296200E72720 /* GuidancePostTableViewCell.m */,
 				6984F6F31AB48FA400548BD2 /* FavoriteTableViewController.h */,
 				6984F6F41AB48FA400548BD2 /* FavoriteTableViewController.m */,
-				69FE90A81AB66EC400E72720 /* BoardTableViewCell.h */,
-				69FE90A91AB66EC400E72720 /* BoardTableViewCell.m */,
+				69FE90A81AB66EC400E72720 /* BoardListTableViewCell.h */,
+				69FE90A91AB66EC400E72720 /* BoardListTableViewCell.m */,
 				69F4EAA71AB06D1D00A82B50 /* LoginViewController.h */,
 				69F4EAA81AB06D1D00A82B50 /* LoginViewController.m */,
 				690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */,
 				690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */,
 				690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */,
 				690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */,
-				69F5E3C11AC0DFE4000F394D /* ContentLabel.h */,
-				69F5E3C21AC0DFE4000F394D /* ContentLabel.m */,
+				69F5E3C11AC0DFE4000F394D /* PostContentLabel.h */,
+				69F5E3C21AC0DFE4000F394D /* PostContentLabel.m */,
 				693FACE11ABE50D900BD8200 /* PostContentTableViewController.h */,
 				693FACE21ABE50D900BD8200 /* PostContentTableViewController.m */,
 				693FACDE1ABE4FA700BD8200 /* PostContentTableViewCell.h */,
@@ -424,11 +424,11 @@
 			files = (
 				69FCBF371AA9CE97007C9EFB /* Main.storyboard in Resources */,
 				693FACDD1ABE4F7900BD8200 /* PostContentTableViewCell.xib in Resources */,
-				69FE90BC1AB727B700E72720 /* PostGuidanceTableViewCell.xib in Resources */,
+				69FE90BC1AB727B700E72720 /* GuidancePostTableViewCell.xib in Resources */,
 				69FCBF3C1AA9CE98007C9EFB /* LaunchScreen.xib in Resources */,
 				69FCBF391AA9CE98007C9EFB /* Images.xcassets in Resources */,
 				690B922B1ABADDD800AAED0D /* UserInfoTableViewCell.xib in Resources */,
-				6984F6FE1AB5D53800548BD2 /* BoardTableViewCell.xib in Resources */,
+				6984F6FE1AB5D53800548BD2 /* BoardListTableViewCell.xib in Resources */,
 				690B92351ABB99ED00AAED0D /* PostListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,7 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */,
-				69FE90BF1AB7296200E72720 /* PostGuidanceTableViewCell.m in Sources */,
+				69FE90BF1AB7296200E72720 /* GuidancePostTableViewCell.m in Sources */,
 				692576671ABBDCF600097DBC /* PostListTableViewCell.m in Sources */,
 				6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */,
 				69FE90B61AB6FCD700E72720 /* GuidanceTableViewController.m in Sources */,
@@ -498,10 +498,10 @@
 				690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */,
 				69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */,
 				691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */,
-				69FE90AA1AB66EC400E72720 /* BoardTableViewCell.m in Sources */,
+				69FE90AA1AB66EC400E72720 /* BoardListTableViewCell.m in Sources */,
 				69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */,
 				6984F6F21AB3DC1D00548BD2 /* NavigationViewController.m in Sources */,
-				69F5E3C31AC0DFE4000F394D /* ContentLabel.m in Sources */,
+				69F5E3C31AC0DFE4000F394D /* PostContentLabel.m in Sources */,
 				693FACE31ABE50D900BD8200 /* PostContentTableViewController.m in Sources */,
 				69F4EAAD1AB1780A00A82B50 /* Reachability.m in Sources */,
 				6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */,
@@ -555,12 +555,12 @@
 			name = PostContentTableViewCell.xib;
 			sourceTree = "<group>";
 		};
-		6984F6FC1AB5D53800548BD2 /* BoardTableViewCell.xib */ = {
+		6984F6FC1AB5D53800548BD2 /* BoardListTableViewCell.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6984F6FD1AB5D53800548BD2 /* Base */,
 			);
-			name = BoardTableViewCell.xib;
+			name = BoardListTableViewCell.xib;
 			path = libSMTH;
 			sourceTree = "<group>";
 		};
@@ -580,12 +580,12 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
-		69FE90BA1AB727B700E72720 /* PostGuidanceTableViewCell.xib */ = {
+		69FE90BA1AB727B700E72720 /* GuidancePostTableViewCell.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				69FE90BB1AB727B700E72720 /* Base */,
 			);
-			name = PostGuidanceTableViewCell.xib;
+			name = GuidancePostTableViewCell.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

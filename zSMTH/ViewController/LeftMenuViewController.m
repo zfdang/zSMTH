@@ -16,6 +16,8 @@
 #import "UserInfoViewController.h"
 #import "PostListTableViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UIView+Toast.h"
+
 
 
 @interface LeftMenuViewController ()
@@ -34,7 +36,7 @@
     
     // init left menu
     leftMenu = @[@[@"节名", @"首页导读", @"个人收藏夹",  @"全部讨论区"],
-                 @[@"我的水木", @"邮箱", @"短信息",@"文章提醒"]];
+                 @[@"我的水木", @"邮箱", @"短信息",@"文章提醒", @"清除缓存"]];
     
     // create table view
     self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:1.0f];
@@ -139,7 +141,6 @@
         [navigationController pushViewController:postlist animated:YES];
     }
     
-    [self.frostedViewController hideMenuViewController];
 }
 
 - (void)refreshTableHeadView
@@ -205,12 +206,15 @@
         [self switchViewto:VIEW_FAVORITE];
     } else if (indexPath.section == 0 && indexPath.row == 2) {
         [self switchViewto:VIEW_POST_LIST];
-    } else if (indexPath.section == 1 && indexPath.row == 1){
+    } else if (indexPath.section == 1 && indexPath.row == 3){
         NSLog(@"Clear SDWebImage Cache");
         SDImageCache *imageCache = [SDImageCache sharedImageCache];
         [imageCache clearMemory];
         [imageCache clearDisk];
+
+        [self.view makeToast:@"缓存已清空!"];
     }
+    [self.frostedViewController hideMenuViewController];
 }
 
 #pragma mark -
@@ -218,7 +222,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 54;
+    return 40;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

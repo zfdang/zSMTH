@@ -7,7 +7,7 @@
 //
 
 #import "GuidanceTableViewController.h"
-#import "PostGuidanceTableViewCell.h"
+#import "GuidancePostTableViewCell.h"
 #import "SMTHPost.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PostContentTableViewController.h"
@@ -97,13 +97,13 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"PostGuidanceTableViewCell";
+    static NSString *cellIdentifier = @"GuidancePostTableViewCell";
     
-    PostGuidanceTableViewCell *cell = (PostGuidanceTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    GuidancePostTableViewCell *cell = (GuidancePostTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil)
     {
         NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
-        cell = (PostGuidanceTableViewCell*)[nibArray objectAtIndex:0];
+        cell = (GuidancePostTableViewCell*)[nibArray objectAtIndex:0];
     }
     
     if (m_sections !=nil) {

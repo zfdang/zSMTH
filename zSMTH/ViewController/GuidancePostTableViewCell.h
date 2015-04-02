@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PostGuidanceTableViewCell : UITableViewCell
+@interface GuidancePostTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *postSubject;
 @property (weak, nonatomic) IBOutlet UILabel *postBoard;

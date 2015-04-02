@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BoardTableViewCell : UITableViewCell
+@interface BoardListTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *boardCategory;
 @property (weak, nonatomic) IBOutlet UILabel *boardName;
 @property (weak, nonatomic) IBOutlet UILabel *boardManagers;

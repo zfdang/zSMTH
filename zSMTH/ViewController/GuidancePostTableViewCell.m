@@ -1,17 +1,14 @@
 //
-//  BoardTableViewCell.m
+//  PostTableViewCell.m
 //  zSMTH
 //
 //  Created by Zhengfa DANG on 2015-3-16.
 //  Copyright (c) 2015 Zhengfa. All rights reserved.
 //
 
-#import "BoardTableViewCell.h"
+#import "GuidancePostTableViewCell.h"
 
-@implementation BoardTableViewCell
-@synthesize boardCategory;
-@synthesize boardName;
-@synthesize boardManagers;
+@implementation GuidancePostTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code

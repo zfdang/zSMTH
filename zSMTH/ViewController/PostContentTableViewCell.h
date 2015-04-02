@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ContentLabel.h"
+#import "PostContentLabel.h"
 #import "SMTHPost.h"
 #import "RefreshTableViewProtocol.h"
 
@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *postTime;
 @property (weak, nonatomic) IBOutlet UILabel *postIndex;
 @property (weak, nonatomic) IBOutlet UILabel *postAuthor;
-@property (weak, nonatomic) IBOutlet ContentLabel *postContent;
+@property (weak, nonatomic) IBOutlet PostContentLabel *postContent;
 @property (weak, nonatomic) IBOutlet UIView *cellView;
 @property (weak, nonatomic) id delegate;
 

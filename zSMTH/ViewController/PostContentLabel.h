@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
 
-@interface ContentLabel : UILabel
+@interface PostContentLabel : UILabel
 {
     NSMutableAttributedString *attString;
     bool prev_line_empty;
