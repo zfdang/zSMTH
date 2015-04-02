@@ -77,8 +77,8 @@
                 } else {
                     [weakSelf.tableView.infiniteScrollingView stopAnimating];
 
-                    [weakSelf.view makeToast:@"没有更多的帖子了..."
-                                duration:2.0
+                    [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的帖子了..."
+                                duration:0.5
                                 position:CSToastPositionCenter];
                 }
             });

@@ -140,7 +140,7 @@
 
         [navigationController pushViewController:postlist animated:YES];
     }
-    
+    [self.frostedViewController hideMenuViewController];
 }
 
 - (void)refreshTableHeadView
@@ -213,8 +213,8 @@
         [imageCache clearDisk];
 
         [self.view makeToast:@"缓存已清空!"];
+        [self.frostedViewController hideMenuViewController];
     }
-    [self.frostedViewController hideMenuViewController];
 }
 
 #pragma mark -
