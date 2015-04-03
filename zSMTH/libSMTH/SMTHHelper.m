@@ -247,7 +247,7 @@
 //        "last_time" = 1425600260;
 //        "last_user_id" = shanzai12;
 
-        NSLog(@"%@", result);
+//        NSLog(@"%@", result);
         NSDictionary *dict = (NSDictionary*) result;
         SMTHPost *post = [[SMTHPost alloc] init];
         post.author = [dict objectForKey:@"author_id"];

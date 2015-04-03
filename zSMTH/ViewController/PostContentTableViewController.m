@@ -65,14 +65,13 @@
                     [weakSelf.tableView beginUpdates];
                     [mPosts addObjectsFromArray:posts];
                     for (int i = 0; i < [posts count]; i++) {
-//                        [mPosts addObject:[posts objectAtIndex:i]];
                         [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
                     }
                     [weakSelf.tableView endUpdates];
                     [weakSelf.tableView.infiniteScrollingView stopAnimating];
                     
                     // scroll to the new location
-//                    [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:currentNumber inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//                    [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:currentNumber-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 
                 } else {
                     [weakSelf.tableView.infiniteScrollingView stopAnimating];
@@ -108,7 +107,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 10.0;
+    CGFloat height = 70.0;
     
     id result = [mHeights objectForKey:indexPath];
     if(result != nil)
@@ -116,10 +115,14 @@
         height = [((NSNumber*)result) floatValue];
     }
     
-    NSLog(@"%@ height=%f", indexPath, height);
+//    NSLog(@"%@ height=%f", indexPath, height);
     return height;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

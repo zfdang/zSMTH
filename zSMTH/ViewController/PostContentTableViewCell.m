@@ -60,7 +60,7 @@
             
             UIImageView * imageview = [[UIImageView alloc] init];
             NSString * url = [NSString stringWithFormat:@"http://att.newsmth.net/nForum/att/%@/%@/%ld", post.postBoard, post.postID, att.attPos];
-            NSLog(@"Image URL: %@", url);
+//            NSLog(@"Image URL: %@", url);
             
             // 20 is the height of placeholder image
             [mImgHeights insertObject:[NSNumber numberWithFloat:20.0] atIndex:i];
