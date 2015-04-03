@@ -53,4 +53,31 @@
 {
     [user setObject:password forKey:@"password"];
 }
+
+
+- (BOOL)bSavePassword
+{
+    return [user boolForKey:@"bSavePassword"];
+}
+
+- (void)setBSavePassword:(BOOL)bSavePassword
+{
+    [user setBool:bSavePassword forKey:@"bSavePassword"];
+}
+
+- (BOOL)bAutoLogin
+{
+    return [user boolForKey:@"bAutoLogin"];
+}
+
+- (void)setBAutoLogin:(BOOL)bAutoLogin
+{
+    [user setBool:bAutoLogin forKey:@"bAutoLogin"];
+}
+
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"login = %d, save = %d,",self.bAutoLogin, self.bSavePassword];
+}
 @end

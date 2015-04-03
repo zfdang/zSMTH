@@ -18,9 +18,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
     [self.editUsername setText:setting.username];
-    [self.editPassword setText:setting.password];
+    if(setting.bSavePassword) {
+        [self.editPassword setText:setting.password];
+    }
+    self.switchAutoLogin.on = setting.bAutoLogin;
+    self.switchSavePassword.on = setting.bSavePassword;
     
 }
 
@@ -54,6 +59,12 @@
 }
 */
 
+- (IBAction)clickAutoLogin:(id)sender {
+    if(self.switchAutoLogin.on){
+        self.switchSavePassword.on = YES;
+    }
+}
+
 - (IBAction)login:(id)sender
 {
     self.progressTitle = @"登录中...";
@@ -64,6 +75,10 @@
 {
     setting.username = [self.editUsername text];
     setting.password = [self.editPassword text];
+    setting.bSavePassword = self.switchSavePassword.on;
+    setting.bAutoLogin = self.switchAutoLogin.on;
+    
+    NSLog(@"%@", setting);
     
     [helper login:[self.editUsername text] password:[self.editPassword text]];
 }

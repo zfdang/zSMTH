@@ -17,6 +17,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *editPassword;
 @property (weak, nonatomic) IBOutlet UILabel *loginFeedback;
 @property (weak, nonatomic) id<LoginCompletionProtocol> delegate;
+@property (weak, nonatomic) IBOutlet UISwitch *switchSavePassword;
+@property (weak, nonatomic) IBOutlet UISwitch *switchAutoLogin;
+- (IBAction)clickAutoLogin:(id)sender;
 
 - (IBAction)login:(id)sender;
 - (IBAction)cancel:(id)sender;

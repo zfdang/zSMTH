@@ -251,6 +251,9 @@
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJ2-ND-sjm" userLabel="autoLogin">
                                 <rect key="frame" x="126" y="195" width="51" height="31"/>
+                                <connections>
+                                    <action selector="clickAutoLogin:" destination="IdG-nZ-lWU" eventType="valueChanged" id="0Hy-z6-TPH"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自动登录" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsE-Ct-UGS">
                                 <rect key="frame" x="21" y="200" width="80" height="20.5"/>
@@ -402,6 +405,8 @@
                         <outlet property="editUsername" destination="H9c-sD-YH3" id="kxB-Or-S4l"/>
                         <outlet property="loginFeedback" destination="32Y-Y2-Mfk" id="4Rb-Tc-cuL"/>
                         <outlet property="netStatus" destination="HPN-sc-Lji" id="ui6-Ex-94K"/>
+                        <outlet property="switchAutoLogin" destination="eJ2-ND-sjm" id="nbI-35-pql"/>
+                        <outlet property="switchSavePassword" destination="JMg-Pa-ziv" id="M4J-vz-CHV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="upc-rz-nXg" userLabel="First Responder" sceneMemberID="firstResponder"/>
