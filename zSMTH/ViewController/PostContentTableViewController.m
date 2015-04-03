@@ -119,6 +119,7 @@
     return height;
 }
 
+// http://tewha.net/2015/01/how-to-fix-uitableview-rows-changing-size/
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
