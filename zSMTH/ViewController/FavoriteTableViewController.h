@@ -12,4 +12,8 @@
 
 @interface FavoriteTableViewController : ExtendedTableViewController <LoginCompletionProtocol>
 
+@property (nonatomic) long favoriteRootID;
+@property (strong, nonatomic) NSString *favoriteRootName;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *leftButton;
+
 @end

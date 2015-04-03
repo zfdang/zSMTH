@@ -105,6 +105,9 @@
         [navigationController pushViewController:guidance animated:YES];
     } else if (target == VIEW_FAVORITE) {
         FavoriteTableViewController *favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
+        favorite.favoriteRootID = 0;
+        favorite.favoriteRootName = @"个人收藏夹";
+        
         [navigationController popToRootViewControllerAnimated:NO];
 
         // user logined?

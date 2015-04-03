@@ -12,6 +12,7 @@
 #import "BoardListTableViewCell.h"
 #import "PostListTableViewController.h"
 
+
 @interface FavoriteTableViewController ()
 {
     NSArray *favorites;
@@ -20,6 +21,9 @@
 @end
 
 @implementation FavoriteTableViewController
+
+@synthesize favoriteRootID;
+@synthesize favoriteRootName;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,7 +37,24 @@
     // load favorite boards
     favorites = nil;
     [self startAsyncTask];
+    
+    if(favoriteRootName && favoriteRootID != 0){
+        self.title = [NSString stringWithFormat:@"收藏夹 | %@", favoriteRootName];
+        self.leftButton.image =  [UIImage imageNamed:@"return"];
+    }
 }
+
+- (IBAction)showLeftMenu:(id)sender {
+    
+    if(favoriteRootID == 0){
+        [super showLeftMenu:self];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -43,7 +64,7 @@
 - (void)asyncTask
 {
     if(helper.isLogined)
-        favorites = [helper getFavorites:0];
+        favorites = [helper getFavorites:favoriteRootID];
 }
 
 - (void)finishAsyncTask
@@ -110,11 +131,20 @@
     if(indexPath.section == 0)
     {
         SMTHBoard* board = (SMTHBoard*)[favorites objectAtIndex:indexPath.row];
-        
-        PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
-        postlist.boardName = board.chsName;
-        postlist.boardID = board.engName;
-        [self.navigationController pushViewController:postlist animated:YES];
+        if(board.type == GROUP){
+            UINavigationController *navigationController = self.navigationController;
+            FavoriteTableViewController *favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
+            favorite.favoriteRootID = board.boardID;
+            favorite.favoriteRootName = board.chsName;
+            
+            [navigationController pushViewController:favorite animated:YES];
+        } else
+        {
+            PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
+            postlist.boardName = board.chsName;
+            postlist.boardID = board.engName;
+            [self.navigationController pushViewController:postlist animated:YES];
+        }
     }
 }
 
