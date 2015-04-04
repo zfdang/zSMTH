@@ -7,6 +7,8 @@
 //
 
 #import "UIViewController+REFrostedViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIView+Toast.h"
 #import "LeftMenuViewController.h"
 #import "NavigationViewController.h"
 #import "REFrostedRootViewController.h"
@@ -15,9 +17,7 @@
 #import "FavoriteTableViewController.h"
 #import "UserInfoViewController.h"
 #import "PostListTableViewController.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-#import "UIView+Toast.h"
-
+#import "BoardListTableViewController.h"
 
 
 @interface LeftMenuViewController ()
@@ -136,13 +136,20 @@
             [navigationController pushViewController:userinfo animated:YES];
         }
     } else if (target == VIEW_POST_LIST) {
+        // this branch is only for test
         PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
         postlist.boardID = @"Picture";
         postlist.boardName = @"贴图";
         [navigationController popToRootViewControllerAnimated:NO];
 
         [navigationController pushViewController:postlist animated:YES];
+    } else if (target == VIEW_BOARD_LIST) {
+        BoardListTableViewController *boardlist = [self.storyboard instantiateViewControllerWithIdentifier:@"boardlistController"];
+        [navigationController popToRootViewControllerAnimated:NO];
+        
+        [navigationController pushViewController:boardlist animated:YES];
     }
+
     [self.frostedViewController hideMenuViewController];
 }
 
@@ -208,7 +215,7 @@
     } else if (indexPath.section == 0 && indexPath.row == 1) {
         [self switchViewto:VIEW_FAVORITE];
     } else if (indexPath.section == 0 && indexPath.row == 2) {
-        [self switchViewto:VIEW_POST_LIST];
+        [self switchViewto:VIEW_BOARD_LIST];
     } else if (indexPath.section == 1 && indexPath.row == 3){
         NSLog(@"Clear SDWebImage Cache");
         SDImageCache *imageCache = [SDImageCache sharedImageCache];

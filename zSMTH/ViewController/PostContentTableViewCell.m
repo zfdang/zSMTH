@@ -105,6 +105,7 @@
     
     // set cell border
     [self.cellView.layer setBorderColor:[UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1.0].CGColor];
+    self.cellView.layer.cornerRadius = 10.0;
     [self.cellView.layer setBorderWidth:0.5f];
     
 //    CGRect rect = self.frame;

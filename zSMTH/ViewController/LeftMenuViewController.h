@@ -15,6 +15,7 @@ typedef enum {
     VIEW_LOGIN,
     VIEW_USER_INFO,
     VIEW_POST_LIST,
+    VIEW_BOARD_LIST,
 } SMTHVIEW;
 
 @interface LeftMenuViewController : ExtendedTableViewController

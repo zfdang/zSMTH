@@ -78,7 +78,7 @@
     setting.bSavePassword = self.switchSavePassword.on;
     setting.bAutoLogin = self.switchAutoLogin.on;
     
-    NSLog(@"%@", setting);
+//    NSLog(@"%@", setting);
     
     [helper login:[self.editUsername text] password:[self.editPassword text]];
 }

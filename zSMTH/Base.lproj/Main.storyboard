@@ -60,7 +60,67 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urS-1D-Ogf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-849" y="1701"/>
+            <point key="canvasLocation" x="-849" y="1837"/>
+        </scene>
+        <!--BoardList-->
+        <scene sceneID="SvY-jZ-mq8">
+            <objects>
+                <tableViewController storyboardIdentifier="boardlistController" id="SJQ-YS-ST9" userLabel="BoardList" customClass="BoardListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Wcg-11-CDn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="eYU-eR-ZyE">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="blU-v8-ewq">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="blU-v8-ewq" id="oTj-Fz-7Il">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SJQ-YS-ST9" id="kxw-oV-uao"/>
+                            <outlet property="delegate" destination="SJQ-YS-ST9" id="Xk0-05-jRF"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="全部讨论区" id="0b0-pp-UJc">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="AHy-0V-I0F" userLabel="Menu">
+                            <connections>
+                                <action selector="showLeftMenu:" destination="SJQ-YS-ST9" id="7e9-N3-GhJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="searchBar" destination="eYU-eR-ZyE" id="2Ry-DF-Id9"/>
+                        <outlet property="searchDisplayController" destination="pEv-YX-I9M" id="d92-Pc-VsS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ic-GW-EB8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="gVi-w9-MvA">
+                    <connections>
+                        <outlet property="delegate" destination="SJQ-YS-ST9" id="YC3-tw-9M9"/>
+                        <outlet property="searchContentsController" destination="SJQ-YS-ST9" id="1kI-vK-10w"/>
+                        <outlet property="searchResultsDataSource" destination="SJQ-YS-ST9" id="i6J-Xu-ZVL"/>
+                        <outlet property="searchResultsDelegate" destination="SJQ-YS-ST9" id="i1s-CY-yCY"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="pEv-YX-I9M">
+                    <connections>
+                        <outlet property="delegate" destination="SJQ-YS-ST9" id="WJd-AN-now"/>
+                        <outlet property="searchContentsController" destination="SJQ-YS-ST9" id="nwh-av-DRq"/>
+                        <outlet property="searchResultsDataSource" destination="SJQ-YS-ST9" id="ahZ-Lz-4JP"/>
+                        <outlet property="searchResultsDelegate" destination="SJQ-YS-ST9" id="ruo-DC-XRu"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="-2727" y="1697"/>
         </scene>
         <!--PostContent-->
         <scene sceneID="Ecu-Kf-GzR">
@@ -93,7 +153,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsf-IR-CJ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1493" y="2015"/>
+            <point key="canvasLocation" x="-1709" y="1919"/>
         </scene>
         <!--PostList TableView Controller-->
         <scene sceneID="dMi-0A-gvg">
@@ -134,7 +194,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNH-es-W7H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-189" y="2317"/>
+            <point key="canvasLocation" x="-15" y="2311"/>
         </scene>
         <!--Login-->
         <scene sceneID="cQk-Yv-dvm">
@@ -550,6 +610,7 @@
                         <segue destination="kcE-6Z-Ydj" kind="push" id="pGG-Ks-QZN"/>
                         <segue destination="Zhi-IQ-lfz" kind="push" id="k4l-0B-86b"/>
                         <segue destination="Eou-hD-dOm" kind="push" id="TUg-H9-VSB"/>
+                        <segue destination="SJQ-YS-ST9" kind="push" id="Ai3-lf-smK"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKF-hL-bC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
