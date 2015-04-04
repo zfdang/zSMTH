@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxX-FN-eEl">
-                        <rect key="frame" x="8" y="8" width="304" height="129.5"/>
+                        <rect key="frame" x="4" y="2" width="312" height="141.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zFC-p5-qHm">
                                 <rect key="frame" x="4" y="2" width="40" height="40"/>
@@ -37,13 +37,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="楼主" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5D-01-p60" userLabel="楼主">
-                                <rect key="frame" x="268" y="6" width="26" height="16"/>
+                                <rect key="frame" x="276" y="6" width="26" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmF-YF-qje" userLabel="Content" customClass="PostContentLabel">
-                                <rect key="frame" x="4" y="46" width="296" height="82.5"/>
+                                <rect key="frame" x="4" y="46" width="304" height="94.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -82,11 +82,11 @@
                 </subviews>
                 <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="IxX-FN-eEl" secondAttribute="trailing" id="KWb-JN-IjR"/>
-                    <constraint firstItem="IxX-FN-eEl" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="topMargin" id="VFB-Wi-8Dc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="IxX-FN-eEl" secondAttribute="trailing" constant="-4" id="KWb-JN-IjR"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="topMargin" constant="-6" id="VFB-Wi-8Dc"/>
                     <constraint firstAttribute="centerY" secondItem="IxX-FN-eEl" secondAttribute="centerY" constant="36.25" id="cO3-rF-TNH"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="IxX-FN-eEl" secondAttribute="bottom" id="cb4-XA-aTW"/>
-                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" id="fW9-Cn-Gc8"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="IxX-FN-eEl" secondAttribute="bottom" constant="-6" id="cb4-XA-aTW"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" constant="-4" id="fW9-Cn-Gc8"/>
                     <constraint firstAttribute="centerX" secondItem="IxX-FN-eEl" secondAttribute="centerX" constant="115" id="yf9-qR-Siw"/>
                 </constraints>
                 <variation key="default">
