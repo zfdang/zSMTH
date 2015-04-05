@@ -95,7 +95,11 @@
                                 <action selector="showLeftMenu:" destination="SJQ-YS-ST9" id="7e9-N3-GhJ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="refresh" id="1Te-u3-kFA"/>
+                        <barButtonItem key="rightBarButtonItem" image="refresh" id="1Te-u3-kFA" userLabel="Refresh">
+                            <connections>
+                                <action selector="refreshBoardList:" destination="SJQ-YS-ST9" id="ljQ-c9-XFl"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

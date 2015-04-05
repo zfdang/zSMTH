@@ -68,11 +68,15 @@
 
         // init FMDB
         NSString* docsdir = [NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-        NSString* dbpath = [docsdir stringByAppendingPathComponent:@"zsmth.sqlite"];
+        NSString* dbpath = [docsdir stringByAppendingPathComponent:@"zSMTH.sqlite"];
         db = [FMDatabase databaseWithPath:dbpath];
         
         [self initDatabaseStructure];
-        
+//        NSString *stamp = [self getBoardListUpdateTime];
+//        [self saveAllBoardToCache:nil];
+//        stamp = [self getBoardListUpdateTime];
+//        [self clearBoardListCache];
+//        stamp = [self getBoardListUpdateTime];
     }
     return self;
 }
@@ -80,19 +84,39 @@
 // init two tables to store cached results
 - (BOOL) initDatabaseStructure
 {
-
     if ([db open]) {
-        NSString *sqlCreateTable =  @"CREATE TABLE IF NOT EXISTS 'CacheStatus' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' TEXT, 'status' INTEGER, 'updated_at' TEXT)";
+        NSString *sqlCreateTable =  @"CREATE TABLE IF NOT EXISTS 'CacheStatus' (\
+        'type' TEXT,\
+        'status' INTEGER,\
+        'updated_at' TEXT)";
         BOOL res = [db executeUpdate:sqlCreateTable];
         if (!res) {
             NSLog(@"error when creating db table: CacheStatus");
         } else {
             NSLog(@"success to creating db table: CacheStatus");
         }
+        
+        sqlCreateTable =  @"CREATE TABLE IF NOT EXISTS 'BoardCache' (\
+        'type' TEXT,\
+        'root_id' INTEGER,\
+        'board_id' INTEGER,\
+        'board_chs_name' TEXT,\
+        'board_eng_name' TEXT,\
+        'board_category' TEXT,\
+        'board_type' INTEGER,\
+        'board_managers' TEXT)";
+        res = [db executeUpdate:sqlCreateTable];
+        if (!res) {
+            NSLog(@"error when creating db table: BoardCache");
+        } else {
+            NSLog(@"success to creating db table: BoardCache");
+        }
         [db close];
+        
+        return YES;
     }
     
-    return YES;
+    return NO;
 }
 
 - (int) login:(NSString*)username password:(NSString*)password
@@ -366,6 +390,33 @@
     return posts;
 }
 
+- (NSString*) getBoardListUpdateTime
+{
+    NSString *result = nil;
+    if ([db open]) {
+        FMResultSet *s = [db executeQuery:@"SELECT updated_at FROM CacheStatus where type='BOARD'"];
+        while ([s next]) {
+            //retrieve values for each record
+            result = [s stringForColumn:@"updated_at"];
+        }
+        [db close];
+    }
+    return result;
+}
+
+- (void)clearBoardListCache
+{
+    if ([db open]) {
+        BOOL result = [db executeUpdate:@"DELETE FROM CacheStatus where type='BOARD'"];
+        if(! result){
+            NSLog(@"clearBoardListCache FAILED.");
+        } else {
+            NSLog(@"clearBoardListCache");
+        }
+        [db close];
+    }
+}
+
 - (NSArray *)getAllBoards
 {
     NSMutableArray *boards = [[NSMutableArray alloc] init];
@@ -375,6 +426,7 @@
         // get raw list of all boards from server
         // 1. duplicated 2. unsorted
         [self getAllBoardsFromServer:0 Result:boards BoardPath:nil isSection:NO];
+        NSLog(@"Raw records loaded from Server: %ld", [boards count]);
         
         // de-duplicate
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -407,19 +459,19 @@
                 }
             }
         }
-        
+
         // sort
         NSArray *sortedBoards = [newBoards sortedArrayUsingSelector:@selector(compare:)];
-        
+
         // save back
         [boards removeAllObjects];
         [boards addObjectsFromArray:sortedBoards];
-        NSLog(@"Number of boards: %ld", [boards count]);
-        
+        NSLog(@"Refined records loaded from Server: %ld", [boards count]);
+
         // save boards to cache server
         [self saveAllBoardToCache:boards];
     }
-    
+
     // return result
     return boards;
 }
@@ -427,11 +479,80 @@
 
 - (BOOL)getAllBoardsFromCache:(NSMutableArray*)boards
 {
-    return NO;
+    NSString *stamp = [self getBoardListUpdateTime];
+    if(stamp == nil){
+        return NO;
+    }
+ 
+    if([db open]){
+        // load all boards from cache
+        FMResultSet *s = [db executeQuery:@"SELECT * FROM BoardCache where type = 'BOARD'"];
+        while ([s next]) {
+            SMTHBoard *board = [[SMTHBoard alloc] init];
+            board.boardID = [s longForColumn:@"board_id"];
+            board.chsName = [s stringForColumn:@"board_chs_name"];
+            board.engName = [s stringForColumn:@"board_eng_name"];
+            board.category = [s stringForColumn:@"board_category"];
+            board.managers = [s stringForColumn:@"board_managers"];
+            
+            [boards addObject:board];
+        }
+        
+        // Sort boards
+        NSArray *sortedBoards = [boards sortedArrayUsingSelector:@selector(compare:)];
+        [boards removeAllObjects];
+        [boards addObjectsFromArray:sortedBoards];
+        
+        NSLog(@"Records loaded from Cache %ld", [boards count]);
+        [db close];
+    }
+    if([boards count] == 0)
+        return NO;
+    
+    return YES;
 }
 
 - (BOOL) saveAllBoardToCache:(NSArray*)boards
 {
+    if([db open]){
+        BOOL success;
+        
+        // clear all board cache first
+        success = [db executeUpdate:@"DELETE from BoardCache where type = 'BOARD'"];
+        if(! success){
+            NSLog(@"Failed to clear cached Boards!");
+        } else {
+            NSLog(@"Clear all cached boards done.");
+        }
+
+        // save all board to cache
+        for (SMTHBoard* board in boards) {
+            success = [db executeUpdate:@"INSERT INTO BoardCache ('type', 'board_id', 'board_chs_name', 'board_eng_name', 'board_category', 'board_managers') VALUES ('BOARD',?,?,?,?,?)", [NSNumber numberWithLong:board.boardID], board.chsName, board.engName, board.category, board.managers];
+            if(! success){
+                NSLog(@"Failt to write board to cache: %@", board.chsName);
+            } else {
+//                NSLog(@"Write board cache: %@", board.chsName);
+            }
+        }
+        NSLog(@"Write board to cache: %ld", [boards count]);
+
+        // write cache status
+        NSDate *date = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm";
+        NSString *dateStr = [dateFormatter stringFromDate:date];
+        
+        success = [db executeUpdate:@"insert into CacheStatus ('type', 'updated_at') values ('BOARD', ?);", dateStr];
+        if(! success){
+            NSLog(@"Insert Record Failed: CacheStatus");
+        } else {
+            NSLog(@"Write Cache Status: %@", dateStr);
+        }
+
+        [db close];
+    }
+
+    
     return YES;
 }
 
@@ -439,7 +560,6 @@
 - (BOOL)getAllBoardsFromServer:(long)groupid Result:(NSMutableArray*)boards BoardPath:(NSString*)path isSection:(BOOL)isSection
 {
     [smth reset_status];
-
     
     NSArray *results = nil;
     

@@ -37,6 +37,9 @@
 
 // 获取版面，文章信息
 - (NSArray*) getAllBoards;
+- (NSString*) getBoardListUpdateTime;
+- (void) clearBoardListCache;
+
 - (NSArray*) getFavorites:(long)fid;
 - (NSArray*) getGuidancePosts;
 - (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from;

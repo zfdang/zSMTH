@@ -35,12 +35,16 @@
     origBoards = [[NSMutableArray alloc] init];
     [self startAsyncTask];
     
+    lastUpdateTime = @"加载版面列表中...";
+    
     self.searchBar.delegate = self;
 }
 
 - (void)asyncTask
 {
     NSArray *results = [helper getAllBoards];
+    lastUpdateTime = [NSString stringWithFormat:@"列表更新时间：%@", [helper getBoardListUpdateTime]];
+    
     [origBoards removeAllObjects];
     [origBoards addObjectsFromArray:results];
 
@@ -97,10 +101,7 @@
         view.backgroundColor = [UIColor colorWithRed:167/255.0f green:167/255.0f blue:167/255.0f alpha:0.6f];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, tableView.frame.size.width, 20)];
-        if(lastUpdateTime != nil)
-            label.text = lastUpdateTime;
-        else
-            label.text = @"全部版面的最近更新时间未知!";
+        label.text = lastUpdateTime;
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:15];
         label.textColor = [UIColor whiteColor];
@@ -238,4 +239,10 @@
 }
 */
 
+- (IBAction)refreshBoardList:(id)sender {
+    [helper clearBoardListCache];
+
+    self.progressTitle = @"刷新中...";
+    [self startAsyncTask];
+}
 @end

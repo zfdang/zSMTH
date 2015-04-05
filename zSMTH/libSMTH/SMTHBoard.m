@@ -23,7 +23,6 @@
 {
     self = [super init];
     if (self) {
-        children = nil;
         type = BOARD;
     }
     return self;

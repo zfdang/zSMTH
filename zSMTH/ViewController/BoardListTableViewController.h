@@ -11,5 +11,6 @@
 
 @interface BoardListTableViewController : ExtendedTableViewController <UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+- (IBAction)refreshBoardList:(id)sender;
 
 @end

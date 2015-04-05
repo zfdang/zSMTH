@@ -33,7 +33,6 @@ typedef enum {
 
 @interface SMTHBoard : NSObject
 {
-    NSArray *children;
 }
 
 @property long boardID;
