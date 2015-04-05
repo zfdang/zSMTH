@@ -9,6 +9,9 @@
 #import "BoardListTableViewController.h"
 
 @interface BoardListTableViewController ()
+{
+    NSMutableArray *boards;
+}
 
 @end
 
@@ -22,6 +25,22 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // load favorite boards
+    boards = [[NSMutableArray alloc] init];
+    [self startAsyncTask];
+}
+
+- (void)asyncTask
+{
+    NSArray *results = [helper getAllBoards];
+    [boards removeAllObjects];
+    [boards addObjectsFromArray:results];
+}
+
+- (void)finishAsyncTask
+{
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

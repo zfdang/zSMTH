@@ -7,6 +7,7 @@ pod 'REFrostedViewController', '~> 2.4.7'
 pod 'SVPullToRefresh'
 pod 'SDWebImage', '~>3.6'
 pod 'Toast', '~> 2.4'
+pod 'FMDB'
 end
 
 target 'zSMTHTests' do

@@ -329,6 +329,76 @@
     return posts;
 }
 
+- (NSArray *)getAllBoards
+{
+    [smth reset_status];
+    
+    NSMutableArray *boards = [[NSMutableArray alloc] init];
+    [self getAllBoardsInternal:0 Result:boards];
+    return boards;
+}
+
+
+- (void)getAllBoardsInternal:(long)groupid Result:(NSMutableArray*)boards
+{
+    [smth reset_status];
+    NSArray *results = [smth net_LoadBoards:groupid];
+    for(id result in results)
+    {
+        //        {
+        //            bid = 60;
+        //            "current_users" = 0;
+        //            flag = "-1";
+        //            flag = 332288;
+        //            group = 0;
+        //            id = "";
+        //            "last_post" = 0;
+        //            level = 0;
+        //            manager = Business;
+        //            "max_online" = 0;
+        //            "max_time" = 0;
+        //            name = "商务　　　 商务版面";
+        //            position = 17;
+        //            score = 0;
+        //            "score_level" = 0;
+        //            section = 0;
+        //            total = 0;
+        //            type = board;
+        //            unread = 0;
+        //        }
+//        NSLog(@"%@", result);
+        
+        NSDictionary *dict = (NSDictionary*) result;
+        NSNumber *bid = [dict objectForKey:@"bid"];
+        NSString *chsName = [dict objectForKey:@"name"];
+        NSString *engName = [dict objectForKey:@"id"];
+        NSString *manager = [dict objectForKey:@"manager"];
+
+        int board_flag = [(NSString*)[dict objectForKey:@"flag"] intValue];
+        NSLog(@"%@, %@, %d", bid, chsName, board_flag);
+
+        if(board_flag == -1){
+            // 目录
+            [self getAllBoardsInternal:[bid longValue] Result:boards];
+        }else if(board_flag & 0x400){
+            // 版面目录，包含几个子版面
+            [self getAllBoardsInternal:[bid longValue] Result:boards];
+        }else{
+            // 真正的版面
+            SMTHBoard *board = [[SMTHBoard alloc] init];
+            board.type = BOARD;
+            board.engName = engName;
+            board.boardID = [bid longValue];
+            board.chsName = chsName;
+            board.managers = manager;
+            
+            [boards addObject:board];
+        }
+    }
+    return;
+}
+
+
 - (int) checkVersion
 {
     NSDictionary* dict = [smth net_GetVersion];

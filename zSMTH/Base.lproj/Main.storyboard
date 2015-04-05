@@ -70,7 +70,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="eYU-eR-ZyE">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="输入中英文版名过滤列表" id="eYU-eR-ZyE">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
@@ -95,6 +95,7 @@
                                 <action selector="showLeftMenu:" destination="SJQ-YS-ST9" id="7e9-N3-GhJ"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="refresh" id="1Te-u3-kFA"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -680,6 +681,7 @@
     <resources>
         <image name="compose" width="20" height="20"/>
         <image name="menu" width="20" height="20"/>
+        <image name="refresh" width="20" height="20"/>
         <image name="return" width="20" height="20"/>
     </resources>
 </document>
