@@ -14,6 +14,7 @@
 @interface BoardListTableViewController ()
 {
     NSMutableArray *boards;
+    NSMutableArray *origBoards;
     NSString *lastUpdateTime;
 }
 @end
@@ -31,12 +32,18 @@
     
     // load favorite boards
     boards = [[NSMutableArray alloc] init];
+    origBoards = [[NSMutableArray alloc] init];
     [self startAsyncTask];
+    
+    self.searchBar.delegate = self;
 }
 
 - (void)asyncTask
 {
     NSArray *results = [helper getAllBoards];
+    [origBoards removeAllObjects];
+    [origBoards addObjectsFromArray:results];
+
     [boards removeAllObjects];
     [boards addObjectsFromArray:results];
 }
@@ -143,6 +150,49 @@
         [self.navigationController pushViewController:postlist animated:YES];
     }
 }
+
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    int length = [self getStringLengthForChinese:searchText];
+    NSLog(@"Search Text Changed: %@, %d", searchText, length);
+
+    // 2个英文字母，或者一个中文，可以开始查找了
+    if(length >= 2){
+        [boards removeAllObjects];
+        // 中文版名，英文版名，还有版面类型
+        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"engName contains[c] %@ || chsName contains[c] %@ || category contains[c] %@", searchText, searchText, searchText];
+        boards = [NSMutableArray arrayWithArray:[origBoards filteredArrayUsingPredicate:resultPredicate]];
+        [self.tableView reloadData];
+    } else {
+        // show all boards
+        [boards removeAllObjects];
+        [boards addObjectsFromArray:origBoards];
+        [self.tableView reloadData];
+    }
+    
+}
+
+//判断中英混合的的字符串长度
+- (int)getStringLengthForChinese:(NSString*)strtemp
+{
+    int strlength = 0;
+    char* p = (char*)[strtemp cStringUsingEncoding:NSUnicodeStringEncoding];
+    for (int i=0 ; i<[strtemp lengthOfBytesUsingEncoding:NSUnicodeStringEncoding] ;i++) {
+        if (*p) {
+            p++;
+            strlength++;
+        }
+        else {
+            p++;
+        }
+        
+    }
+    return strlength;
+}
+
 
 /*
 // Override to support conditional editing of the table view.

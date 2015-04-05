@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ExtendedTableViewController.h"
 
-@interface BoardListTableViewController : ExtendedTableViewController
+@interface BoardListTableViewController : ExtendedTableViewController <UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
