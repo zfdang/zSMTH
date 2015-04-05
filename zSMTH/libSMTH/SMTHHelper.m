@@ -11,6 +11,18 @@
 #import "SMTHBoard.h"
 #import "SMTHPost.h"
 #import "SMTHAttachment.h"
+#import "FMDB.h"
+
+@interface SMTHHelper ()
+{
+    int postNumberinOnePage;  // 版面列表：一页显示多少个帖子数
+    int replyNumberinOnePost; // 文章内容：一页显示多少回复数
+    int replyOrder;
+    int brcmode;
+    
+    FMDatabase *db;
+}
+@end
 
 @implementation SMTHHelper
 
@@ -53,10 +65,35 @@
         // init setting to load post details & replies
         replyNumberinOnePost = 20;
         replyOrder = 1;
+
+        // init FMDB
+        NSString* docsdir = [NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString* dbpath = [docsdir stringByAppendingPathComponent:@"zsmth.sqlite"];
+        db = [FMDatabase databaseWithPath:dbpath];
+        
+        [self initDatabaseStructure];
+        
     }
     return self;
 }
 
+// init two tables to store cached results
+- (BOOL) initDatabaseStructure
+{
+
+    if ([db open]) {
+        NSString *sqlCreateTable =  @"CREATE TABLE IF NOT EXISTS 'CacheStatus' ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'type' TEXT, 'status' INTEGER, 'updated_at' TEXT)";
+        BOOL res = [db executeUpdate:sqlCreateTable];
+        if (!res) {
+            NSLog(@"error when creating db table: CacheStatus");
+        } else {
+            NSLog(@"success to creating db table: CacheStatus");
+        }
+        [db close];
+    }
+    
+    return YES;
+}
 
 - (int) login:(NSString*)username password:(NSString*)password
 {
@@ -331,42 +368,119 @@
 
 - (NSArray *)getAllBoards
 {
-    [smth reset_status];
-    
     NSMutableArray *boards = [[NSMutableArray alloc] init];
-    [self getAllBoardsInternal:0 Result:boards];
+    
+    BOOL loaded = [self getAllBoardsFromCache:boards];
+    if(!loaded){
+        // get raw list of all boards from server
+        // 1. duplicated 2. unsorted
+        [self getAllBoardsFromServer:0 Result:boards BoardPath:nil isSection:NO];
+        
+        // de-duplicate
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        NSMutableArray *newBoards = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [boards count]; i++) {
+            SMTHBoard *board = [boards objectAtIndex:i];
+            NSNumber* value = [dict valueForKey:board.engName];
+            if(value == nil){
+                // new board
+                [dict setValue:[NSNumber numberWithInt:i] forKey:board.engName];
+                [newBoards addObject:board];
+            } else {
+                // duplicated board, merge category and do not add current board again
+                SMTHBoard *previousBoard = [boards objectAtIndex:[value intValue]];
+                if(board.category == nil){
+                    continue;
+                } else if(previousBoard.category == nil){
+                    previousBoard.category = board.category;
+                } else {
+                    // 两个都不为空，需要合并
+                    // 合并时，我们对某些category会舍弃，比如"正版主-","商务-"等
+                    if([previousBoard.category hasPrefix:@"正版主"] ||  [previousBoard.category hasPrefix:@"商务"]){
+                        // ignore previous category
+                        previousBoard.category = board.category;
+                    } else if([board.category hasPrefix:@"正版主"] ||  [board.category hasPrefix:@"商务"]){
+                        // ignore current category
+                    } else {
+                        previousBoard.category = [NSString stringWithFormat:@"%@|%@", previousBoard.category, board.category];
+                    }
+                }
+            }
+        }
+        
+        // sort
+        NSArray *sortedBoards = [newBoards sortedArrayUsingSelector:@selector(compare:)];
+        
+        // save back
+        [boards removeAllObjects];
+        [boards addObjectsFromArray:sortedBoards];
+        NSLog(@"Number of boards: %ld", [boards count]);
+        
+        // save boards to cache server
+        [self saveAllBoardToCache:boards];
+    }
+    
+    // return result
     return boards;
 }
 
 
-- (void)getAllBoardsInternal:(long)groupid Result:(NSMutableArray*)boards
+- (BOOL)getAllBoardsFromCache:(NSMutableArray*)boards
+{
+    return NO;
+}
+
+- (BOOL) saveAllBoardToCache:(NSArray*)boards
+{
+    return YES;
+}
+
+
+- (BOOL)getAllBoardsFromServer:(long)groupid Result:(NSMutableArray*)boards BoardPath:(NSString*)path isSection:(BOOL)isSection
 {
     [smth reset_status];
-    NSArray *results = [smth net_LoadBoards:groupid];
+
+    
+    NSArray *results = nil;
+    
+    if(isSection)
+    {
+        // 版面目录，比如“篮球”，下面有几个具体的子版面
+        // sectionid 固定为0, 现在的API貌似不看sectionid
+        results = [smth net_ReadSection:0 :groupid];
+    } else {
+        // 目录，比如"体育运动"
+        results = [smth net_LoadBoards:groupid];
+    }
+    if(smth->net_error != 0){
+        // 获取失败了
+        NSLog(@"Load group failed, groupid=%ld", groupid);
+        return NO;
+    }
+    
     for(id result in results)
     {
-        //        {
-        //            bid = 60;
-        //            "current_users" = 0;
-        //            flag = "-1";
-        //            flag = 332288;
-        //            group = 0;
-        //            id = "";
-        //            "last_post" = 0;
-        //            level = 0;
-        //            manager = Business;
-        //            "max_online" = 0;
-        //            "max_time" = 0;
-        //            name = "商务　　　 商务版面";
-        //            position = 17;
-        //            score = 0;
-        //            "score_level" = 0;
-        //            section = 0;
-        //            total = 0;
-        //            type = board;
-        //            unread = 0;
-        //        }
-//        NSLog(@"%@", result);
+//                {
+//                    bid = 60;
+//                    "current_users" = 0;
+//                    flag = "-1";
+//                    flag = 332288;
+//                    group = 0;
+//                    id = "";
+//                    "last_post" = 0;
+//                    level = 0;
+//                    manager = Business;
+//                    "max_online" = 0;
+//                    "max_time" = 0;
+//                    name = "商务　　　 商务版面";
+//                    position = 17;
+//                    score = 0;
+//                    "score_level" = 0;
+//                    section = 0;
+//                    total = 0;
+//                    type = board;
+//                    unread = 0;
+//                }
         
         NSDictionary *dict = (NSDictionary*) result;
         NSNumber *bid = [dict objectForKey:@"bid"];
@@ -375,14 +489,32 @@
         NSString *manager = [dict objectForKey:@"manager"];
 
         int board_flag = [(NSString*)[dict objectForKey:@"flag"] intValue];
-        NSLog(@"%@, %@, %d", bid, chsName, board_flag);
+//        NSLog(@"%@, %@, %d, %@", bid, chsName, board_flag, [dict objectForKey:@"section"]);
 
         if(board_flag == -1){
-            // 目录
-            [self getAllBoardsInternal:[bid longValue] Result:boards];
+            // 目录, 需要包含在版面路径中
+            NSArray *listItems = [chsName componentsSeparatedByString:@" "];
+            NSString *directParent = [[listItems objectAtIndex:0] stringByTrimmingCharactersInSet:
+                                      [NSCharacterSet whitespaceCharacterSet]];
+            NSString *parent = nil;
+            if(path != nil){
+                parent = [NSString stringWithFormat:@"%@-%@", path, directParent];
+            } else {
+                parent = directParent;
+            }
+            [self getAllBoardsFromServer:[bid longValue] Result:boards BoardPath:parent  isSection:NO];
         }else if(board_flag & 0x400){
             // 版面目录，包含几个子版面
-            [self getAllBoardsInternal:[bid longValue] Result:boards];
+            NSArray *listItems = [chsName componentsSeparatedByString:@" "];
+            NSString *directParent = [[listItems objectAtIndex:0] stringByTrimmingCharactersInSet:
+                                      [NSCharacterSet whitespaceCharacterSet]];
+            NSString *parent = nil;
+            if(path != nil){
+                parent = [NSString stringWithFormat:@"%@-%@", path, directParent];
+            } else {
+                parent = directParent;
+            }
+            [self getAllBoardsFromServer:[bid longValue] Result:boards BoardPath:parent isSection:YES];
         }else{
             // 真正的版面
             SMTHBoard *board = [[SMTHBoard alloc] init];
@@ -391,11 +523,12 @@
             board.boardID = [bid longValue];
             board.chsName = chsName;
             board.managers = manager;
-            
+            board.category = path;
+
             [boards addObject:board];
         }
     }
-    return;
+    return YES;
 }
 
 

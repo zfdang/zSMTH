@@ -39,8 +39,10 @@ typedef enum {
 @property long boardID;
 @property (strong, nonatomic) NSString* chsName;
 @property (strong, nonatomic) NSString* engName;
+@property (strong, nonatomic) NSString* category;
 @property BoardType type;
 @property (strong, nonatomic) NSString* managers;
 
+- (NSComparisonResult)compare:(SMTHBoard *)otherObject;
 
 @end

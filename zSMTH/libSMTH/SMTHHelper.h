@@ -5,18 +5,16 @@
 //  Created by Zhengfa DANG on 2015-3-12.
 //  Copyright (c) 2015 Zhengfa. All rights reserved.
 //
-
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "Reachability.h"
 #import "SMTHURLConnection.h"
 #import "SMTHUser.h"
 
+
 @interface SMTHHelper : NSObject <SMTHURLConnectionDelegate>
 {
-    int postNumberinOnePage;  // 版面列表：一页显示多少个帖子数
-    int replyNumberinOnePost; // 文章内容：一页显示多少回复数
-    int replyOrder;
-    int brcmode;
+    
 }
 
 + (id)sharedManager;
@@ -36,11 +34,13 @@
 // 使用isLogined来判断真实用户是否登录
 - (int) login:(NSString*)username password:(NSString*)password;
 - (void) logout;
+
+// 获取版面，文章信息
+- (NSArray*) getAllBoards;
 - (NSArray*) getFavorites:(long)fid;
 - (NSArray*) getGuidancePosts;
 - (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from;
 - (NSArray *)getPostContents:(NSString *)board_id postID:(long)article_id from:(long)from;
 
-- (NSArray*) getAllBoards;
 
 @end

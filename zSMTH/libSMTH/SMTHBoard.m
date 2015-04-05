@@ -17,6 +17,7 @@
 @synthesize engName;
 @synthesize managers;
 @synthesize type;
+@synthesize category;
 
 - (instancetype)init
 {
@@ -26,5 +27,15 @@
         type = BOARD;
     }
     return self;
+}
+
+- (NSComparisonResult)compare:(SMTHBoard *)otherObject
+{
+    return [self.engName compare:otherObject.engName options:NSCaseInsensitiveSearch];
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@(%@) - %@", self.chsName, self.engName, self.category];
 }
 @end

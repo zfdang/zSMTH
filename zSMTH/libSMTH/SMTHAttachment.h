@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "FMDB.h"
+
 @interface SMTHAttachment : NSObject
 @property (strong, nonatomic) NSString *attName;
 @property (nonatomic) long attPos;
