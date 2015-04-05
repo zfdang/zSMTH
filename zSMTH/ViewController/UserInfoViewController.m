@@ -13,6 +13,11 @@
 
 
 @interface UserInfoViewController ()
+{
+    int taskType;
+    SMTHUser *user;
+    NSString* userID;
+}
 
 @end
 
@@ -26,7 +31,7 @@
     
     // set userinfo
     if (helper.isLogined) {
-        [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL]];
+        [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
         self.imageAvatar.layer.cornerRadius = 30.0;
         self.imageAvatar.layer.borderWidth = 0;
         self.imageAvatar.clipsToBounds = YES;
@@ -36,14 +41,11 @@
         self.labelLevel.text = [helper.user getLifeLevel];
     }
     
-    NSLog(@"viewDidLoad");
+    taskType = 0;
+    self.progressTitle = @"加载中...";
+    userID = helper.user.userID;
+    [self startAsyncTask];
 }
-
-
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//}
 
 
 - (void)didReceiveMemoryWarning {
@@ -93,8 +95,45 @@
     }
     
     if (indexPath.section == 0) {
-        cell.rowLabel.text = @"标题";
-        cell.rowValue.text = @"内容";
+        if(user == nil){
+            cell.rowLabel.text = @"属性";
+            cell.rowValue.text = @"值";
+        } else {
+            if(indexPath.row == 0){
+                cell.rowLabel.text = @"性别";
+                cell.rowValue.text = user.userGender;
+            } else if (indexPath.row == 1){
+                cell.rowLabel.text = @"年龄";
+                cell.rowValue.text = user.userAge;
+            } else if (indexPath.row == 2){
+                cell.rowLabel.text = @"身份";
+                cell.rowValue.text = user.userTitle;
+            } else if (indexPath.row == 3){
+//                @property (strong, nonatomic) NSString *firstLogin;
+//                @property (strong, nonatomic) NSString *lastLogin;
+//                @property (strong, nonatomic) NSString *totalLogins;
+//                @property (strong, nonatomic) NSString *totalPosts;
+//                @property (strong, nonatomic) NSString *userScore;
+                
+                cell.rowLabel.text = @"首次登录";
+                cell.rowValue.text = user.firstLogin;
+            } else if (indexPath.row == 4){
+                cell.rowLabel.text = @"最后登录";
+                cell.rowValue.text = user.lastLogin;
+            } else if (indexPath.row == 5){
+                cell.rowLabel.text = @"总登录次数";
+                cell.rowValue.text = user.totalLogins;
+            } else if (indexPath.row == 6){
+                cell.rowLabel.text = @"总帖子数";
+                cell.rowValue.text = user.totalPosts;
+            } else if (indexPath.row == 7){
+                cell.rowLabel.text = @"积分";
+                cell.rowValue.text = user.userScore;
+            } else if (indexPath.row == 8){
+                cell.rowLabel.text = @"标题";
+                cell.rowValue.text = @"内容";
+            }
+        }
     }
     
     return cell;
@@ -116,7 +155,7 @@
 {
     // refresh UserInformation
     if (helper.isLogined) {
-        [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL]];
+        [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
         self.imageAvatar.layer.cornerRadius = 30.0;
         self.imageAvatar.layer.borderWidth = 0;
         self.imageAvatar.clipsToBounds = YES;
@@ -131,13 +170,27 @@
 }
 
 - (IBAction)logout:(id)sender {
+    taskType = 1;
+    [self startAsyncTask];
+}
+
+- (IBAction)doSearch:(id)sender {
+    taskType = 0;
+    userID = self.editUserID.text;
     [self startAsyncTask];
 }
 
 - (void)asyncTask
 {
-    self.progressTitle = @"退出中...";
-    [helper logout];
+    // now different async task is distinguished by taskType, which is unsafe
+    // it's better to add parameter to startAsyncTask->asyncTask->finishAsyncTask
+    if(taskType == 0){
+        user = [helper getUserInfo:userID];
+    } else if(taskType == 1)
+    {
+        self.progressTitle = @"退出中...";
+        [helper logout];
+    }
 }
 
 - (void)finishAsyncTask
@@ -147,5 +200,18 @@
         login.delegate = self;
         [self.navigationController pushViewController:login animated:YES];
     }
+
+    // update top information
+    [self.imageAvatar sd_setImageWithURL:[user getFaceURL]];
+    self.imageAvatar.layer.cornerRadius = 30.0;
+    self.imageAvatar.layer.borderWidth = 0;
+    self.imageAvatar.clipsToBounds = YES;
+    
+    self.labelID.text = user.userID;
+    self.labelNick.text = user.userNick;
+    self.labelLevel.text = [user getLifeLevel];
+    
+    // update tableview infors
+    [self.tableView reloadData];
 }
 @end

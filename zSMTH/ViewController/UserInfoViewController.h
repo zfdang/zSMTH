@@ -19,7 +19,9 @@
 
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *editUserID;
 
 - (IBAction)logout:(id)sender;
+- (IBAction)doSearch:(id)sender;
 
 @end

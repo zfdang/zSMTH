@@ -119,55 +119,18 @@
     return NO;
 }
 
-- (int) login:(NSString*)username password:(NSString*)password
+- (void) login:(NSString*)username password:(NSString*)password
 {
     [smth reset_status];
     user = nil;
     int status = [smth net_LoginBBS:username :password];
     if(status == 1)
     {
-        NSDictionary *infos = [smth net_QueryUser:username];
-//        NSLog(@"%@", infos);
-        if(infos != nil){
-            //        uid = 409391;
-            //        id = zSMTHDev;
-            //        nick = zSMTHDev;
-            //        gender = 0;
-            //        age = 35;
-            //        faceurl = "";
-            
-            //        logins = 208;
-            //        "first_login" = 1426471523;
-            //        "last_login" = 1426608072;
-
-            //        level = 1;
-            //        life = "\U840c\U82bd";
-            //        posts = 0;
-            //        score = 0;
-            //        title = "\U7528\U6237";
-            user = [[SMTHUser alloc] init];
-            
-            self.user.uID = [infos objectForKey:@"uid"];
-            self.user.userID = [infos objectForKey:@"id"];
-            self.user.userNick = [infos objectForKey:@"nick"];
-            self.user.userGender = [infos objectForKey:@"gender"];
-            self.user.userAge = [infos objectForKey:@"age"];
-            self.user.faceURL = [infos objectForKey:@"faceurl"];
-
-            self.user.totalLogins = [infos objectForKey:@"logins"];
-            self.user.firstLogin = [[[NSDate alloc] initWithTimeIntervalSince1970:[[infos objectForKey:@"first_login"] doubleValue]] description];
-            self.user.lastLogin = [[[NSDate alloc] initWithTimeIntervalSince1970:[[infos objectForKey:@"last_login"] doubleValue]] description];
-
-            self.user.userLevel = [[infos objectForKey:@"level"] stringValue];
-            self.user.userLife = [infos objectForKey:@"life"];
-            self.user.totalPosts = [infos objectForKey:@"posts"];
-            self.user.userScore = [infos objectForKey:@"score"];
-            self.user.userTitle = [infos objectForKey:@"title"];
-        }
+        user = [self getUserInfo:username];
     }
     NSLog(@"Login Status %d", user != nil);
 
-    return user != nil;
+    return;
 }
 
 - (void) logout
@@ -651,6 +614,56 @@
     return YES;
 }
 
+- (SMTHUser*) getUserInfo:(NSString*) userID
+{
+    [smth reset_status];
+    NSDictionary* infos = [smth net_QueryUser:userID];
+    if(smth->net_error == 0){
+        // 没有错误
+        if(infos != nil){
+            //        uid = 409391;
+            //        id = zSMTHDev;
+            //        nick = zSMTHDev;
+            //        gender = 0;
+            //        age = 35;
+            //        faceurl = "";
+            
+            //        logins = 208;
+            //        "first_login" = 1426471523;
+            //        "last_login" = 1426608072;
+            
+            //        level = 1;
+            //        life = "\U840c\U82bd";
+            //        posts = 0;
+            //        score = 0;
+            //        title = "\U7528\U6237";
+            NSLog(@"%@", infos);
+            
+            SMTHUser* u = [[SMTHUser alloc] init];
+            
+            u.uID = [infos objectForKey:@"uid"];
+            u.userID = [infos objectForKey:@"id"];
+            u.userNick = [infos objectForKey:@"nick"];
+            u.userGender = [[infos objectForKey:@"gender"] description];
+            u.userAge = [[infos objectForKey:@"age"] description];
+            u.faceURL = [infos objectForKey:@"faceurl"];
+            
+            u.totalLogins = [[infos objectForKey:@"logins"] description];
+            u.firstLogin = [self getAbsoluteDateString:[[infos objectForKey:@"first_login"] doubleValue]];
+            u.lastLogin = [self getAbsoluteDateString:[[infos objectForKey:@"last_login"] doubleValue]];
+            
+            u.userLevel = [[infos objectForKey:@"level"] stringValue];
+            u.userLife = [infos objectForKey:@"life"];
+            u.totalPosts = [[infos objectForKey:@"posts"] description];
+            u.userScore = [[infos objectForKey:@"score"] description];
+            u.userTitle = [infos objectForKey:@"title"];
+            
+            return u;
+        }
+    }
+    
+    return nil;
+}
 
 - (int) checkVersion
 {

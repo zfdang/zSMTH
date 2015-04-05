@@ -32,7 +32,7 @@
 // returned value should not be used to judge whether user is logined or not.
 // 有的时候会用内置帐号登录，但是应该认为真正用户还没有登录
 // 使用isLogined来判断真实用户是否登录
-- (int) login:(NSString*)username password:(NSString*)password;
+- (void) login:(NSString*)username password:(NSString*)password;
 - (void) logout;
 
 // 获取版面，文章信息
@@ -43,7 +43,8 @@
 - (NSArray*) getFavorites:(long)fid;
 - (NSArray*) getGuidancePosts;
 - (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from;
-- (NSArray *)getPostContents:(NSString *)board_id postID:(long)article_id from:(long)from;
+- (NSArray*) getPostContents:(NSString *)board_id postID:(long)article_id from:(long)from;
 
+- (SMTHUser*) getUserInfo:(NSString*) userID;
 
 @end
