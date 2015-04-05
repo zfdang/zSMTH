@@ -1,4 +1,9 @@
 PODS:
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
   - MBProgressHUD (0.9.1)
   - REFrostedViewController (2.4.7)
   - SDWebImage (3.7.2):
@@ -8,6 +13,7 @@ PODS:
   - Toast (2.4)
 
 DEPENDENCIES:
+  - FMDB
   - MBProgressHUD (~> 0.9.1)
   - REFrostedViewController (~> 2.4.7)
   - SDWebImage (~> 3.6)
@@ -15,6 +21,7 @@ DEPENDENCIES:
   - Toast (~> 2.4)
 
 SPEC CHECKSUMS:
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   REFrostedViewController: 0adda479a71c0e603faa801282994bee23362504
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
