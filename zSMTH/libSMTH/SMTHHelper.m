@@ -632,19 +632,22 @@
             //        "first_login" = 1426471523;
             //        "last_login" = 1426608072;
             
-            //        level = 1;
-            //        life = "\U840c\U82bd";
+            //        level = 11;
+            //        life = "紫檀";
             //        posts = 0;
             //        score = 0;
-            //        title = "\U7528\U6237";
-            NSLog(@"%@", infos);
+            //        title = "用户";
             
             SMTHUser* u = [[SMTHUser alloc] init];
             
             u.uID = [infos objectForKey:@"uid"];
             u.userID = [infos objectForKey:@"id"];
             u.userNick = [infos objectForKey:@"nick"];
-            u.userGender = [[infos objectForKey:@"gender"] description];
+            long gender = [[infos objectForKey:@"gender"] longValue];
+            if(gender == 0)
+                u.userGender = @"男";
+            else
+                u.userGender = @"女";
             u.userAge = [[infos objectForKey:@"age"] description];
             u.faceURL = [infos objectForKey:@"faceurl"];
             

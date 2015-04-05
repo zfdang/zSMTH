@@ -79,7 +79,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return 9;
 }
 
 
@@ -106,32 +106,26 @@
                 cell.rowLabel.text = @"年龄";
                 cell.rowValue.text = user.userAge;
             } else if (indexPath.row == 2){
-                cell.rowLabel.text = @"身份";
+                cell.rowLabel.text = @"论坛身份";
                 cell.rowValue.text = user.userTitle;
             } else if (indexPath.row == 3){
-//                @property (strong, nonatomic) NSString *firstLogin;
-//                @property (strong, nonatomic) NSString *lastLogin;
-//                @property (strong, nonatomic) NSString *totalLogins;
-//                @property (strong, nonatomic) NSString *totalPosts;
-//                @property (strong, nonatomic) NSString *userScore;
-                
-                cell.rowLabel.text = @"首次登录";
-                cell.rowValue.text = user.firstLogin;
+                cell.rowLabel.text = @"";
+                cell.rowValue.text = @"";
             } else if (indexPath.row == 4){
-                cell.rowLabel.text = @"最后登录";
-                cell.rowValue.text = user.lastLogin;
+                cell.rowLabel.text = @"注册时间";
+                cell.rowValue.text = user.firstLogin;
             } else if (indexPath.row == 5){
-                cell.rowLabel.text = @"总登录次数";
-                cell.rowValue.text = user.totalLogins;
+                cell.rowLabel.text = @"上次登录";
+                cell.rowValue.text = user.lastLogin;
             } else if (indexPath.row == 6){
-                cell.rowLabel.text = @"总帖子数";
-                cell.rowValue.text = user.totalPosts;
+                cell.rowLabel.text = @"登陆次数";
+                cell.rowValue.text = user.totalLogins;
             } else if (indexPath.row == 7){
+                cell.rowLabel.text = @"帖子总数";
+                cell.rowValue.text = user.totalPosts;
+            } else if (indexPath.row == 8){
                 cell.rowLabel.text = @"积分";
                 cell.rowValue.text = user.userScore;
-            } else if (indexPath.row == 8){
-                cell.rowLabel.text = @"标题";
-                cell.rowValue.text = @"内容";
             }
         }
     }
