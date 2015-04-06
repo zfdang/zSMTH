@@ -11,6 +11,7 @@
 #import "PostContentTableViewCell.h"
 #import "SMTHPost.h"
 #import "UIView+Toast.h"
+#import "SIAlertView.h"
 
 #define LABEL_WIDTH 300
 
@@ -40,6 +41,7 @@
     self.title = [helper getFullBoardName:self.boardName];
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.allowsSelection = NO;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
     self.progressTitle = @"加载中...";
     [self startAsyncTask];
@@ -122,7 +124,7 @@
         label.text = self.postSubject;
         label.textAlignment = NSTextAlignmentLeft;
         label.font = [UIFont systemFontOfSize:18];
-        label.textColor = [UIColor whiteColor];
+        label.textColor = [UIColor blackColor];
         label.backgroundColor = [UIColor clearColor];
         
         CGSize newSize = [label sizeThatFits:label.frame.size];
@@ -133,7 +135,7 @@
         iHeaderHeight = newSize.height + 4;
         
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, iHeaderHeight)];
-        view.backgroundColor = [UIColor colorWithRed:167/255.0f green:167/255.0f blue:167/255.0f alpha:0.6f];
+        view.backgroundColor = [UIColor colorWithRed:230/255.0f green:230/255.0f blue:230/255.0f alpha:0.9f];
         [view addSubview:label];
         
         return view;
@@ -174,6 +176,11 @@
         cell = (PostContentTableViewCell*)[nibArray objectAtIndex:0];
         cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+
+        UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                              initWithTarget:self action:@selector(handleLongPress:)];
+        lpgr.minimumPressDuration = 0.6; //seconds
+        [cell addGestureRecognizer:lpgr];
     }
     
     if (indexPath.section == 0) {
@@ -189,6 +196,76 @@
     return cell;
 }
 
+- (void) handleLongPress:(UILongPressGestureRecognizer *)gesture
+{
+    // only when gesture was recognized, not when ended
+    if (gesture.state == UIGestureRecognizerStateBegan)
+    {
+        // get affected cell
+        UITableViewCell *cell = (UITableViewCell *)[gesture view];
+        // get indexPath of cell
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        // now start our action on long press
+        NSLog(@"Long click on post %ld, %ld", indexPath.section, indexPath.row);
+        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        NSString* title = [NSString stringWithFormat:@"作者[%@]的文章",post.author];
+
+        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:title andMessage:nil];
+        
+        [alertView addButtonWithTitle:@"回复"
+                                 type:SIAlertViewButtonTypeDestructive
+                              handler:^(SIAlertView *alert) {
+                                  NSLog(@"Button1 Clicked");
+                              }];
+        [alertView addButtonWithTitle:@"私信回复"
+                                 type:SIAlertViewButtonTypeDefault
+                              handler:^(SIAlertView *alert) {
+                                  NSLog(@"Button2 Clicked");
+                              }];
+        [alertView addButtonWithTitle:@"转寄"
+                                 type:SIAlertViewButtonTypeDefault
+                              handler:^(SIAlertView *alert) {
+                                  NSLog(@"Button3 Clicked");
+                              }];
+        [alertView addButtonWithTitle:@"转发到版面"
+                                 type:SIAlertViewButtonTypeDefault
+                              handler:^(SIAlertView *alert) {
+                                  NSLog(@"Button3 Clicked");
+                              }];
+        [alertView addButtonWithTitle:@"查看作者信息"
+                                 type:SIAlertViewButtonTypeDefault
+                              handler:^(SIAlertView *alert) {
+                                  NSLog(@"Button3 Clicked");
+                              }];
+        [alertView addButtonWithTitle:@"取消"
+                                 type:SIAlertViewButtonTypeCancel
+                              handler:^(SIAlertView *alert) {
+                                  NSLog(@"Button3 Clicked");
+                              }];
+        
+//        alertView.willShowHandler = ^(SIAlertView *alertView) {
+//            NSLog(@"%@, willShowHandler", alertView);
+//        };
+//        alertView.didShowHandler = ^(SIAlertView *alertView) {
+//            NSLog(@"%@, didShowHandler", alertView);
+//        };
+//        alertView.willDismissHandler = ^(SIAlertView *alertView) {
+//            NSLog(@"%@, willDismissHandler", alertView);
+//        };
+//        alertView.didDismissHandler = ^(SIAlertView *alertView) {
+//            NSLog(@"%@, didDismissHandler", alertView);
+//        };
+        
+        alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+        
+        [alertView show];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
