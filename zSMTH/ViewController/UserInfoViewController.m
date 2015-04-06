@@ -42,7 +42,7 @@
     }
     
     taskType = 0;
-    self.progressTitle = @"加载中...";
+    self.progressTitle = @"加载信息中...";
     userID = helper.user.userID;
     [self startAsyncTask];
 }
@@ -52,6 +52,75 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)clickRightButton:(id)sender {
+    if([user.userID compare:helper.user.userID] == NSOrderedSame) {
+        // 显示的是当前用户的信息，按钮的作用是退出
+        taskType = 1;
+        self.progressTitle = @"退出中...";
+        [self startAsyncTask];
+    } else {
+        // 显示的是查询用户的信息，按钮的作用是返回到当前用户信息页
+        taskType = 0;
+        self.progressTitle = @"加载信息中...";
+        userID = helper.user.userID;
+        [self startAsyncTask];
+    }
+}
+
+- (IBAction)doSearch:(id)sender {
+    taskType = 0;
+    self.progressTitle = @"查询用户中...";
+    userID = self.editUserID.text;
+    [self startAsyncTask];
+}
+
+#pragma mark - ExpandedTableView -- async task
+
+- (void)asyncTask
+{
+    // now different async task is distinguished by taskType, which is unsafe
+    // it's better to add parameter to startAsyncTask->asyncTask->finishAsyncTask
+    if(taskType == 0){
+        user = [helper getUserInfo:userID];
+    } else if(taskType == 1)
+    {
+        [helper logout];
+    }
+}
+
+- (void)finishAsyncTask
+{
+    if(taskType == 1 && !helper.isLogined) {
+        // 当上一个任务是退出，并且用户已经退出时，显示登录窗口
+        LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+        login.delegate = self;
+        [self.navigationController pushViewController:login animated:YES];
+        return;
+    }
+    
+    // update top information
+    [self.imageAvatar sd_setImageWithURL:[user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
+    self.imageAvatar.layer.cornerRadius = 30.0;
+    self.imageAvatar.layer.borderWidth = 0;
+    self.imageAvatar.clipsToBounds = YES;
+    
+    self.labelID.text = user.userID;
+    self.labelNick.text = user.userNick;
+    self.labelLevel.text = [user getLifeLevel];
+    
+    // update tableview infors
+    [self.tableView reloadData];
+    
+    // update icon of right button
+    if([user.userID compare:helper.user.userID] == NSOrderedSame){
+        // 显示的是登录用户的信息，显示退出按钮
+        [self.buttonRight setImage:[UIImage imageNamed:@"logout"]];
+    } else {
+        [self.buttonRight setImage:[UIImage imageNamed:@"return"]];
+    }
+}
+
 
 #pragma mark - UITableViewDelegate
 
@@ -143,13 +212,18 @@
 }
 */
 
+
+
+
 #pragma mark - LoginCompletionProtocol
 
 - (void)refreshViewAfterLogin
 {
     // refresh UserInformation
+    // 当显示用户信息时，用户可能还未登录，这时候，需要先跳转到登录界面，登录结束后，会调用这个方法，我们会刷新用户的信息
     if (helper.isLogined) {
         [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
+        
         self.imageAvatar.layer.cornerRadius = 30.0;
         self.imageAvatar.layer.borderWidth = 0;
         self.imageAvatar.clipsToBounds = YES;
@@ -158,71 +232,11 @@
         self.labelNick.text = helper.user.userNick;
         self.labelLevel.text = [helper.user getLifeLevel];
         
-        [self.tableView reloadData];
-    }
-    
-}
-
-- (IBAction)clickRightButton:(id)sender {
-    if([user.userID compare:helper.user.userID] == NSOrderedSame) {
-        // 显示的是当前用户的信息，按钮的作用是退出
-        taskType = 1;
-        [self startAsyncTask];
-    } else {
-        // 显示的是查询用户的信息，按钮的作用是返回到当前用户信息页
         taskType = 0;
         userID = helper.user.userID;
         [self startAsyncTask];
     }
-    
 }
 
-- (IBAction)doSearch:(id)sender {
-    taskType = 0;
-    userID = self.editUserID.text;
-    [self startAsyncTask];
-}
 
-- (void)asyncTask
-{
-    // now different async task is distinguished by taskType, which is unsafe
-    // it's better to add parameter to startAsyncTask->asyncTask->finishAsyncTask
-    if(taskType == 0){
-        user = [helper getUserInfo:userID];
-    } else if(taskType == 1)
-    {
-        self.progressTitle = @"退出中...";
-        [helper logout];
-    }
-}
-
-- (void)finishAsyncTask
-{
-    if(!helper.isLogined){
-        LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-        login.delegate = self;
-        [self.navigationController pushViewController:login animated:YES];
-    }
-
-    // update top information
-    [self.imageAvatar sd_setImageWithURL:[user getFaceURL]];
-    self.imageAvatar.layer.cornerRadius = 30.0;
-    self.imageAvatar.layer.borderWidth = 0;
-    self.imageAvatar.clipsToBounds = YES;
-    
-    self.labelID.text = user.userID;
-    self.labelNick.text = user.userNick;
-    self.labelLevel.text = [user getLifeLevel];
-    
-    // update tableview infors
-    [self.tableView reloadData];
-    
-    // update icon of right button
-    if([user.userID compare:helper.user.userID] == NSOrderedSame){
-        // 显示的是登录用户的信息，显示退出按钮
-        [self.buttonRight setImage:[UIImage imageNamed:@"logout"]];
-    } else {
-        [self.buttonRight setImage:[UIImage imageNamed:@"return"]];
-    }
-}
 @end
