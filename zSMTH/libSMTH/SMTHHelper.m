@@ -690,6 +690,25 @@
     return nil;
 }
 
+- (NSString*) getFullBoardName:(NSString*) engName
+{
+    NSString *result = nil;
+    if ([db open]) {
+        // 查看缓存中是否有对应的英文版名的中文版名
+        NSString *sql = [NSString stringWithFormat:@"SELECT board_chs_name FROM BoardCache where board_eng_name='%@'",engName];
+        FMResultSet *s = [db executeQuery:sql];
+        if ([s next]) {
+            //retrieve values for each record
+            result = [s stringForColumn:@"board_chs_name"];
+        }
+        [db close];
+    }
+    if(result != nil){
+        return [NSString stringWithFormat:@"%@(%@)", result, engName ];
+    }
+    return engName;
+}
+
 - (int) checkVersion
 {
     NSDictionary* dict = [smth net_GetVersion];

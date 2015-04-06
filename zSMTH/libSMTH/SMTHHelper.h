@@ -48,4 +48,6 @@
 
 - (SMTHUser*) getUserInfo:(NSString*) userID;
 
+- (NSString*) getFullBoardName:(NSString*) engName;
+
 @end
