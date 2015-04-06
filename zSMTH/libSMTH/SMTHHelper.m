@@ -230,6 +230,8 @@
             SMTHPost *post = [[SMTHPost alloc] init];
             post.author = [result objectForKey:@"author_id"];
             post.postBoard = [result objectForKey:@"board"];
+            // convert SA%2ETHU ==> SA.THU
+            post.postBoard = [post.postBoard stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             post.postID = [result objectForKey:@"id"];
             post.postSubject = [result objectForKey:@"subject"];
             post.postCount = [result objectForKey:@"count"];
