@@ -163,9 +163,18 @@
     
 }
 
-- (IBAction)logout:(id)sender {
-    taskType = 1;
-    [self startAsyncTask];
+- (IBAction)clickRightButton:(id)sender {
+    if([user.userID compare:helper.user.userID] == NSOrderedSame) {
+        // 显示的是当前用户的信息，按钮的作用是退出
+        taskType = 1;
+        [self startAsyncTask];
+    } else {
+        // 显示的是查询用户的信息，按钮的作用是返回到当前用户信息页
+        taskType = 0;
+        userID = helper.user.userID;
+        [self startAsyncTask];
+    }
+    
 }
 
 - (IBAction)doSearch:(id)sender {
@@ -207,5 +216,13 @@
     
     // update tableview infors
     [self.tableView reloadData];
+    
+    // update icon of right button
+    if([user.userID compare:helper.user.userID] == NSOrderedSame){
+        // 显示的是登录用户的信息，显示退出按钮
+        [self.buttonRight setImage:[UIImage imageNamed:@"logout"]];
+    } else {
+        [self.buttonRight setImage:[UIImage imageNamed:@"return"]];
+    }
 }
 @end

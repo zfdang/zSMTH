@@ -16,12 +16,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelID;
 @property (weak, nonatomic) IBOutlet UILabel *labelNick;
 @property (weak, nonatomic) IBOutlet UILabel *labelLevel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonRight;
 
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *editUserID;
 
-- (IBAction)logout:(id)sender;
+- (IBAction)clickRightButton:(id)sender;
 - (IBAction)doSearch:(id)sender;
 
 @end

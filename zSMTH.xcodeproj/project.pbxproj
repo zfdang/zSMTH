@@ -29,6 +29,10 @@
 		6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6FA1AB579E900548BD2 /* SMTHBoard.m */; };
 		6984F6FE1AB5D53800548BD2 /* BoardListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6984F6FC1AB5D53800548BD2 /* BoardListTableViewCell.xib */; };
 		69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */; };
+		69C506AF1AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506A81AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m */; };
+		69C506B01AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AA1AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m */; };
+		69C506B11AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AC1AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.m */; };
+		69C506B21AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AE1AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		69D196D71ACF76A00004D614 /* BoardListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D196D61ACF76A00004D614 /* BoardListTableViewController.m */; };
 		69F4EAA31AAFF9FF00A82B50 /* libSMTH_0.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAA51AAFFA5100A82B50 /* client_signature.m */; };
@@ -105,6 +109,14 @@
 		6984F6FD1AB5D53800548BD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = zSMTH/Base.lproj/BoardListTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHAttachment.h; sourceTree = "<group>"; };
 		69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHAttachment.m; sourceTree = "<group>"; };
+		69C506A71AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		69C506A81AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		69C506A91AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		69C506AA1AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		69C506AB1AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		69C506AC1AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		69C506AD1AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		69C506AE1AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		69D196D51ACF76A00004D614 /* BoardListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardListTableViewController.h; path = ViewController/BoardListTableViewController.h; sourceTree = "<group>"; };
 		69D196D61ACF76A00004D614 /* BoardListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardListTableViewController.m; path = ViewController/BoardListTableViewController.m; sourceTree = "<group>"; };
 		69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSMTH_0.2.3.a; sourceTree = "<group>"; };
@@ -229,6 +241,21 @@
 			name = ViewController;
 			sourceTree = "<group>";
 		};
+		69C506A61AD20C4C0044B6B9 /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				69C506A71AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.h */,
+				69C506A81AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m */,
+				69C506A91AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.h */,
+				69C506AA1AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m */,
+				69C506AB1AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.h */,
+				69C506AC1AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.m */,
+				69C506AD1AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				69C506AE1AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
 		69F4EA9F1AAFF9FF00A82B50 /* libSMTH */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +287,7 @@
 				69F4EAAC1AB1780A00A82B50 /* Reachability.m */,
 				6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */,
 				6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */,
+				69C506A61AD20C4C0044B6B9 /* TPKeyboardAvoiding */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -487,6 +515,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */,
+				69C506B11AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.m in Sources */,
+				69C506B01AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				69FE90BF1AB7296200E72720 /* GuidancePostTableViewCell.m in Sources */,
 				692576671ABBDCF600097DBC /* PostListTableViewCell.m in Sources */,
 				6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */,
@@ -496,9 +526,11 @@
 				690B922E1ABADEA300AAED0D /* UserInfoTableViewCell.m in Sources */,
 				69FCBF311AA9CE97007C9EFB /* AppDelegate.m in Sources */,
 				695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */,
+				69C506AF1AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				6925766A1ABBDDC800097DBC /* PostListTableViewController.m in Sources */,
 				6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */,
 				69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */,
+				69C506B21AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */,
 				6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */,
 				690B92321ABB92B100AAED0D /* UIImage+RoundedResize.m in Sources */,
