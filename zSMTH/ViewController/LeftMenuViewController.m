@@ -46,7 +46,9 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = ({
 
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
+        // 我们使用修改过menuView的大小，宽度为180
+        // 头像区域为一个180 * 180的正方形
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 180.0f)];
         
         // user avatar
         // http://images.newsmth.net/nForum/uploadFace/M/mozilla.jpg
@@ -62,13 +64,14 @@
         imageView.clipsToBounds = YES;
         
         // user name
-        labelUser = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
+        labelUser = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 180, 24)];
+        labelUser.textAlignment = NSTextAlignmentCenter;
         labelUser.text = @"点击登录";
         labelUser.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
         labelUser.backgroundColor = [UIColor clearColor];
         labelUser.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
-        [labelUser sizeToFit];
-        labelUser.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+//        [labelUser sizeToFit];
+//        labelUser.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 
         
         // enable single tap on imager
