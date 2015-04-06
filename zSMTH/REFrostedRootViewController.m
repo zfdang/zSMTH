@@ -17,13 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    CGSize size = CGSizeMake(180.0, 0.0);
+    self.menuViewSize = size;
 }
 
 - (void)awakeFromNib {
     self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
     self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"menuController"];
-    [self setMenuViewSize:CGSizeMake(self.contentViewController.view.frame.size.width - 100.0f, self.contentViewController.view.frame.size.height)];
 }
 
 
