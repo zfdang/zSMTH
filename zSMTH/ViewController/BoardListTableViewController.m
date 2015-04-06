@@ -43,7 +43,7 @@
 - (void)asyncTask
 {
     NSArray *results = [helper getAllBoards];
-    lastUpdateTime = [NSString stringWithFormat:@"列表更新时间：%@", [helper getBoardListUpdateTime]];
+    lastUpdateTime = [NSString stringWithFormat:@"列表更新时间：%@", [helper getCacheUpdateTime:@"BOARD" RootID:0]];
     
     [origBoards removeAllObjects];
     [origBoards addObjectsFromArray:results];
@@ -240,7 +240,7 @@
 */
 
 - (IBAction)refreshBoardList:(id)sender {
-    [helper clearBoardListCache];
+    [helper clearCacheStatus:@"BOARD" RootID:0];
 
     self.progressTitle = @"刷新中...";
     [self startAsyncTask];

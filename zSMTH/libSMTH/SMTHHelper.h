@@ -37,8 +37,9 @@
 
 // 获取版面，文章信息
 - (NSArray*) getAllBoards;
-- (NSString*) getBoardListUpdateTime;
-- (void) clearBoardListCache;
+- (NSString*) getCacheUpdateTime:(NSString*) type RootID:(long)rootid;
+- (void) clearCacheStatus:(NSString*) type RootID:(long)rootid;
+- (BOOL) updateCacheStatus:(NSString*) type RootID:(long)rootid;
 
 - (NSArray*) getFavorites:(long)fid;
 - (NSArray*) getGuidancePosts;

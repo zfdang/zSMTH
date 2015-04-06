@@ -353,32 +353,65 @@
     return posts;
 }
 
-- (NSString*) getBoardListUpdateTime
+- (NSString*) getCacheUpdateTime:(NSString*) type RootID:(long)rootid
 {
     NSString *result = nil;
     if ([db open]) {
-        FMResultSet *s = [db executeQuery:@"SELECT updated_at FROM CacheStatus where type='BOARD'"];
-        while ([s next]) {
-            //retrieve values for each record
-            result = [s stringForColumn:@"updated_at"];
+        if( [@"BOARD" compare:type] == NSOrderedSame){
+            // 得到所有版面的更新状态
+            FMResultSet *s = [db executeQuery:@"SELECT updated_at FROM CacheStatus where type='BOARD'"];
+            if ([s next]) {
+                //retrieve values for each record
+                result = [s stringForColumn:@"updated_at"];
+            }
+        } else {
+            NSString *sql = [NSString stringWithFormat:@"SELECT updated_at FROM CacheStatus where type='FAVORITE' and status=%ld", rootid];
+            FMResultSet *s = [db executeQuery:sql];
+            if ([s next]) {
+                //retrieve values for each record
+                result = [s stringForColumn:@"updated_at"];
+            }
         }
         [db close];
     }
+    NSLog(@"getCacheUpdateTime: %@, %ld, %@", type, rootid, result);
     return result;
 }
 
-- (void)clearBoardListCache
+- (void)clearCacheStatus:(NSString*) type RootID:(long)rootid
 {
     if ([db open]) {
         BOOL result = [db executeUpdate:@"DELETE FROM CacheStatus where type='BOARD'"];
         if(! result){
-            NSLog(@"clearBoardListCache FAILED.");
+            NSLog(@"clearBoardListCache FAILED: %@, %ld", type, rootid);
         } else {
-            NSLog(@"clearBoardListCache");
+            NSLog(@"clearBoardListCache done: %@ - %ld", type, rootid);
         }
         [db close];
     }
 }
+
+- (BOOL) updateCacheStatus:(NSString*) type RootID:(long)rootid
+{
+    if([db open]){
+        // write cache status
+        NSDate *date = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm";
+        NSString *dateStr = [dateFormatter stringFromDate:date];
+        
+        BOOL success = [db executeUpdate:@"insert into CacheStatus ('type', 'status', 'updated_at') values (?, ?, ?);", type, rootid, dateStr];
+        if(! success){
+            NSLog(@"Failed to Write Cache Status: %@-%ld %@", type, rootid, dateStr);
+        } else {
+            NSLog(@"Write Cache Status: %@-%ld %@", type, rootid, dateStr);
+        }
+        
+        [db close];
+    }
+    return YES;
+}
+
 
 - (NSArray *)getAllBoards
 {
@@ -442,7 +475,7 @@
 
 - (BOOL)getAllBoardsFromCache:(NSMutableArray*)boards
 {
-    NSString *stamp = [self getBoardListUpdateTime];
+    NSString *stamp = [self getCacheUpdateTime:@"BOARD" RootID:0];
     if(stamp == nil){
         return NO;
     }
@@ -483,9 +516,9 @@
         // clear all board cache first
         success = [db executeUpdate:@"DELETE from BoardCache where type = 'BOARD'"];
         if(! success){
-            NSLog(@"Failed to clear cached Boards!");
+            NSLog(@"Failed to Delete cached Boards from BoardCache!");
         } else {
-            NSLog(@"Clear all cached boards done.");
+            NSLog(@"Delete cached boards from BoardCache done.");
         }
 
         // save all board to cache
@@ -499,19 +532,8 @@
         }
         NSLog(@"Write board to cache: %ld", [boards count]);
 
-        // write cache status
-        NSDate *date = [NSDate date];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm";
-        NSString *dateStr = [dateFormatter stringFromDate:date];
+        [self updateCacheStatus:@"BOARD" RootID:0];
         
-        success = [db executeUpdate:@"insert into CacheStatus ('type', 'updated_at') values ('BOARD', ?);", dateStr];
-        if(! success){
-            NSLog(@"Insert Record Failed: CacheStatus");
-        } else {
-            NSLog(@"Write Cache Status: %@", dateStr);
-        }
-
         [db close];
     }
 
