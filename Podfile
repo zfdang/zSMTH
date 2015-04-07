@@ -8,7 +8,8 @@ pod 'SVPullToRefresh'
 pod 'SDWebImage', '~>3.6'
 pod 'Toast', '~> 2.4'
 pod 'FMDB'
-pod 'SIAlertView'
+#pod 'SIAlertView'
+pod 'RNGridMenu', '~> 0.1.2'
 end
 
 target 'zSMTHTests' do

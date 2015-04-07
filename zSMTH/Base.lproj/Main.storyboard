@@ -154,7 +154,15 @@
                                 <action selector="return:" destination="Eou-hD-dOm" id="ogY-6v-lfD"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="enterBoard" id="wmo-uw-TiV" userLabel="enterBoard">
+                            <connections>
+                                <action selector="clickRightButton:" destination="Eou-hD-dOm" id="BbS-SS-7Mt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="buttonRight" destination="wmo-uw-TiV" id="L4a-8H-8Z5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zsf-IR-CJ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -807,6 +815,7 @@
     </scenes>
     <resources>
         <image name="compose" width="20" height="20"/>
+        <image name="enterBoard" width="20" height="20"/>
         <image name="logout" width="20" height="20"/>
         <image name="menu" width="20" height="20"/>
         <image name="refresh" width="20" height="20"/>

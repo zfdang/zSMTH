@@ -11,7 +11,8 @@
 #import "PostContentTableViewCell.h"
 #import "SMTHPost.h"
 #import "UIView+Toast.h"
-#import "SIAlertView.h"
+//#import "SIAlertView.h"
+#import "RNGridMenu.h"
 
 #define LABEL_WIDTH 300
 
@@ -208,41 +209,106 @@
         
         // now start our action on long press
         NSLog(@"Long click on post %ld, %ld", indexPath.section, indexPath.row);
-        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
-        NSString* title = [NSString stringWithFormat:@"作者[%@]的文章",post.author];
 
-        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:title andMessage:nil];
+        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        NSArray *items = @[
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"arrow"]
+                                                           title:@"转发到版面"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"0", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"attachment"]
+                                                           title:@"回信给作者"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"1", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"block"]
+                                                           title:@"浏览器打开"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"2", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"]
+                                                           title:@"转寄到信箱"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"3", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"reply"]
+                                                           title:@"回复"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"4", post.postID);
+                                                          }],
+
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"]
+                                                           title:@"复制帖子"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"5", post.postID);
+                                                          }],
+
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"search"]
+                                                           title:@"转寄给他人"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"6", post.postID);
+                                                          }],
+
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"anonymous"]
+                                                           title:@"查询作者"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"7", post.postID);
+                                                          }],
+
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"]
+                                                           title:@"分享"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"8", post.postID);
+                                                          }],
+                           ];
+        RNGridMenu *av = [[RNGridMenu alloc] initWithItems:items];
+        av.backgroundColor = [UIColor lightGrayColor];
+        av.itemTextColor = [UIColor darkTextColor];
+        av.itemTextAlignment = NSTextAlignmentCenter;
+        av.blurLevel = 0.1;
+        av.itemFont = [UIFont boldSystemFontOfSize:15];
+        av.itemSize = CGSizeMake(100, 100);
+        av.menuStyle = RNGridMenuStyleGrid;
+        [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
         
-        [alertView addButtonWithTitle:@"回复"
-                                 type:SIAlertViewButtonTypeDestructive
-                              handler:^(SIAlertView *alert) {
-                                  NSLog(@"Button1 Clicked");
-                              }];
-        [alertView addButtonWithTitle:@"私信回复"
-                                 type:SIAlertViewButtonTypeDefault
-                              handler:^(SIAlertView *alert) {
-                                  NSLog(@"Button2 Clicked");
-                              }];
-        [alertView addButtonWithTitle:@"转寄"
-                                 type:SIAlertViewButtonTypeDefault
-                              handler:^(SIAlertView *alert) {
-                                  NSLog(@"Button3 Clicked");
-                              }];
-        [alertView addButtonWithTitle:@"转发到版面"
-                                 type:SIAlertViewButtonTypeDefault
-                              handler:^(SIAlertView *alert) {
-                                  NSLog(@"Button3 Clicked");
-                              }];
-        [alertView addButtonWithTitle:@"查看作者信息"
-                                 type:SIAlertViewButtonTypeDefault
-                              handler:^(SIAlertView *alert) {
-                                  NSLog(@"Button3 Clicked");
-                              }];
-        [alertView addButtonWithTitle:@"取消"
-                                 type:SIAlertViewButtonTypeCancel
-                              handler:^(SIAlertView *alert) {
-                                  NSLog(@"Button3 Clicked");
-                              }];
+// SIAlertView: be replaced by RNGridMenuItem
+//        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:title andMessage:nil];
+//        
+//        [alertView addButtonWithTitle:@"回复"
+//                                 type:SIAlertViewButtonTypeDestructive
+//                              handler:^(SIAlertView *alert) {
+//                                  NSLog(@"Button1 Clicked");
+//                              }];
+//        [alertView addButtonWithTitle:@"私信回复"
+//                                 type:SIAlertViewButtonTypeDefault
+//                              handler:^(SIAlertView *alert) {
+//                                  NSLog(@"Button2 Clicked");
+//                              }];
+//        [alertView addButtonWithTitle:@"转寄"
+//                                 type:SIAlertViewButtonTypeDefault
+//                              handler:^(SIAlertView *alert) {
+//                                  NSLog(@"Button3 Clicked");
+//                              }];
+//        [alertView addButtonWithTitle:@"转发到版面"
+//                                 type:SIAlertViewButtonTypeDefault
+//                              handler:^(SIAlertView *alert) {
+//                                  NSLog(@"Button3 Clicked");
+//                              }];
+//        [alertView addButtonWithTitle:@"查看作者信息"
+//                                 type:SIAlertViewButtonTypeDefault
+//                              handler:^(SIAlertView *alert) {
+//                                  NSLog(@"Button3 Clicked");
+//                              }];
+//        [alertView addButtonWithTitle:@"取消"
+//                                 type:SIAlertViewButtonTypeCancel
+//                              handler:^(SIAlertView *alert) {
+//                                  NSLog(@"Button3 Clicked");
+//                              }];
         
 //        alertView.willShowHandler = ^(SIAlertView *alertView) {
 //            NSLog(@"%@, willShowHandler", alertView);
@@ -256,10 +322,8 @@
 //        alertView.didDismissHandler = ^(SIAlertView *alertView) {
 //            NSLog(@"%@, didDismissHandler", alertView);
 //        };
-        
-        alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
-        
-        [alertView show];
+//        alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+//        [alertView show];
     }
 }
 
@@ -293,4 +357,6 @@
     [self.tableView reloadData];
 }
 
+- (IBAction)clickRightButton:(id)sender {
+}
 @end

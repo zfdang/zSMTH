@@ -14,7 +14,9 @@
 @property (strong, nonatomic) NSString *boardName;
 @property (strong, nonatomic) NSString *postSubject;
 @property (nonatomic) long postID;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonRight;
 
+- (IBAction)clickRightButton:(id)sender;
 
 - (IBAction)return:(id)sender;
 
