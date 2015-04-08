@@ -7,8 +7,9 @@
 //
 
 #import "ExtendedTableViewController.h"
+#import "SINavigationMenuView.h"
 
-@interface PostListTableViewController : ExtendedTableViewController
+@interface PostListTableViewController : ExtendedTableViewController <SINavigationMenuDelegate>
 
 @property (strong, nonatomic) NSString *engName;
 @property (strong, nonatomic) NSString *chsName;

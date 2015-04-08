@@ -279,6 +279,9 @@
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"openInBrowser"]
                                                            title:@"浏览器打开"
                                                           action:^{
+
+                                                              NSString* url = [NSString stringWithFormat:@"http://m.newsmth.net/article/%@/%@?p=%d",self.engName, post.postID, 0];
+                                                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
                                                               NSLog(@"%@, %@", @"2", post.postID);
                                                           }],
                            

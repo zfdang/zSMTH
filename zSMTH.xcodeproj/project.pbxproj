@@ -28,6 +28,17 @@
 		6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F71AB4927600548BD2 /* ExtendedTableViewController.m */; };
 		6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6FA1AB579E900548BD2 /* SMTHBoard.m */; };
 		6984F6FE1AB5D53800548BD2 /* BoardListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6984F6FC1AB5D53800548BD2 /* BoardListTableViewCell.xib */; };
+		69949CD61AD5214100970E60 /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 69949CC41AD5214100970E60 /* arrow_down.png */; };
+		69949CD71AD5214100970E60 /* arrow_down1.png in Resources */ = {isa = PBXBuildFile; fileRef = 69949CC51AD5214100970E60 /* arrow_down1.png */; };
+		69949CD81AD5214100970E60 /* arrow_down1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69949CC61AD5214100970E60 /* arrow_down1@2x.png */; };
+		69949CD91AD5214100970E60 /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69949CC71AD5214100970E60 /* arrow_down@2x.png */; };
+		69949CDA1AD5214100970E60 /* SICellSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CC91AD5214100970E60 /* SICellSelection.m */; };
+		69949CDB1AD5214100970E60 /* SIMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CCB1AD5214100970E60 /* SIMenuButton.m */; };
+		69949CDC1AD5214100970E60 /* SIMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CCD1AD5214100970E60 /* SIMenuCell.m */; };
+		69949CDD1AD5214100970E60 /* SIMenuConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CCF1AD5214100970E60 /* SIMenuConfiguration.m */; };
+		69949CDE1AD5214100970E60 /* SIMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD11AD5214100970E60 /* SIMenuTable.m */; };
+		69949CDF1AD5214100970E60 /* SINavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD31AD5214100970E60 /* SINavigationMenuView.m */; };
+		69949CE01AD5214100970E60 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD51AD5214100970E60 /* UIColor+Extension.m */; };
 		69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */; };
 		69C506AF1AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506A81AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m */; };
 		69C506B01AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AA1AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m */; };
@@ -107,6 +118,24 @@
 		6984F6F91AB579E900548BD2 /* SMTHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHBoard.h; sourceTree = "<group>"; };
 		6984F6FA1AB579E900548BD2 /* SMTHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHBoard.m; sourceTree = "<group>"; };
 		6984F6FD1AB5D53800548BD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = zSMTH/Base.lproj/BoardListTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		69949CC41AD5214100970E60 /* arrow_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down.png; sourceTree = "<group>"; };
+		69949CC51AD5214100970E60 /* arrow_down1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down1.png; sourceTree = "<group>"; };
+		69949CC61AD5214100970E60 /* arrow_down1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down1@2x.png"; sourceTree = "<group>"; };
+		69949CC71AD5214100970E60 /* arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@2x.png"; sourceTree = "<group>"; };
+		69949CC81AD5214100970E60 /* SICellSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SICellSelection.h; sourceTree = "<group>"; };
+		69949CC91AD5214100970E60 /* SICellSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SICellSelection.m; sourceTree = "<group>"; };
+		69949CCA1AD5214100970E60 /* SIMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuButton.h; sourceTree = "<group>"; };
+		69949CCB1AD5214100970E60 /* SIMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuButton.m; sourceTree = "<group>"; };
+		69949CCC1AD5214100970E60 /* SIMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuCell.h; sourceTree = "<group>"; };
+		69949CCD1AD5214100970E60 /* SIMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuCell.m; sourceTree = "<group>"; };
+		69949CCE1AD5214100970E60 /* SIMenuConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuConfiguration.h; sourceTree = "<group>"; };
+		69949CCF1AD5214100970E60 /* SIMenuConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuConfiguration.m; sourceTree = "<group>"; };
+		69949CD01AD5214100970E60 /* SIMenuTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuTable.h; sourceTree = "<group>"; };
+		69949CD11AD5214100970E60 /* SIMenuTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuTable.m; sourceTree = "<group>"; };
+		69949CD21AD5214100970E60 /* SINavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SINavigationMenuView.h; sourceTree = "<group>"; };
+		69949CD31AD5214100970E60 /* SINavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINavigationMenuView.m; sourceTree = "<group>"; };
+		69949CD41AD5214100970E60 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		69949CD51AD5214100970E60 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
 		69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHAttachment.h; sourceTree = "<group>"; };
 		69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHAttachment.m; sourceTree = "<group>"; };
 		69C506A71AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
@@ -241,6 +270,39 @@
 			name = ViewController;
 			sourceTree = "<group>";
 		};
+		69949CC21AD5214100970E60 /* NavigationMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				69949CC31AD5214100970E60 /* images */,
+				69949CC81AD5214100970E60 /* SICellSelection.h */,
+				69949CC91AD5214100970E60 /* SICellSelection.m */,
+				69949CCA1AD5214100970E60 /* SIMenuButton.h */,
+				69949CCB1AD5214100970E60 /* SIMenuButton.m */,
+				69949CCC1AD5214100970E60 /* SIMenuCell.h */,
+				69949CCD1AD5214100970E60 /* SIMenuCell.m */,
+				69949CCE1AD5214100970E60 /* SIMenuConfiguration.h */,
+				69949CCF1AD5214100970E60 /* SIMenuConfiguration.m */,
+				69949CD01AD5214100970E60 /* SIMenuTable.h */,
+				69949CD11AD5214100970E60 /* SIMenuTable.m */,
+				69949CD21AD5214100970E60 /* SINavigationMenuView.h */,
+				69949CD31AD5214100970E60 /* SINavigationMenuView.m */,
+				69949CD41AD5214100970E60 /* UIColor+Extension.h */,
+				69949CD51AD5214100970E60 /* UIColor+Extension.m */,
+			);
+			path = NavigationMenuView;
+			sourceTree = "<group>";
+		};
+		69949CC31AD5214100970E60 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				69949CC41AD5214100970E60 /* arrow_down.png */,
+				69949CC51AD5214100970E60 /* arrow_down1.png */,
+				69949CC61AD5214100970E60 /* arrow_down1@2x.png */,
+				69949CC71AD5214100970E60 /* arrow_down@2x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		69C506A61AD20C4C0044B6B9 /* TPKeyboardAvoiding */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +349,7 @@
 				69F4EAAC1AB1780A00A82B50 /* Reachability.m */,
 				6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */,
 				6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */,
+				69949CC21AD5214100970E60 /* NavigationMenuView */,
 				69C506A61AD20C4C0044B6B9 /* TPKeyboardAvoiding */,
 			);
 			path = Utilities;
@@ -460,6 +523,10 @@
 				693FACDD1ABE4F7900BD8200 /* PostContentTableViewCell.xib in Resources */,
 				69FE90BC1AB727B700E72720 /* GuidancePostTableViewCell.xib in Resources */,
 				69FCBF3C1AA9CE98007C9EFB /* LaunchScreen.xib in Resources */,
+				69949CD91AD5214100970E60 /* arrow_down@2x.png in Resources */,
+				69949CD61AD5214100970E60 /* arrow_down.png in Resources */,
+				69949CD71AD5214100970E60 /* arrow_down1.png in Resources */,
+				69949CD81AD5214100970E60 /* arrow_down1@2x.png in Resources */,
 				69FCBF391AA9CE98007C9EFB /* Images.xcassets in Resources */,
 				690B922B1ABADDD800AAED0D /* UserInfoTableViewCell.xib in Resources */,
 				6984F6FE1AB5D53800548BD2 /* BoardListTableViewCell.xib in Resources */,
@@ -514,6 +581,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69949CDA1AD5214100970E60 /* SICellSelection.m in Sources */,
 				69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */,
 				69C506B11AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.m in Sources */,
 				69C506B01AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m in Sources */,
@@ -525,9 +593,12 @@
 				69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */,
 				690B922E1ABADEA300AAED0D /* UserInfoTableViewCell.m in Sources */,
 				69FCBF311AA9CE97007C9EFB /* AppDelegate.m in Sources */,
+				69949CDC1AD5214100970E60 /* SIMenuCell.m in Sources */,
+				69949CDE1AD5214100970E60 /* SIMenuTable.m in Sources */,
 				695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */,
 				69C506AF1AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				6925766A1ABBDDC800097DBC /* PostListTableViewController.m in Sources */,
+				69949CDF1AD5214100970E60 /* SINavigationMenuView.m in Sources */,
 				6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */,
 				69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */,
 				69C506B21AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
@@ -537,12 +608,15 @@
 				690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */,
 				69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */,
 				691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */,
+				69949CE01AD5214100970E60 /* UIColor+Extension.m in Sources */,
+				69949CDB1AD5214100970E60 /* SIMenuButton.m in Sources */,
 				69FE90AA1AB66EC400E72720 /* BoardListTableViewCell.m in Sources */,
 				69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */,
 				6984F6F21AB3DC1D00548BD2 /* NavigationViewController.m in Sources */,
 				69F5E3C31AC0DFE4000F394D /* PostContentLabel.m in Sources */,
 				693FACE31ABE50D900BD8200 /* PostContentTableViewController.m in Sources */,
 				69F4EAAD1AB1780A00A82B50 /* Reachability.m in Sources */,
+				69949CDD1AD5214100970E60 /* SIMenuConfiguration.m in Sources */,
 				6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */,
 				693FACE01ABE4FA700BD8200 /* PostContentTableViewCell.m in Sources */,
 				69F4EAA91AB06D1D00A82B50 /* LoginViewController.m in Sources */,

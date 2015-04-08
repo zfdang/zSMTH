@@ -13,6 +13,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PostContentTableViewController.h"
 
+
 @interface PostListTableViewController ()
 {
     NSMutableArray *mPosts;
@@ -28,21 +29,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    NSLog(@"boardID = %@, boardName = %@", engName, chsName);
+
+    // 设定title的内容，和下拉菜单
+    NSString* navTitle = nil;
     if(self.chsName){
-        self.title = [NSString stringWithFormat:@"%@(%@)", chsName, engName];
+        navTitle = [NSString stringWithFormat:@"%@(%@)", chsName, engName];
     } else {
         // 从导读-> 帖子 -> 回到版面时，版面没有中文名称
-        self.title = engName;
+        navTitle = engName;
     }
-    
+    // add dropdown menu for navigation bar
+    if (self.navigationItem) {
+        CGRect frame = CGRectMake(0.0, 0.0, 200.0, self.navigationController.navigationBar.bounds.size.height);
+        SINavigationMenuView *menu = [[SINavigationMenuView alloc] initWithFrame:frame title:navTitle];
+        //Set in which view we will display a menu
+        [menu displayMenuInView:self.navigationController.view];
+        //Create array of items
+        menu.items = @[@"搜索帖子", @"切换置顶显示",  @"收藏本版"];
+        menu.delegate = self;
+        self.navigationItem.titleView = menu;
+    }
+
+    // 开始异步加载帖子列表
     mPosts = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
     [self startAsyncTask];
 
+    // 开启上拉加载和和下拉刷新
     self.navigationController.navigationBar.translucent = NO;
-    
     // add pull to refresh function at the top & bottom
     __weak typeof(self) weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -52,6 +66,7 @@
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMorePostList];
     }];
+    
 }
 
 - (void) refreshPostList {
@@ -189,4 +204,12 @@
 - (IBAction)newPost:(id)sender {
     NSLog(@"New Post");
 }
+
+#pragma mark - SINavigationMenuDelegate
+
+-(void)didSelectItemAtIndex:(NSUInteger)index
+{
+    NSLog(@"%ld clicked in navigation menu", index);
+}
+
 @end
