@@ -12,9 +12,6 @@
 #import "SIMenuConfiguration.h"
 
 @interface SINavigationMenuView  ()
-@property (nonatomic, strong) SIMenuButton *menuButton;
-@property (nonatomic, strong) SIMenuTable *table;
-@property (nonatomic, strong) UIView *menuContainer;
 @end
 
 @implementation SINavigationMenuView

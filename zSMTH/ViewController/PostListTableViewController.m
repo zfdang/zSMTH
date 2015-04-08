@@ -132,7 +132,11 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    NSLog(@"Can we do something here?");
+    SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
+    if (menu.menuButton.isActive) {
+//        NSLog(@"dropdown menu is active, turn off it now");
+        [menu onHideMenu];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
