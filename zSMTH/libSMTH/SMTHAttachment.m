@@ -25,4 +25,20 @@
     return self;
 }
 
+-(BOOL) isImage
+{
+    if(self.attName == nil)
+        return NO;
+    
+    NSString* extension = [self.attName pathExtension];
+    BOOL isImage = ([extension caseInsensitiveCompare:@"jpg"] == NSOrderedSame)
+    || ([extension caseInsensitiveCompare:@"jpeg"] == NSOrderedSame)
+    || ([extension caseInsensitiveCompare:@"gif"] == NSOrderedSame)
+    || ([extension caseInsensitiveCompare:@"png"] == NSOrderedSame)
+    || ([extension caseInsensitiveCompare:@"bmp"] == NSOrderedSame)
+    || ([extension caseInsensitiveCompare:@"tiff"] == NSOrderedSame);
+    
+    return isImage;
+}
+
 @end

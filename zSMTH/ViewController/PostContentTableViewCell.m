@@ -58,6 +58,10 @@
             
             SMTHAttachment *att = (SMTHAttachment*)[attachs objectAtIndex:i];
             
+            if(![att isImage]){
+                // this is not an image
+                continue;
+            }
             UIImageView * imageview = [[UIImageView alloc] init];
             NSString * url = [NSString stringWithFormat:@"http://att.newsmth.net/nForum/att/%@/%@/%ld", post.postBoard, post.postID, att.attPos];
 //            NSLog(@"Image URL: %@", url);

@@ -264,7 +264,7 @@
         
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
         NSArray *items = @[
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"forward"]
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"retweet"]
                                                            title:@"转发到版面"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"0", post.postID);
@@ -300,7 +300,7 @@
                                                               NSLog(@"%@, %@", @"5", post.postID);
                                                           }],
                            
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"forward"]
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"toUser"]
                                                            title:@"转寄给他人"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"6", post.postID);
@@ -319,7 +319,7 @@
                                                           }],
                            ];
         RNGridMenu *av = [[RNGridMenu alloc] initWithItems:items];
-        av.backgroundColor = [[UIColor alloc] initWithRed:235/255.0 green:1.0 blue:235/255.0 alpha:0.8];
+        av.backgroundColor = [[UIColor alloc] initWithRed:235/255.0 green:1.0 blue:235/255.0 alpha:0.85];
         av.itemTextColor = [UIColor darkTextColor];
         av.itemTextAlignment = NSTextAlignmentCenter;
         av.blurLevel = 0.1;

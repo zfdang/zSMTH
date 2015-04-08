@@ -18,4 +18,6 @@
 @property (nonatomic) CGFloat imgHeight;
 @property (nonatomic) BOOL loaded;
 
+-(BOOL) isImage;
+
 @end
