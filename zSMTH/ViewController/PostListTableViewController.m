@@ -39,6 +39,7 @@
         navTitle = engName;
     }
     // add dropdown menu for navigation bar
+    // 有一个bug, 当点击了navigation bar的其他按钮后，如果菜单处于弹出状态，居然也不消失
     if (self.navigationItem) {
         CGRect frame = CGRectMake(0.0, 0.0, 200.0, self.navigationController.navigationBar.bounds.size.height);
         SINavigationMenuView *menu = [[SINavigationMenuView alloc] initWithFrame:frame title:navTitle];
@@ -103,6 +104,7 @@
 }
 
 
+
 - (void)asyncTask
 {
     // this function will only load first page
@@ -128,6 +130,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    NSLog(@"Can we do something here?");
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
