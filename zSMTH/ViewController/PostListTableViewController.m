@@ -23,14 +23,19 @@
 
 @implementation PostListTableViewController
 
-@synthesize boardID;
-@synthesize boardName;
+@synthesize engName;
+@synthesize chsName;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"boardID = %@, boardName = %@", boardID, boardName);
-    self.navItem.title = [NSString stringWithFormat:@"%@(%@)", boardName, boardID];
+    NSLog(@"boardID = %@, boardName = %@", engName, chsName);
+    if(self.chsName){
+        self.title = [NSString stringWithFormat:@"%@(%@)", chsName, engName];
+    } else {
+        // 从导读-> 帖子 -> 回到版面时，版面没有中文名称
+        self.title = engName;
+    }
     
     mPosts = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
@@ -66,7 +71,7 @@
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         mPageIndex += 1;
-        NSArray *posts = [helper getPostsFromBoard:boardID from:mPageIndex];
+        NSArray *posts = [helper getPostsFromBoard:engName from:mPageIndex];
         long currentNumber = [mPosts count];
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -87,7 +92,7 @@
 {
     // this function will only load first page
     mPageIndex = 0;
-    NSArray *posts = [helper getPostsFromBoard:boardID from:0];
+    NSArray *posts = [helper getPostsFromBoard:engName from:0];
     [mPosts removeAllObjects];
     [mPosts addObjectsFromArray:posts];
 }
@@ -161,7 +166,7 @@
     NSLog(@"Click on Post: Board = %@, Post = %@", post.postBoard, post.postID);
     
     PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
-    postcontent.boardName = post.postBoard;
+    postcontent.engName = post.postBoard;
     postcontent.postID = [post.postID doubleValue];
     postcontent.postSubject = post.postSubject;    
     [self.navigationController pushViewController:postcontent animated:YES];

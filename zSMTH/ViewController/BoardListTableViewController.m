@@ -146,8 +146,8 @@
     {
         SMTHBoard* board = (SMTHBoard*)[boards objectAtIndex:indexPath.row];
         PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
-        postlist.boardName = board.chsName;
-        postlist.boardID = board.engName;
+        postlist.chsName = board.chsName;
+        postlist.engName = board.engName;
         [self.navigationController pushViewController:postlist animated:YES];
     }
 }

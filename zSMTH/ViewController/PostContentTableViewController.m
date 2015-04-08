@@ -13,6 +13,8 @@
 #import "UIView+Toast.h"
 //#import "SIAlertView.h"
 #import "RNGridMenu.h"
+#import "PostListTableViewController.h"
+
 
 #define LABEL_WIDTH 300
 
@@ -29,7 +31,8 @@
 @implementation PostContentTableViewController
 
 @synthesize postID;
-@synthesize boardName;
+@synthesize engName;
+@synthesize chsName;
 @synthesize postSubject;
 
 - (void)viewDidLoad {
@@ -39,7 +42,28 @@
     mPosts = [[NSMutableArray alloc] init];
     mHeights = [[NSMutableDictionary alloc] init];
     iHeaderHeight  = 22.0;
-    self.title = [helper getFullBoardName:self.boardName];
+    if(self.chsName){
+        self.title = [NSString stringWithFormat:@"%@(%@)",self.chsName, self.engName];
+    } else {
+        self.title = [helper getFullBoardName:self.engName];
+    }
+    
+    // hide right button if this view is not initiated from Guidance
+    if(! self.isFromGuidance){
+        // Get the reference to the current toolbar buttons
+        UIBarButtonItem *item = self.navigationController.navigationItem.rightBarButtonItem;
+        UIBarButtonItem *item1 = self.navigationItem.rightBarButtonItem;
+        long result = [self.navigationItem.rightBarButtonItems count];
+        
+        self.navigationController.navigationBar.topItem.rightBarButtonItem = nil;
+        NSMutableArray *toolbarButtons = [self.toolbarItems mutableCopy];
+        
+        // This is how you remove the button from the toolbar and animate it
+        [toolbarButtons removeObject:self.buttonRight];
+        [self setToolbarItems:toolbarButtons animated:YES];
+
+//        self.buttonRight.hidden = YES;
+    }
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
@@ -61,7 +85,7 @@
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         mPageIndex += 1;
-        NSArray *posts = [helper getPostContents:boardName postID:postID from:mPageIndex];
+        NSArray *posts = [helper getPostContents:engName postID:postID from:mPageIndex];
         long currentNumber = [mPosts count];
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -93,7 +117,7 @@
 - (void)asyncTask
 {
     mPageIndex = 0;
-    NSArray *results = [helper getPostContents:boardName postID:postID from:mPageIndex];
+    NSArray *results = [helper getPostContents:engName postID:postID from:mPageIndex];
     [mPosts removeAllObjects];
     [mPosts addObjectsFromArray:results];
 }
@@ -187,7 +211,7 @@
     if (indexPath.section == 0) {
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
         
-        post.postBoard = self.boardName;
+        post.postBoard = self.engName;
         [cell setCellContent:post];
        
         NSNumber *height = [NSNumber numberWithFloat:[cell getCellHeight]];
@@ -358,5 +382,9 @@
 }
 
 - (IBAction)clickRightButton:(id)sender {
+    PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
+    postlist.chsName = self.chsName;  // this field might be null
+    postlist.engName = self.engName;
+    [self.navigationController pushViewController:postlist animated:YES];
 }
 @end

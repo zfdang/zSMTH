@@ -141,8 +141,8 @@
         } else
         {
             PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
-            postlist.boardName = board.chsName;
-            postlist.boardID = board.engName;
+            postlist.engName = board.engName;
+            postlist.chsName = board.chsName;
             [self.navigationController pushViewController:postlist animated:YES];
         }
     }

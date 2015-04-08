@@ -141,8 +141,8 @@
     } else if (target == VIEW_POST_LIST) {
         // this branch is only for test
         PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
-        postlist.boardID = @"Picture";
-        postlist.boardName = @"贴图";
+        postlist.engName = @"Picture";
+        postlist.chsName = @"贴图";
         [navigationController popToRootViewControllerAnimated:NO];
 
         [navigationController pushViewController:postlist animated:YES];
