@@ -70,10 +70,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attachment" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-OZ-UDj" userLabel="attachment">
-                        <rect key="frame" x="404" y="58.5" width="20" height="20"/>
+                        <rect key="frame" x="409" y="64" width="15" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="qBA-9o-ANk"/>
-                            <constraint firstAttribute="height" constant="20" id="tAr-b9-885"/>
+                            <constraint firstAttribute="width" constant="15" id="qBA-9o-ANk"/>
+                            <constraint firstAttribute="height" constant="15" id="tAr-b9-885"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -107,7 +107,7 @@
                     <constraint firstItem="Jc7-hn-fEB" firstAttribute="leading" secondItem="qTb-JF-7Fg" secondAttribute="trailing" constant="10" id="jZB-qM-5Gz"/>
                     <constraint firstItem="qbW-dU-8JW" firstAttribute="centerY" secondItem="Jc7-hn-fEB" secondAttribute="centerY" id="lbg-sg-yfA"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="centerY" secondItem="Qm2-1D-u80" secondAttribute="centerY" id="lxA-6O-bXS"/>
-                    <constraint firstItem="vBy-OZ-UDj" firstAttribute="centerY" secondItem="iNH-um-IeO" secondAttribute="centerY" constant="-3" id="p7k-Ta-sfm"/>
+                    <constraint firstItem="vBy-OZ-UDj" firstAttribute="centerY" secondItem="iNH-um-IeO" secondAttribute="centerY" id="p7k-Ta-sfm"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iNH-um-IeO" secondAttribute="trailing" constant="12" id="psT-9z-lrJ"/>
                     <constraint firstItem="igt-nh-T1W" firstAttribute="top" secondItem="mtN-tG-h7e" secondAttribute="topMargin" id="qXX-wb-uPb"/>
                     <constraint firstAttribute="bottomMargin" secondItem="3GA-da-M0u" secondAttribute="bottom" id="spc-6O-WLP"/>
@@ -151,6 +151,6 @@
     </objects>
     <resources>
         <image name="anonymous" width="40" height="40"/>
-        <image name="attachment" width="20" height="20"/>
+        <image name="attachment" width="10" height="10"/>
     </resources>
 </document>
