@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -69,7 +70,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attachment" translatesAutoresizingMaskIntoConstraints="NO" id="vBy-OZ-UDj" userLabel="attachment">
-                        <rect key="frame" x="404" y="57.5" width="20" height="20"/>
+                        <rect key="frame" x="404" y="54.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="qBA-9o-ANk"/>
                             <constraint firstAttribute="height" constant="20" id="tAr-b9-885"/>
@@ -106,7 +107,7 @@
                     <constraint firstItem="Jc7-hn-fEB" firstAttribute="leading" secondItem="qTb-JF-7Fg" secondAttribute="trailing" constant="10" id="jZB-qM-5Gz"/>
                     <constraint firstItem="qbW-dU-8JW" firstAttribute="centerY" secondItem="Jc7-hn-fEB" secondAttribute="centerY" id="lbg-sg-yfA"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="centerY" secondItem="Qm2-1D-u80" secondAttribute="centerY" id="lxA-6O-bXS"/>
-                    <constraint firstItem="vBy-OZ-UDj" firstAttribute="centerY" secondItem="iNH-um-IeO" secondAttribute="centerY" id="p7k-Ta-sfm"/>
+                    <constraint firstItem="vBy-OZ-UDj" firstAttribute="centerY" secondItem="iNH-um-IeO" secondAttribute="centerY" constant="-3" id="p7k-Ta-sfm"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iNH-um-IeO" secondAttribute="trailing" constant="12" id="psT-9z-lrJ"/>
                     <constraint firstItem="igt-nh-T1W" firstAttribute="top" secondItem="mtN-tG-h7e" secondAttribute="topMargin" id="qXX-wb-uPb"/>
                     <constraint firstAttribute="bottomMargin" secondItem="3GA-da-M0u" secondAttribute="bottom" id="spc-6O-WLP"/>

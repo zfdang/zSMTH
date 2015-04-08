@@ -50,19 +50,7 @@
     
     // hide right button if this view is not initiated from Guidance
     if(! self.isFromGuidance){
-        // Get the reference to the current toolbar buttons
-        UIBarButtonItem *item = self.navigationController.navigationItem.rightBarButtonItem;
-        UIBarButtonItem *item1 = self.navigationItem.rightBarButtonItem;
-        long result = [self.navigationItem.rightBarButtonItems count];
-        
-        self.navigationController.navigationBar.topItem.rightBarButtonItem = nil;
-        NSMutableArray *toolbarButtons = [self.toolbarItems mutableCopy];
-        
-        // This is how you remove the button from the toolbar and animate it
-        [toolbarButtons removeObject:self.buttonRight];
-        [self setToolbarItems:toolbarButtons animated:YES];
-
-//        self.buttonRight.hidden = YES;
+        [self.navigationItem setRightBarButtonItem:nil];
     }
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -128,12 +116,13 @@
     [self.tableView reloadData];
 }
 
+
+#pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return [mPosts count];
 }
-
-#pragma mark - UITableViewDataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -221,135 +210,6 @@
     return cell;
 }
 
-- (void) handleLongPress:(UILongPressGestureRecognizer *)gesture
-{
-    // only when gesture was recognized, not when ended
-    if (gesture.state == UIGestureRecognizerStateBegan)
-    {
-        // get affected cell
-        UITableViewCell *cell = (UITableViewCell *)[gesture view];
-        // get indexPath of cell
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        
-        // now start our action on long press
-        NSLog(@"Long click on post %ld, %ld", indexPath.section, indexPath.row);
-
-        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
-        NSArray *items = @[
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"arrow"]
-                                                           title:@"转发到版面"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"0", post.postID);
-                                                          }],
-                           
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"attachment"]
-                                                           title:@"回信给作者"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"1", post.postID);
-                                                          }],
-                           
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"block"]
-                                                           title:@"浏览器打开"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"2", post.postID);
-                                                          }],
-                           
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"]
-                                                           title:@"转寄到信箱"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"3", post.postID);
-                                                          }],
-                           
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"reply"]
-                                                           title:@"回复"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"4", post.postID);
-                                                          }],
-
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"]
-                                                           title:@"复制帖子"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"5", post.postID);
-                                                          }],
-
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"search"]
-                                                           title:@"转寄给他人"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"6", post.postID);
-                                                          }],
-
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"anonymous"]
-                                                           title:@"查询作者"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"7", post.postID);
-                                                          }],
-
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"]
-                                                           title:@"分享"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"8", post.postID);
-                                                          }],
-                           ];
-        RNGridMenu *av = [[RNGridMenu alloc] initWithItems:items];
-        av.backgroundColor = [UIColor lightGrayColor];
-        av.itemTextColor = [UIColor darkTextColor];
-        av.itemTextAlignment = NSTextAlignmentCenter;
-        av.blurLevel = 0.1;
-        av.itemFont = [UIFont boldSystemFontOfSize:15];
-        av.itemSize = CGSizeMake(100, 100);
-        av.menuStyle = RNGridMenuStyleGrid;
-        [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
-        
-// SIAlertView: be replaced by RNGridMenuItem
-//        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:title andMessage:nil];
-//        
-//        [alertView addButtonWithTitle:@"回复"
-//                                 type:SIAlertViewButtonTypeDestructive
-//                              handler:^(SIAlertView *alert) {
-//                                  NSLog(@"Button1 Clicked");
-//                              }];
-//        [alertView addButtonWithTitle:@"私信回复"
-//                                 type:SIAlertViewButtonTypeDefault
-//                              handler:^(SIAlertView *alert) {
-//                                  NSLog(@"Button2 Clicked");
-//                              }];
-//        [alertView addButtonWithTitle:@"转寄"
-//                                 type:SIAlertViewButtonTypeDefault
-//                              handler:^(SIAlertView *alert) {
-//                                  NSLog(@"Button3 Clicked");
-//                              }];
-//        [alertView addButtonWithTitle:@"转发到版面"
-//                                 type:SIAlertViewButtonTypeDefault
-//                              handler:^(SIAlertView *alert) {
-//                                  NSLog(@"Button3 Clicked");
-//                              }];
-//        [alertView addButtonWithTitle:@"查看作者信息"
-//                                 type:SIAlertViewButtonTypeDefault
-//                              handler:^(SIAlertView *alert) {
-//                                  NSLog(@"Button3 Clicked");
-//                              }];
-//        [alertView addButtonWithTitle:@"取消"
-//                                 type:SIAlertViewButtonTypeCancel
-//                              handler:^(SIAlertView *alert) {
-//                                  NSLog(@"Button3 Clicked");
-//                              }];
-        
-//        alertView.willShowHandler = ^(SIAlertView *alertView) {
-//            NSLog(@"%@, willShowHandler", alertView);
-//        };
-//        alertView.didShowHandler = ^(SIAlertView *alertView) {
-//            NSLog(@"%@, didShowHandler", alertView);
-//        };
-//        alertView.willDismissHandler = ^(SIAlertView *alertView) {
-//            NSLog(@"%@, willDismissHandler", alertView);
-//        };
-//        alertView.didDismissHandler = ^(SIAlertView *alertView) {
-//            NSLog(@"%@, didDismissHandler", alertView);
-//        };
-//        alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
-//        [alertView show];
-    }
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -381,10 +241,142 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - Content Actions
 - (IBAction)clickRightButton:(id)sender {
     PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
     postlist.chsName = self.chsName;  // this field might be null
     postlist.engName = self.engName;
     [self.navigationController pushViewController:postlist animated:YES];
 }
+
+- (void) handleLongPress:(UILongPressGestureRecognizer *)gesture
+{
+    // only when gesture was recognized, not when ended
+    if (gesture.state == UIGestureRecognizerStateBegan)
+    {
+        // get affected cell
+        UITableViewCell *cell = (UITableViewCell *)[gesture view];
+        // get indexPath of cell
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        // now start our action on long press
+        NSLog(@"Long click on post %ld, %ld", indexPath.section, indexPath.row);
+        
+        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        NSArray *items = @[
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"forward"]
+                                                           title:@"转发到版面"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"0", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"email"]
+                                                           title:@"回信给作者"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"1", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"openInBrowser"]
+                                                           title:@"浏览器打开"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"2", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"forward"]
+                                                           title:@"转寄到信箱"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"3", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"reply"]
+                                                           title:@"回复"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"4", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"copy"]
+                                                           title:@"复制帖子"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"5", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"forward"]
+                                                           title:@"转寄给他人"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"6", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"queryUser"]
+                                                           title:@"查询作者"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"7", post.postID);
+                                                          }],
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"share"]
+                                                           title:@"分享"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"8", post.postID);
+                                                          }],
+                           ];
+        RNGridMenu *av = [[RNGridMenu alloc] initWithItems:items];
+        av.backgroundColor = [[UIColor alloc] initWithRed:235/255.0 green:1.0 blue:235/255.0 alpha:0.8];
+        av.itemTextColor = [UIColor darkTextColor];
+        av.itemTextAlignment = NSTextAlignmentCenter;
+        av.blurLevel = 0.1;
+        av.itemFont = [UIFont boldSystemFontOfSize:15];
+        av.itemSize = CGSizeMake(100, 100);
+        av.menuStyle = RNGridMenuStyleGrid;
+        [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
+        
+        // SIAlertView: be replaced by RNGridMenuItem
+        //        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:title andMessage:nil];
+        //
+        //        [alertView addButtonWithTitle:@"回复"
+        //                                 type:SIAlertViewButtonTypeDestructive
+        //                              handler:^(SIAlertView *alert) {
+        //                                  NSLog(@"Button1 Clicked");
+        //                              }];
+        //        [alertView addButtonWithTitle:@"私信回复"
+        //                                 type:SIAlertViewButtonTypeDefault
+        //                              handler:^(SIAlertView *alert) {
+        //                                  NSLog(@"Button2 Clicked");
+        //                              }];
+        //        [alertView addButtonWithTitle:@"转寄"
+        //                                 type:SIAlertViewButtonTypeDefault
+        //                              handler:^(SIAlertView *alert) {
+        //                                  NSLog(@"Button3 Clicked");
+        //                              }];
+        //        [alertView addButtonWithTitle:@"转发到版面"
+        //                                 type:SIAlertViewButtonTypeDefault
+        //                              handler:^(SIAlertView *alert) {
+        //                                  NSLog(@"Button3 Clicked");
+        //                              }];
+        //        [alertView addButtonWithTitle:@"查看作者信息"
+        //                                 type:SIAlertViewButtonTypeDefault
+        //                              handler:^(SIAlertView *alert) {
+        //                                  NSLog(@"Button3 Clicked");
+        //                              }];
+        //        [alertView addButtonWithTitle:@"取消"
+        //                                 type:SIAlertViewButtonTypeCancel
+        //                              handler:^(SIAlertView *alert) {
+        //                                  NSLog(@"Button3 Clicked");
+        //                              }];
+        
+        //        alertView.willShowHandler = ^(SIAlertView *alertView) {
+        //            NSLog(@"%@, willShowHandler", alertView);
+        //        };
+        //        alertView.didShowHandler = ^(SIAlertView *alertView) {
+        //            NSLog(@"%@, didShowHandler", alertView);
+        //        };
+        //        alertView.willDismissHandler = ^(SIAlertView *alertView) {
+        //            NSLog(@"%@, willDismissHandler", alertView);
+        //        };
+        //        alertView.didDismissHandler = ^(SIAlertView *alertView) {
+        //            NSLog(@"%@, didDismissHandler", alertView);
+        //        };
+        //        alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+        //        [alertView show];
+    }
+}
+
 @end

@@ -163,6 +163,7 @@
     postcontent.engName = post.postBoard;
     postcontent.postID = [post.postID doubleValue];
     postcontent.postSubject = post.postSubject;
+    postcontent.isFromGuidance = YES;
     [self.navigationController pushViewController:postcontent animated:YES];
 }
 
