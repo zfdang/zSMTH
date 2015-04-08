@@ -22,15 +22,19 @@
 @property (nonatomic, strong) NSArray *items;
 
 
-// move the following three property here;
+// expose the following property and methods, so that we can hide the menu in caller
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
+//    if (menu.menuButton.isActive) {
+//        [menu onHideMenu];
+//    }
+//}
 @property (nonatomic, strong) SIMenuButton *menuButton;
-@property (nonatomic, strong) SIMenuTable *table;
-@property (nonatomic, strong) UIView *menuContainer;
-
+- (void)onShowMenu;
+- (void)onHideMenu;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title;
 - (void)displayMenuInView:(UIView *)view;
-- (void)onShowMenu;
-- (void)onHideMenu;
 
 @end

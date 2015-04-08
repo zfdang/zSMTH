@@ -23,16 +23,20 @@
             [self setSpotlightStartRadius:0];
             [self setSpotlightEndRadius:frame.size.width/2];
         }
-        
         frame.origin.y -= 2.0;
         self.title = [[UILabel alloc] initWithFrame:frame];
         self.title.textAlignment = NSTextAlignmentCenter;
+        
+        // auto shrink of font size
+        self.title.adjustsFontSizeToFitWidth = YES;
+        self.title.minimumScaleFactor = 0.1;
+        
         self.title.backgroundColor = [UIColor clearColor];
         NSDictionary *currentStyle = [[UINavigationBar appearance] titleTextAttributes];
-        self.title.textColor = currentStyle[UITextAttributeTextColor];
-        self.title.font = currentStyle[UITextAttributeFont];
-        self.title.shadowColor = currentStyle[UITextAttributeTextShadowColor];
-        NSValue *shadowOffset = currentStyle[UITextAttributeTextShadowOffset];
+        self.title.textColor = currentStyle[NSForegroundColorAttributeName];
+        self.title.font = currentStyle[NSFontAttributeName];
+        self.title.shadowColor = currentStyle[NSShadowAttributeName];
+        NSValue *shadowOffset = currentStyle[NSShadowAttributeName];
         self.title.shadowOffset = shadowOffset.CGSizeValue;
         [self addSubview:self.title];
 
@@ -49,8 +53,16 @@
 
 - (void)layoutSubviews
 {
-    [self.title sizeToFit];
-    self.title.center = CGPointMake(self.frame.size.width/2, (self.frame.size.height-2.0)/2);
+//    [self.title sizeToFit];
+    // only shrink width if necessary
+    CGSize newSize = [self.title sizeThatFits:self.title.frame.size];
+    if(newSize.width < self.title.frame.size.width){
+        CGRect newFrame = CGRectMake(self.title.frame.origin.x, self.title.frame.origin.y, newSize.width, self.title.frame.size.height);
+        self.title.frame = newFrame;
+    }
+
+    // add offsite, so that title and icon can be centered together
+    self.title.center = CGPointMake(self.frame.size.width/2 - 10, (self.frame.size.height-2.0)/2);
     self.arrow.center = CGPointMake(CGRectGetMaxX(self.title.frame) + [SIMenuConfiguration arrowPadding], self.frame.size.height / 2);
 }
 
