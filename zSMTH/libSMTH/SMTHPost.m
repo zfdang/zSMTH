@@ -7,6 +7,7 @@
 //
 
 #import "SMTHPost.h"
+#import "SMTHAttachment.h"
 
 @implementation SMTHPost
 
@@ -64,6 +65,17 @@
 {
     return [NSString stringWithFormat:@"Board=%@, Author=%@, id=%@, subject=%@, time=%@",
             self.postBoard, self.author, self.postID, self.postSubject, self.postDate];
+}
+
+- (NSURL*) getAttachedImageURL:(int) index
+{
+    if(index >= [self.attachments count])
+        return nil;
+    
+    SMTHAttachment *attach = [self.attachments objectAtIndex:index];
+    NSString * url = [NSString stringWithFormat:@"http://att.newsmth.net/nForum/att/%@/%@/%ld", self.postBoard, self.postID,
+                      attach.attPos];    
+    return [NSURL URLWithString:url];
 }
 
 @end

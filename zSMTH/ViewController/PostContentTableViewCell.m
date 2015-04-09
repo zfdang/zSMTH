@@ -11,10 +11,12 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVPullToRefresh.h"
 #import "SMTHAttachment.h"
+#import "TapImageView.h"
 
 @implementation PostContentTableViewCell
 
 @synthesize delegate;
+@synthesize idxPost;
 
 - (void)awakeFromNib {
     // Initialization code
@@ -62,15 +64,16 @@
                 // this is not an image
                 continue;
             }
-            UIImageView * imageview = [[UIImageView alloc] init];
-            NSString * url = [NSString stringWithFormat:@"http://att.newsmth.net/nForum/att/%@/%@/%ld", post.postBoard, post.postID, att.attPos];
-//            NSLog(@"Image URL: %@", url);
+            TapImageView * imageview = [[TapImageView alloc] init];
+            imageview.idxPost = self.idxPost;
+            imageview.idxImage = i;
+            imageview.delegate = self.delegate;
             
             // 20 is the height of placeholder image
             [mImgHeights insertObject:[NSNumber numberWithFloat:20.0] atIndex:i];
             
             // Here we use the new provided sd_setImageWithURL: method to load the web image
-            [imageview sd_setImageWithURL:[NSURL URLWithString:url]
+            [imageview sd_setImageWithURL: [post getAttachedImageURL:i]
                          placeholderImage:[UIImage imageNamed:@"loading"]
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                     CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;

@@ -39,6 +39,7 @@
 		69949CDE1AD5214100970E60 /* SIMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD11AD5214100970E60 /* SIMenuTable.m */; };
 		69949CDF1AD5214100970E60 /* SINavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD31AD5214100970E60 /* SINavigationMenuView.m */; };
 		69949CE01AD5214100970E60 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD51AD5214100970E60 /* UIColor+Extension.m */; };
+		69949CE31AD6813400970E60 /* TapImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CE21AD6813400970E60 /* TapImageView.m */; };
 		69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */; };
 		69C506AF1AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506A81AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m */; };
 		69C506B01AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AA1AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m */; };
@@ -136,6 +137,8 @@
 		69949CD31AD5214100970E60 /* SINavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINavigationMenuView.m; sourceTree = "<group>"; };
 		69949CD41AD5214100970E60 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
 		69949CD51AD5214100970E60 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		69949CE11AD6813400970E60 /* TapImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TapImageView.h; path = ViewController/TapImageView.h; sourceTree = "<group>"; };
+		69949CE21AD6813400970E60 /* TapImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TapImageView.m; path = ViewController/TapImageView.m; sourceTree = "<group>"; };
 		69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHAttachment.h; sourceTree = "<group>"; };
 		69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHAttachment.m; sourceTree = "<group>"; };
 		69C506A71AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				690B922F1ABB266D00AAED0D /* LoginCompletionProtocol.h */,
+				69949CE11AD6813400970E60 /* TapImageView.h */,
+				69949CE21AD6813400970E60 /* TapImageView.m */,
 				690196501ACBED6200D0819C /* RefreshTableViewProtocol.h */,
 				69FE90B41AB6FCD700E72720 /* GuidanceTableViewController.h */,
 				69FE90B51AB6FCD700E72720 /* GuidanceTableViewController.m */,
@@ -588,6 +593,7 @@
 				69FE90BF1AB7296200E72720 /* GuidancePostTableViewCell.m in Sources */,
 				692576671ABBDCF600097DBC /* PostListTableViewCell.m in Sources */,
 				6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */,
+				69949CE31AD6813400970E60 /* TapImageView.m in Sources */,
 				69FE90B61AB6FCD700E72720 /* GuidanceTableViewController.m in Sources */,
 				69D196D71ACF76A00004D614 /* BoardListTableViewController.m in Sources */,
 				69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */,
@@ -799,6 +805,7 @@
 					"$(PROJECT_DIR)/zSMTH/libSMTH",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SHARED_PRECOMPS_DIR = "zSMTH/zSMTH-prefix.pch";
 			};
 			name = Debug;
@@ -818,6 +825,7 @@
 					"$(PROJECT_DIR)/zSMTH/libSMTH",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 				SHARED_PRECOMPS_DIR = "zSMTH/zSMTH-prefix.pch";
 			};
 			name = Release;

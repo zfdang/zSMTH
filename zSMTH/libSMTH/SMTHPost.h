@@ -58,4 +58,6 @@
 -(BOOL) isUnread;
 -(BOOL) hasAttachment;
 
+- (NSURL*) getAttachedImageURL:(int) index;
+
 @end

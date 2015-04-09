@@ -10,6 +10,7 @@ pod 'Toast', '~> 2.4'
 pod 'FMDB'
 #pod 'SIAlertView'
 pod 'RNGridMenu', '~> 0.1.2'
+pod 'MWPhotoBrowser'
 end
 
 target 'zSMTHTests' do

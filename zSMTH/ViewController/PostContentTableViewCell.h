@@ -26,4 +26,6 @@
 
 -(void) setCellContent:(SMTHPost*)post;
 -(CGFloat) getCellHeight;
+@property (nonatomic) long idxPost;
+
 @end

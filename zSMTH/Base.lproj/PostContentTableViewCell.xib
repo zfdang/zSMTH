@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -14,8 +14,8 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v7b-OF-h0R" id="w0C-zd-P4T">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxX-FN-eEl">
-                        <rect key="frame" x="4" y="2" width="312" height="141.5"/>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IxX-FN-eEl">
+                        <rect key="frame" x="-2" y="2" width="318" height="142"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zFC-p5-qHm">
                                 <rect key="frame" x="4" y="2" width="40" height="40"/>
@@ -25,25 +25,25 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFX-9g-6Qd" userLabel="author">
-                                <rect key="frame" x="49" y="4" width="34" height="20.5"/>
+                                <rect key="frame" x="49" y="4" width="34" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-03-22 12:10:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAv-79-F0z" userLabel="time">
-                                <rect key="frame" x="49" y="24" width="126.5" height="16"/>
+                                <rect key="frame" x="49" y="24" width="127" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="楼主" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5D-01-p60" userLabel="楼主">
-                                <rect key="frame" x="276" y="6" width="26" height="16"/>
+                                <rect key="frame" x="288" y="6" width="26" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmF-YF-qje" userLabel="Content" customClass="PostContentLabel">
-                                <rect key="frame" x="4" y="46" width="304" height="94.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmF-YF-qje" userLabel="Content" customClass="PostContentLabel">
+                                <rect key="frame" x="4" y="46" width="310" height="95"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -82,11 +82,11 @@
                 </subviews>
                 <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="IxX-FN-eEl" secondAttribute="trailing" constant="-4" id="KWb-JN-IjR"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="IxX-FN-eEl" secondAttribute="trailing" constant="-10" id="KWb-JN-IjR"/>
                     <constraint firstItem="IxX-FN-eEl" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="topMargin" constant="-6" id="VFB-Wi-8Dc"/>
                     <constraint firstAttribute="centerY" secondItem="IxX-FN-eEl" secondAttribute="centerY" constant="36.25" id="cO3-rF-TNH"/>
                     <constraint firstAttribute="bottomMargin" secondItem="IxX-FN-eEl" secondAttribute="bottom" constant="-6" id="cb4-XA-aTW"/>
-                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" constant="-4" id="fW9-Cn-Gc8"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" constant="-10" id="fW9-Cn-Gc8"/>
                     <constraint firstAttribute="centerX" secondItem="IxX-FN-eEl" secondAttribute="centerX" constant="115" id="yf9-qR-Siw"/>
                 </constraints>
                 <variation key="default">
