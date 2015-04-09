@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -14,32 +15,32 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boardIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Sem-RL-J5o">
-                        <rect key="frame" x="10" y="8" width="50" height="50"/>
+                        <rect key="frame" x="2" y="4" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="463-dr-9tM"/>
                             <constraint firstAttribute="width" constant="50" id="WeG-0o-YPA"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Picture" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adx-9g-7DZ" userLabel="英文版名" colorLabel="IBBuiltInLabel-Blue">
-                        <rect key="frame" x="62" y="10" width="39.5" height="14.5"/>
+                        <rect key="frame" x="54" y="10" width="40" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贴图版" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJh-Ck-CAj" userLabel="中文版名">
-                        <rect key="frame" x="62" y="35.5" width="51" height="20.5"/>
+                        <rect key="frame" x="56" y="31" width="51" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" text="版主" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1f-DA-YpG" userLabel="版主">
-                        <rect key="frame" x="111.5" y="10" width="198.5" height="14.5"/>
+                        <rect key="frame" x="104" y="10" width="206" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folderExpand" translatesAutoresizingMaskIntoConstraints="NO" id="UD8-65-748" userLabel="Folder">
-                        <rect key="frame" x="287" y="23" width="23" height="20"/>
+                        <rect key="frame" x="287" y="19" width="23" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="0dY-hl-soP"/>
                             <constraint firstAttribute="height" constant="20" id="LiD-Ki-C3g"/>
@@ -56,10 +57,10 @@
                 <constraints>
                     <constraint firstItem="eJh-Ck-CAj" firstAttribute="leading" secondItem="1nu-iY-M69" secondAttribute="leadingMargin" constant="54" id="0Zf-BQ-udY"/>
                     <constraint firstItem="R1f-DA-YpG" firstAttribute="top" secondItem="1nu-iY-M69" secondAttribute="topMargin" constant="2" id="1Db-kk-uYV"/>
-                    <constraint firstItem="adx-9g-7DZ" firstAttribute="leading" secondItem="Sem-RL-J5o" secondAttribute="trailing" constant="2" id="3Uo-dd-kll"/>
+                    <constraint firstItem="adx-9g-7DZ" firstAttribute="leading" secondItem="Sem-RL-J5o" secondAttribute="trailing" constant="4" id="3Uo-dd-kll"/>
                     <constraint firstItem="Sem-RL-J5o" firstAttribute="bottom" secondItem="eJh-Ck-CAj" secondAttribute="bottom" constant="0.5" id="4aS-bh-Cks"/>
                     <constraint firstItem="eJh-Ck-CAj" firstAttribute="top" secondItem="adx-9g-7DZ" secondAttribute="bottom" constant="5" id="B2d-zr-Gyb"/>
-                    <constraint firstItem="Sem-RL-J5o" firstAttribute="leading" secondItem="1nu-iY-M69" secondAttribute="leadingMargin" constant="2" id="B8w-Hx-zTt"/>
+                    <constraint firstItem="Sem-RL-J5o" firstAttribute="leading" secondItem="1nu-iY-M69" secondAttribute="leadingMargin" constant="-6" id="B8w-Hx-zTt"/>
                     <constraint firstAttribute="trailingMargin" secondItem="R1f-DA-YpG" secondAttribute="trailing" constant="2" id="BYS-lk-A0H"/>
                     <constraint firstItem="UD8-65-748" firstAttribute="centerY" secondItem="Sem-RL-J5o" secondAttribute="centerY" id="E2m-rv-wxh"/>
                     <constraint firstItem="eJh-Ck-CAj" firstAttribute="top" secondItem="adx-9g-7DZ" secondAttribute="bottom" constant="10" id="Fec-KQ-ktL"/>
@@ -69,11 +70,11 @@
                     <constraint firstItem="R1f-DA-YpG" firstAttribute="top" secondItem="1nu-iY-M69" secondAttribute="topMargin" constant="4" id="N28-J5-aud"/>
                     <constraint firstItem="R1f-DA-YpG" firstAttribute="leading" secondItem="adx-9g-7DZ" secondAttribute="trailing" constant="20" id="N5d-pY-X3A"/>
                     <constraint firstAttribute="centerY" secondItem="Sem-RL-J5o" secondAttribute="centerY" id="NFb-ZV-C3b"/>
-                    <constraint firstItem="eJh-Ck-CAj" firstAttribute="leading" secondItem="Sem-RL-J5o" secondAttribute="trailing" constant="2" id="Q9Y-LC-ukN"/>
+                    <constraint firstItem="eJh-Ck-CAj" firstAttribute="leading" secondItem="Sem-RL-J5o" secondAttribute="trailing" constant="4" id="Q9Y-LC-ukN"/>
                     <constraint firstItem="Sem-RL-J5o" firstAttribute="bottom" secondItem="eJh-Ck-CAj" secondAttribute="bottom" constant="2" id="Qr2-OM-Z4r"/>
                     <constraint firstItem="R1f-DA-YpG" firstAttribute="leading" secondItem="adx-9g-7DZ" secondAttribute="trailing" constant="10" id="Rh4-gC-URa"/>
                     <constraint firstItem="eJh-Ck-CAj" firstAttribute="top" secondItem="adx-9g-7DZ" secondAttribute="bottom" constant="5" id="SQc-Yb-nIc"/>
-                    <constraint firstItem="Sem-RL-J5o" firstAttribute="top" secondItem="1nu-iY-M69" secondAttribute="topMargin" id="YvP-HB-bd0"/>
+                    <constraint firstItem="Sem-RL-J5o" firstAttribute="top" secondItem="1nu-iY-M69" secondAttribute="topMargin" constant="-4" id="YvP-HB-bd0"/>
                     <constraint firstItem="adx-9g-7DZ" firstAttribute="top" secondItem="Sem-RL-J5o" secondAttribute="top" constant="2" id="jnU-CN-okf"/>
                     <constraint firstAttribute="bottomMargin" secondItem="eJh-Ck-CAj" secondAttribute="bottom" constant="1" id="mV2-tj-sXe"/>
                     <constraint firstAttribute="trailingMargin" secondItem="UD8-65-748" secondAttribute="trailing" constant="2" id="ttL-q1-oLh"/>
