@@ -16,8 +16,14 @@
 
 @interface PostListTableViewController ()
 {
+    // array of all posts
     NSMutableArray *mPosts;
+    // the current loaded page index
     int mPageIndex;
+    // number of 置顶的帖子数
+    int iNumberOfDing;
+    // 如果是YES, 则跳过置顶的帖子
+    BOOL showDingPosts;
 }
 
 @end
@@ -52,6 +58,7 @@
     }
 
     // 开始异步加载帖子列表
+    showDingPosts = NO;
     mPosts = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
     [self startAsyncTask];
@@ -89,6 +96,8 @@
         mPageIndex += 1;
         NSArray *posts = [helper getPostsFromBoard:engName from:mPageIndex];
         long currentNumber = [mPosts count];
+        if(! showDingPosts)
+            currentNumber -= iNumberOfDing;
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [mPosts addObjectsFromArray:posts];
@@ -104,7 +113,6 @@
 }
 
 
-
 - (void)asyncTask
 {
     // this function will only load first page
@@ -116,7 +124,23 @@
 
 - (void)finishAsyncTask
 {
+    iNumberOfDing = [self getNumberOfDingPosts];
     [self.tableView reloadData];
+}
+
+- (int) getNumberOfDingPosts
+{
+    int result = 0;
+    for(int i = 0; i < [mPosts count]; i ++)
+    {
+        SMTHPost *post = [mPosts objectAtIndex:i];
+        if(post.isDing){
+            result += 1;
+        } else {
+            break;
+        }
+    }
+    return result;
 }
 
 //- (void)viewWillAppear:(BOOL)animated
@@ -140,8 +164,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [mPosts count];
+    if(mPosts == nil)
+        return 0;
+
+    if(showDingPosts){
+        return [mPosts count];
+    } else {
+        // 刨去置顶的帖子数
+        return [mPosts count] - iNumberOfDing;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -162,7 +193,12 @@
     }
     
     if (indexPath.section == 0) {
-        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        long postIdx = indexPath.row;
+        if(!showDingPosts){
+            postIdx += iNumberOfDing;
+        }
+        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:postIdx];
+        
         [cell.imageAvatar sd_setImageWithURL:[helper getFaceURLByUserID:[post author]] placeholderImage:[UIImage imageNamed:@"anonymous"]];
         cell.imageAvatar.layer.cornerRadius = 10.0;
         cell.imageAvatar.layer.borderWidth = 0;
@@ -187,8 +223,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
-    NSLog(@"Click on Post: Board = %@, Post = %@", post.postBoard, post.postID);
+    long postIdx = indexPath.row;
+    if(!showDingPosts){
+        postIdx += iNumberOfDing;
+    }
+    SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:postIdx];
+//    NSLog(@"Click on Post: Board = %@, Post = %@", post.postBoard, post.postID);
     
     PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
     postcontent.engName = post.postBoard;
@@ -219,7 +259,12 @@
 
 -(void)didSelectItemAtIndex:(NSUInteger)index
 {
-    NSLog(@"%ld clicked in navigation menu", index);
+    if(index == 1){
+        // 切换置顶
+        showDingPosts = !showDingPosts;
+        [self.tableView reloadData];
+    }
+//    NSLog(@"%ld clicked in navigation menu", index);
 }
 
 @end
