@@ -14,7 +14,7 @@
     UIColor *uicolor = color_;
     CGColorRef colorRef = [uicolor CGColor];
     
-    int numComponents = CGColorGetNumberOfComponents(colorRef);
+    size_t numComponents = CGColorGetNumberOfComponents(colorRef);
     
     CGFloat red = 0.0;
     CGFloat green = 0.0;

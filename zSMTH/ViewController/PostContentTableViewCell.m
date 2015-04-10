@@ -54,6 +54,7 @@
         NSArray* attachs = post.attachments;
 
         CGRect rect = self.postContent.frame;
+
         CGFloat imgOffset = [self.postContent get_height] + rect.origin.y + 5;
         
         for(int i=0; i<[attachs count]; i++){

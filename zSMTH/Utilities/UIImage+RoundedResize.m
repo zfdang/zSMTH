@@ -131,8 +131,8 @@ CGContextRef MyCreateBitmapContextTemp(int pixelsWide, int pixelsHigh)
     CGContextRef context = MyCreateBitmapContextTemp(rect.size.width, rect.size.height);
     CGContextSetShadowWithColor(context, resizedShadowOffset, 3.0f, [shadowColor CGColor]);
     
-    CGContextDrawImage(context, CGRectMake(fabsf(resizedShadowOffset.width), 
-                                           fabsf(resizedShadowOffset.height), 
+    CGContextDrawImage(context, CGRectMake(fabsf(resizedShadowOffset.width),
+                                           fabsf(resizedShadowOffset.height),
                                            self.size.width, 
                                            self.size.height), [self CGImage]);
     
