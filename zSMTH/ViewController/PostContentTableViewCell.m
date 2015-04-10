@@ -56,7 +56,8 @@
         CGRect rect = self.postContent.frame;
         // it's strange that postContent.width = 316, which is larger than it's display on screen
         // 16 is a decided from the final result
-        rect.size.width -= 16;
+//        rect.size.width -= 16;
+//        NSLog(@"%f, %f, %f, %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
 
         CGFloat imgOffset = [self.postContent get_height] + rect.origin.y + 5;
         
