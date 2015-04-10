@@ -14,7 +14,6 @@
 #import "SVPullToRefresh.h"
 
 
-
 @interface GuidanceTableViewController ()
 {
     NSArray *m_sections;
@@ -32,6 +31,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    // CGFloat top, left , bottom, right ;
+//    [self.tableView setContentInset:UIEdgeInsetsMake(0, -6, 0, -6)];
     
     m_sections = nil;
     [self startAsyncTask];
@@ -43,9 +45,7 @@
     }];
     // change translucent, otherwise, tableview will be partially hidden
     self.navigationController.navigationBar.translucent = NO;
-
 }
-
 
 - (void)asyncTask
 {

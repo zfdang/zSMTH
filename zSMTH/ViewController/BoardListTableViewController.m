@@ -29,6 +29,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    // CGFloat top, left , bottom, right ;
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, -6, 0, 0);
     
     // load favorite boards
     boards = [[NSMutableArray alloc] init];
