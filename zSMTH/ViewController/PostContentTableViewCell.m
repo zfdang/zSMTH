@@ -35,7 +35,7 @@
     self.imageAvatar.layer.cornerRadius = 10.0;
     self.imageAvatar.layer.borderWidth = 0;
     self.imageAvatar.clipsToBounds = YES;
-    
+
     self.postAuthor.text = post.author;
     self.postTime.text = post.postDate;
     
@@ -44,7 +44,7 @@
     } else {
         self.postIndex.text = [NSString stringWithFormat:@"%ld楼",post.replyIndex];
     }
-    
+
     // set content
     [self.postContent setContentInfo:post.postContent];
 
@@ -54,6 +54,9 @@
         NSArray* attachs = post.attachments;
 
         CGRect rect = self.postContent.frame;
+        // it's strange that postContent.width = 316, which is larger than it's display on screen
+        // 16 is a decided from the final result
+        rect.size.width -= 16;
 
         CGFloat imgOffset = [self.postContent get_height] + rect.origin.y + 5;
         
@@ -110,12 +113,12 @@
             [self.cellView addSubview:imageview];
         }
     }
-    
+
     // set cell border
     [self.cellView.layer setBorderColor:[UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1.0].CGColor];
     self.cellView.layer.cornerRadius = 10.0;
     [self.cellView.layer setBorderWidth:0.5f];
-    
+
 //    CGRect rect = self.frame;
 //    NSLog(@"%f, %f, %f, %f", rect.origin.x, rect.origin.y, rect.size.height, rect.size.width);
 //    rect = self.cellView.frame;

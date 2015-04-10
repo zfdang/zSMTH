@@ -425,8 +425,9 @@
             // this is not an image
             continue;
         }
-        NSURL * url = [post getAttachedImageURL:i];
-        [mPhotos addObject:[MWPhoto photoWithURL:url]];
+        MWPhoto *photo = [MWPhoto photoWithURL:[post getAttachedImageURL:i]];
+//        photo.caption = att.attName;
+        [mPhotos addObject:photo];
     }
     
     // Create browser (must be done each time photo browser is
@@ -448,11 +449,6 @@
     
     // Present
     [self.navigationController pushViewController:browser animated:YES];
-    
-    // Manipulate
-//    [browser showNextPhotoAnimated:YES];
-//    [browser showPreviousPhotoAnimated:YES];
-//    [browser setCurrentPhotoIndex:10];
 }
 
 @end
