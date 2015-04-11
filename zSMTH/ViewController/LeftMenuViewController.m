@@ -25,6 +25,12 @@
     NSArray *leftMenu;
     UIImageView *imageView;
     UILabel *labelUser;
+    
+    GuidanceTableViewController *guidance;
+    FavoriteTableViewController *favorite;
+    UserInfoViewController *userinfo;
+    LoginViewController *login;
+    BoardListTableViewController *boardlist;
 }
 @end
 
@@ -103,11 +109,15 @@
     
     if (target == VIEW_GUIDANCE) {
         // top view is guidance view
-        GuidanceTableViewController *guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
+        if( guidance == nil){
+            guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
+        }
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:guidance animated:YES];
     } else if (target == VIEW_FAVORITE) {
-        FavoriteTableViewController *favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
+        if( favorite == nil){
+            favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
+        }
         favorite.favoriteRootID = 0;
         favorite.favoriteRootName = @"个人收藏夹";
         
@@ -117,7 +127,9 @@
         if(! helper.isLogined)
         {
             [navigationController pushViewController:favorite animated:NO];
-            LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+            if(login == nil){
+                login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+            }
             login.delegate = favorite;
             [navigationController pushViewController:login animated:YES];
         } else {
@@ -125,14 +137,18 @@
         }
 
     } else if (target == VIEW_USER_INFO) {
-        UserInfoViewController *userinfo = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
+        if(userinfo == nil){
+            userinfo = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
+        }
         [navigationController popToRootViewControllerAnimated:NO];
 
         // user logined?
         if(! helper.isLogined)
         {
             [navigationController pushViewController:userinfo animated:NO];
-            LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+            if(login == nil){
+                login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
+            }
             login.delegate = userinfo;
             [navigationController pushViewController:login animated:YES];
         } else {
@@ -144,12 +160,12 @@
         postlist.engName = @"Picture";
         postlist.chsName = @"贴图";
         [navigationController popToRootViewControllerAnimated:NO];
-
         [navigationController pushViewController:postlist animated:YES];
     } else if (target == VIEW_BOARD_LIST) {
-        BoardListTableViewController *boardlist = [self.storyboard instantiateViewControllerWithIdentifier:@"boardlistController"];
+        if(boardlist == nil){
+            boardlist = [self.storyboard instantiateViewControllerWithIdentifier:@"boardlistController"];
+        }
         [navigationController popToRootViewControllerAnimated:NO];
-        
         [navigationController pushViewController:boardlist animated:YES];
     }
 
