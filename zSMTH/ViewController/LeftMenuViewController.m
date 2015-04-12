@@ -19,7 +19,6 @@
 #import "PostListTableViewController.h"
 #import "BoardListTableViewController.h"
 
-
 @interface LeftMenuViewController ()
 {
     NSArray *leftMenu;
@@ -237,12 +236,14 @@
         [self switchViewto:VIEW_BOARD_LIST];
     } else if (indexPath.section == 1 && indexPath.row == 0) {
         [self switchViewto:VIEW_POST_LIST];
+    } else if (indexPath.section == 1 && indexPath.row == 1){
+        NSLog(@"短信息");
     } else if (indexPath.section == 1 && indexPath.row == 3){
         NSLog(@"Clear SDWebImage Cache");
         SDImageCache *imageCache = [SDImageCache sharedImageCache];
         [imageCache clearMemory];
         [imageCache clearDisk];
-
+        
         [self.view makeToast:@"缓存已清空!"];
         [self.frostedViewController hideMenuViewController];
     }
