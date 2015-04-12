@@ -54,10 +54,6 @@
         NSArray* attachs = post.attachments;
 
         CGRect rect = self.postContent.frame;
-        // it's strange that postContent.width = 316, which is larger than it's display on screen
-        // 16 is a decided from the final result
-//        rect.size.width -= 16;
-//        NSLog(@"%f, %f, %f, %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
 
         CGFloat imgOffset = [self.postContent get_height] + rect.origin.y + 5;
         
@@ -117,7 +113,7 @@
 
     // set cell border
     [self.cellView.layer setBorderColor:[UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1.0].CGColor];
-    self.cellView.layer.cornerRadius = 10.0;
+    self.cellView.layer.cornerRadius = 5.0;
     [self.cellView.layer setBorderWidth:0.5f];
 
 //    CGRect rect = self.frame;

@@ -112,7 +112,6 @@
     });
 }
 
-
 - (void)asyncTask
 {
     // this function will only load first page
@@ -143,11 +142,20 @@
     return result;
 }
 
+- (IBAction)return:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)newPost:(id)sender {
+    NSLog(@"New Post");
+}
+
 //- (void)viewWillAppear:(BOOL)animated
 //{
 //    NSLog(@"boardID = %@, boardName = %@", boardID, boardName);
 //}
 
+#pragma mark - UIView methods
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -163,6 +171,8 @@
     }
 }
 
+#pragma mark - TableView
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(mPosts == nil)
         return 0;
@@ -177,7 +187,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70;
+    return 66;
 }
 
 
@@ -237,6 +247,7 @@
     [self.navigationController pushViewController:postcontent animated:YES];
 }
 
+
 /*
 #pragma mark - Navigation
 
@@ -247,13 +258,7 @@
 }
 */
 
-- (IBAction)return:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
-- (IBAction)newPost:(id)sender {
-    NSLog(@"New Post");
-}
 
 #pragma mark - SINavigationMenuDelegate
 

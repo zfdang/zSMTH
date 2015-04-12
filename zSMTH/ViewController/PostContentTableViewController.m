@@ -140,7 +140,7 @@
         label.numberOfLines = 2;
         label.text = self.postSubject;
         label.textAlignment = NSTextAlignmentLeft;
-        label.font = [UIFont systemFontOfSize:18];
+        label.font = [UIFont systemFontOfSize:16];
         label.textColor = [UIColor blackColor];
         label.backgroundColor = [UIColor clearColor];
         

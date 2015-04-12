@@ -15,25 +15,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0c-IS-tDF" userLabel="label">
-                        <rect key="frame" x="18" y="8" width="42" height="27.5"/>
+                        <rect key="frame" x="4" y="8" width="42" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kqy-Su-yam" userLabel="value">
-                        <rect key="frame" x="260" y="8" width="42" height="27.5"/>
+                        <rect key="frame" x="274" y="8" width="42" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="Kqy-Su-yam" secondAttribute="trailing" constant="10" id="0uk-8d-cMi"/>
+                    <constraint firstAttribute="trailing" secondItem="Kqy-Su-yam" secondAttribute="trailing" constant="4" id="0uk-8d-cMi"/>
                     <constraint firstItem="Kqy-Su-yam" firstAttribute="height" secondItem="V0c-IS-tDF" secondAttribute="height" id="AJu-35-feq"/>
                     <constraint firstItem="V0c-IS-tDF" firstAttribute="top" secondItem="r6s-i8-oBq" secondAttribute="topMargin" id="Pcz-HZ-j2r"/>
                     <constraint firstAttribute="bottomMargin" secondItem="V0c-IS-tDF" secondAttribute="bottom" id="elW-70-JFL"/>
                     <constraint firstItem="Kqy-Su-yam" firstAttribute="centerY" secondItem="V0c-IS-tDF" secondAttribute="centerY" id="mqD-ey-8t6"/>
-                    <constraint firstItem="V0c-IS-tDF" firstAttribute="leading" secondItem="r6s-i8-oBq" secondAttribute="leadingMargin" constant="10" id="ys8-s0-8He"/>
+                    <constraint firstItem="V0c-IS-tDF" firstAttribute="leading" secondItem="r6s-i8-oBq" secondAttribute="leading" constant="4" id="ys8-s0-8He"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

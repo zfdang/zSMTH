@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -11,11 +11,11 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="146" id="v7b-OF-h0R" customClass="PostContentTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="146"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v7b-OF-h0R" id="w0C-zd-P4T">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v7b-OF-h0R" id="w0C-zd-P4T" userLabel="Full View">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxX-FN-eEl">
-                        <rect key="frame" x="8" y="2" width="304" height="141"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxX-FN-eEl" userLabel="Cell View">
+                        <rect key="frame" x="4" y="1" width="312" height="143"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zFC-p5-qHm">
                                 <rect key="frame" x="4" y="2" width="40" height="40"/>
@@ -25,31 +25,32 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作者" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFX-9g-6Qd" userLabel="author">
-                                <rect key="frame" x="49" y="4" width="34" height="20.5"/>
+                                <rect key="frame" x="49" y="4" width="34" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-03-22 12:10:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAv-79-F0z" userLabel="time">
-                                <rect key="frame" x="49" y="24" width="126.5" height="16"/>
+                                <rect key="frame" x="49" y="24" width="127" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="楼主" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5D-01-p60" userLabel="楼主">
-                                <rect key="frame" x="268" y="6" width="26" height="16"/>
+                                <rect key="frame" x="276" y="6" width="26" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmF-YF-qje" userLabel="Content" customClass="PostContentLabel">
-                                <rect key="frame" x="2" y="46" width="300" height="94"/>
+                                <rect key="frame" x="2" y="46" width="308" height="96"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration" label="CellView"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="qmF-YF-qje" secondAttribute="trailing" constant="2" id="023-zK-Nj2"/>
                             <constraint firstItem="qmF-YF-qje" firstAttribute="leading" secondItem="IxX-FN-eEl" secondAttribute="leading" constant="2" id="F4n-3c-hi2"/>
@@ -82,16 +83,54 @@
                 </subviews>
                 <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="IxX-FN-eEl" secondAttribute="trailing" id="KWb-JN-IjR"/>
-                    <constraint firstItem="IxX-FN-eEl" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="topMargin" constant="-6" id="VFB-Wi-8Dc"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="top" constant="1" id="7eK-u7-S3k"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="top" constant="1" id="DBF-4c-ETx"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leading" constant="4" id="DLA-2H-o2H"/>
+                    <constraint firstAttribute="bottom" secondItem="IxX-FN-eEl" secondAttribute="bottom" constant="1" id="GfI-wZ-d8t"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="top" constant="1" id="Gla-Ha-r2x"/>
+                    <constraint firstAttribute="trailing" secondItem="IxX-FN-eEl" secondAttribute="trailing" constant="2" id="IkT-Un-dJf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="IxX-FN-eEl" secondAttribute="trailing" constant="4" id="KWb-JN-IjR"/>
+                    <constraint firstAttribute="trailing" secondItem="IxX-FN-eEl" secondAttribute="trailing" constant="4" id="MqI-dx-LxW"/>
+                    <constraint firstAttribute="trailing" secondItem="IxX-FN-eEl" secondAttribute="trailing" id="NvK-Fb-e0d"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="topMargin" constant="1" id="VFB-Wi-8Dc"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leading" id="c6f-6G-K2T"/>
                     <constraint firstAttribute="centerY" secondItem="IxX-FN-eEl" secondAttribute="centerY" constant="36.25" id="cO3-rF-TNH"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="IxX-FN-eEl" secondAttribute="bottom" constant="-6" id="cb4-XA-aTW"/>
-                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" id="fW9-Cn-Gc8"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="IxX-FN-eEl" secondAttribute="bottom" constant="1" id="cb4-XA-aTW"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" constant="-6" id="dI7-PC-cax"/>
+                    <constraint firstAttribute="bottom" secondItem="IxX-FN-eEl" secondAttribute="bottom" constant="1" id="dLP-yL-4Eo"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leadingMargin" constant="4" id="fW9-Cn-Gc8"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leading" constant="2" id="g34-q7-AJh"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="top" secondItem="w0C-zd-P4T" secondAttribute="top" constant="1" id="iW8-fv-Cmu"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="IxX-FN-eEl" secondAttribute="bottom" constant="-7" id="ifN-WH-92O"/>
+                    <constraint firstAttribute="trailing" secondItem="IxX-FN-eEl" secondAttribute="trailing" constant="2" id="lgY-Wv-DZp"/>
+                    <constraint firstAttribute="trailing" secondItem="IxX-FN-eEl" secondAttribute="trailing" constant="2" id="qyP-5U-4EI"/>
+                    <constraint firstItem="IxX-FN-eEl" firstAttribute="leading" secondItem="w0C-zd-P4T" secondAttribute="leading" constant="2" id="tsC-9o-4X3"/>
+                    <constraint firstAttribute="bottom" secondItem="IxX-FN-eEl" secondAttribute="bottom" constant="1" id="wph-gV-1Qq"/>
+                    <constraint firstAttribute="trailing" secondItem="IxX-FN-eEl" secondAttribute="trailing" constant="2" id="wsI-fT-t93"/>
                     <constraint firstAttribute="centerX" secondItem="IxX-FN-eEl" secondAttribute="centerX" constant="115" id="yf9-qR-Siw"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="7eK-u7-S3k"/>
+                        <exclude reference="GfI-wZ-d8t"/>
+                        <exclude reference="Gla-Ha-r2x"/>
+                        <exclude reference="IkT-Un-dJf"/>
+                        <exclude reference="KWb-JN-IjR"/>
+                        <exclude reference="NvK-Fb-e0d"/>
+                        <exclude reference="VFB-Wi-8Dc"/>
+                        <exclude reference="c6f-6G-K2T"/>
                         <exclude reference="cO3-rF-TNH"/>
+                        <exclude reference="cb4-XA-aTW"/>
+                        <exclude reference="dI7-PC-cax"/>
+                        <exclude reference="fW9-Cn-Gc8"/>
+                        <exclude reference="g34-q7-AJh"/>
+                        <exclude reference="iW8-fv-Cmu"/>
+                        <exclude reference="ifN-WH-92O"/>
+                        <exclude reference="lgY-Wv-DZp"/>
+                        <exclude reference="qyP-5U-4EI"/>
+                        <exclude reference="tsC-9o-4X3"/>
+                        <exclude reference="wph-gV-1Qq"/>
+                        <exclude reference="wsI-fT-t93"/>
                         <exclude reference="yf9-qR-Siw"/>
                     </mask>
                 </variation>
