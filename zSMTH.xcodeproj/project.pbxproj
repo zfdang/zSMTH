@@ -119,6 +119,12 @@
 		6984F6F91AB579E900548BD2 /* SMTHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHBoard.h; sourceTree = "<group>"; };
 		6984F6FA1AB579E900548BD2 /* SMTHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHBoard.m; sourceTree = "<group>"; };
 		6984F6FD1AB5D53800548BD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = zSMTH/Base.lproj/BoardListTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		699019801ADA053D00AA3D7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PostListTableViewCell.strings"; sourceTree = "<group>"; };
+		699019811ADA053D00AA3D7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PostContentTableViewCell.strings"; sourceTree = "<group>"; };
+		699019821ADA053D00AA3D7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GuidancePostTableViewCell.strings"; sourceTree = "<group>"; };
+		699019831ADA053D00AA3D7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UserInfoTableViewCell.strings"; sourceTree = "<group>"; };
+		699019841ADA053D00AA3D7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		699019851ADA053D00AA3D7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		69949CC41AD5214100970E60 /* arrow_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down.png; sourceTree = "<group>"; };
 		69949CC51AD5214100970E60 /* arrow_down1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down1.png; sourceTree = "<group>"; };
 		69949CC61AD5214100970E60 /* arrow_down1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down1@2x.png"; sourceTree = "<group>"; };
@@ -654,6 +660,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				690B922A1ABADDD800AAED0D /* Base */,
+				699019831ADA053D00AA3D7D /* zh-Hans */,
 			);
 			name = UserInfoTableViewCell.xib;
 			sourceTree = "<group>";
@@ -662,6 +669,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				690B92341ABB99ED00AAED0D /* Base */,
+				699019801ADA053D00AA3D7D /* zh-Hans */,
 			);
 			name = PostListTableViewCell.xib;
 			sourceTree = "<group>";
@@ -670,6 +678,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				693FACDC1ABE4F7900BD8200 /* Base */,
+				699019811ADA053D00AA3D7D /* zh-Hans */,
 			);
 			name = PostContentTableViewCell.xib;
 			sourceTree = "<group>";
@@ -687,6 +696,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				69FCBF361AA9CE97007C9EFB /* Base */,
+				699019841ADA053D00AA3D7D /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -695,6 +705,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				69FCBF3B1AA9CE98007C9EFB /* Base */,
+				699019851ADA053D00AA3D7D /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -703,6 +714,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				69FE90BB1AB727B700E72720 /* Base */,
+				699019821ADA053D00AA3D7D /* zh-Hans */,
 			);
 			name = GuidancePostTableViewCell.xib;
 			sourceTree = "<group>";
@@ -745,7 +757,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -782,7 +794,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;

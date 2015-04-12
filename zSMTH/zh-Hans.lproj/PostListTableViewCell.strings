@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "作者"; ObjectID = "3GA-da-M0u"; */
+"3GA-da-M0u.text" = "作者";
+
+/* Class = "UILabel"; text = "回帖:"; ObjectID = "5wb-jA-SUy"; */
+"5wb-jA-SUy.text" = "回帖:";
+
+/* Class = "UILabel"; text = "回复:"; ObjectID = "Jc7-hn-fEB"; */
+"Jc7-hn-fEB.text" = "回复:";
+
+/* Class = "UILabel"; text = "发布:"; ObjectID = "Qm2-1D-u80"; */
+"Qm2-1D-u80.text" = "发布:";
+
+/* Class = "UILabel"; text = "这是一个非常长的主题，应该没有比这个更长的主题了吧？测试用目的"; ObjectID = "SO4-cb-6T6"; */
+"SO4-cb-6T6.text" = "这是一个非常长的主题，应该没有比这个更长的主题了吧？测试用目的";
+
+/* Class = "UILabel"; text = "128"; ObjectID = "iNH-um-IeO"; */
+"iNH-um-IeO.text" = "128";
+
+/* Class = "UILabel"; text = "12天前"; ObjectID = "qTb-JF-7Fg"; */
+"qTb-JF-7Fg.text" = "12天前";
+
+/* Class = "UILabel"; text = "12天前"; ObjectID = "qbW-dU-8JW"; */
+"qbW-dU-8JW.text" = "12天前";

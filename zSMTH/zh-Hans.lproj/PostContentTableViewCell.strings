@@ -1,0 +1,12 @@
+
+/* Class = "UIView"; accessibilityLabel = "CellView"; ObjectID = "IxX-FN-eEl"; */
+"IxX-FN-eEl.accessibilityLabel" = "CellView";
+
+/* Class = "UILabel"; text = "作者"; ObjectID = "MFX-9g-6Qd"; */
+"MFX-9g-6Qd.text" = "作者";
+
+/* Class = "UILabel"; text = "2015-03-22 12:10:20"; ObjectID = "dAv-79-F0z"; */
+"dAv-79-F0z.text" = "2015-03-22 12:10:20";
+
+/* Class = "UILabel"; text = "楼主"; ObjectID = "j5D-01-p60"; */
+"j5D-01-p60.text" = "楼主";
