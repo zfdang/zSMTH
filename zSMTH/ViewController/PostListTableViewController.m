@@ -12,7 +12,7 @@
 #import "SVPullToRefresh.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PostContentTableViewController.h"
-
+#import "ContentEditViewController.h"
 
 @interface PostListTableViewController ()
 {
@@ -147,6 +147,10 @@
 }
 
 - (IBAction)newPost:(id)sender {
+
+    ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
+    [self.navigationController pushViewController:editor animated:YES];
+    
     NSLog(@"New Post");
 }
 

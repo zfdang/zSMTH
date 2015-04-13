@@ -18,6 +18,7 @@
 #import "UserInfoViewController.h"
 #import "PostListTableViewController.h"
 #import "BoardListTableViewController.h"
+#import "ContentEditViewController.h"
 
 @interface LeftMenuViewController ()
 {
@@ -155,11 +156,19 @@
         }
     } else if (target == VIEW_POST_LIST) {
         // this branch is only for test
-        PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
-        postlist.engName = @"Picture";
-        postlist.chsName = @"贴图";
-        [navigationController popToRootViewControllerAnimated:NO];
-        [navigationController pushViewController:postlist animated:YES];
+        ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
+        
+        editor.engName = @"Test";
+        editor.origSubject = @"我发的一个帖子";
+        editor.origContent = @"梯子的内容是什么啊？";
+        editor.replyID = 1234;
+        [navigationController pushViewController:editor animated:YES];
+
+//        PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
+//        postlist.engName = @"Picture";
+//        postlist.chsName = @"贴图";
+//        [navigationController popToRootViewControllerAnimated:NO];
+//        [navigationController pushViewController:postlist animated:YES];
     } else if (target == VIEW_BOARD_LIST) {
         if(boardlist == nil){
             boardlist = [self.storyboard instantiateViewControllerWithIdentifier:@"boardlistController"];
@@ -237,7 +246,8 @@
     } else if (indexPath.section == 1 && indexPath.row == 0) {
         [self switchViewto:VIEW_POST_LIST];
     } else if (indexPath.section == 1 && indexPath.row == 1){
-        NSLog(@"短信息");
+        ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
+        [self.navigationController pushViewController:editor animated:YES];
     } else if (indexPath.section == 1 && indexPath.row == 3){
         NSLog(@"Clear SDWebImage Cache");
         SDImageCache *imageCache = [SDImageCache sharedImageCache];

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -30,32 +29,32 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="这是一个非常长的主题，应该没有比这个更长的主题了吧？测试用目的" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SO4-cb-6T6" userLabel="Subject">
-                        <rect key="frame" x="56" y="2" width="382" height="57"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="这是一个非常长的主题，应该没有比这个更长的主题了吧？测试用目的" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SO4-cb-6T6" userLabel="Subject">
+                        <rect key="frame" x="56" y="2" width="382" height="41"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="版面:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qm2-1D-u80">
-                        <rect key="frame" x="56" y="65" width="28" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="版面:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qm2-1D-u80">
+                        <rect key="frame" x="56" y="49" width="28" height="31"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTb-JF-7Fg" userLabel="Board">
-                        <rect key="frame" x="86" y="65" width="22" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTb-JF-7Fg" userLabel="Board">
+                        <rect key="frame" x="86" y="57" width="22" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="回帖:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-jA-SUy">
-                        <rect key="frame" x="377" y="65" width="28" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="回帖:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-jA-SUy">
+                        <rect key="frame" x="214" y="57" width="28" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="128" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNH-um-IeO" userLabel="Count">
-                        <rect key="frame" x="407" y="65" width="21" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="128" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNH-um-IeO" userLabel="Count">
+                        <rect key="frame" x="244" y="57" width="21" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -68,12 +67,15 @@
                     <constraint firstItem="SO4-cb-6T6" firstAttribute="top" secondItem="mtN-tG-h7e" secondAttribute="top" constant="2" id="3ut-WG-Wu7"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iNH-um-IeO" secondAttribute="trailing" constant="6" id="68N-C9-vCx"/>
                     <constraint firstItem="Qm2-1D-u80" firstAttribute="centerY" secondItem="3GA-da-M0u" secondAttribute="centerY" constant="-8.5" id="7T9-3B-tIV"/>
+                    <constraint firstItem="iNH-um-IeO" firstAttribute="leading" secondItem="5wb-jA-SUy" secondAttribute="trailing" constant="2" id="9x0-Y0-Xo4"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" constant="2" id="G1W-xd-b5x"/>
                     <constraint firstItem="iNH-um-IeO" firstAttribute="leading" secondItem="5wb-jA-SUy" secondAttribute="trailing" constant="34" id="Jhi-pd-niV"/>
                     <constraint firstItem="5wb-jA-SUy" firstAttribute="centerY" secondItem="iNH-um-IeO" secondAttribute="centerY" id="Lj6-9w-ciK"/>
                     <constraint firstItem="5wb-jA-SUy" firstAttribute="centerY" secondItem="qTb-JF-7Fg" secondAttribute="centerY" id="Nmd-Vn-5Gu"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="5wb-jA-SUy" secondAttribute="trailing" constant="35" id="Onz-Et-7tJ"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" constant="2" id="Qqs-bj-sg2"/>
                     <constraint firstItem="igt-nh-T1W" firstAttribute="leading" secondItem="mtN-tG-h7e" secondAttribute="leading" constant="6" id="SKp-yt-NmM"/>
+                    <constraint firstItem="5wb-jA-SUy" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" constant="130" id="TU0-eR-giM"/>
                     <constraint firstItem="SO4-cb-6T6" firstAttribute="leading" secondItem="mtN-tG-h7e" secondAttribute="leadingMargin" constant="50" id="UmI-I2-4Z3"/>
                     <constraint firstItem="iNH-um-IeO" firstAttribute="leading" secondItem="5wb-jA-SUy" secondAttribute="trailing" constant="2" id="XZY-CG-FRf"/>
                     <constraint firstAttribute="bottom" secondItem="Qm2-1D-u80" secondAttribute="bottom" constant="4" id="Ym3-4O-d4r"/>
@@ -82,6 +84,7 @@
                     <constraint firstItem="3GA-da-M0u" firstAttribute="leading" secondItem="mtN-tG-h7e" secondAttribute="leadingMargin" id="bYd-Wm-3MA"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Qm2-1D-u80" secondAttribute="bottom" id="bZq-Jh-Nld"/>
                     <constraint firstItem="3GA-da-M0u" firstAttribute="top" secondItem="igt-nh-T1W" secondAttribute="bottom" constant="2" id="dAi-yt-7py"/>
+                    <constraint firstItem="5wb-jA-SUy" firstAttribute="leading" secondItem="qTb-JF-7Fg" secondAttribute="trailing" constant="260" id="da5-hb-7tW"/>
                     <constraint firstAttribute="bottomMargin" secondItem="igt-nh-T1W" secondAttribute="bottom" constant="28" id="ehT-Vu-ZrM"/>
                     <constraint firstItem="SO4-cb-6T6" firstAttribute="leading" secondItem="igt-nh-T1W" secondAttribute="trailing" constant="10" id="fmd-jG-myD"/>
                     <constraint firstItem="5wb-jA-SUy" firstAttribute="centerY" secondItem="qTb-JF-7Fg" secondAttribute="centerY" id="hQ0-lB-P01"/>
@@ -114,10 +117,14 @@
                         <exclude reference="G1W-xd-b5x"/>
                         <exclude reference="acw-5o-y4M"/>
                         <exclude reference="Nmd-Vn-5Gu"/>
+                        <exclude reference="Onz-Et-7tJ"/>
+                        <exclude reference="da5-hb-7tW"/>
                         <exclude reference="hQ0-lB-P01"/>
                         <exclude reference="vXP-0N-Ksp"/>
                         <exclude reference="x68-lu-lWm"/>
+                        <exclude reference="68N-C9-vCx"/>
                         <exclude reference="Jhi-pd-niV"/>
+                        <exclude reference="XZY-CG-FRf"/>
                         <exclude reference="psT-9z-lrJ"/>
                     </mask>
                 </variation>

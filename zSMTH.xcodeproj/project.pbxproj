@@ -21,6 +21,7 @@
 		693FACE01ABE4FA700BD8200 /* PostContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FACDF1ABE4FA700BD8200 /* PostContentTableViewCell.m */; };
 		693FACE31ABE50D900BD8200 /* PostContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FACE21ABE50D900BD8200 /* PostContentTableViewController.m */; };
 		695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */; };
+		6957CC491ADA6F5700B522A4 /* ContentEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6957CC481ADA6F5700B522A4 /* ContentEditViewController.m */; };
 		6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */; };
 		6984F6EF1AB3D3F700548BD2 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EE1AB3D3F700548BD2 /* LeftMenuViewController.m */; };
 		6984F6F21AB3DC1D00548BD2 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F11AB3DC1D00548BD2 /* NavigationViewController.m */; };
@@ -105,6 +106,8 @@
 		693FACE21ABE50D900BD8200 /* PostContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostContentTableViewController.m; path = ViewController/PostContentTableViewController.m; sourceTree = "<group>"; };
 		695226941AB2D4140060E5B3 /* ExtendedUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedUIViewController.h; sourceTree = "<group>"; };
 		695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedUIViewController.m; sourceTree = "<group>"; };
+		6957CC471ADA6F5700B522A4 /* ContentEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentEditViewController.h; path = ViewController/ContentEditViewController.h; sourceTree = "<group>"; };
+		6957CC481ADA6F5700B522A4 /* ContentEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentEditViewController.m; path = ViewController/ContentEditViewController.m; sourceTree = "<group>"; };
 		6979903F1ACCC5DC002570EE /* zSMTH-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zSMTH-prefix.pch"; sourceTree = "<group>"; };
 		6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSMTHSetting.h; sourceTree = "<group>"; };
 		6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSMTHSetting.m; sourceTree = "<group>"; };
@@ -277,6 +280,8 @@
 				692576661ABBDCF600097DBC /* PostListTableViewCell.m */,
 				69D196D51ACF76A00004D614 /* BoardListTableViewController.h */,
 				69D196D61ACF76A00004D614 /* BoardListTableViewController.m */,
+				6957CC471ADA6F5700B522A4 /* ContentEditViewController.h */,
+				6957CC481ADA6F5700B522A4 /* ContentEditViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -600,6 +605,7 @@
 				692576671ABBDCF600097DBC /* PostListTableViewCell.m in Sources */,
 				6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */,
 				69949CE31AD6813400970E60 /* TapImageView.m in Sources */,
+				6957CC491ADA6F5700B522A4 /* ContentEditViewController.m in Sources */,
 				69FE90B61AB6FCD700E72720 /* GuidanceTableViewController.m in Sources */,
 				69D196D71ACF76A00004D614 /* BoardListTableViewController.m in Sources */,
 				69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */,
