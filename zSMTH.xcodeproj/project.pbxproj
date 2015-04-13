@@ -41,6 +41,7 @@
 		69949CDF1AD5214100970E60 /* SINavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD31AD5214100970E60 /* SINavigationMenuView.m */; };
 		69949CE01AD5214100970E60 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD51AD5214100970E60 /* UIColor+Extension.m */; };
 		69949CE31AD6813400970E60 /* TapImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CE21AD6813400970E60 /* TapImageView.m */; };
+		69A38B841ADBB52C0090BB6C /* AttachSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */; };
 		69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */; };
 		69C506AF1AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506A81AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m */; };
 		69C506B01AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AA1AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m */; };
@@ -148,6 +149,9 @@
 		69949CD51AD5214100970E60 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
 		69949CE11AD6813400970E60 /* TapImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TapImageView.h; path = ViewController/TapImageView.h; sourceTree = "<group>"; };
 		69949CE21AD6813400970E60 /* TapImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TapImageView.m; path = ViewController/TapImageView.m; sourceTree = "<group>"; };
+		69A38B821ADBB52C0090BB6C /* AttachSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttachSelectorTableViewController.h; path = ViewController/AttachSelectorTableViewController.h; sourceTree = "<group>"; };
+		69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttachSelectorTableViewController.m; path = ViewController/AttachSelectorTableViewController.m; sourceTree = "<group>"; };
+		69A38B851ADBD0470090BB6C /* UpdateAttachmentsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UpdateAttachmentsProtocol.h; path = ViewController/UpdateAttachmentsProtocol.h; sourceTree = "<group>"; };
 		69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHAttachment.h; sourceTree = "<group>"; };
 		69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHAttachment.m; sourceTree = "<group>"; };
 		69C506A71AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
@@ -251,9 +255,10 @@
 			isa = PBXGroup;
 			children = (
 				690B922F1ABB266D00AAED0D /* LoginCompletionProtocol.h */,
+				690196501ACBED6200D0819C /* RefreshTableViewProtocol.h */,
+				69A38B851ADBD0470090BB6C /* UpdateAttachmentsProtocol.h */,
 				69949CE11AD6813400970E60 /* TapImageView.h */,
 				69949CE21AD6813400970E60 /* TapImageView.m */,
-				690196501ACBED6200D0819C /* RefreshTableViewProtocol.h */,
 				69FE90B41AB6FCD700E72720 /* GuidanceTableViewController.h */,
 				69FE90B51AB6FCD700E72720 /* GuidanceTableViewController.m */,
 				69FE90BD1AB7296200E72720 /* GuidancePostTableViewCell.h */,
@@ -282,6 +287,8 @@
 				69D196D61ACF76A00004D614 /* BoardListTableViewController.m */,
 				6957CC471ADA6F5700B522A4 /* ContentEditViewController.h */,
 				6957CC481ADA6F5700B522A4 /* ContentEditViewController.m */,
+				69A38B821ADBB52C0090BB6C /* AttachSelectorTableViewController.h */,
+				69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -618,6 +625,7 @@
 				6925766A1ABBDDC800097DBC /* PostListTableViewController.m in Sources */,
 				69949CDF1AD5214100970E60 /* SINavigationMenuView.m in Sources */,
 				6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */,
+				69A38B841ADBB52C0090BB6C /* AttachSelectorTableViewController.m in Sources */,
 				69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */,
 				69C506B21AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */,

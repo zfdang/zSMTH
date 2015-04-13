@@ -11,7 +11,7 @@ pod 'FMDB'
 #pod 'SIAlertView'
 pod 'RNGridMenu', '~> 0.1.2'
 pod 'MWPhotoBrowser'
-pod "QBImagePickerController"
+pod 'CTAssetsPickerController',  '~> 2.9.0'
 end
 
 target 'zSMTHTests' do

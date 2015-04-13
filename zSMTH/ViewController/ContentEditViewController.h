@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExtendedUIViewController.h"
 
-@interface ContentEditViewController : UIViewController
+@interface ContentEditViewController : ExtendedUIViewController
 
 @property (strong, nonatomic) NSString *engName;
 
 @property (nonatomic) long replyID;
 @property (strong, nonatomic) NSString *origSubject;
 @property (strong, nonatomic) NSString *origContent;
-
+@property (strong, nonatomic) NSArray *mAttachments;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtSubject;
 @property (weak, nonatomic) IBOutlet UITextField *txtAttach;
