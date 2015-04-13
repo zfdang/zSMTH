@@ -234,7 +234,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6DD-GH-TVU" userLabel="Content">
-                                        <rect key="frame" x="10" y="80" width="580" height="415"/>
+                                        <rect key="frame" x="10" y="84" width="580" height="411"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="Kcd-yt-M2N"/>
@@ -257,8 +257,14 @@
                                             </mask>
                                         </variation>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文章字数:500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z48-Ry-6hm">
-                                        <rect key="frame" x="249" y="505" width="102" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文章字数:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31V-U2-s0e">
+                                        <rect key="frame" x="234" y="505" width="73" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z48-Ry-6hm">
+                                        <rect key="frame" x="313" y="505" width="29" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -267,6 +273,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="bVm-Be-DZh" secondAttribute="trailing" constant="20" id="020-Hi-Ogr"/>
                                     <constraint firstAttribute="width" secondItem="6DD-GH-TVU" secondAttribute="width" id="0do-N2-apC"/>
+                                    <constraint firstAttribute="centerX" secondItem="31V-U2-s0e" secondAttribute="centerX" constant="30" id="0mg-9n-t9S"/>
                                     <constraint firstItem="Dne-zq-lLp" firstAttribute="leading" secondItem="SZB-PZ-QOf" secondAttribute="leading" constant="10" id="0zP-yj-M3V"/>
                                     <constraint firstItem="wKW-9Z-5JV" firstAttribute="top" secondItem="Dne-zq-lLp" secondAttribute="bottom" constant="18" id="1As-rd-EcU"/>
                                     <constraint firstItem="bVm-Be-DZh" firstAttribute="centerY" secondItem="Dne-zq-lLp" secondAttribute="centerY" id="3EO-Cq-w7b"/>
@@ -276,6 +283,7 @@
                                     <constraint firstItem="wKW-9Z-5JV" firstAttribute="top" secondItem="6DD-GH-TVU" secondAttribute="bottom" constant="-100" id="69j-p3-WeI"/>
                                     <constraint firstItem="Z48-Ry-6hm" firstAttribute="top" secondItem="6DD-GH-TVU" secondAttribute="bottom" constant="10" id="8Fh-BT-eDR"/>
                                     <constraint firstItem="bVm-Be-DZh" firstAttribute="trailing" secondItem="6DD-GH-TVU" secondAttribute="trailing" id="8dk-xh-2Ac"/>
+                                    <constraint firstItem="Z48-Ry-6hm" firstAttribute="leading" secondItem="31V-U2-s0e" secondAttribute="trailing" constant="6" id="A0v-nH-sfa"/>
                                     <constraint firstItem="Dne-zq-lLp" firstAttribute="leading" secondItem="SZB-PZ-QOf" secondAttribute="leading" constant="20" id="ANl-qk-lk9"/>
                                     <constraint firstItem="bVm-Be-DZh" firstAttribute="leading" secondItem="Dne-zq-lLp" secondAttribute="trailing" constant="10" id="BOn-4l-SFM"/>
                                     <constraint firstItem="wKW-9Z-5JV" firstAttribute="leading" secondItem="Dne-zq-lLp" secondAttribute="leading" id="BuO-Kn-UTX"/>
@@ -283,7 +291,7 @@
                                     <constraint firstAttribute="width" secondItem="6DD-GH-TVU" secondAttribute="width" constant="-8" id="Fu4-DI-7E4"/>
                                     <constraint firstAttribute="centerX" secondItem="6DD-GH-TVU" secondAttribute="centerX" id="Gf4-0J-qlF"/>
                                     <constraint firstAttribute="centerY" secondItem="6DD-GH-TVU" secondAttribute="centerY" id="Hnn-fU-8cE"/>
-                                    <constraint firstAttribute="centerX" secondItem="Z48-Ry-6hm" secondAttribute="centerX" id="I2n-Ma-wqb"/>
+                                    <constraint firstAttribute="centerX" secondItem="Z48-Ry-6hm" secondAttribute="centerX" constant="-20" id="I2n-Ma-wqb"/>
                                     <constraint firstItem="Dne-zq-lLp" firstAttribute="top" secondItem="SZB-PZ-QOf" secondAttribute="top" constant="30" id="K6y-lO-ARA"/>
                                     <constraint firstItem="J4R-Dv-6qf" firstAttribute="centerY" secondItem="wKW-9Z-5JV" secondAttribute="centerY" id="LMR-g0-xjI"/>
                                     <constraint firstAttribute="trailing" secondItem="bVm-Be-DZh" secondAttribute="trailing" constant="10" id="Pb5-4o-7rh"/>
@@ -304,8 +312,9 @@
                                     <constraint firstAttribute="width" secondItem="6DD-GH-TVU" secondAttribute="width" id="miI-iy-ibF"/>
                                     <constraint firstItem="6DD-GH-TVU" firstAttribute="top" secondItem="wKW-9Z-5JV" secondAttribute="bottom" constant="10" id="mn4-yd-6VR"/>
                                     <constraint firstAttribute="centerX" secondItem="6DD-GH-TVU" secondAttribute="centerX" id="n76-8i-oOT"/>
+                                    <constraint firstItem="31V-U2-s0e" firstAttribute="centerY" secondItem="Z48-Ry-6hm" secondAttribute="centerY" id="omk-Lj-wSz"/>
                                     <constraint firstItem="Cud-Y6-ymP" firstAttribute="leading" secondItem="J4R-Dv-6qf" secondAttribute="trailing" constant="10" id="pHE-l0-EEH"/>
-                                    <constraint firstItem="6DD-GH-TVU" firstAttribute="top" secondItem="wKW-9Z-5JV" secondAttribute="bottom" constant="10" id="pVQ-HP-CLH"/>
+                                    <constraint firstItem="6DD-GH-TVU" firstAttribute="top" secondItem="wKW-9Z-5JV" secondAttribute="bottom" constant="14" id="pVQ-HP-CLH"/>
                                     <constraint firstItem="bVm-Be-DZh" firstAttribute="leading" secondItem="J4R-Dv-6qf" secondAttribute="leading" id="pYh-LA-1yT"/>
                                     <constraint firstAttribute="bottom" secondItem="6DD-GH-TVU" secondAttribute="bottom" constant="10" id="q8Y-iL-LUK"/>
                                     <constraint firstAttribute="trailing" secondItem="Cud-Y6-ymP" secondAttribute="trailing" constant="10" id="so8-vA-3Uf"/>
@@ -344,6 +353,7 @@
                                         <exclude reference="eIv-Te-91Z"/>
                                         <exclude reference="so8-vA-3Uf"/>
                                         <exclude reference="xKB-f4-yTg"/>
+                                        <exclude reference="I2n-Ma-wqb"/>
                                     </mask>
                                 </variation>
                             </scrollView>
