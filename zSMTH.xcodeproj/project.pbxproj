@@ -10,7 +10,6 @@
 		58A4F5D48E429C8662E18489 /* libPods-zSMTH.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA120C3EDD82A397C7762E47 /* libPods-zSMTH.a */; };
 		690B922B1ABADDD800AAED0D /* UserInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690B92291ABADDD800AAED0D /* UserInfoTableViewCell.xib */; };
 		690B922E1ABADEA300AAED0D /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */; };
-		690B92321ABB92B100AAED0D /* UIImage+RoundedResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 690B92311ABB92B100AAED0D /* UIImage+RoundedResize.m */; };
 		690B92351ABB99ED00AAED0D /* PostListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690B92331ABB99ED00AAED0D /* PostListTableViewCell.xib */; };
 		690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */; };
 		6915D4A01AB2785C00B3FB53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6915D49F1AB2785C00B3FB53 /* Foundation.framework */; };
@@ -42,6 +41,7 @@
 		69949CE01AD5214100970E60 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD51AD5214100970E60 /* UIColor+Extension.m */; };
 		69949CE31AD6813400970E60 /* TapImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CE21AD6813400970E60 /* TapImageView.m */; };
 		69A38B841ADBB52C0090BB6C /* AttachSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */; };
+		69A38B881ADC81B20090BB6C /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B871ADC81B20090BB6C /* UIImage+Resize.m */; };
 		69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */; };
 		69C506AF1AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506A81AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m */; };
 		69C506B01AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AA1AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m */; };
@@ -88,8 +88,6 @@
 		690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoTableViewCell.h; path = ViewController/UserInfoTableViewCell.h; sourceTree = "<group>"; };
 		690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoTableViewCell.m; path = ViewController/UserInfoTableViewCell.m; sourceTree = "<group>"; };
 		690B922F1ABB266D00AAED0D /* LoginCompletionProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LoginCompletionProtocol.h; path = ViewController/LoginCompletionProtocol.h; sourceTree = "<group>"; };
-		690B92301ABB92B100AAED0D /* UIImage+RoundedResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedResize.h"; sourceTree = "<group>"; };
-		690B92311ABB92B100AAED0D /* UIImage+RoundedResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedResize.m"; sourceTree = "<group>"; };
 		690B92341ABB99ED00AAED0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PostListTableViewCell.xib; sourceTree = "<group>"; };
 		690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoViewController.h; path = ViewController/UserInfoViewController.h; sourceTree = "<group>"; };
 		690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoViewController.m; path = ViewController/UserInfoViewController.m; sourceTree = "<group>"; };
@@ -152,6 +150,8 @@
 		69A38B821ADBB52C0090BB6C /* AttachSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttachSelectorTableViewController.h; path = ViewController/AttachSelectorTableViewController.h; sourceTree = "<group>"; };
 		69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttachSelectorTableViewController.m; path = ViewController/AttachSelectorTableViewController.m; sourceTree = "<group>"; };
 		69A38B851ADBD0470090BB6C /* UpdateAttachmentsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UpdateAttachmentsProtocol.h; path = ViewController/UpdateAttachmentsProtocol.h; sourceTree = "<group>"; };
+		69A38B861ADC81B20090BB6C /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		69A38B871ADC81B20090BB6C /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHAttachment.h; sourceTree = "<group>"; };
 		69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHAttachment.m; sourceTree = "<group>"; };
 		69C506A71AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
@@ -366,8 +366,8 @@
 		69F4EAAA1AB1780A00A82B50 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				690B92301ABB92B100AAED0D /* UIImage+RoundedResize.h */,
-				690B92311ABB92B100AAED0D /* UIImage+RoundedResize.m */,
+				69A38B861ADC81B20090BB6C /* UIImage+Resize.h */,
+				69A38B871ADC81B20090BB6C /* UIImage+Resize.m */,
 				69F4EAAB1AB1780A00A82B50 /* Reachability.h */,
 				69F4EAAC1AB1780A00A82B50 /* Reachability.m */,
 				6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */,
@@ -614,6 +614,7 @@
 				69949CE31AD6813400970E60 /* TapImageView.m in Sources */,
 				6957CC491ADA6F5700B522A4 /* ContentEditViewController.m in Sources */,
 				69FE90B61AB6FCD700E72720 /* GuidanceTableViewController.m in Sources */,
+				69A38B881ADC81B20090BB6C /* UIImage+Resize.m in Sources */,
 				69D196D71ACF76A00004D614 /* BoardListTableViewController.m in Sources */,
 				69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */,
 				690B922E1ABADEA300AAED0D /* UserInfoTableViewCell.m in Sources */,
@@ -630,7 +631,6 @@
 				69C506B21AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */,
 				6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */,
-				690B92321ABB92B100AAED0D /* UIImage+RoundedResize.m in Sources */,
 				690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */,
 				69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */,
 				691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */,

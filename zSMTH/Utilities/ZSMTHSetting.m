@@ -75,6 +75,20 @@
     [user setBool:bAutoLogin forKey:@"bAutoLogin"];
 }
 
+- (NSString*) getAttachmentFilepath:(NSString*) fname
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString * diskCachePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"PostAtt"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:diskCachePath]) {
+        NSError *error = nil;
+        [[NSFileManager defaultManager] createDirectoryAtPath:diskCachePath
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:&error];
+    }
+    
+    return [diskCachePath stringByAppendingPathComponent:fname];
+}
 
 - (NSString *)description
 {

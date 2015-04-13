@@ -15,6 +15,8 @@
 @property (nonatomic) BOOL bAutoLogin;
 @property (nonatomic) BOOL bSavePassword;
 
-
 + (id)sharedManager;
+
+- (NSString*) getAttachmentFilepath:(NSString*)fname;
+
 @end
