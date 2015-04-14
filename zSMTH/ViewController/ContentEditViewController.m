@@ -80,7 +80,11 @@
 
     // set init subject and content
     // Re: 有遭遇过小米4的GPS门没
-    quotedSubject = [NSString stringWithFormat:@"Re: %@",origSubject];
+    if([origSubject hasPrefix:@"Re:"]){
+        quotedSubject = origSubject;
+    } else {
+        quotedSubject = [NSString stringWithFormat:@"Re: %@",origSubject];
+    }
 
     //    【 在 alroy (alroy) 的大作中提到: 】
     //    : 小米4到手快一个月了
