@@ -11,12 +11,12 @@
 #import "PostContentTableViewCell.h"
 #import "SMTHPost.h"
 #import "UIView+Toast.h"
-//#import "SIAlertView.h"
 #import "RNGridMenu.h"
 #import "PostListTableViewController.h"
 #import "TapImageView.h"
 #import "MWPhotoBrowser.h"
 #import "SMTHAttachment.h"
+#import "ContentEditViewController.h"
 
 #define LABEL_WIDTH 300
 
@@ -299,6 +299,7 @@
                                                            title:@"回复"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"4", post.postID);
+                                                              [self replyPost:post];
                                                           }],
                            
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"copy"]
@@ -334,58 +335,17 @@
         av.itemSize = CGSizeMake(100, 100);
         av.menuStyle = RNGridMenuStyleGrid;
         [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
-        
-        // SIAlertView: be replaced by RNGridMenuItem
-        //        SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:title andMessage:nil];
-        //
-        //        [alertView addButtonWithTitle:@"回复"
-        //                                 type:SIAlertViewButtonTypeDestructive
-        //                              handler:^(SIAlertView *alert) {
-        //                                  NSLog(@"Button1 Clicked");
-        //                              }];
-        //        [alertView addButtonWithTitle:@"私信回复"
-        //                                 type:SIAlertViewButtonTypeDefault
-        //                              handler:^(SIAlertView *alert) {
-        //                                  NSLog(@"Button2 Clicked");
-        //                              }];
-        //        [alertView addButtonWithTitle:@"转寄"
-        //                                 type:SIAlertViewButtonTypeDefault
-        //                              handler:^(SIAlertView *alert) {
-        //                                  NSLog(@"Button3 Clicked");
-        //                              }];
-        //        [alertView addButtonWithTitle:@"转发到版面"
-        //                                 type:SIAlertViewButtonTypeDefault
-        //                              handler:^(SIAlertView *alert) {
-        //                                  NSLog(@"Button3 Clicked");
-        //                              }];
-        //        [alertView addButtonWithTitle:@"查看作者信息"
-        //                                 type:SIAlertViewButtonTypeDefault
-        //                              handler:^(SIAlertView *alert) {
-        //                                  NSLog(@"Button3 Clicked");
-        //                              }];
-        //        [alertView addButtonWithTitle:@"取消"
-        //                                 type:SIAlertViewButtonTypeCancel
-        //                              handler:^(SIAlertView *alert) {
-        //                                  NSLog(@"Button3 Clicked");
-        //                              }];
-        
-        //        alertView.willShowHandler = ^(SIAlertView *alertView) {
-        //            NSLog(@"%@, willShowHandler", alertView);
-        //        };
-        //        alertView.didShowHandler = ^(SIAlertView *alertView) {
-        //            NSLog(@"%@, didShowHandler", alertView);
-        //        };
-        //        alertView.willDismissHandler = ^(SIAlertView *alertView) {
-        //            NSLog(@"%@, willDismissHandler", alertView);
-        //        };
-        //        alertView.didDismissHandler = ^(SIAlertView *alertView) {
-        //            NSLog(@"%@, didDismissHandler", alertView);
-        //        };
-        //        alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
-        //        [alertView show];
     }
 }
 
+-(void) replyPost:(SMTHPost*) post
+{
+    ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
+    
+    editor.engName = self.engName;
+    [editor setOrigPostInfo:[post.postID doubleValue] subject:post.postSubject author:post.author content:post.postContent];
+    [self.navigationController pushViewController:editor animated:YES];
+}
 
 #pragma mark MWPhotoBrowserDelegate
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser

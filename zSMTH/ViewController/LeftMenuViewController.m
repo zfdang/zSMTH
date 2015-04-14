@@ -159,9 +159,7 @@
         ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
         
         editor.engName = @"Test";
-        editor.origSubject = @"我发的一个帖子";
-        editor.origContent = @"梯子的内容是什么啊？";
-        editor.replyID = 1234;
+        [editor setOrigPostInfo:1234 subject:@"我发的一个帖子" author:@"mozilla" content:@"帖子的内容是啥啊"];
         [navigationController pushViewController:editor animated:YES];
 
 //        PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];

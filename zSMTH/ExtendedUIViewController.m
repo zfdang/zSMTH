@@ -11,7 +11,6 @@
 
 @interface ExtendedUIViewController ()
 {
-    MBProgressHUD *progressBar;
 }
 @end
 

@@ -132,11 +132,12 @@
 
 - (BOOL)assetsPickerController:(CTAssetsPickerController *)picker shouldSelectAsset:(ALAsset *)asset
 {
-    if (picker.selectedAssets.count >= 10)
+    int maxmiumImages = 1;
+    if (picker.selectedAssets.count >= maxmiumImages)
     {
         UIAlertView *alertView =
-        [[UIAlertView alloc] initWithTitle:@"Attention"
-                                   message:@"Please select not more than 10 assets"
+        [[UIAlertView alloc] initWithTitle:@"注意"
+                                   message:[NSString stringWithFormat:@"由于API的限制，现阶段只能上载%d个图片",maxmiumImages]
                                   delegate:nil
                          cancelButtonTitle:nil
                          otherButtonTitles:@"OK", nil];
@@ -156,7 +157,7 @@
         [alertView show];
     }
     
-    return (picker.selectedAssets.count < 10 && asset.defaultRepresentation != nil);
+    return (picker.selectedAssets.count < maxmiumImages && asset.defaultRepresentation != nil);
 }
 
 @end

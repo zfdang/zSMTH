@@ -13,9 +13,6 @@
 
 @property (strong, nonatomic) NSString *engName;
 
-@property (nonatomic) long replyID;
-@property (strong, nonatomic) NSString *origSubject;
-@property (strong, nonatomic) NSString *origContent;
 @property (strong, nonatomic) NSArray *mAttachments;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtSubject;
@@ -26,5 +23,7 @@
 - (IBAction)editAttachments:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)submit:(id)sender;
+
+- (void) setOrigPostInfo:(long)postID subject:(NSString*)origSubject author:(NSString*) author content:(NSString*)origContent;
 
 @end

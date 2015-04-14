@@ -147,11 +147,13 @@
 }
 
 - (IBAction)newPost:(id)sender {
-
     ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
-    [self.navigationController pushViewController:editor animated:YES];
     
-    NSLog(@"New Post");
+    editor.engName = self.engName;
+//    editor.origSubject = @"我发的一个帖子";
+//    editor.origContent = @"梯子的内容是什么啊？";
+//    editor.replyID = 1234;
+    [self.navigationController pushViewController:editor animated:YES];
 }
 
 //- (void)viewWillAppear:(BOOL)animated

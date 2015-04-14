@@ -278,14 +278,6 @@
                                             <constraint firstAttribute="width" constant="200" id="Kcd-yt-M2N"/>
                                             <constraint firstAttribute="height" constant="200" id="Kpr-zA-7V4"/>
                                         </constraints>
-                                        <string key="text">2011年2月23日，一个我将永远珍藏的日子。这一天，我作为赴利比亚撤离我在利人员
-第一工作组的成员，登上了飞往的黎波里的首架包机，而这天，也是我刚刚结束常驻回
-国工作报到后的第三天。飞机在北京时间5时48分起飞，空荡荡的客舱内除了国航机组
-只有工作组七人，走得匆忙，轻装出发，身边没有任何多余的行李，最值钱的物件是两
-台海事卫星电话，最特殊的装备就是一套防弹衣。平生第一次坐进头等舱，但没有丝毫
-兴奋感，哥几个话也不多，因为都知道此行不是旅行，更不是出访，而是一次充满着未
-知的任务。
-　</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <variation key="default">
@@ -301,7 +293,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z48-Ry-6hm">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z48-Ry-6hm">
                                         <rect key="frame" x="313" y="505" width="29" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

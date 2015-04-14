@@ -17,6 +17,7 @@
 {
     SMTHHelper *helper;
     ZSMTHSetting *setting;
+    MBProgressHUD *progressBar;
 }
 
 @property (strong, nonatomic) NSString* progressTitle;
