@@ -42,6 +42,8 @@
 		69949CE31AD6813400970E60 /* TapImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CE21AD6813400970E60 /* TapImageView.m */; };
 		69A38B841ADBB52C0090BB6C /* AttachSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */; };
 		69A38B881ADC81B20090BB6C /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B871ADC81B20090BB6C /* UIImage+Resize.m */; };
+		69A38B8D1ADE234A0090BB6C /* UINavigationController+MethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B8A1ADE234A0090BB6C /* UINavigationController+MethodSwizzling.m */; };
+		69A38B8E1ADE234A0090BB6C /* UIViewController+MethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B8C1ADE234A0090BB6C /* UIViewController+MethodSwizzling.m */; };
 		69C393001AC62BFB000F2652 /* SMTHAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */; };
 		69C506AF1AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506A81AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.m */; };
 		69C506B01AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AA1AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m */; };
@@ -152,6 +154,10 @@
 		69A38B851ADBD0470090BB6C /* UpdateAttachmentsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UpdateAttachmentsProtocol.h; path = ViewController/UpdateAttachmentsProtocol.h; sourceTree = "<group>"; };
 		69A38B861ADC81B20090BB6C /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		69A38B871ADC81B20090BB6C /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		69A38B891ADE234A0090BB6C /* UINavigationController+MethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+MethodSwizzling.h"; sourceTree = "<group>"; };
+		69A38B8A1ADE234A0090BB6C /* UINavigationController+MethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+MethodSwizzling.m"; sourceTree = "<group>"; };
+		69A38B8B1ADE234A0090BB6C /* UIViewController+MethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MethodSwizzling.h"; sourceTree = "<group>"; };
+		69A38B8C1ADE234A0090BB6C /* UIViewController+MethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MethodSwizzling.m"; sourceTree = "<group>"; };
 		69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHAttachment.h; sourceTree = "<group>"; };
 		69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHAttachment.m; sourceTree = "<group>"; };
 		69C506A71AD20C4C0044B6B9 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
@@ -366,6 +372,10 @@
 		69F4EAAA1AB1780A00A82B50 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				69A38B891ADE234A0090BB6C /* UINavigationController+MethodSwizzling.h */,
+				69A38B8A1ADE234A0090BB6C /* UINavigationController+MethodSwizzling.m */,
+				69A38B8B1ADE234A0090BB6C /* UIViewController+MethodSwizzling.h */,
+				69A38B8C1ADE234A0090BB6C /* UIViewController+MethodSwizzling.m */,
 				69A38B861ADC81B20090BB6C /* UIImage+Resize.h */,
 				69A38B871ADC81B20090BB6C /* UIImage+Resize.m */,
 				69F4EAAB1AB1780A00A82B50 /* Reachability.h */,
@@ -634,6 +644,7 @@
 				690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */,
 				69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */,
 				691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */,
+				69A38B8E1ADE234A0090BB6C /* UIViewController+MethodSwizzling.m in Sources */,
 				69949CE01AD5214100970E60 /* UIColor+Extension.m in Sources */,
 				69949CDB1AD5214100970E60 /* SIMenuButton.m in Sources */,
 				69FE90AA1AB66EC400E72720 /* BoardListTableViewCell.m in Sources */,
@@ -642,6 +653,7 @@
 				69F5E3C31AC0DFE4000F394D /* PostContentLabel.m in Sources */,
 				693FACE31ABE50D900BD8200 /* PostContentTableViewController.m in Sources */,
 				69F4EAAD1AB1780A00A82B50 /* Reachability.m in Sources */,
+				69A38B8D1ADE234A0090BB6C /* UINavigationController+MethodSwizzling.m in Sources */,
 				69949CDD1AD5214100970E60 /* SIMenuConfiguration.m in Sources */,
 				6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */,
 				693FACE01ABE4FA700BD8200 /* PostContentTableViewCell.m in Sources */,
