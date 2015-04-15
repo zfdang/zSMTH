@@ -18,7 +18,6 @@
 #import "UserInfoViewController.h"
 #import "PostListTableViewController.h"
 #import "BoardListTableViewController.h"
-#import "ContentEditViewController.h"
 
 @interface LeftMenuViewController ()
 {
@@ -113,7 +112,6 @@
             guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
         }
         [navigationController popToRootViewControllerAnimated:YES];
-//        [navigationController pushViewController:guidance animated:YES];
     } else if (target == VIEW_FAVORITE) {
         if( favorite == nil){
             favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
@@ -156,17 +154,7 @@
         }
     } else if (target == VIEW_POST_LIST) {
         // this branch is only for test
-        ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
-        
-        editor.engName = @"Test";
-        [editor setOrigPostInfo:1234 subject:@"我发的一个帖子" author:@"mozilla" content:@"帖子的内容是啥啊"];
-        [navigationController pushViewController:editor animated:YES];
 
-//        PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
-//        postlist.engName = @"Picture";
-//        postlist.chsName = @"贴图";
-//        [navigationController popToRootViewControllerAnimated:NO];
-//        [navigationController pushViewController:postlist animated:YES];
     } else if (target == VIEW_BOARD_LIST) {
         if(boardlist == nil){
             boardlist = [self.storyboard instantiateViewControllerWithIdentifier:@"boardlistController"];
