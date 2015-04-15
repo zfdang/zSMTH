@@ -74,7 +74,6 @@
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMorePostList];
     }];
-    
 }
 
 - (void) refreshPostList {

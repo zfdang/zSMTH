@@ -69,7 +69,6 @@
     }];
     // change translucent, otherwise, tableview will be partially hidden
     self.navigationController.navigationBar.translucent = NO;
-    
 }
 
 - (void) loadMorePostList {

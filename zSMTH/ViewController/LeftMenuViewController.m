@@ -112,8 +112,8 @@
         if( guidance == nil){
             guidance = [self.storyboard instantiateViewControllerWithIdentifier:@"guidanceController"];
         }
-        [navigationController popToRootViewControllerAnimated:NO];
-        [navigationController pushViewController:guidance animated:YES];
+        [navigationController popToRootViewControllerAnimated:YES];
+//        [navigationController pushViewController:guidance animated:YES];
     } else if (target == VIEW_FAVORITE) {
         if( favorite == nil){
             favorite = [self.storyboard instantiateViewControllerWithIdentifier:@"favoriteController"];
