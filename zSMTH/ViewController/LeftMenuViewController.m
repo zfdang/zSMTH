@@ -18,6 +18,8 @@
 #import "UserInfoViewController.h"
 #import "PostListTableViewController.h"
 #import "BoardListTableViewController.h"
+#import "SettingViewController.h"
+
 
 @interface LeftMenuViewController ()
 {
@@ -30,6 +32,7 @@
     UserInfoViewController *userinfo;
     LoginViewController *login;
     BoardListTableViewController *boardlist;
+    SettingViewController *setting;
 }
 @end
 
@@ -41,7 +44,7 @@
     
     // init left menu
     leftMenu = @[@[@"节名", @"首页导读", @"个人收藏夹",  @"全部讨论区"],
-                 @[@"我的水木", @"邮箱", @"短信息",@"文章提醒", @"清除缓存"]];
+                 @[@"我的水木", @"邮箱", @"文章提醒", @"设置"]];
     
     // create table view
     self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:1.0f];
@@ -152,15 +155,22 @@
         } else {
             [navigationController pushViewController:userinfo animated:YES];
         }
-    } else if (target == VIEW_POST_LIST) {
-        // this branch is only for test
-
     } else if (target == VIEW_BOARD_LIST) {
         if(boardlist == nil){
             boardlist = [self.storyboard instantiateViewControllerWithIdentifier:@"boardlistController"];
         }
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:boardlist animated:YES];
+    } else if(target == VIEW_MAIL) {
+        
+    } else if(target == VIEW_NOTIFICATION) {
+        
+    } else if(target == VIEW_SETTING) {
+        if(setting == nil){
+            setting = [self.storyboard instantiateViewControllerWithIdentifier:@"settingController"];
+        }
+        [navigationController popToRootViewControllerAnimated:NO];
+        [navigationController pushViewController:setting animated:YES];
     }
 
     [self.frostedViewController hideMenuViewController];
@@ -230,18 +240,11 @@
     } else if (indexPath.section == 0 && indexPath.row == 2) {
         [self switchViewto:VIEW_BOARD_LIST];
     } else if (indexPath.section == 1 && indexPath.row == 0) {
-        [self switchViewto:VIEW_POST_LIST];
+        [self switchViewto:VIEW_MAIL];
     } else if (indexPath.section == 1 && indexPath.row == 1){
-        ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
-        [self.navigationController pushViewController:editor animated:YES];
-    } else if (indexPath.section == 1 && indexPath.row == 3){
-        NSLog(@"Clear SDWebImage Cache");
-        SDImageCache *imageCache = [SDImageCache sharedImageCache];
-        [imageCache clearMemory];
-        [imageCache clearDisk];
-        
-        [self.view makeToast:@"缓存已清空!"];
-        [self.frostedViewController hideMenuViewController];
+        [self switchViewto:VIEW_NOTIFICATION];
+    } else if (indexPath.section == 1 && indexPath.row == 2){
+        [self switchViewto:VIEW_SETTING];
     }
 }
 
