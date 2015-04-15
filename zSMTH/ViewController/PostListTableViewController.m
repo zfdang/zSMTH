@@ -263,6 +263,49 @@
 }
 */
 
+-(void) popupSearchDialog
+{
+    UIAlertController *alertController =
+    [UIAlertController alertControllerWithTitle:@"搜索帖子"
+                                        message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+    //添加输入框
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"主题关键字";
+    }];//可以在block之中对textField进行相关的操作
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"用户名";
+        textField.secureTextEntry = NO;//输入框密文显示格式
+    }];
+    
+    //添加其他按钮
+    /**
+     *  UIAlertAction对象的 style的三种样式:
+     // 默认的格式
+     1.UIAlertActionStyleDefault
+     // 取消操作. 该种格式只能由一个UIAlertAction的对象使用, 不能超过两个
+     UIAlertActionStyleCancel
+     //警告样式, 按钮颜色为红色, 提醒用户这样做可能会改变或者删除某些数据
+     UIAlertActionStyleDestructive
+     */
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"取消"
+                                                      style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                                                          //对应每个按钮处理事件操作
+                                                          NSLog(@"点击了取消");
+                                                      }];//可以在对应的action的block中处理相应的事件, 无需使用代理方式
+    UIAlertAction *actionSearch = [UIAlertAction actionWithTitle:@"搜索"
+                                                      style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                                          UITextField *keyword = alertController.textFields[0];
+                                                          UITextField *author = alertController.textFields[1];
+                                                          NSLog(@"点击了搜索:%@, %@", keyword.text, author.text);
+                                                      }];
+    //添加action
+    [alertController addAction:actionCancel];//为alertController添加action
+    [alertController addAction:actionSearch];
+    
+    //方法
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 
 #pragma mark - SINavigationMenuDelegate
@@ -273,6 +316,8 @@
         // 切换置顶
         showDingPosts = !showDingPosts;
         [self.tableView reloadData];
+    } else if (index == 0){
+        [self popupSearchDialog];
     }
 //    NSLog(@"%ld clicked in navigation menu", index);
 }
