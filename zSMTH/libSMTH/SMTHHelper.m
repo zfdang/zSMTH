@@ -87,14 +87,15 @@
     if ([db open]) {
         NSString *sqlCreateTable =  @"CREATE TABLE IF NOT EXISTS 'CacheStatus' (\
         'type' TEXT,\
-        'status' INTEGER,\
+        'root_id' INTEGER,\
         'updated_at' TEXT)";
         BOOL res = [db executeUpdate:sqlCreateTable];
         if (!res) {
             NSLog(@"error when creating db table: CacheStatus");
-        } else {
-            NSLog(@"success to creating db table: CacheStatus");
         }
+//        else {
+//            NSLog(@"success to creating db table: CacheStatus");
+//        }
         
         sqlCreateTable =  @"CREATE TABLE IF NOT EXISTS 'BoardCache' (\
         'type' TEXT,\
@@ -108,9 +109,10 @@
         res = [db executeUpdate:sqlCreateTable];
         if (!res) {
             NSLog(@"error when creating db table: BoardCache");
-        } else {
-            NSLog(@"success to creating db table: BoardCache");
         }
+//        else {
+//            NSLog(@"success to creating db table: BoardCache");
+//        }
         [db close];
         
         return YES;
@@ -151,57 +153,6 @@
 //      if([@"zSMTHDevAA" compare:user.userID] == NSOrderedSame)
         return NO;
     return YES;
-}
-
-- (NSArray *)getFavorites: (long) fid
-{
-    [smth reset_status];
-
-    NSMutableArray *favorites = [[NSMutableArray alloc] init];
-    NSArray *results = [smth net_LoadFavorites:fid];
-    for(id result in results)
-    {
-        //bid = 647;
-        //"current_users" = 309;
-        //flag = 279040;
-        //group = 0;
-        //id = Children;
-        //"last_post" = 931215771;
-        //level = 0;
-        //manager = "";
-        //"max_online" = 0;
-        //"max_time" = 0;
-        //name = "\U5b69\U5b50";
-        //position = 646;
-        //score = 0;
-        //"score_level" = 0;
-        //section = 0;
-        //total = 93186;
-        //type = board;
-        //unread = 1;
-
-        NSDictionary *dict = (NSDictionary*) result;
-        NSNumber *bid = [dict objectForKey:@"bid"];
-        NSString *engName = [dict objectForKey:@"id"];
-        NSString *chsName = [dict objectForKey:@"name"];
-        NSString *manager = [dict objectForKey:@"manager"];
-
-//        NSLog(@"English board name:%@", engName);
-        SMTHBoard *board = [[SMTHBoard alloc] init];
-        if (engName != nil && engName.length > 0)
-        {
-            board.type = BOARD;
-        } else
-        {
-            board.type = GROUP;
-        }
-        board.engName = engName;
-        board.boardID = [bid longValue];
-        board.chsName = chsName;
-        board.managers = manager;
-        [favorites addObject:board];
-    }
-    return favorites;
 }
 
 - (NSArray *)getGuidancePosts
@@ -355,19 +306,23 @@
     return posts;
 }
 
+
+#pragma mark - Cache Status Management
+
 - (NSString*) getCacheUpdateTime:(NSString*) type RootID:(long)rootid
 {
     NSString *result = nil;
     if ([db open]) {
         if( [@"BOARD" compare:type] == NSOrderedSame){
-            // 得到所有版面的更新状态
+            // 得到所有版面的更新状态, 只有一条记录
             FMResultSet *s = [db executeQuery:@"SELECT updated_at FROM CacheStatus where type='BOARD'"];
             if ([s next]) {
                 //retrieve values for each record
                 result = [s stringForColumn:@"updated_at"];
             }
         } else {
-            NSString *sql = [NSString stringWithFormat:@"SELECT updated_at FROM CacheStatus where type='FAVORITE' and status=%ld", rootid];
+            // 收藏夹的缓存状态，跟rootid有关系
+            NSString *sql = [NSString stringWithFormat:@"SELECT updated_at FROM CacheStatus where type='FAVORITE' and root_id=%ld", rootid];
             FMResultSet *s = [db executeQuery:sql];
             if ([s next]) {
                 //retrieve values for each record
@@ -380,14 +335,23 @@
     return result;
 }
 
+
 - (void)clearCacheStatus:(NSString*) type RootID:(long)rootid
 {
     if ([db open]) {
-        BOOL result = [db executeUpdate:@"DELETE FROM CacheStatus where type='BOARD'"];
-        if(! result){
-            NSLog(@"clearBoardListCache FAILED: %@, %ld", type, rootid);
+        if( [@"BOARD" compare:type] == NSOrderedSame){
+            // 删除所有版面列表的缓存
+            BOOL result = [db executeUpdate:@"DELETE FROM CacheStatus where type='BOARD'"];
+            if(! result){
+                NSLog(@"clearBoardListCache FAILED: %@, %ld", type, rootid);
+            }
         } else {
-            NSLog(@"clearBoardListCache done: %@ - %ld", type, rootid);
+            // 清除特定收藏列表的缓存
+            NSString *sql = [NSString stringWithFormat:@"DELETE FROM CacheStatus where type='FAVORITE' and root_id=%ld", rootid];
+            BOOL result = [db executeUpdate:sql];
+            if(! result){
+                NSLog(@"clearBoardListCache FAILED: %@, %ld", type, rootid);
+            }
         }
         [db close];
     }
@@ -402,18 +366,165 @@
         dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm";
         NSString *dateStr = [dateFormatter stringFromDate:date];
         
-        BOOL success = [db executeUpdate:@"insert into CacheStatus ('type', 'status', 'updated_at') values (?, ?, ?);", type, rootid, dateStr];
+        BOOL success = [db executeUpdate:@"insert into CacheStatus ('type', 'root_id', 'updated_at') values (?, ?, ?);", type, [NSNumber numberWithLong:rootid], dateStr];
         if(! success){
-            NSLog(@"Failed to Write Cache Status: %@-%ld %@", type, rootid, dateStr);
-        } else {
-            NSLog(@"Write Cache Status: %@-%ld %@", type, rootid, dateStr);
+            NSLog(@"Failed to Write Cache Status: %@, %ld, %@", type, rootid, dateStr);
         }
-        
         [db close];
     }
     return YES;
 }
 
+- (BOOL)dumpDatabase
+{
+    NSLog(@"---------- Dump Database ----------");
+    if([db open]){
+        FMResultSet *ss = [db executeQuery:@"SELECT * FROM CacheStatus"];
+        while ([ss next]) {
+            NSLog(@"%@, %@, %@", [ss stringForColumn:@"type"], [ss stringForColumn:@"root_id"], [ss stringForColumn:@"updated_at"]);
+        }
+        
+        FMResultSet *s = [db executeQuery:@"SELECT * FROM BoardCache"];
+        while ([s next]) {
+            NSLog(@"%@, %@, %@", [s stringForColumn:@"type"], [s stringForColumn:@"root_id"], [s stringForColumn:@"board_eng_name"]);
+        }
+        
+        [db close];
+    }
+    NSLog(@"---------- Dump Database ----------");
+    return YES;
+}
+
+
+#pragma mark - Get Favorite List
+
+- (NSArray *)getFavorites: (long)fid
+{
+    NSMutableArray *favorites = [[NSMutableArray alloc] init];
+    BOOL loaded = [self getFavoritesFromCache:favorites rootid:fid];
+    if(!loaded){
+        // 从cache加载没成功，从服务器上加载
+        [self getFavoritesFromServer:favorites rootid:fid];
+        NSLog(@"Favorites boards loaded from Server: %ld", [favorites count]);
+        
+        // save boards to cache server
+        [self saveFavoritesToCache:favorites rootid:fid];
+    }
+    return favorites;
+}
+
+- (BOOL)getFavoritesFromCache:(NSMutableArray*)favorites rootid:(long)fid
+{
+    NSString *stamp = [self getCacheUpdateTime:@"FAVORITE" RootID:fid];
+    if(stamp == nil){
+        return NO;
+    }
+    
+    if([db open]){
+        // load favorite boards from cache
+        NSString *sql = [NSString stringWithFormat:@"SELECT * FROM BoardCache where type = 'FAVORITE' and root_id=%ld", fid];
+        FMResultSet *s = [db executeQuery:sql];
+        while ([s next]) {
+            SMTHBoard *board = [[SMTHBoard alloc] init];
+            board.boardID = [s longForColumn:@"board_id"];
+            board.chsName = [s stringForColumn:@"board_chs_name"];
+            board.engName = [s stringForColumn:@"board_eng_name"];
+            board.category = [s stringForColumn:@"board_category"];
+            board.managers = [s stringForColumn:@"board_managers"];
+            board.type = [s intForColumn:@"board_type"];
+            
+            [favorites addObject:board];
+        }
+
+        NSLog(@"Favorite boards loaded from Cache %ld", [favorites count]);
+        [db close];
+    }
+
+    return YES;
+}
+
+
+- (BOOL) saveFavoritesToCache:(NSArray*)favorites rootid:(long)fid
+{
+    if([db open]){
+        BOOL success;
+        
+        // clear all board cache first
+        NSString *sql = [NSString stringWithFormat:@"DELETE from BoardCache where type = 'FAVORITE' and root_id='%ld'",fid];
+        success = [db executeUpdate:sql];
+        if(! success){
+            NSLog(@"Failed to Delete cached Boards from BoardCache, fid=%ld!", fid);
+        }
+        
+        // save all board to cache
+        for (SMTHBoard* board in favorites) {
+            success = [db executeUpdate:@"INSERT INTO BoardCache ('type', 'root_id', 'board_id', 'board_chs_name', 'board_eng_name', 'board_category', 'board_managers', 'board_type') VALUES ('FAVORITE',?,?,?,?,?,?,?)", [NSNumber numberWithLong:fid], [NSNumber numberWithLong:board.boardID], board.chsName, board.engName, board.category, board.managers, [NSNumber numberWithLong:board.type]];
+            if(! success){
+                NSLog(@"failed to write board to cache: %@, fid=%ld", board.chsName, fid);
+            }
+        }
+        NSLog(@"Write board to cache: %ld", [favorites count]);
+        
+        [self updateCacheStatus:@"FAVORITE" RootID:fid];
+        
+        [db close];
+    }
+    
+    return YES;
+}
+
+- (BOOL)getFavoritesFromServer:(NSMutableArray*)favorites rootid:(long)fid
+{
+    [smth reset_status];
+    
+    NSArray *results = [smth net_LoadFavorites:fid];
+    for(id result in results)
+    {
+        //bid = 647;
+        //"current_users" = 309;
+        //flag = 279040;
+        //group = 0;
+        //id = Children;
+        //"last_post" = 931215771;
+        //level = 0;
+        //manager = "";
+        //"max_online" = 0;
+        //"max_time" = 0;
+        //name = "\U5b69\U5b50";
+        //position = 646;
+        //score = 0;
+        //"score_level" = 0;
+        //section = 0;
+        //total = 93186;
+        //type = board;
+        //unread = 1;
+        
+        NSDictionary *dict = (NSDictionary*) result;
+        NSNumber *bid = [dict objectForKey:@"bid"];
+        NSString *engName = [dict objectForKey:@"id"];
+        NSString *chsName = [dict objectForKey:@"name"];
+        NSString *manager = [dict objectForKey:@"manager"];
+        
+        //        NSLog(@"English board name:%@", engName);
+        SMTHBoard *board = [[SMTHBoard alloc] init];
+        if (engName != nil && engName.length > 0)
+        {
+            board.type = BOARD;
+        } else
+        {
+            board.type = GROUP;
+        }
+        board.engName = engName;
+        board.boardID = [bid longValue];
+        board.chsName = chsName;
+        board.managers = manager;
+        [favorites addObject:board];
+    }
+    
+    return YES;
+}
+
+#pragma mark - Get Boards List
 
 - (NSArray *)getAllBoards
 {
@@ -519,8 +630,6 @@
         success = [db executeUpdate:@"DELETE from BoardCache where type = 'BOARD'"];
         if(! success){
             NSLog(@"Failed to Delete cached Boards from BoardCache!");
-        } else {
-            NSLog(@"Delete cached boards from BoardCache done.");
         }
 
         // save all board to cache
@@ -528,8 +637,6 @@
             success = [db executeUpdate:@"INSERT INTO BoardCache ('type', 'board_id', 'board_chs_name', 'board_eng_name', 'board_category', 'board_managers') VALUES ('BOARD',?,?,?,?,?)", [NSNumber numberWithLong:board.boardID], board.chsName, board.engName, board.category, board.managers];
             if(! success){
                 NSLog(@"Failt to write board to cache: %@", board.chsName);
-            } else {
-//                NSLog(@"Write board cache: %@", board.chsName);
             }
         }
         NSLog(@"Write board to cache: %ld", [boards count]);
@@ -637,6 +744,8 @@
     }
     return YES;
 }
+
+#pragma mark - Other methods
 
 - (SMTHUser*) getUserInfo:(NSString*) userID
 {

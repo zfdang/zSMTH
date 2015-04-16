@@ -139,7 +139,6 @@
 //然后在 - gestureRecognizerShouldBegin: 中返回就可以了。
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    NSLog(@"gestureRecognizerShouldBegin");
     if ([self isRootViewController]) {
         return NO;
     } else {

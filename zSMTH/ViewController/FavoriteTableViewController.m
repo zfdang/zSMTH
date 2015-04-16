@@ -11,7 +11,7 @@
 #import "SMTHBoard.h"
 #import "BoardListTableViewCell.h"
 #import "PostListTableViewController.h"
-
+#import "SVPullToRefresh.h"
 
 @interface FavoriteTableViewController ()
 {
@@ -42,6 +42,14 @@
         self.title = [NSString stringWithFormat:@"收藏夹 | %@", favoriteRootName];
         self.leftButton.image =  [UIImage imageNamed:@"return"];
     }
+    
+    // 开启上拉加载和和下拉刷新
+    self.navigationController.navigationBar.translucent = NO;
+    // add pull to refresh function at the top & bottom
+    __weak typeof(self) weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshFavorite];
+    }];
 }
 
 - (IBAction)showLeftMenu:(id)sender {
@@ -54,11 +62,27 @@
 }
 
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Favorite List Loading
+
+- (void) refreshFavorite {
+    // clear cache
+    [helper clearCacheStatus:@"FAVORITE" RootID:self.favoriteRootID];
+
+    __weak typeof(self) weakSelf = self;
+    int64_t delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [weakSelf.tableView.pullToRefreshView stopAnimating];
+        
+        weakSelf.progressTitle = @"刷新中...";
+        [weakSelf startAsyncTask];
+    });
 }
 
 - (void)asyncTask

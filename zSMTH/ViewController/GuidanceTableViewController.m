@@ -157,7 +157,7 @@
 {
     NSArray *posts = [m_sections objectAtIndex:indexPath.section];
     SMTHPost* post = (SMTHPost*)[posts objectAtIndex:indexPath.row];
-    NSLog(@"Click on Post: Board = %@, Post = %@", post.postBoard, post.postID);
+//    NSLog(@"Click on Post: Board = %@, Post = %@", post.postBoard, post.postID);
 
     PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
     postcontent.engName = post.postBoard;
