@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) NSString *engName;
 @property (strong, nonatomic) NSString *chsName;
+@property (nonatomic) long boardID;
 
 - (IBAction)return:(id)sender;
 - (IBAction)newPost:(id)sender;

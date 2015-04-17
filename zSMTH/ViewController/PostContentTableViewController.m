@@ -27,6 +27,10 @@
     int mPageIndex;
     CGFloat iHeaderHeight;
     NSMutableArray *mPhotos;
+    
+    NSString *chsName;
+    NSString *engName;
+    long boardID;
 }
 
 @end
@@ -34,8 +38,6 @@
 @implementation PostContentTableViewController
 
 @synthesize postID;
-@synthesize engName;
-@synthesize chsName;
 @synthesize postSubject;
 
 - (void)viewDidLoad {
@@ -45,12 +47,12 @@
     mPosts = [[NSMutableArray alloc] init];
     mHeights = [[NSMutableDictionary alloc] init];
     iHeaderHeight  = 22.0;
-    if(self.chsName){
-        self.title = [NSString stringWithFormat:@"%@(%@)",self.chsName, self.engName];
+    if(chsName){
+        self.title = [NSString stringWithFormat:@"%@(%@)",chsName, engName];
     } else {
-        self.title = [helper getFullBoardName:self.engName];
+        self.title = engName;
     }
-    
+
     // hide right button if this view is not initiated from Guidance
     if(! self.isFromGuidance){
         [self.navigationItem setRightBarButtonItem:nil];
@@ -69,6 +71,21 @@
     }];
     // change translucent, otherwise, tableview will be partially hidden
     self.navigationController.navigationBar.translucent = NO;
+}
+
+-(void) setBoardInfo:(long)boardid chsName:(NSString*)chsname engName:(NSString*) engname;
+{
+    // 从首页导读调用的时候，没有boardid, 没有chsname
+    boardID = boardid;
+    engName = engname;
+    chsName = chsname;
+    if(chsName == nil){
+        // 从缓存的所有版面列表中获取中文版名和版面的ID
+        // 如果之前没有访问过所有版面，那么会返回空值
+        helper = [SMTHHelper sharedManager];
+        chsName = [helper getChsBoardName:engName];
+        boardID = [helper getBoardID:engName];
+    }
 }
 
 - (void) loadMorePostList {
@@ -203,7 +220,7 @@
         cell.idxPost = indexPath.row;
 
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
-        post.postBoard = self.engName;
+        post.postBoard = engName;
         [cell setCellContent:post];
        
         CGFloat height = [cell getCellHeight];
@@ -245,10 +262,11 @@
 }
 
 #pragma mark - Content Actions
+
 - (IBAction)clickRightButton:(id)sender {
     PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
-    postlist.chsName = self.chsName;  // this field might be null
-    postlist.engName = self.engName;
+    postlist.chsName = chsName;  // this field might be null
+    postlist.engName = engName;
     [self.navigationController pushViewController:postlist animated:YES];
 }
 
@@ -282,9 +300,13 @@
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"openInBrowser"]
                                                            title:@"浏览器打开"
                                                           action:^{
-
-                                                              NSString* url = [NSString stringWithFormat:@"http://m.newsmth.net/article/%@/%@?p=%d",self.engName, post.postID, 0];
-                                                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+                                                              if(boardID == 0)
+                                                              {
+                                                                  [self.view makeToast:@"版面ID未知，请先打开一次\"全部讨论区\"!"];
+                                                              } else {
+                                                                  NSString* url = [NSString stringWithFormat:@"http://www.newsmth.net/bbscon.php?bid=%ld&id=%@", boardID, post.postID];
+                                                                  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+                                                              }
                                                               NSLog(@"%@, %@", @"2", post.postID);
                                                           }],
                            
@@ -341,7 +363,7 @@
 {
     ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
     
-    editor.engName = self.engName;
+    editor.engName = engName;
     [editor setOrigPostInfo:[post.postID doubleValue] subject:post.postSubject author:post.author content:post.postContent];
     [self.navigationController pushViewController:editor animated:YES];
 }

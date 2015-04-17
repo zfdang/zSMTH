@@ -11,8 +11,6 @@
 
 @interface PostContentTableViewController : ExtendedTableViewController <RefreshTableViewProtocol>
 
-@property (strong, nonatomic) NSString *engName;
-@property (strong, nonatomic) NSString *chsName;
 @property (strong, nonatomic) NSString *postSubject;
 @property (nonatomic) long postID;
 @property (nonatomic) BOOL isFromGuidance;
@@ -21,5 +19,6 @@
 - (IBAction)clickRightButton:(id)sender;
 
 - (IBAction)return:(id)sender;
+-(void) setBoardInfo:(long)boardid chsName:(NSString*)chsname engName:(NSString*) engname;
 
 @end

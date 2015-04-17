@@ -32,6 +32,7 @@
 
 @synthesize engName;
 @synthesize chsName;
+@synthesize boardID;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -246,7 +247,8 @@
 //    NSLog(@"Click on Post: Board = %@, Post = %@", post.postBoard, post.postID);
     
     PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
-    postcontent.engName = post.postBoard;
+    
+    [postcontent setBoardInfo:0 chsName:self.chsName engName:self.engName];
     postcontent.postID = [post.postID doubleValue];
     postcontent.postSubject = post.postSubject;    
     [self.navigationController pushViewController:postcontent animated:YES];

@@ -160,7 +160,8 @@
 //    NSLog(@"Click on Post: Board = %@, Post = %@", post.postBoard, post.postID);
 
     PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
-    postcontent.engName = post.postBoard;
+    // 首页导读页面，没有版面的ID和中文名，只有英文名
+    [postcontent setBoardInfo:0 chsName:nil engName:post.postBoard];
     postcontent.postID = [post.postID doubleValue];
     postcontent.postSubject = post.postSubject;
     postcontent.isFromGuidance = YES;

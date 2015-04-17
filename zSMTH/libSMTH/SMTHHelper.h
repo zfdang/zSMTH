@@ -48,6 +48,7 @@
 
 - (SMTHUser*) getUserInfo:(NSString*) userID;
 
-- (NSString*) getFullBoardName:(NSString*) engName;
+- (NSString*) getChsBoardName:(NSString*) engName;
+- (long) getBoardID:(NSString*) engName;
 
 @end

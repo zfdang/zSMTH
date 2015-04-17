@@ -121,6 +121,8 @@
     return NO;
 }
 
+#pragma mark - User
+
 - (void) login:(NSString*)username password:(NSString*)password
 {
     [smth reset_status];
@@ -154,6 +156,70 @@
         return NO;
     return YES;
 }
+
+- (NSURL*) getFaceURLByUserID:(NSString*)userID
+{
+    SMTHUser *u = [[SMTHUser alloc] init];
+    u.userID = userID;
+    return [u getFaceURL];
+}
+
+- (SMTHUser*) getUserInfo:(NSString*) userID
+{
+    [smth reset_status];
+    NSDictionary* infos = [smth net_QueryUser:userID];
+    if(smth->net_error == 0){
+        // 没有错误
+        if(infos != nil){
+            //        uid = 409391;
+            //        id = zSMTHDev;
+            //        nick = zSMTHDev;
+            //        gender = 0;
+            //        age = 35;
+            //        faceurl = "";
+            
+            //        logins = 208;
+            //        "first_login" = 1426471523;
+            //        "last_login" = 1426608072;
+            
+            //        level = 11;
+            //        life = "紫檀";
+            //        posts = 0;
+            //        score = 0;
+            //        title = "用户";
+            
+            SMTHUser* u = [[SMTHUser alloc] init];
+            
+            u.uID = [infos objectForKey:@"uid"];
+            u.userID = [infos objectForKey:@"id"];
+            u.userNick = [infos objectForKey:@"nick"];
+            long gender = [[infos objectForKey:@"gender"] longValue];
+            if(gender == 0)
+                u.userGender = @"男";
+            else
+                u.userGender = @"女";
+            u.userAge = [[infos objectForKey:@"age"] description];
+            u.faceURL = [infos objectForKey:@"faceurl"];
+            
+            u.totalLogins = [[infos objectForKey:@"logins"] description];
+            u.firstLogin = [self getAbsoluteDateString:[[infos objectForKey:@"first_login"] doubleValue]];
+            u.lastLogin = [self getAbsoluteDateString:[[infos objectForKey:@"last_login"] doubleValue]];
+            
+            u.userLevel = [[infos objectForKey:@"level"] stringValue];
+            u.userLife = [infos objectForKey:@"life"];
+            u.totalPosts = [[infos objectForKey:@"posts"] description];
+            u.userScore = [[infos objectForKey:@"score"] description];
+            u.userTitle = [infos objectForKey:@"title"];
+            
+            return u;
+        }
+    }
+    
+    return nil;
+}
+
+
+#pragma mark - Posts
 
 - (NSArray *)getGuidancePosts
 {
@@ -195,14 +261,6 @@
     }
 
     return sections;
-}
-
-
-- (NSURL*) getFaceURLByUserID:(NSString*)userID
-{
-    SMTHUser *u = [[SMTHUser alloc] init];
-    u.userID = userID;
-    return [u getFaceURL];
 }
 
 - (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from
@@ -745,63 +803,7 @@
     return YES;
 }
 
-#pragma mark - Other methods
-
-- (SMTHUser*) getUserInfo:(NSString*) userID
-{
-    [smth reset_status];
-    NSDictionary* infos = [smth net_QueryUser:userID];
-    if(smth->net_error == 0){
-        // 没有错误
-        if(infos != nil){
-            //        uid = 409391;
-            //        id = zSMTHDev;
-            //        nick = zSMTHDev;
-            //        gender = 0;
-            //        age = 35;
-            //        faceurl = "";
-            
-            //        logins = 208;
-            //        "first_login" = 1426471523;
-            //        "last_login" = 1426608072;
-            
-            //        level = 11;
-            //        life = "紫檀";
-            //        posts = 0;
-            //        score = 0;
-            //        title = "用户";
-            
-            SMTHUser* u = [[SMTHUser alloc] init];
-            
-            u.uID = [infos objectForKey:@"uid"];
-            u.userID = [infos objectForKey:@"id"];
-            u.userNick = [infos objectForKey:@"nick"];
-            long gender = [[infos objectForKey:@"gender"] longValue];
-            if(gender == 0)
-                u.userGender = @"男";
-            else
-                u.userGender = @"女";
-            u.userAge = [[infos objectForKey:@"age"] description];
-            u.faceURL = [infos objectForKey:@"faceurl"];
-            
-            u.totalLogins = [[infos objectForKey:@"logins"] description];
-            u.firstLogin = [self getAbsoluteDateString:[[infos objectForKey:@"first_login"] doubleValue]];
-            u.lastLogin = [self getAbsoluteDateString:[[infos objectForKey:@"last_login"] doubleValue]];
-            
-            u.userLevel = [[infos objectForKey:@"level"] stringValue];
-            u.userLife = [infos objectForKey:@"life"];
-            u.totalPosts = [[infos objectForKey:@"posts"] description];
-            u.userScore = [[infos objectForKey:@"score"] description];
-            u.userTitle = [infos objectForKey:@"title"];
-            
-            return u;
-        }
-    }
-    
-    return nil;
-}
-
-- (NSString*) getFullBoardName:(NSString*) engName
+- (NSString*) getChsBoardName:(NSString*) engName
 {
     NSString *result = nil;
     if ([db open]) {
@@ -814,11 +816,27 @@
         }
         [db close];
     }
-    if(result != nil){
-        return [NSString stringWithFormat:@"%@(%@)", result, engName ];
-    }
-    return engName;
+    return result;
 }
+
+- (long) getBoardID:(NSString*) engName
+{
+    long result = 0;
+    if ([db open]) {
+        // 查看缓存中是否有对应的英文版名的中文版名
+        NSString *sql = [NSString stringWithFormat:@"SELECT board_id FROM BoardCache where board_eng_name='%@'",engName];
+        FMResultSet *s = [db executeQuery:sql];
+        if ([s next]) {
+            //retrieve values for each record
+            result = [s longForColumn:@"board_id"];
+        }
+        [db close];
+    }
+    return result;
+}
+
+
+#pragma mark - Other methods
 
 - (int) checkVersion
 {
