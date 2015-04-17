@@ -162,7 +162,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     int length = [self getStringLengthForChinese:searchText];
-    NSLog(@"Search Text Changed: %@, %d", searchText, length);
+//    NSLog(@"Search Text Changed: %@, %d", searchText, length);
 
     // 2个英文字母，或者一个中文，可以开始查找了
     if(length >= 2){
@@ -177,7 +177,6 @@
         [boards addObjectsFromArray:origBoards];
         [self.tableView reloadData];
     }
-    
 }
 
 //判断中英混合的的字符串长度
