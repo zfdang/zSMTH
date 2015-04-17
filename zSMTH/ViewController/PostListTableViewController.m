@@ -248,7 +248,7 @@
     
     PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
     
-    [postcontent setBoardInfo:0 chsName:self.chsName engName:self.engName];
+    [postcontent setBoardInfo:self.boardID chsName:self.chsName engName:self.engName];
     postcontent.postID = [post.postID doubleValue];
     postcontent.postSubject = post.postSubject;    
     [self.navigationController pushViewController:postcontent animated:YES];

@@ -167,6 +167,7 @@
             PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
             postlist.engName = board.engName;
             postlist.chsName = board.chsName;
+            postlist.boardID = board.boardID;
             [self.navigationController pushViewController:postlist animated:YES];
         }
     }
