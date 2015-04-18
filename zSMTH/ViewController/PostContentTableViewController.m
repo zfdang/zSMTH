@@ -327,6 +327,16 @@
                                                            title:@"复制帖子"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"5", post.postID);
+                                                              UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                                                              [pasteboard setString:post.postContent];
+                                                              
+                                                              CGRect screenRect = [[UIScreen mainScreen] bounds];
+                                                              CGFloat screenWidth = screenRect.size.width;
+                                                              CGFloat screenHeight = screenRect.size.height;
+                                                              [self.view  makeToast:@"帖子内容已复制到剪切板!"
+                                                                                duration:0.8
+                                                                                position:[NSValue valueWithCGPoint:CGPointMake(screenWidth*0.5, screenHeight*0.6)]];
+
                                                           }],
                            
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"toUser"]

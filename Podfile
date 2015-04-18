@@ -8,10 +8,10 @@ pod 'SVPullToRefresh'
 pod 'SDWebImage', '~>3.6'
 pod 'Toast', '~> 2.4'
 pod 'FMDB'
-#pod 'SIAlertView'
 pod 'RNGridMenu', '~> 0.1.2'
 pod 'MWPhotoBrowser'
 pod 'CTAssetsPickerController',  '~> 2.9.0'
+pod 'TTTAttributedLabel'
 end
 
 target 'zSMTHTests' do

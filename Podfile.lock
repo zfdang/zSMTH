@@ -20,6 +20,7 @@ PODS:
   - SDWebImage/Core (3.7.2)
   - SVPullToRefresh (0.4.1)
   - Toast (2.4)
+  - TTTAttributedLabel (1.13.3)
 
 DEPENDENCIES:
   - CTAssetsPickerController (~> 2.9.0)
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.6)
   - SVPullToRefresh
   - Toast (~> 2.4)
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   CTAssetsPickerController: 56a4a228dcb48a9375ab8d4922e82ac74af74aa1
@@ -44,5 +46,6 @@ SPEC CHECKSUMS:
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
+  TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
 
 COCOAPODS: 0.36.0

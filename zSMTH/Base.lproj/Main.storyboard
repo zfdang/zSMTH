@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="l22-2R-Y2i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="l22-2R-Y2i">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -235,6 +235,12 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="8Ob-lR-Wd2"/>
+                                <exclude reference="9at-6c-Iix"/>
+                                <exclude reference="HCp-WE-YXx"/>
+                                <exclude reference="Sxr-c9-2Pr"/>
+                                <exclude reference="bNL-mb-Rp7"/>
+                                <exclude reference="hfX-oP-C5H"/>
                                 <exclude reference="1I1-4G-Txx"/>
                                 <exclude reference="GCw-H4-C5A"/>
                                 <exclude reference="SZY-da-yeA"/>
@@ -247,12 +253,6 @@
                                 <exclude reference="T5B-jZ-2fF"/>
                                 <exclude reference="YcG-YW-4WH"/>
                                 <exclude reference="dtk-rg-bbQ"/>
-                                <exclude reference="8Ob-lR-Wd2"/>
-                                <exclude reference="9at-6c-Iix"/>
-                                <exclude reference="HCp-WE-YXx"/>
-                                <exclude reference="Sxr-c9-2Pr"/>
-                                <exclude reference="bNL-mb-Rp7"/>
-                                <exclude reference="hfX-oP-C5H"/>
                                 <exclude reference="Vtm-iD-plZ"/>
                                 <exclude reference="WJ1-R7-9H1"/>
                                 <exclude reference="kHA-fB-ogs"/>

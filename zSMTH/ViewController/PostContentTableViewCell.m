@@ -13,10 +13,14 @@
 #import "SMTHAttachment.h"
 #import "TapImageView.h"
 
+const CGFloat PaddingBetweenContentAndImage = 5.0;
+const CGFloat PaddingBetweenImages = 5.0;
+
 @implementation PostContentTableViewCell
 
 @synthesize delegate;
 @synthesize idxPost;
+
 
 - (void)awakeFromNib {
     // Initialization code
@@ -55,7 +59,7 @@
 
         CGRect rect = self.postContent.frame;
 
-        CGFloat imgOffset = [self.postContent get_height] + rect.origin.y + 5;
+        CGFloat imgOffset = [self.postContent getContentHeight] + rect.origin.y + PaddingBetweenContentAndImage;
         
         for(int i=0; i<[attachs count]; i++){
             
@@ -86,7 +90,7 @@
                                     for (int j = 0; j < i; j++) {
                                         // calculate sum of previous images's height
                                         float imgHeight = [[mImgHeights objectAtIndex:j] floatValue];
-                                        curImageOffset += imgHeight + 5;
+                                        curImageOffset += imgHeight + PaddingBetweenImages;
                                     }
                                     imageview.frame = CGRectMake(rect.origin.x, curImageOffset, rect.size.width, curImageHeight);
                                     
@@ -127,8 +131,8 @@
     CGRect rect = self.postContent.frame;
     
     // this is the image offset to post content
-    CGFloat content_height = [self.postContent get_height];
-    CGFloat result = rect.origin.y + content_height + 10;
+    CGFloat content_height = [self.postContent getContentHeight];
+    CGFloat result = rect.origin.y + content_height + PaddingBetweenContentAndImage;
     
 //    NSLog(@"header height is %f, content height = %f", rect.origin.y, content_height);
     if(mImgHeights != nil){
@@ -137,12 +141,12 @@
             // calculate sum of previous images's height
             imageHeight = [[mImgHeights objectAtIndex:i] floatValue];
 //            NSLog(@"image index %d, height = %f", i, imageHeight);
-            result += imageHeight + 5;
+            result += imageHeight + PaddingBetweenImages;
         }
-        result += 10;
+        result += PaddingBetweenImages;
     }
 //    NSLog(@"Final result is %f", result);
-    return result + 10;
+    return result;
 }
 
 @end

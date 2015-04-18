@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
+#import "TTTAttributedLabel.h"
 
-@interface PostContentLabel : UILabel
+@interface PostContentLabel : TTTAttributedLabel
 {
-    NSMutableAttributedString *attString;
-    bool prev_line_empty;
 }
 
 - (void)setContentInfo:(NSString *)text;
-- (CGFloat)get_height;
+- (CGFloat)getContentHeight;
 
 @end

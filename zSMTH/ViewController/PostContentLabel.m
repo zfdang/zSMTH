@@ -7,26 +7,35 @@
 //
 
 #import "PostContentLabel.h"
+#import "UIView+Toast.h"
+
+static CGFloat const kEspressoDescriptionTextFontSize = 17;
+
+@interface PostContentLabel() <TTTAttributedLabelDelegate, UIActionSheetDelegate>
+{
+}
+@end
 
 @implementation PostContentLabel
 
-- (id)initWithFrame:(CGRect)frame
+
+- (void) initTTTAttributedLabel
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    self.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+    self.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    self.delegate = self;
 }
 
 - (void)setContentInfo:(NSString *)text
 {
-    attString = [[NSMutableAttributedString alloc] initWithString:@""];
+    [self initTTTAttributedLabel];
+    
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:@""];
     
     UIFont * font = [self font];
-    CTFontRef font_ref = CTFontCreateWithName((CFStringRef)font.fontName, font.pointSize, nil);
+    CTFontRef font_ref = CTFontCreateWithName((CFStringRef)font.fontName, kEspressoDescriptionTextFontSize, nil);
     
-    prev_line_empty = false;
+    __block BOOL prev_line_empty = false;
     
     [text enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
         bool is_quota = false;
@@ -68,64 +77,62 @@
     }];
     
     CFRelease(font_ref);
+    
+    self.text = attString;
 }
 
-- (CGFloat)get_height
+- (CGFloat)getContentHeight
 {
-    CGFloat total_height = 0;
+    static CGFloat padding = 0.0;
+
+    UIFont *systemFont = [UIFont systemFontOfSize:kEspressoDescriptionTextFontSize];
+    CGSize textSize = CGSizeMake(self.frame.size.width, CGFLOAT_MAX); // rough accessory size
+    CGSize sizeWithFont = [self.text sizeWithFont:systemFont constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
+
+    CGFloat result =  sizeWithFont.height + padding;
+    return result;
+}
+
+#pragma mark - TTTAttributedLabelDelegate
+
+- (void)attributedLabel:(__unused TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
+{
+    [[[UIActionSheet alloc] initWithTitle:[url absoluteString]
+                                 delegate:self
+                        cancelButtonTitle:NSLocalizedString(@"取消", nil)
+                   destructiveButtonTitle:nil
+                        otherButtonTitles:NSLocalizedString(@"复制链接", nil), NSLocalizedString(@"在浏览器中打开", nil),nil
+      ]
+     showInView:self];
+}
+
+- (void)attributedLabel:(__unused TTTAttributedLabel *)label didLongPressLinkWithURL:(__unused NSURL *)url atPoint:(__unused CGPoint)point
+{
+    // 长按链接，直接打开URL
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    } else if (buttonIndex == actionSheet.firstOtherButtonIndex){
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        [pasteboard setURL:[NSURL URLWithString:actionSheet.title]];
+        
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        CGFloat screenHeight = screenRect.size.height;
+        [self.superview  makeToast:@"URL已复制到剪切板!"
+                duration:0.8
+                position:[NSValue valueWithCGPoint:CGPointMake(screenWidth*0.5, screenHeight*0.6)]];
     
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString);
-    CGRect drawingRect = CGRectMake(0, 0, self.frame.size.width, 50000);  //这里的高要设置足够大
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddRect(path, NULL, drawingRect);
-    CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter,CFRangeMake(0,0), path, NULL);
-    CGPathRelease(path);
-    CFRelease(framesetter);
-    
-    NSArray *linesArray = (NSArray *) CTFrameGetLines(textFrame);
-    if([linesArray count] == 0){
-        return 0;
+    } else{
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:actionSheet.title]];
     }
     
-    CGPoint origins[[linesArray count]];
-    CTFrameGetLineOrigins(textFrame, CFRangeMake(0, 0), origins);
-    
-    CGFloat line_y = origins[[linesArray count] -1].y;  //最后一行line的原点y坐标
-    
-    CGFloat ascent;
-    CGFloat descent;
-    CGFloat leading;
-    
-    CTLineRef line = (__bridge CTLineRef) [linesArray objectAtIndex:[linesArray count]-1];
-    CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
-    
-    total_height = 50000 - line_y + descent +1;    //+1为了纠正descent转换成int小数点后舍去的值
-    
-    CFRelease(textFrame);
-    
-    return total_height;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-    CGContextTranslateCTM(context, 0, self.bounds.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddRect(path, NULL, self.bounds);
-    
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString);
-    CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, [attString length]), path, NULL);
-    CTFrameDraw(frame, context);
-    
-    CFRelease(frame);
-    CFRelease(path);
-    CFRelease(framesetter);
-}
 
 @end
