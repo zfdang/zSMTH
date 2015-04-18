@@ -134,5 +134,15 @@ static CGFloat const kEspressoDescriptionTextFontSize = 17;
     
 }
 
+// http://www.jamesvandyne.com/improve-performance-and-draw-your-own-strings-on-iphone/
+//UILabel is great for displaying static or mostly static text on the screen. However
+//if you are going to be updating it with any frequency, it is advantageous to draw text
+//manually. UILabel uses the drawInRect: or drawAtPoint: methods to draw anyways, calling
+//them directly saves your phone from a lot of unneeded calls. This equates to less execution
+//faster which in turn means more battery life for your users. A win for everybody.
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+}
 
 @end
