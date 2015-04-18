@@ -132,6 +132,7 @@
     {
         NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
         cell = (GuidancePostTableViewCell*)[nibArray objectAtIndex:0];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     if (m_sections !=nil) {

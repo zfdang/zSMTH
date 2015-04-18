@@ -302,7 +302,7 @@
                                                           action:^{
                                                               if(boardID == 0)
                                                               {
-                                                                  [self.view makeToast:@"版面ID未知，请先打开一次\"全部讨论区\"!"];
+                                                                  [cell makeToast:@"版面ID未知，请先打开一次\"全部讨论区\"!"];
                                                               } else {
                                                                   NSString* url = [NSString stringWithFormat:@"http://www.newsmth.net/bbscon.php?bid=%ld&id=%@", boardID, post.postID];
                                                                   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
@@ -333,7 +333,7 @@
                                                               CGRect screenRect = [[UIScreen mainScreen] bounds];
                                                               CGFloat screenWidth = screenRect.size.width;
                                                               CGFloat screenHeight = screenRect.size.height;
-                                                              [self.view  makeToast:@"帖子内容已复制到剪切板!"
+                                                              [cell  makeToast:@"帖子内容已复制到剪切板!"
                                                                                 duration:0.8
                                                                                 position:[NSValue valueWithCGPoint:CGPointMake(screenWidth*0.5, screenHeight*0.6)]];
 
