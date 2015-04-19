@@ -330,12 +330,10 @@
                                                               UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
                                                               [pasteboard setString:post.postContent];
                                                               
-                                                              CGRect screenRect = [[UIScreen mainScreen] bounds];
-                                                              CGFloat screenWidth = screenRect.size.width;
-                                                              CGFloat screenHeight = screenRect.size.height;
-                                                              [cell  makeToast:@"帖子内容已复制到剪切板!"
+                                                              CGRect bounds = [[UIScreen mainScreen] bounds];
+                                                              [self.tableView  makeToast:@"帖子内容已复制到剪切板!"
                                                                                 duration:0.8
-                                                                                position:[NSValue valueWithCGPoint:CGPointMake(screenWidth*0.5, screenHeight*0.6)]];
+                                                                                position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
 
                                                           }],
                            

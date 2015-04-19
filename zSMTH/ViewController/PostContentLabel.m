@@ -124,9 +124,16 @@ static CGFloat const kEspressoDescriptionTextFontSize = 17;
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
         CGFloat screenHeight = screenRect.size.height;
-        [self.superview  makeToast:@"URL已复制到剪切板!"
+
+        // 找到最上层的tableview, 这样好确定toast的位置
+        UIView *view = self.superview;
+        while (! [view isKindOfClass:[UITableView class]]){
+            view = view.superview;
+        }
+        UITableView *tableview = (UITableView*) view;
+        [tableview  makeToast:@"URL已复制到剪切板!"
                 duration:0.8
-                position:[NSValue valueWithCGPoint:CGPointMake(screenWidth*0.5, screenHeight*0.6)]];
+                position:[NSValue valueWithCGPoint:CGPointMake(screenWidth*0.5, tableview.contentOffset.y + screenHeight*0.7)]];
     
     } else{
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:actionSheet.title]];
