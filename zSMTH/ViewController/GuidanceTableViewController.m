@@ -36,6 +36,7 @@
 //    [self.tableView setContentInset:UIEdgeInsetsMake(0, -6, 0, -6)];
     
     m_sections = nil;
+    self.progressTitle = @"加载中...";
     [self startAsyncTask:nil];
     
     // add pull to refresh function at the top & bottom
