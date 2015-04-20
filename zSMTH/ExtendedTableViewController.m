@@ -22,7 +22,7 @@
 
 
 @implementation ExtendedTableViewController
-
+i
 @synthesize progressTitle;
 
 - (void)viewDidLoad {

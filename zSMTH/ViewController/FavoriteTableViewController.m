@@ -13,9 +13,20 @@
 #import "PostListTableViewController.h"
 #import "SVPullToRefresh.h"
 
+typedef enum {
+    TASK_RELOAD = 0,
+    TASK_DELETE,
+} TASKTYPE;
+
+
 @interface FavoriteTableViewController ()
 {
-    NSArray *favorites;
+    NSMutableArray *favorites;
+    NSString *toBeDeletedFavoriteBoardEngName;
+    NSIndexPath *toBeDeletedIndex;
+
+    TASKTYPE taskType;
+    BOOL taskResult;
 }
 
 @end
@@ -32,10 +43,11 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     // load favorite boards
     favorites = nil;
+    taskType = TASK_RELOAD;
     [self startAsyncTask];
     
     if(favoriteRootName && favoriteRootID != 0){
@@ -81,6 +93,7 @@
         [weakSelf.tableView.pullToRefreshView stopAnimating];
         
         weakSelf.progressTitle = @"刷新中...";
+        taskType = TASK_RELOAD;
         [weakSelf startAsyncTask];
     });
 }
@@ -88,16 +101,51 @@
 - (void)asyncTask
 {
     if(helper.isLogined)
-        favorites = [helper getFavorites:favoriteRootID];
+    {
+        if(taskType == TASK_RELOAD){
+            favorites = [NSMutableArray arrayWithArray:[helper getFavorites:favoriteRootID]];
+        } else if (taskType == TASK_DELETE){
+            taskResult = [helper removeFavorite:toBeDeletedFavoriteBoardEngName];
+        }
+    }
 }
 
 - (void)finishAsyncTask
 {
     if(helper.isLogined)
-        [self.tableView reloadData];
+    {
+        if(taskType == TASK_RELOAD){
+            [self.tableView reloadData];
+        } else if (taskType == TASK_DELETE){
+            // invalid cache for this favorite folder
+            [helper clearCacheStatus:@"FAVORITE" RootID:self.favoriteRootID];
+            
+            if(taskResult){
+                // delete selected board from array and server
+                [favorites removeObjectAtIndex:toBeDeletedIndex.row];
+                
+                // delete selected board from tableview
+                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:toBeDeletedIndex] withRowAnimation:UITableViewRowAnimationLeft];
+                
+                UIAlertView *altview = [[UIAlertView alloc] initWithTitle:@"删除成功"
+                                                                  message:[NSString stringWithFormat:@"删除版面%@成功",toBeDeletedFavoriteBoardEngName]
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"确定"
+                                                        otherButtonTitles:nil];
+                [altview show];
+            } else {
+                UIAlertView *altview = [[UIAlertView alloc] initWithTitle:@"删除失败"
+                                                                  message:[NSString stringWithFormat:@"删除版面%@失败",toBeDeletedFavoriteBoardEngName]
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"确定"
+                                                        otherButtonTitles:nil];
+                [altview show];
+            }
+        }
+    }
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
@@ -151,6 +199,8 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0)
@@ -174,6 +224,34 @@
     }
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 从收藏夹中删除版面
+    if(indexPath.section == 0){
+        SMTHBoard* board = (SMTHBoard*)[favorites objectAtIndex:indexPath.row];
+        if(board.type == GROUP){
+            // alert it's a group
+            UIAlertView *altview = [[UIAlertView alloc] initWithTitle:@"不支持文件夹删除"
+                                                              message:[NSString stringWithFormat:@"删除%@失败，请登录Web进行操作!",board.chsName]
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"确定"
+                                                    otherButtonTitles:nil];
+            [altview show];
+        } else {
+            // delete board from server
+            self.progressTitle = @"从服务器删除中...";
+            taskType = TASK_DELETE;
+            toBeDeletedFavoriteBoardEngName = [board.engName copy];
+            toBeDeletedIndex = [indexPath copy];
+            [self startAsyncTask];
+        }
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.

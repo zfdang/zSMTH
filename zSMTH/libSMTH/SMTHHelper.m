@@ -456,6 +456,31 @@
 
 #pragma mark - Get Favorite List
 
+- (BOOL) addFavorite:(NSString*)engName
+{
+    [smth reset_status];
+    [smth net_AddFav:engName];
+    
+    if(smth->net_error == 0)
+    {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL) removeFavorite:(NSString*)engName
+{
+    [smth reset_status];
+    [smth net_DelFav:engName];
+    
+    if(smth->net_error == 0)
+    {
+        return YES;
+    }
+    return NO;
+}
+
+
 - (NSArray *)getFavorites: (long)fid
 {
     NSMutableArray *favorites = [[NSMutableArray alloc] init];
