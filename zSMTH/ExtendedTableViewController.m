@@ -80,7 +80,7 @@
     }
 }
 
-- (void)finishAsyncTask::(NSDictionary*) resultParams
+- (void)finishAsyncTask:(NSDictionary*) resultParams
 {
     
 }

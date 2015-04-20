@@ -39,7 +39,7 @@
  * default: do nothing;
  * subclass: [m_tableView reloadData] if use tableView.
  */
-- (void)finishAsyncTask::(NSDictionary*) resultParams;
+- (void)finishAsyncTask:(NSDictionary*) resultParams;
 
 - (IBAction)showLeftMenu:(id)sender;
 
