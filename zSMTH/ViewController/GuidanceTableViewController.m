@@ -36,7 +36,7 @@
 //    [self.tableView setContentInset:UIEdgeInsetsMake(0, -6, 0, -6)];
     
     m_sections = nil;
-    [self startAsyncTask];
+    [self startAsyncTask:nil];
     
     // add pull to refresh function at the top & bottom
     __weak typeof(self) weakSelf = self;
@@ -47,8 +47,10 @@
     self.navigationController.navigationBar.translucent = NO;
 }
 
-- (void)asyncTask
+- (void)asyncTask:(NSMutableDictionary*) params
 {
+//    NSLog(@"%@", [dict objectForKey:@"雨松MOMO"]);
+
     if(helper.user == nil){
         // 因为API的限制，想看10大必须得登录，如果用户没有登录，则用内置的帐号获取10大
         if(setting.bAutoLogin) {
@@ -60,7 +62,7 @@
     m_sections = [helper getGuidancePosts];
 }
 
-- (void)finishAsyncTask
+- (void)finishAsyncTask:(NSDictionary*) resultParams
 {
     
     [self.tableView reloadData];
@@ -74,7 +76,7 @@
         [weakSelf.tableView.pullToRefreshView stopAnimating];
         
         weakSelf.progressTitle = @"刷新中...";
-        [weakSelf startAsyncTask];
+        [weakSelf startAsyncTask:nil];
     });
 }
 

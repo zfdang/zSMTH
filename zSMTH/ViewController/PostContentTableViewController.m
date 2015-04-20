@@ -62,7 +62,7 @@
     self.tableView.allowsSelection = NO;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
     self.progressTitle = @"加载中...";
-    [self startAsyncTask];
+    [self startAsyncTask:nil];
     
     // add pull to refresh function at the top & bottom
     __weak typeof(self) weakSelf = self;
@@ -121,7 +121,7 @@
 }
 
 
-- (void)asyncTask
+- (void)asyncTask:(NSMutableDictionary*) params
 {
     mPageIndex = 0;
     NSArray *results = [helper getPostContents:engName postID:postID from:mPageIndex];
@@ -130,7 +130,7 @@
 }
 
 
-- (void)finishAsyncTask
+- (void)finishAsyncTask:(NSDictionary*) resultParams
 {
     [self.tableView reloadData];
 }

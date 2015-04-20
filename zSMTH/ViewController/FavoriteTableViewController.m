@@ -48,7 +48,7 @@ typedef enum {
     // load favorite boards
     favorites = nil;
     taskType = TASK_RELOAD;
-    [self startAsyncTask];
+    [self startAsyncTask:nil];
     
     if(favoriteRootName && favoriteRootID != 0){
         self.title = [NSString stringWithFormat:@"收藏夹 | %@", favoriteRootName];
@@ -94,11 +94,11 @@ typedef enum {
         
         weakSelf.progressTitle = @"刷新中...";
         taskType = TASK_RELOAD;
-        [weakSelf startAsyncTask];
+        [weakSelf startAsyncTask:nil];
     });
 }
 
-- (void)asyncTask
+- (void)asyncTask:(NSMutableDictionary*) params
 {
     if(helper.isLogined)
     {
@@ -110,7 +110,7 @@ typedef enum {
     }
 }
 
-- (void)finishAsyncTask
+- (void)finishAsyncTask:(NSDictionary*) resultParams
 {
     if(helper.isLogined)
     {
@@ -248,7 +248,7 @@ typedef enum {
             taskType = TASK_DELETE;
             toBeDeletedFavoriteBoardEngName = [board.engName copy];
             toBeDeletedIndex = [indexPath copy];
-            [self startAsyncTask];
+            [self startAsyncTask:nil];
         }
     }
 }
@@ -302,7 +302,7 @@ typedef enum {
 
 - (void)refreshViewAfterLogin
 {
-    [self startAsyncTask];
+    [self startAsyncTask:nil];
 }
 
 @end

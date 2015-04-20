@@ -16,13 +16,15 @@
 @interface ExtendedTableViewController () <UIGestureRecognizerDelegate>
 {
     MBProgressHUD *progressBar;
+    BOOL asyncTaskResult;
+    NSDictionary *resultParams;
 }
 @end
 
 
 
 @implementation ExtendedTableViewController
-i
+
 @synthesize progressTitle;
 
 - (void)viewDidLoad {
@@ -51,7 +53,7 @@ i
 }
 
 
-- (void)startAsyncTask
+- (void)startAsyncTask:(NSMutableDictionary*) params
 {
     [helper.smth reset_status];
     
@@ -61,17 +63,24 @@ i
     progressBar.labelText = self.progressTitle;
     
     [self.view addSubview:progressBar];
-    
-    [progressBar showWhileExecuting:@selector(asyncTask) onTarget:self withObject:nil animated:YES];
+    [progressBar showWhileExecuting:@selector(asyncTask:) onTarget:self withObject:params animated:YES];
 }
 
 
-- (void)asyncTask
+- (void)asyncTask:(NSMutableDictionary*) params
 {
     NSLog(@"asyncTask");
+
+    //得到词典中所有Value值
+    NSEnumerator * enumeratorValue = [params objectEnumerator];
+    
+    //快速枚举遍历所有Value的值
+    for (NSObject *object in enumeratorValue) {
+        NSLog(@"遍历Value的值: %@",object);
+    }
 }
 
-- (void)finishAsyncTask
+- (void)finishAsyncTask::(NSDictionary*) resultParams
 {
     
 }
@@ -81,7 +90,7 @@ i
 - (void)hudWasHidden:(MBProgressHUD *)hud
 {
     [hud removeFromSuperview];
-    [self finishAsyncTask];
+    [self finishAsyncTask:resultParams];
 }
 
 #pragma mark virtual method for all child views to show left menu

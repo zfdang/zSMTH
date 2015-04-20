@@ -62,7 +62,7 @@
     showDingPosts = NO;
     mPosts = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
-    [self startAsyncTask];
+    [self startAsyncTask:nil];
 
     // 开启上拉加载和和下拉刷新
     self.navigationController.navigationBar.translucent = NO;
@@ -85,7 +85,7 @@
         [weakSelf.tableView.pullToRefreshView stopAnimating];
 
         weakSelf.progressTitle = @"刷新中...";
-        [weakSelf startAsyncTask];
+        [weakSelf startAsyncTask:nil];
     });
 }
 
@@ -112,7 +112,7 @@
     });
 }
 
-- (void)asyncTask
+- (void)asyncTask:(NSMutableDictionary*) params
 {
     // this function will only load first page
     mPageIndex = 0;
@@ -121,7 +121,7 @@
     [mPosts addObjectsFromArray:posts];
 }
 
-- (void)finishAsyncTask
+- (void)finishAsyncTask:(NSDictionary*) resultParams
 {
     iNumberOfDing = [self getNumberOfDingPosts];
     [self.tableView reloadData];

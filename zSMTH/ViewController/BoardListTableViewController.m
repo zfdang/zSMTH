@@ -36,14 +36,14 @@
     // load favorite boards
     boards = [[NSMutableArray alloc] init];
     origBoards = [[NSMutableArray alloc] init];
-    [self startAsyncTask];
+    [self startAsyncTask:nil];
     
     lastUpdateTime = @"加载版面列表中...";
     
     self.searchBar.delegate = self;
 }
 
-- (void)asyncTask
+- (void)asyncTask:(NSMutableDictionary*) params
 {
     NSArray *results = [helper getAllBoards];
     lastUpdateTime = [NSString stringWithFormat:@"列表更新时间：%@", [helper getCacheUpdateTime:@"BOARD" RootID:0]];
@@ -55,7 +55,7 @@
     [boards addObjectsFromArray:results];
 }
 
-- (void)finishAsyncTask
+- (void)finishAsyncTask:(NSDictionary*) resultParams
 {
     [self.tableView reloadData];
 }
@@ -247,6 +247,6 @@
     [helper clearCacheStatus:@"BOARD" RootID:0];
 
     self.progressTitle = @"刷新中...";
-    [self startAsyncTask];
+    [self startAsyncTask:nil];
 }
 @end

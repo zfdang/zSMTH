@@ -23,7 +23,7 @@
  * default: init m_progressBar;
  * subclass: don't overwrite this in most cases.
  */
--(void)startAsyncTask;
+-(void)startAsyncTask:(NSMutableDictionary*)params;
 
 
 /*
@@ -31,7 +31,7 @@
  * default: do nothing;
  * subclass: do real network operations.
  */
--(void)asyncTask;
+- (void)asyncTask:(NSMutableDictionary*) params;
 
 
 /*
@@ -39,7 +39,7 @@
  * default: do nothing;
  * subclass: [m_tableView reloadData] if use tableView.
  */
-- (void)finishAsyncTask;
+- (void)finishAsyncTask::(NSDictionary*) resultParams;
 
 - (IBAction)showLeftMenu:(id)sender;
 
