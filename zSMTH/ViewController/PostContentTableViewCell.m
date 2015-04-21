@@ -67,6 +67,7 @@ const CGFloat PaddingBetweenImages = 5.0;
             
             if(![att isImage]){
                 // this is not an image
+                [mImgHeights insertObject:[NSNumber numberWithFloat:0.0] atIndex:i];
                 continue;
             }
             TapImageView * imageview = [[TapImageView alloc] init];
