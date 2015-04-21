@@ -16,7 +16,6 @@
 @interface ExtendedTableViewController () <UIGestureRecognizerDelegate>
 {
     MBProgressHUD *progressBar;
-    BOOL asyncTaskResult;
     NSDictionary *resultParams;
 }
 @end

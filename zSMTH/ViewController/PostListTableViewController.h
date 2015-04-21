@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSString *chsName;
 @property (nonatomic) long boardID;
 
-- (IBAction)return:(id)sender;
+- (IBAction)clickLeftButton:(id)sender;
 - (IBAction)newPost:(id)sender;
 
 @end

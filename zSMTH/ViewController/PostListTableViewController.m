@@ -10,9 +10,17 @@
 #import "PostListTableViewCell.h"
 #import "SMTHPost.h"
 #import "SVPullToRefresh.h"
+#import "UIView+Toast.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PostContentTableViewController.h"
 #import "ContentEditViewController.h"
+
+typedef enum {
+    TASK_RELOAD = 0,
+    TASK_ADD_FAVORITE,
+    TASK_SEARCH,
+} TASKTYPE;
+
 
 @interface PostListTableViewController ()
 {
@@ -24,6 +32,15 @@
     int iNumberOfDing;
     // 如果是YES, 则跳过置顶的帖子
     BOOL showDingPosts;
+    
+    // 当前async task的类型
+    TASKTYPE taskType;
+    BOOL asyncTaskResult;
+
+    // 搜索结果的当前页面
+    int mFilterPageIndex;
+    NSString* filterTitle;
+    NSString* filterAuthor;
 }
 
 @end
@@ -47,6 +64,7 @@
     }
     // add dropdown menu for navigation bar
     // 有一个bug, 当点击了navigation bar的其他按钮后，如果菜单处于弹出状态，居然也不消失
+    // 在viewwilldisappear里手动隐藏菜单
     if (self.navigationItem) {
         CGRect frame = CGRectMake(0.0, 0.0, 200.0, self.navigationController.navigationBar.bounds.size.height);
         SINavigationMenuView *menu = [[SINavigationMenuView alloc] initWithFrame:frame title:navTitle];
@@ -62,6 +80,7 @@
     showDingPosts = NO;
     mPosts = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
+    taskType = TASK_RELOAD;
     [self startAsyncTask:nil];
 
     // 开启上拉加载和和下拉刷新
@@ -93,20 +112,35 @@
 - (void) loadMorePostList {
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        mPageIndex += 1;
-        NSArray *posts = [helper getPostsFromBoard:engName from:mPageIndex];
+        NSArray *posts;
+        if(taskType == TASK_RELOAD){
+            mPageIndex += 1;
+            posts = [helper getPostsFromBoard:engName from:mPageIndex];
+        } else if(taskType == TASK_SEARCH) {
+            mFilterPageIndex += 1;
+            posts = [helper getFilteredPostsFromBoard:engName title:filterTitle user:filterAuthor from:mFilterPageIndex];
+        }
+        
         long currentNumber = [mPosts count];
         if(! showDingPosts)
             currentNumber -= iNumberOfDing;
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [mPosts addObjectsFromArray:posts];
-                [weakSelf.tableView.infiniteScrollingView stopAnimating];
-                [weakSelf.tableView beginUpdates];
-                for (int i = 0; i < [posts count]; i++) {
-                    [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                if([posts count] > 0){
+                    [mPosts addObjectsFromArray:posts];
+                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                    [weakSelf.tableView beginUpdates];
+                    for (int i = 0; i < [posts count]; i++) {
+                        [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                    }
+                    [weakSelf.tableView endUpdates];
+                    
+                } else {
+                    [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的帖子了..."
+                                                                duration:0.5
+                                                                position:CSToastPositionCenter];
+                    
                 }
-                [weakSelf.tableView endUpdates];
             });
         }
     });
@@ -115,16 +149,35 @@
 - (void)asyncTask:(NSMutableDictionary*) params
 {
     // this function will only load first page
-    mPageIndex = 0;
-    NSArray *posts = [helper getPostsFromBoard:engName from:0];
-    [mPosts removeAllObjects];
-    [mPosts addObjectsFromArray:posts];
+    NSArray* posts;
+    if(taskType == TASK_RELOAD){
+        mPageIndex = 0;
+        posts = [helper getPostsFromBoard:engName from:mPageIndex];
+        [mPosts removeAllObjects];
+        [mPosts addObjectsFromArray:posts];
+    } else if (taskType == TASK_SEARCH){
+        mFilterPageIndex = 0;
+        posts = [helper getFilteredPostsFromBoard:engName title:filterTitle user:filterAuthor from:mFilterPageIndex];
+        [mPosts removeAllObjects];
+        [mPosts addObjectsFromArray:posts];
+    } else if(taskType == TASK_ADD_FAVORITE){
+        asyncTaskResult = [helper addFavorite:self.engName];
+    }
 }
 
 - (void)finishAsyncTask:(NSDictionary*) resultParams
 {
-    iNumberOfDing = [self getNumberOfDingPosts];
-    [self.tableView reloadData];
+    if(taskType == TASK_RELOAD || taskType == TASK_SEARCH){
+        iNumberOfDing = [self getNumberOfDingPosts];
+        [self.tableView reloadData];
+    } else if(taskType == TASK_ADD_FAVORITE){
+        UIAlertView *altview = [[UIAlertView alloc] initWithTitle:@"收藏成功"
+                                                          message:[NSString stringWithFormat:@"收藏版面%@成功, 请刷新收藏夹!", self.engName]
+                                                         delegate:nil
+                                                cancelButtonTitle:@"确定"
+                                                otherButtonTitles:nil];
+        [altview show];
+    }
 }
 
 - (int) getNumberOfDingPosts
@@ -142,8 +195,17 @@
     return result;
 }
 
-- (IBAction)return:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+#pragma mark - Navigation Buttons
+
+- (IBAction)clickLeftButton:(id)sender {
+    if(taskType == TASK_SEARCH){
+        self.navigationItem.rightBarButtonItem.enabled = YES;
+        self.progressTitle = @"重新加载版面列表中...";
+        taskType = TASK_RELOAD;
+        [self startAsyncTask:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)newPost:(id)sender {
@@ -161,7 +223,7 @@
 //    NSLog(@"boardID = %@, boardName = %@", boardID, boardName);
 //}
 
-#pragma mark - UIView methods
+#pragma mark - UIView life cycle methods
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -294,13 +356,25 @@
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"取消"
                                                       style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
                                                           //对应每个按钮处理事件操作
-                                                          NSLog(@"点击了取消");
+//                                                          NSLog(@"点击了取消");
                                                       }];//可以在对应的action的block中处理相应的事件, 无需使用代理方式
     UIAlertAction *actionSearch = [UIAlertAction actionWithTitle:@"搜索"
                                                       style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                                          //  开始真正的search工作
+                                                          
                                                           UITextField *keyword = alertController.textFields[0];
+                                                          filterTitle = keyword.text;
                                                           UITextField *author = alertController.textFields[1];
-                                                          NSLog(@"点击了搜索:%@, %@", keyword.text, author.text);
+                                                          filterAuthor = author.text;
+//                                                          NSLog(@"点击了搜索:%@, %@", filterTitle, filterAuthor);
+
+                                                          // 禁止右侧的发帖按钮
+                                                          self.navigationItem.rightBarButtonItem.enabled = NO;
+                                                          
+                                                          // 开始搜索
+                                                          self.progressTitle = @"搜索中...";
+                                                          taskType = TASK_SEARCH;
+                                                          [self startAsyncTask:nil];
                                                       }];
     //添加action
     [alertController addAction:actionCancel];//为alertController添加action
@@ -310,17 +384,35 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+- (void) showInvalidAlert
+{
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    [self.tableView  makeToast:@"搜索模式下无法使用!"
+                      duration:0.8
+                      position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
+    
+}
 
 #pragma mark - SINavigationMenuDelegate
 
 -(void)didSelectItemAtIndex:(NSUInteger)index
 {
+    if(taskType != TASK_RELOAD){
+        // 只有在正常列表下，菜单项才有效
+        [self showInvalidAlert];
+        return;
+    }
     if(index == 1){
         // 切换置顶
         showDingPosts = !showDingPosts;
         [self.tableView reloadData];
     } else if (index == 0){
         [self popupSearchDialog];
+    } else if(index == 2){
+        // 添加收藏
+        self.progressTitle = @"收藏版面中...";
+        taskType = TASK_ADD_FAVORITE;
+        [self startAsyncTask:nil];
     }
 //    NSLog(@"%ld clicked in navigation menu", index);
 }

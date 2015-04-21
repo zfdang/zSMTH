@@ -48,6 +48,8 @@
 - (NSArray*) getGuidancePosts;
 - (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from;
 - (NSArray*) getPostContents:(NSString *)board_id postID:(long)article_id from:(long)from;
+- (NSArray*) getFilteredPostsFromBoard:(NSString*)boardID title:(NSString*)title user:(NSString*)user from:(int)from;
+
 
 - (SMTHUser*) getUserInfo:(NSString*) userID;
 

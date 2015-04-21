@@ -13,10 +13,12 @@
 #import "SMTHAttachment.h"
 #import "FMDB.h"
 
+const int postNumberinOnePage = 20; // 版面列表：一页显示多少个帖子数
+const int replyNumberinOnePost = 20; // 文章内容：一页显示多少回复数
+const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
+
 @interface SMTHHelper ()
 {
-    int postNumberinOnePage;  // 版面列表：一页显示多少个帖子数
-    int replyNumberinOnePost; // 文章内容：一页显示多少回复数
     int replyOrder;
     int brcmode;
     
@@ -60,10 +62,8 @@
 
         // init setting to load post list
         brcmode = 0;
-        postNumberinOnePage = 20;
         
         // init setting to load post details & replies
-        replyNumberinOnePost = 20;
         replyOrder = 1;
 
         // init FMDB
@@ -303,6 +303,47 @@
     return posts;
 }
 
+- (NSArray*) getFilteredPostsFromBoard:(NSString*)boardID title:(NSString*)title user:(NSString*)_user from:(int)from
+{
+    [smth reset_status];
+    NSMutableArray *posts = [[NSMutableArray alloc] init];
+    NSArray *results = [smth net_SearchArticle:boardID :title :_user :from*filterPostNumberinOnePage :filterPostNumberinOnePage];
+    for (id result in results) {
+        //        "author_id" = Kazoo;
+        //        id = 410834;
+        //        subject = "这个是一个测试的帖子";
+        //        time = 1424611727;
+        //        count = 18;
+        //        flags = "Dnn d";   -- 置顶帖子的flag
+        //        flags = " nn  ";   -- 普通帖子的flag
+        //        "board_id" = DigiHome;
+        //        "board_name" = "\U6570\U5b57\U5bb6\U5ead";
+        //        "last_reply_id" = 415457;
+        //        "last_time" = 1425600260;
+        //        "last_user_id" = shanzai12;
+        
+        //        NSLog(@"%@", result);
+        NSDictionary *dict = (NSDictionary*) result;
+        SMTHPost *post = [[SMTHPost alloc] init];
+        post.author = [dict objectForKey:@"author_id"];
+        post.postID = [dict objectForKey:@"id"];
+        post.postSubject = [dict objectForKey:@"subject"];
+        post.postDate = [self getRelativeDateString:[[result objectForKey:@"time"] doubleValue]];
+        post.postCount = [[dict objectForKey:@"count"] description];
+        post.postFlags = [dict objectForKey:@"flags"];
+        
+        post.postBoard = [dict objectForKey:@"board_id"];
+        post.replyPostID = [dict objectForKey:@"last_reply_id"];
+        post.replyAuthor = [dict objectForKey:@"last_user_id"];
+        post.replyPostDate = [self getRelativeDateString:[[result objectForKey:@"last_time"] doubleValue]];
+        
+        [posts addObject:post];
+    }
+    
+    return posts;
+}
+
+
 - (NSArray *)getPostContents:(NSString *)board_id postID:(long)article_id from:(long)from
 {
     [smth reset_status];
@@ -460,7 +501,9 @@
 {
     [smth reset_status];
     [smth net_AddFav:engName];
-    
+
+    // 清空最上一级收藏夹的缓存, 添加的新版总是在最上一级
+    [self clearCacheStatus:@"FAVORITE" RootID:0];
     if(smth->net_error == 0)
     {
         return YES;
