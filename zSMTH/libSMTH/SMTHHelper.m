@@ -72,11 +72,6 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         db = [FMDatabase databaseWithPath:dbpath];
         
         [self initDatabaseStructure];
-//        NSString *stamp = [self getBoardListUpdateTime];
-//        [self saveAllBoardToCache:nil];
-//        stamp = [self getBoardListUpdateTime];
-//        [self clearBoardListCache];
-//        stamp = [self getBoardListUpdateTime];
     }
     return self;
 }

@@ -181,7 +181,7 @@
     if(helper.isLogined){
         NSComparisonResult result = [labelUser.text compare:helper.user.userID];
         if(result != NSOrderedSame){
-            NSLog(@"Label=%@, userID=%@", labelUser.text, helper.user.userID);
+//            NSLog(@"Label=%@, userID=%@", labelUser.text, helper.user.userID);
             // update avatar & userID when necessary
             [imageView sd_setImageWithURL:[helper.user getFaceURL]];
             labelUser.text = helper.user.userID;
