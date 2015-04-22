@@ -109,8 +109,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
         }
     }];
     
-    CFRelease(font_ref);
-    
+    // 加上被截取的提示信息
     if(truncated) {
         NSString *hint = @"\n文章太长，请长按后选择\"浏览器打开\"...";
         NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -122,6 +121,8 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
         
         [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",hint] attributes:attrs]];
     }
+
+    CFRelease(font_ref);
     self.text = attString;
 }
 
