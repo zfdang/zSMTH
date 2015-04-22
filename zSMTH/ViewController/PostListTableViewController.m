@@ -177,6 +177,7 @@ typedef enum {
                                                 cancelButtonTitle:@"确定"
                                                 otherButtonTitles:nil];
         [altview show];
+        taskType = TASK_RELOAD;
     }
 }
 

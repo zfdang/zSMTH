@@ -9,7 +9,7 @@
 #import "PostContentLabel.h"
 #import "UIView+Toast.h"
 
-static CGFloat const kEspressoDescriptionTextFontSize = 17;
+static CGFloat kEspressoDescriptionTextFontSize = 17;
 
 @interface PostContentLabel() <TTTAttributedLabelDelegate, UIActionSheetDelegate>
 {
@@ -30,9 +30,27 @@ static CGFloat const kEspressoDescriptionTextFontSize = 17;
 {
     [self initTTTAttributedLabel];
     
+    // UILabel has maximum height, if content size is too large, content will be invisible
+//    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
+//    http://stackoverflow.com/questions/1493895/uiview-what-are-the-maximum-bounds-dimensions-i-can-use
+    // 所以需要限制text的长度
+    // 去除多余的换行
+//    text = [text stringByReplacingOccurrencesOfString:@"[\r\n]+"
+//                                           withString:@"\n"
+//                                              options:NSRegularExpressionSearch
+//                                                range:NSMakeRange(0, text.length)];
+
+    // 截取前5000个字符
+    BOOL truncated = NO;
+    if(text.length > 5000){
+        text = [text substringToIndex:5000];
+        truncated = YES;
+    }
+    
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:@""];
     
     UIFont * font = [self font];
+    kEspressoDescriptionTextFontSize = font.pointSize;
     CTFontRef font_ref = CTFontCreateWithName((CFStringRef)font.fontName, kEspressoDescriptionTextFontSize, nil);
     
     __block BOOL prev_line_empty = false;
@@ -58,7 +76,12 @@ static CGFloat const kEspressoDescriptionTextFontSize = 17;
             }
             
             if(prev_line_empty){
-                NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:(id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName, font_ref, kCTFontAttributeName, [UIColor whiteColor].CGColor, (NSString *)kCTStrokeColorAttributeName, [NSNumber numberWithFloat:0.0f],(NSString *)kCTStrokeWidthAttributeName, nil];
+                NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
+                                        font_ref, kCTFontAttributeName,
+                                        [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
+                                        [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
+                                        nil];
                 
                 [attString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:attrs]];
                 prev_line_empty = false;
@@ -66,11 +89,21 @@ static CGFloat const kEspressoDescriptionTextFontSize = 17;
         }
 
         if(is_quota){
-            NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:(id)[UIColor grayColor].CGColor, kCTForegroundColorAttributeName, font_ref, kCTFontAttributeName, [UIColor whiteColor].CGColor, (NSString *)kCTStrokeColorAttributeName, [NSNumber numberWithFloat:0.0f],(NSString *)kCTStrokeWidthAttributeName, nil];
+            NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    (id)[UIColor grayColor].CGColor, kCTForegroundColorAttributeName,
+                                    font_ref, kCTFontAttributeName,
+                                    [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
+                                    [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
+                                    nil];
             
             [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",line] attributes:attrs]];
         }else{
-            NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:(id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName, font_ref, kCTFontAttributeName, [UIColor whiteColor].CGColor, (NSString *)kCTStrokeColorAttributeName, [NSNumber numberWithFloat:0.0f],(NSString *)kCTStrokeWidthAttributeName, nil];
+            NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
+                                    font_ref, kCTFontAttributeName,
+                                    [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
+                                    [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
+                                    nil];
             
             [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",line] attributes:attrs]];
         }
@@ -78,6 +111,17 @@ static CGFloat const kEspressoDescriptionTextFontSize = 17;
     
     CFRelease(font_ref);
     
+    if(truncated) {
+        NSString *hint = @"\n文章太长，请长按后选择\"浏览器打开\"...";
+        NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                (id)[UIColor redColor].CGColor, kCTForegroundColorAttributeName,
+                                font_ref, kCTFontAttributeName,
+                                [UIColor grayColor].CGColor, kCTStrokeColorAttributeName,
+                                [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
+                                nil];
+        
+        [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",hint] attributes:attrs]];
+    }
     self.text = attString;
 }
 

@@ -281,7 +281,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
         // now start our action on long press
-        NSLog(@"Long click on post %ld, %ld", indexPath.section, indexPath.row);
+//        NSLog(@"Long click on post %ld, %ld", indexPath.section, indexPath.row);
         
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
         NSArray *items = @[
