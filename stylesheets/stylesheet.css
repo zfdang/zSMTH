@@ -70,7 +70,7 @@ header {
 
 header h1 {
   font-family: 'Chivo', 'Helvetica Neue', Helvetica, Arial, serif;
-  font-size: 48px; font-weight: 900;
+  font-size: 25px; font-weight: 900;
   line-height: 1.2;
   color: #303030;
   letter-spacing: -1px;
@@ -371,3 +371,11 @@ footer a:hover {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) { }
+
+img.thumb
+{
+max-width: 100px;
+max-height: 120px;
+  padding: 5px;
+
+}
