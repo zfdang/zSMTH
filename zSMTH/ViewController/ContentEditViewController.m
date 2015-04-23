@@ -226,7 +226,7 @@
 
 #pragma mark - UITextViewDelegate
 
--(void)textViewDidEndEditing:(UITextView *)textView
+-(void)textViewDidChange:(UITextView *)textView
 {
     self.txtSummary.text = [NSString stringWithFormat:@"%ld",textView.text.length];
 }

@@ -23,6 +23,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
 {
     self.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
     self.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    self.lineBreakMode = NSLineBreakByWordWrapping;
     self.delegate = self;
 }
 
