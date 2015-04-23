@@ -374,8 +374,7 @@ footer a:hover {
 
 img.thumb
 {
-max-width: 100px;
-max-height: 120px;
+  max-width: 100px;
+  max-height: 120px;
   padding: 5px;
-
 }
