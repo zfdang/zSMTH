@@ -63,15 +63,21 @@
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
     self.progressTitle = @"加载中...";
     [self startAsyncTask:nil];
-    
+
     // add pull to refresh function at the top & bottom
     __weak typeof(self) weakSelf = self;
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshPostContent];
+    }];
+    
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMorePostList];
     }];
     // change translucent, otherwise, tableview will be partially hidden
     self.navigationController.navigationBar.translucent = NO;
 }
+
+
 
 -(void) setBoardInfo:(long)boardid chsName:(NSString*)chsname engName:(NSString*) engname;
 {
@@ -86,6 +92,20 @@
         chsName = [helper getChsBoardName:engName];
         boardID = [helper getBoardID:engName];
     }
+}
+
+#pragma mark - Loading Tasks
+
+- (void) refreshPostContent {
+    __weak typeof(self) weakSelf = self;
+    int64_t delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [weakSelf.tableView.pullToRefreshView stopAnimating];
+        
+        weakSelf.progressTitle = @"刷新中...";
+        [weakSelf startAsyncTask:nil];
+    });
 }
 
 - (void) loadMorePostList {
@@ -104,10 +124,6 @@
                     }
                     [weakSelf.tableView endUpdates];
                     [weakSelf.tableView.infiniteScrollingView stopAnimating];
-                    
-                    // scroll to the new location
-//                    [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:currentNumber-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-
                 } else {
                     [weakSelf.tableView.infiniteScrollingView stopAnimating];
 
@@ -193,6 +209,7 @@
 
 // http://tewha.net/2015/01/how-to-fix-uitableview-rows-changing-size/
 // http://blog.jldagon.me/blog/2013/12/07/auto-layout-and-uitableview-cells/
+// 当cell的高度不统一时，这个方法的作用很重要
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;

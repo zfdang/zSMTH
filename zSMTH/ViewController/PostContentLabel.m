@@ -30,16 +30,13 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
 {
     [self initTTTAttributedLabel];
     
+    // 去除开始、结尾的空格、换行符
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     // UILabel has maximum height, if content size is too large, content will be invisible
-//    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
-//    http://stackoverflow.com/questions/1493895/uiview-what-are-the-maximum-bounds-dimensions-i-can-use
+    //    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
+    //    http://stackoverflow.com/questions/1493895/uiview-what-are-the-maximum-bounds-dimensions-i-can-use
     // 所以需要限制text的长度
-    // 去除多余的换行
-//    text = [text stringByReplacingOccurrencesOfString:@"[\r\n]+"
-//                                           withString:@"\n"
-//                                              options:NSRegularExpressionSearch
-//                                                range:NSMakeRange(0, text.length)];
-
     // 截取前5000个字符
     BOOL truncated = NO;
     if(text.length > 5000){
@@ -49,66 +46,111 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
     
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:@""];
     
+    // create font for attString
     UIFont * font = [self font];
     kEspressoDescriptionTextFontSize = font.pointSize;
     CTFontRef font_ref = CTFontCreateWithName((CFStringRef)font.fontName, kEspressoDescriptionTextFontSize, nil);
     
-    __block BOOL prev_line_empty = false;
-    
-    [text enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+    __block BOOL is_in_quota_mode = false;
+    __block NSMutableString *subContent = [[NSMutableString alloc] initWithCapacity:2000];
+    __block int empty_line_counter = 0;
+    [text enumerateLinesUsingBlock:^(NSString *line, BOOL *stop)
+    {
         bool is_quota = false;
         
-        unsigned long len = [line length];
-        
-        if(len == 0){
-            prev_line_empty = true;
-            return;
-        }else{
-            if(len >= 2){
-                NSString * head = [line substringToIndex:2];
-                if([head isEqualToString:@": "]){
-                    is_quota = true;
-                }
-                if(len == 2 && [head isEqualToString:@"--"]){
-                    *stop = YES;
-                    return;
-                }
+        if(line.length == 0){
+            empty_line_counter += 1;
+            if(empty_line_counter >= 2){
+                // 当有多余两个空行出现时，只增加2个空行
+                return;
             }
-            
-            if(prev_line_empty){
-                NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
-                                        font_ref, kCTFontAttributeName,
-                                        [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
-                                        [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
-                                        nil];
-                
-                [attString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n" attributes:attrs]];
-                prev_line_empty = false;
-            }
+        } else {
+            empty_line_counter = 0;
         }
 
-        if(is_quota){
+        if([line hasPrefix:@"--"]){
+            // 签名档，skip剩余的所有行
+            *stop = YES;
+            return;
+        }
+
+        if([line hasPrefix:@": "])
+        {
+            // 引文
+            is_quota = true;
+        }
+
+        if(is_quota != is_in_quota_mode)
+        {
+            // 首先给原来的内容加一个换行
+            [subContent appendString:@"\n"];
+
+            // 新一行的模式和之前的不一样了，需要把之前的内容加入到attString中去
+            if(subContent.length > 0)
+            {
+                if(is_in_quota_mode)
+                {
+                    // 引文模式
+                    NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            (id)[UIColor grayColor].CGColor, kCTForegroundColorAttributeName,
+                                            font_ref, kCTFontAttributeName,
+                                            [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
+                                            [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
+                                            nil];
+                    [attString appendAttributedString:[[NSAttributedString alloc] initWithString:subContent attributes:attrs]];
+                } else
+                {
+                    // 正文模式
+                    NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
+                                            font_ref, kCTFontAttributeName,
+                                            [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
+                                            [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
+                                            nil];
+                    [attString appendAttributedString:[[NSAttributedString alloc] initWithString:subContent attributes:attrs]];
+                }
+
+                // 更改模式，开始新的subContent的累积
+                is_in_quota_mode = is_quota;
+                [subContent setString:line];
+            }
+        } else
+        {
+            // 模式没有变化，则将当前行加入到subContent中
+            if(subContent.length > 0){
+                [subContent appendFormat:@"\n%@",line];
+            } else {
+                [subContent appendFormat:@"%@",line];
+            }
+        }
+    }]; // enumerateLinesUsingBlock
+
+    // 遗留下的subContent, 根据当前模式，添加到attString中去
+    if(subContent.length > 0)
+    {
+        if(is_in_quota_mode)
+        {
+            // 引文模式
             NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                     (id)[UIColor grayColor].CGColor, kCTForegroundColorAttributeName,
                                     font_ref, kCTFontAttributeName,
                                     [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
                                     [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
                                     nil];
-            
-            [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",line] attributes:attrs]];
-        }else{
+            [attString appendAttributedString:[[NSAttributedString alloc] initWithString:subContent attributes:attrs]];
+        } else
+        {
+            // 正文模式
             NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                     (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
                                     font_ref, kCTFontAttributeName,
                                     [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
                                     [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
                                     nil];
-            
-            [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",line] attributes:attrs]];
+            [attString appendAttributedString:[[NSAttributedString alloc] initWithString:subContent attributes:attrs]];
         }
-    }];
-    
+    }
+
     // 加上被截取的提示信息
     if(truncated) {
         NSString *hint = @"\n文章太长，请长按后选择\"浏览器打开\"...";
@@ -118,7 +160,6 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
                                 [UIColor grayColor].CGColor, kCTStrokeColorAttributeName,
                                 [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
                                 nil];
-        
         [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",hint] attributes:attrs]];
     }
 
