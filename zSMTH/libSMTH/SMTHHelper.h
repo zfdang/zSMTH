@@ -34,6 +34,7 @@
 // 使用isLogined来判断真实用户是否登录
 - (void) login:(NSString*)username password:(NSString*)password;
 - (void) logout;
+- (BOOL) isConnectionActive;
 
 // 获取版面，文章信息
 - (NSArray*) getAllBoards;

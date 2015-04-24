@@ -213,6 +213,17 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     return nil;
 }
 
+- (BOOL) isConnectionActive
+{
+    [smth reset_status];
+    [smth net_GetMailCount];
+    
+    // 10010: 登录时密码错误(TODO,服务器端暂时未实现)，其他时候token失效。
+    if(smth->net_error == 10010){
+        return NO;
+    }
+    return YES;
+}
 
 #pragma mark - Posts
 
