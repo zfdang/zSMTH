@@ -90,7 +90,7 @@ header h2 {
 }
 
 .inner {
-  width: 620px;
+  width: 750px;
   margin: 0 auto;
 }
 
@@ -375,6 +375,7 @@ footer a:hover {
 img.thumb
 {
   max-width: 100px;
-  max-height: 120px;
+  max-height: 180px;
   padding: 5px;
 }
+
