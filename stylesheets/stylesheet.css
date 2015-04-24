@@ -379,3 +379,9 @@ img.thumb
   padding: 5px;
 }
 
+img.smallthumb
+{
+  max-width: 100px;
+  max-height: 130px;
+  padding: 5px;
+}
