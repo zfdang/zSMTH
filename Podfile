@@ -12,6 +12,7 @@ pod 'RNGridMenu', '~> 0.1.2'
 pod 'MWPhotoBrowser'
 pod 'CTAssetsPickerController',  '~> 2.9.0'
 pod 'TTTAttributedLabel'
+pod 'JDStatusBarNotification'
 end
 
 target 'zSMTHTests' do

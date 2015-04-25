@@ -57,4 +57,6 @@
 - (NSString*) getChsBoardName:(NSString*) engName;
 - (long) getBoardID:(NSString*) engName;
 
+- (BOOL) hasNewMail;
+
 @end

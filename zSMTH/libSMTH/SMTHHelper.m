@@ -215,7 +215,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (BOOL) isConnectionActive
 {
-    [smth reset_status];
+//    [smth reset_status];
     [smth net_GetMailCount];
     
     // 10010: 登录时密码错误(TODO,服务器端暂时未实现)，其他时候token失效。
@@ -910,6 +910,34 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 }
 
 
+#pragma mark - mail and notification
+
+- (BOOL) hasNewMail
+{
+//    [smth reset_status];
+    
+    NSDictionary *dict = [smth net_GetMailCount];
+    // sample result
+//    {
+//        error = 0;
+//        "error_description" = "";
+//        "is_full" = 0;
+//        "new_count" = 1;
+//        "total_count" = 233;
+//    }
+    
+    if(smth->net_error != 0){
+        return NO;
+    }
+
+    int new_count = [[dict objectForKey:@"new_count"] intValue];
+//    NSLog(@"%@, %d", dict, new_count);
+    if(new_count > 0)
+        return YES;
+    
+    return NO;
+}
+
 #pragma mark - Other methods
 
 - (int) checkVersion
@@ -919,7 +947,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         return -1;
     }
     NSLog(@"%@", dict);
-    
+
 //    int latest_major = [(NSString *)[dict objectForKey:@"latest_major"] intValue];
 //    int latest_minor = [(NSString *)[dict objectForKey:@"latest_minor"] intValue];
 //    int latest_rc    = [(NSString *)[dict objectForKey:@"latest_rc"] intValue];

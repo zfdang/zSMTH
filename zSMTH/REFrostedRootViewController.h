@@ -12,5 +12,6 @@
 
 @interface REFrostedRootViewController : REFrostedViewController <SMTHURLConnectionDelegate>
 
+- (void) postTimerTask;
 
 @end

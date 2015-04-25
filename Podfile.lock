@@ -6,6 +6,7 @@ PODS:
   - FMDB/common (2.5)
   - FMDB/standard (2.5):
     - FMDB/common
+  - JDStatusBarNotification (1.5.2)
   - MBProgressHUD (0.9.1)
   - MWPhotoBrowser (1.4.1):
     - DACircularProgress
@@ -25,6 +26,7 @@ PODS:
 DEPENDENCIES:
   - CTAssetsPickerController (~> 2.9.0)
   - FMDB
+  - JDStatusBarNotification
   - MBProgressHUD (~> 0.9.1)
   - MWPhotoBrowser
   - REFrostedViewController (~> 2.4.7)
@@ -38,6 +40,7 @@ SPEC CHECKSUMS:
   CTAssetsPickerController: 56a4a228dcb48a9375ab8d4922e82ac74af74aa1
   DACircularProgress: 0f92b77239d5f3c612fc66185e2998391ac8e054
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  JDStatusBarNotification: a36d09ccbb047217572b074a61e7ca10dddc5f0a
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MWPhotoBrowser: 2531e682860d62b8a7ba8659de02eb9040e431e5
   PSTCollectionView: 6749df92885353521f55279a7ce2b293762e2be4
@@ -48,4 +51,4 @@ SPEC CHECKSUMS:
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.36.4
