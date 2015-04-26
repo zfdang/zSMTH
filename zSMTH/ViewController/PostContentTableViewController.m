@@ -117,17 +117,21 @@
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([posts count] > 0) {
+                    NSMutableArray *array = [[NSMutableArray alloc] init];
+                    for (int i = 0; i < [posts count]; i++) {
+                        [array addObject:[NSIndexPath indexPathForRow:currentNumber+i inSection:0]];
+                    }
+
                     [weakSelf.tableView beginUpdates];
                     [mPosts addObjectsFromArray:posts];
-                    for (int i = 0; i < [posts count]; i++) {
-                        [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-                    }
+                    [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
                     [weakSelf.tableView endUpdates];
+
                     [weakSelf.tableView.infiniteScrollingView stopAnimating];
                 } else {
                     [weakSelf.tableView.infiniteScrollingView stopAnimating];
 
-                    [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的帖子了..."
+                    [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
                                 duration:0.5
                                 position:CSToastPositionCenter];
                 }

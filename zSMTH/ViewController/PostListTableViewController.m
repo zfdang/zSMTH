@@ -127,14 +127,17 @@ typedef enum {
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if([posts count] > 0){
-                    [mPosts addObjectsFromArray:posts];
-                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
-                    [weakSelf.tableView beginUpdates];
+                    NSMutableArray *array = [[NSMutableArray alloc] init];
                     for (int i = 0; i < [posts count]; i++) {
-                        [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:currentNumber+i inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+                        [array addObject:[NSIndexPath indexPathForRow:currentNumber+i inSection:0]];
                     }
+
+                    [weakSelf.tableView beginUpdates];
+                    [mPosts addObjectsFromArray:posts];
+                    [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
                     [weakSelf.tableView endUpdates];
-                    
+
+                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
                 } else {
                     [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的帖子了..."
                                                                 duration:0.5
