@@ -33,10 +33,19 @@ DEPENDENCIES:
   - REFrostedViewController (~> 2.4.7)
   - RNGridMenu (~> 0.1.2)
   - SDWebImage (~> 3.6)
-  - SVPullToRefresh
+  - SVPullToRefresh (from `https://github.com/zfdang/SVPullToRefresh.git`)
   - Toast (~> 2.4)
   - TTTAttributedLabel
   - UMengAnalytics-NO-IDFA
+
+EXTERNAL SOURCES:
+  SVPullToRefresh:
+    :git: https://github.com/zfdang/SVPullToRefresh.git
+
+CHECKOUT OPTIONS:
+  SVPullToRefresh:
+    :commit: 8de39b02e7e41ee6d80ca43fc2e1c6b062a1400f
+    :git: https://github.com/zfdang/SVPullToRefresh.git
 
 SPEC CHECKSUMS:
   CTAssetsPickerController: 56a4a228dcb48a9375ab8d4922e82ac74af74aa1

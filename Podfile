@@ -4,7 +4,7 @@
 target 'zSMTH' do
 pod 'MBProgressHUD', '~> 0.9.1'
 pod 'REFrostedViewController', '~> 2.4.7'
-pod 'SVPullToRefresh'
+pod 'SVPullToRefresh', :git => 'https://github.com/zfdang/SVPullToRefresh.git'
 pod 'SDWebImage', '~>3.6'
 pod 'Toast', '~> 2.4'
 pod 'FMDB'
