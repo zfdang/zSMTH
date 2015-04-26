@@ -336,7 +336,7 @@
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"reply"]
                                                            title:@"回复"
                                                           action:^{
-                                                              NSLog(@"%@, %@", @"4", post.postID);
+//                                                              NSLog(@"%@, %@", @"4", post.postID);
                                                               [self replyPost:post];
                                                           }],
                            

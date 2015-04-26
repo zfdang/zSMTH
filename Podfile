@@ -13,6 +13,8 @@ pod 'MWPhotoBrowser'
 pod 'CTAssetsPickerController',  '~> 2.9.0'
 pod 'TTTAttributedLabel'
 pod 'JDStatusBarNotification'
+# 无IDFA版SDK（请根据需要选择）
+pod 'UMengAnalytics-NO-IDFA'
 end
 
 target 'zSMTHTests' do

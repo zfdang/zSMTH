@@ -22,6 +22,7 @@ PODS:
   - SVPullToRefresh (0.4.1)
   - Toast (2.4)
   - TTTAttributedLabel (1.13.3)
+  - UMengAnalytics-NO-IDFA (3.4.7)
 
 DEPENDENCIES:
   - CTAssetsPickerController (~> 2.9.0)
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - SVPullToRefresh
   - Toast (~> 2.4)
   - TTTAttributedLabel
+  - UMengAnalytics-NO-IDFA
 
 SPEC CHECKSUMS:
   CTAssetsPickerController: 56a4a228dcb48a9375ab8d4922e82ac74af74aa1
@@ -50,5 +52,6 @@ SPEC CHECKSUMS:
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
+  UMengAnalytics-NO-IDFA: 68a71671c10067315339fc3fd1283be416f02a8b
 
 COCOAPODS: 0.36.4

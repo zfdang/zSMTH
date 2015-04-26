@@ -839,7 +839,7 @@
 			baseConfigurationReference = 13FB643B10FFC65DDD7CF5C4 /* Pods-zSMTH.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhengfa Dang (RVQK234ECB)";
+				CODE_SIGN_IDENTITY = "-";
 				INFOPLIST_FILE = zSMTH/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -859,7 +859,7 @@
 			baseConfigurationReference = 48F951DFD4F05230EF38D92E /* Pods-zSMTH.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Zhengfa Dang (RVQK234ECB)";
+				CODE_SIGN_IDENTITY = "-";
 				INFOPLIST_FILE = zSMTH/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
