@@ -58,6 +58,13 @@ const CGFloat PaddingBetweenImages = 5.0;
         NSArray* attachs = post.attachments;
 
         CGRect rect = self.postContent.frame;
+        // tableviewcell does not resize with UIScreen size, but I guess this issue can be fixed somehow
+        // before we fix the issue, use UIScreen's width
+        CGRect rectScreen = [UIScreen mainScreen].bounds;
+        // 12 is not a magic number;
+        // cellView is 4 + 4 smaller than screen
+        // post content is 2 + 2 smaller than cellview;
+        rect.size.width = rectScreen.size.width - 12;
 
         CGFloat imgOffset = [self.postContent getContentHeight] + rect.origin.y + PaddingBetweenContentAndImage;
         

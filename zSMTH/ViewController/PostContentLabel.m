@@ -173,7 +173,11 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
     static CGFloat padding = 0.0;
 
     UIFont *systemFont = [UIFont systemFontOfSize:kEspressoDescriptionTextFontSize];
-    CGSize textSize = CGSizeMake(self.frame.size.width, CGFLOAT_MAX); // rough accessory size
+//    CGSize textSize = CGSizeMake(self.frame.size.width, CGFLOAT_MAX); // rough accessory size
+    // tableviewcell does not resize with UIScreen size, but I guess this issue can be fixed somehow
+    // before we fix the issue, use UIScreen's width
+    CGRect rect = [UIScreen mainScreen].bounds;
+    CGSize textSize = CGSizeMake(rect.size.width, CGFLOAT_MAX); // rough accessory size
     CGSize sizeWithFont = [self.text sizeWithFont:systemFont constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
 
     CGFloat result =  sizeWithFont.height + padding;
