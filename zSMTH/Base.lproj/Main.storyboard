@@ -127,7 +127,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBz-UO-TI4" userLabel="Center">
-                                        <rect key="frame" x="350" y="0.0" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="330" y="0.0" width="0.0" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="width" id="gs3-Gh-ayo"/>
                                             <constraint firstAttribute="width" id="yxS-gU-7Kh"/>
@@ -142,25 +142,25 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加载用户头像" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aG3-Kd-CFJ">
-                                        <rect key="frame" x="228" y="10" width="102" height="21"/>
+                                        <rect key="frame" x="218" y="10" width="102" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rlb-Lr-dFu">
-                                        <rect key="frame" x="370" y="5" width="51" height="31"/>
+                                        <rect key="frame" x="340" y="5" width="51" height="31"/>
                                         <connections>
                                             <action selector="switchUserAvatar:" destination="tNM-e1-qdM" eventType="valueChanged" id="oJZ-0V-qxh"/>
                                         </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片缓存 (1000M)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHB-Vq-7op">
-                                        <rect key="frame" x="195" y="51" width="135" height="21"/>
+                                        <rect key="frame" x="185" y="51" width="135" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Itc-eU-hV6">
-                                        <rect key="frame" x="370" y="47" width="60" height="30"/>
+                                        <rect key="frame" x="340" y="47" width="60" height="30"/>
                                         <state key="normal" title="清理缓存">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -168,22 +168,38 @@
                                             <action selector="clearCache:" destination="tNM-e1-qdM" eventType="touchUpInside" id="NC6-sJ-N1u"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版本号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKu-hG-7ei">
+                                        <rect key="frame" x="269" y="92" width="51" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3K4-1A-RHp">
+                                        <rect key="frame" x="340" y="92" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Itc-eU-hV6" firstAttribute="centerY" secondItem="mHB-Vq-7op" secondAttribute="centerY" constant="0.5" id="4uN-nH-4tV"/>
+                                    <constraint firstItem="3K4-1A-RHp" firstAttribute="centerY" secondItem="MKu-hG-7ei" secondAttribute="centerY" id="C6L-Uz-En4"/>
                                     <constraint firstItem="rlb-Lr-dFu" firstAttribute="leading" secondItem="aG3-Kd-CFJ" secondAttribute="leading" constant="150" id="Gdl-DN-3qw"/>
-                                    <constraint firstItem="rlb-Lr-dFu" firstAttribute="leading" secondItem="pBz-UO-TI4" secondAttribute="trailing" constant="20" id="JsX-NH-jTz"/>
+                                    <constraint firstItem="rlb-Lr-dFu" firstAttribute="leading" secondItem="pBz-UO-TI4" secondAttribute="trailing" constant="10" id="JsX-NH-jTz"/>
                                     <constraint firstItem="mHB-Vq-7op" firstAttribute="leading" secondItem="aG3-Kd-CFJ" secondAttribute="leading" id="MTU-Fp-mJ7"/>
                                     <constraint firstItem="mHB-Vq-7op" firstAttribute="top" secondItem="aG3-Kd-CFJ" secondAttribute="bottom" constant="25" id="U7q-rD-M15"/>
-                                    <constraint firstItem="Itc-eU-hV6" firstAttribute="leading" secondItem="pBz-UO-TI4" secondAttribute="trailing" constant="20" id="Zeh-aD-dv9"/>
+                                    <constraint firstItem="Itc-eU-hV6" firstAttribute="leading" secondItem="pBz-UO-TI4" secondAttribute="trailing" constant="10" id="Zeh-aD-dv9"/>
                                     <constraint firstItem="rlb-Lr-dFu" firstAttribute="leading" secondItem="aG3-Kd-CFJ" secondAttribute="trailing" constant="20" id="ciU-AY-v4T"/>
                                     <constraint firstItem="pBz-UO-TI4" firstAttribute="leading" secondItem="aG3-Kd-CFJ" secondAttribute="trailing" constant="171" id="deG-qe-T5W"/>
+                                    <constraint firstItem="MKu-hG-7ei" firstAttribute="top" secondItem="mHB-Vq-7op" secondAttribute="bottom" constant="20" id="dqN-eG-qk2"/>
+                                    <constraint firstItem="3K4-1A-RHp" firstAttribute="leading" secondItem="pBz-UO-TI4" secondAttribute="trailing" constant="10" id="iKc-KL-uRP"/>
                                     <constraint firstItem="rlb-Lr-dFu" firstAttribute="centerY" secondItem="aG3-Kd-CFJ" secondAttribute="centerY" id="ihp-OG-AQc"/>
-                                    <constraint firstItem="pBz-UO-TI4" firstAttribute="leading" secondItem="aG3-Kd-CFJ" secondAttribute="trailing" constant="20" id="jAw-7J-eIW"/>
+                                    <constraint firstItem="pBz-UO-TI4" firstAttribute="leading" secondItem="aG3-Kd-CFJ" secondAttribute="trailing" constant="10" id="jAw-7J-eIW"/>
                                     <constraint firstItem="rlb-Lr-dFu" firstAttribute="centerY" secondItem="aG3-Kd-CFJ" secondAttribute="centerY" id="m02-wl-pih"/>
                                     <constraint firstItem="aG3-Kd-CFJ" firstAttribute="top" secondItem="aCu-Ey-i1e" secondAttribute="top" constant="10" id="nwO-dc-eZu"/>
-                                    <constraint firstItem="pBz-UO-TI4" firstAttribute="leading" secondItem="mHB-Vq-7op" secondAttribute="trailing" constant="20" id="oGp-eT-u4M"/>
+                                    <constraint firstItem="pBz-UO-TI4" firstAttribute="leading" secondItem="mHB-Vq-7op" secondAttribute="trailing" constant="10" id="oGp-eT-u4M"/>
                                     <constraint firstItem="mHB-Vq-7op" firstAttribute="top" secondItem="aG3-Kd-CFJ" secondAttribute="bottom" constant="20" id="oZw-BM-5lI"/>
+                                    <constraint firstItem="pBz-UO-TI4" firstAttribute="leading" secondItem="MKu-hG-7ei" secondAttribute="trailing" constant="10" id="tR1-zx-ETk"/>
                                     <constraint firstItem="Itc-eU-hV6" firstAttribute="centerY" secondItem="mHB-Vq-7op" secondAttribute="centerY" id="u3r-w5-o81"/>
                                 </constraints>
                                 <variation key="default">
@@ -210,7 +226,7 @@
                             <constraint firstItem="fTi-vO-Oel" firstAttribute="bottom" secondItem="aCu-Ey-i1e" secondAttribute="top" id="HCp-WE-YXx"/>
                             <constraint firstItem="Jas-A6-9HM" firstAttribute="leading" secondItem="9N8-FB-Hql" secondAttribute="leading" id="Mm9-Ya-pQe"/>
                             <constraint firstItem="h4K-Ua-TEh" firstAttribute="top" secondItem="Jas-A6-9HM" secondAttribute="bottom" id="Ohy-eF-pMV"/>
-                            <constraint firstItem="Jas-A6-9HM" firstAttribute="centerX" secondItem="pBz-UO-TI4" secondAttribute="centerX" constant="-50" id="R6N-XB-l4v"/>
+                            <constraint firstItem="Jas-A6-9HM" firstAttribute="centerX" secondItem="pBz-UO-TI4" secondAttribute="centerX" constant="-30" id="R6N-XB-l4v"/>
                             <constraint firstAttribute="centerX" secondItem="aCu-Ey-i1e" secondAttribute="centerX" id="SE9-XE-opC"/>
                             <constraint firstAttribute="centerXWithinMargins" secondItem="Jas-A6-9HM" secondAttribute="centerX" id="SZY-da-yeA"/>
                             <constraint firstItem="fTi-vO-Oel" firstAttribute="top" secondItem="aCu-Ey-i1e" secondAttribute="bottom" id="Sxr-c9-2Pr"/>
@@ -269,6 +285,7 @@
                     <connections>
                         <outlet property="scrollView" destination="aCu-Ey-i1e" id="v2P-g2-hwo"/>
                         <outlet property="txtCacheSize" destination="mHB-Vq-7op" id="Zfa-av-qqz"/>
+                        <outlet property="txtVersion" destination="3K4-1A-RHp" id="Owg-ob-D9h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysf-4e-cjn" userLabel="First Responder" sceneMemberID="firstResponder"/>

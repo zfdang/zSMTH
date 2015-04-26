@@ -21,6 +21,12 @@
     // Do any additional setup after loading the view.
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1200);
+    
+    // Load git version from plist
+    // http://feinstruktur.com/blog/2010/12/29/integrating-git-version-info-in-ioscocoa-apps
+    NSString *version = [[[NSBundle mainBundle] infoDictionary]
+                         objectForKey:@"CFBundleVersion"];
+    self.txtVersion.text = version;
 }
 
 - (void)viewWillAppear:(BOOL)animated

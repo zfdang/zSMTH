@@ -19,6 +19,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [MobClick startWithAppkey:@"553c8da267e58e541b00334f" reportPolicy:BATCH   channelId:nil];
+
+    // 使用git version作为版本号
+    NSString *version = [[[NSBundle mainBundle] infoDictionary]
+                         objectForKey:@"CFBundleVersion"];
+    [MobClick setAppVersion:version];
     return YES;
 }
 
