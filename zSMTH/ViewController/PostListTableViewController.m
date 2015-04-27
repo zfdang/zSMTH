@@ -96,6 +96,8 @@ typedef enum {
     mPosts = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
     taskType = TASK_RELOAD;
+    self.tableView.showsPullToRefresh = NO;
+    self.tableView.showsInfiniteScrolling = NO;
     [self startAsyncTask:nil];
     
 }
@@ -108,6 +110,8 @@ typedef enum {
         [weakSelf.tableView.pullToRefreshView stopAnimating];
 
         weakSelf.progressTitle = @"刷新中...";
+        weakSelf.tableView.showsPullToRefresh = NO;
+        weakSelf.tableView.showsInfiniteScrolling = NO;
         [weakSelf startAsyncTask:nil];
     });
 }
@@ -159,9 +163,6 @@ typedef enum {
 
 - (void)asyncTask:(NSMutableDictionary*) params
 {
-    self.tableView.showsPullToRefresh = NO;
-    self.tableView.showsInfiniteScrolling = NO;
-    
     // this function will only load first page
     NSArray* posts;
     if(taskType == TASK_RELOAD){
@@ -250,13 +251,12 @@ typedef enum {
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-
     SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
     if (menu.menuButton.isActive) {
 //        NSLog(@"dropdown menu is active, turn off it now");
         [menu onHideMenu];
     }
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - TableView

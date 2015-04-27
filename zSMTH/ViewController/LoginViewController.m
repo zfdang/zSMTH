@@ -31,8 +31,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-
     // show network connection status
 //    SMTHHelper *helper = [SMTHHelper sharedManager];
     [helper updateNetworkStatus];
@@ -43,6 +41,7 @@
     } else if(helper.nNetworkStatus == 1){
         [self.netStatus setText:@"移动网络"];
     }
+    [super viewWillAppear:animated];
 }
 
 

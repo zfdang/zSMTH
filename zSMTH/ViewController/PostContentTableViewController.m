@@ -78,6 +78,8 @@
     
     // loading content now
     self.progressTitle = @"加载中...";
+    self.tableView.showsPullToRefresh = NO;
+    self.tableView.showsInfiniteScrolling = NO;
     [self startAsyncTask:nil];
 }
 
@@ -108,6 +110,8 @@
         [weakSelf.tableView.pullToRefreshView stopAnimating];
         
         weakSelf.progressTitle = @"刷新中...";
+        weakSelf.tableView.showsPullToRefresh = NO;
+        weakSelf.tableView.showsInfiniteScrolling = NO;
         [weakSelf startAsyncTask:nil];
     });
 }
@@ -150,9 +154,6 @@
 
 - (void)asyncTask:(NSMutableDictionary*) params
 {
-    self.tableView.showsPullToRefresh = NO;
-    self.tableView.showsInfiniteScrolling = NO;
-
     mPageIndex = 0;
     NSArray *results = [helper getPostContents:engName postID:postID from:mPageIndex];
     [mPosts removeAllObjects];
