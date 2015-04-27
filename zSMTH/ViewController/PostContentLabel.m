@@ -18,19 +18,17 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
 
 @implementation PostContentLabel
 
-
-- (void) initTTTAttributedLabel
-{
-    self.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
-    self.enabledTextCheckingTypes = NSTextCheckingTypeLink;
-    self.lineBreakMode = NSLineBreakByWordWrapping;
-    self.delegate = self;
-}
-
 - (void)setContentInfo:(NSString *)text
 {
-    [self initTTTAttributedLabel];
-    
+    // 设置TTT label的一些属性
+    self.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+    self.lineBreakMode = NSLineBreakByWordWrapping;
+    self.delegate = self;
+    if(text.length < 2000){
+        // 当文本太长时，不做链接的检查，否则性能会太差
+        self.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    }
+
     // 去除开始、结尾的空格、换行符
     text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
@@ -163,7 +161,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
 
     // 加上被截取的提示信息
     if(truncated) {
-        NSString *hint = @"\n\n文章太长，请长按后选择\"浏览器打开\"...";
+        NSString *hint = @"\n\n帖子太长，阅读全文请在浏览器中打开...";
         NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                 (id)[UIColor redColor].CGColor, kCTForegroundColorAttributeName,
                                 font_ref, kCTFontAttributeName,
