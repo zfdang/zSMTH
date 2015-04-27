@@ -40,8 +40,8 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
     // 所以需要限制text的长度
     // 截取前5000个字符
     BOOL truncated = NO;
-    if(text.length > 5000){
-        text = [text substringToIndex:5000];
+    if(text.length > 3500){
+        text = [text substringToIndex:3500];
         truncated = YES;
     }
     
@@ -154,7 +154,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
 
     // 加上被截取的提示信息
     if(truncated) {
-        NSString *hint = @"\n文章太长，请长按后选择\"浏览器打开\"...";
+        NSString *hint = @"\n\n文章太长，请长按后选择\"浏览器打开\"...";
         NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                 (id)[UIColor redColor].CGColor, kCTForegroundColorAttributeName,
                                 font_ref, kCTFontAttributeName,
