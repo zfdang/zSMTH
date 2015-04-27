@@ -34,6 +34,15 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
     // 去除开始、结尾的空格、换行符
     text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
+    // 过滤ASCII控制符，参照
+    // http://www.newsmth.net/bbs0an.php?path=%2Fgroups%2Fsystem.faq%2FASCIIart%2Ffaq%2Ffaq02
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[[;0-9]*m" options:NSRegularExpressionCaseInsensitive error:&error];
+    text = [regex stringByReplacingMatchesInString:text
+                                           options:0
+                                             range:NSMakeRange(0, [text length])
+                                      withTemplate:@""];
+
     // UILabel has maximum height, if content size is too large, content will be invisible
     //    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
     //    http://stackoverflow.com/questions/1493895/uiview-what-are-the-maximum-bounds-dimensions-i-can-use
