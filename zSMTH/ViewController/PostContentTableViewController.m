@@ -58,9 +58,6 @@
         [self.navigationItem setRightBarButtonItem:nil];
     }
 
-    // change translucent, otherwise, tableview will be partially hidden
-    self.navigationController.navigationBar.translucent = NO;
-
     // tableview setting
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
@@ -76,6 +73,9 @@
         [weakSelf loadMorePostList];
     }];
 
+    // change translucent, otherwise, tableview will be partially hidden
+    self.navigationController.navigationBar.translucent = NO;
+    
     // loading content now
     self.progressTitle = @"加载中...";
     [self startAsyncTask:nil];

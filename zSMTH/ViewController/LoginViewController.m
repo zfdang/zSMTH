@@ -31,6 +31,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+
     // show network connection status
 //    SMTHHelper *helper = [SMTHHelper sharedManager];
     [helper updateNetworkStatus];

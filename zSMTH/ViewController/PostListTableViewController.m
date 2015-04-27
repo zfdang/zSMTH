@@ -78,7 +78,6 @@ typedef enum {
     }
 
     // 开启上拉加载和和下拉刷新
-    self.navigationController.navigationBar.translucent = NO;
     // add pull to refresh function at the top & bottom
     __weak typeof(self) weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
@@ -88,7 +87,10 @@ typedef enum {
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMorePostList];
     }];
-    
+
+    // 防止tableview的顶部被navigation bar挡住
+    self.navigationController.navigationBar.translucent = NO;
+
     // 开始异步加载帖子列表
     showDingPosts = NO;
     mPosts = [[NSMutableArray alloc] init];
@@ -248,6 +250,8 @@ typedef enum {
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+
     SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
     if (menu.menuButton.isActive) {
 //        NSLog(@"dropdown menu is active, turn off it now");
