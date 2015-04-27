@@ -31,25 +31,25 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // change translucent, otherwise, tableview will be partially hidden
+    self.navigationController.navigationBar.translucent = NO;
 
-    // CGFloat top, left , bottom, right ;
-//    [self.tableView setContentInset:UIEdgeInsetsMake(0, -6, 0, -6)];
-    
-    m_sections = nil;
-    self.progressTitle = @"加载中...";
-    [self startAsyncTask:nil];
-    
     // add pull to refresh function at the top & bottom
     __weak typeof(self) weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
         [weakSelf refreshPostList];
     }];
-    // change translucent, otherwise, tableview will be partially hidden
-    self.navigationController.navigationBar.translucent = NO;
+
+    // load content now
+    m_sections = nil;
+    self.progressTitle = @"加载中...";
+    [self startAsyncTask:nil];
 }
 
 - (void)asyncTask:(NSMutableDictionary*) params
 {
+    self.tableView.showsPullToRefresh = NO;
     if(helper.user == nil){
         // 因为API的限制，想看10大必须得登录，如果用户没有登录，则用内置的帐号获取10大
         if(setting.bAutoLogin) {
@@ -65,6 +65,7 @@
 {
     
     [self.tableView reloadData];
+    self.tableView.showsPullToRefresh = YES;
 }
 
 - (void) refreshPostList {

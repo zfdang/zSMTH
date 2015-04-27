@@ -58,11 +58,13 @@
         [self.navigationItem setRightBarButtonItem:nil];
     }
 
+    // change translucent, otherwise, tableview will be partially hidden
+    self.navigationController.navigationBar.translucent = NO;
+
+    // tableview setting
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
-    self.progressTitle = @"加载中...";
-    [self startAsyncTask:nil];
 
     // add pull to refresh function at the top & bottom
     __weak typeof(self) weakSelf = self;
@@ -73,8 +75,10 @@
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMorePostList];
     }];
-    // change translucent, otherwise, tableview will be partially hidden
-    self.navigationController.navigationBar.translucent = NO;
+
+    // loading content now
+    self.progressTitle = @"加载中...";
+    [self startAsyncTask:nil];
 }
 
 
@@ -111,6 +115,8 @@
 - (void) loadMorePostList {
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        weakSelf.tableView.showsPullToRefresh = NO;
+        
         mPageIndex += 1;
         NSArray *posts = [helper getPostContents:engName postID:postID from:mPageIndex];
         long currentNumber = [mPosts count];
@@ -135,14 +141,18 @@
                                 duration:0.5
                                 position:CSToastPositionCenter];
                 }
+
+                weakSelf.tableView.showsPullToRefresh = YES;
             });
         }
     });
 }
 
-
 - (void)asyncTask:(NSMutableDictionary*) params
 {
+    self.tableView.showsPullToRefresh = NO;
+    self.tableView.showsInfiniteScrolling = NO;
+
     mPageIndex = 0;
     NSArray *results = [helper getPostContents:engName postID:postID from:mPageIndex];
     [mPosts removeAllObjects];
@@ -153,6 +163,9 @@
 - (void)finishAsyncTask:(NSDictionary*) resultParams
 {
     [self.tableView reloadData];
+
+    self.tableView.showsPullToRefresh = YES;
+    self.tableView.showsInfiniteScrolling = YES;
 }
 
 

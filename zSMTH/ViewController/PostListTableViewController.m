@@ -62,6 +62,7 @@ typedef enum {
         // 从导读-> 帖子 -> 回到版面时，版面没有中文名称
         navTitle = engName;
     }
+
     // add dropdown menu for navigation bar
     // 有一个bug, 当点击了navigation bar的其他按钮后，如果菜单处于弹出状态，居然也不消失
     // 在viewwilldisappear里手动隐藏菜单
@@ -76,13 +77,6 @@ typedef enum {
         self.navigationItem.titleView = menu;
     }
 
-    // 开始异步加载帖子列表
-    showDingPosts = NO;
-    mPosts = [[NSMutableArray alloc] init];
-    self.progressTitle = @"加载中...";
-    taskType = TASK_RELOAD;
-    [self startAsyncTask:nil];
-
     // 开启上拉加载和和下拉刷新
     self.navigationController.navigationBar.translucent = NO;
     // add pull to refresh function at the top & bottom
@@ -94,6 +88,14 @@ typedef enum {
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMorePostList];
     }];
+    
+    // 开始异步加载帖子列表
+    showDingPosts = NO;
+    mPosts = [[NSMutableArray alloc] init];
+    self.progressTitle = @"加载中...";
+    taskType = TASK_RELOAD;
+    [self startAsyncTask:nil];
+    
 }
 
 - (void) refreshPostList {
@@ -112,6 +114,8 @@ typedef enum {
 - (void) loadMorePostList {
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        weakSelf.tableView.showsPullToRefresh = NO;
+
         NSArray *posts;
         if(taskType == TASK_RELOAD){
             mPageIndex += 1;
@@ -144,6 +148,8 @@ typedef enum {
                                                                 position:CSToastPositionCenter];
                     
                 }
+
+                weakSelf.tableView.showsPullToRefresh = YES;
             });
         }
     });
@@ -151,6 +157,9 @@ typedef enum {
 
 - (void)asyncTask:(NSMutableDictionary*) params
 {
+    self.tableView.showsPullToRefresh = NO;
+    self.tableView.showsInfiniteScrolling = NO;
+    
     // this function will only load first page
     NSArray* posts;
     if(taskType == TASK_RELOAD){
@@ -182,6 +191,9 @@ typedef enum {
         [altview show];
         taskType = TASK_RELOAD;
     }
+
+    self.tableView.showsPullToRefresh = YES;
+    self.tableView.showsInfiniteScrolling = YES;
 }
 
 - (int) getNumberOfDingPosts
