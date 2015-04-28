@@ -131,7 +131,6 @@
             if(login == nil){
                 login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
             }
-            login.delegate = favorite;
             [navigationController pushViewController:login animated:YES];
         } else {
             [navigationController pushViewController:favorite animated:YES];
@@ -150,7 +149,6 @@
             if(login == nil){
                 login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
             }
-            login.delegate = userinfo;
             [navigationController pushViewController:login animated:YES];
         } else {
             [navigationController pushViewController:userinfo animated:YES];

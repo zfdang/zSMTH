@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ExtendedUIViewController.h"
-#import "LoginCompletionProtocol.h"
 
-@interface UserInfoViewController : ExtendedUIViewController <UITableViewDataSource, UITableViewDelegate, LoginCompletionProtocol>
+@interface UserInfoViewController : ExtendedUIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *labelID;

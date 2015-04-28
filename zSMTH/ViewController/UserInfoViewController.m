@@ -94,7 +94,6 @@
     if(taskType == 1 && !helper.isLogined) {
         // 当上一个任务是退出，并且用户已经退出时，显示登录窗口
         LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-        login.delegate = self;
         [self.navigationController pushViewController:login animated:YES];
         return;
     }
@@ -228,32 +227,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-
-
-
-#pragma mark - LoginCompletionProtocol
-
-- (void)refreshViewAfterLogin
-{
-    // refresh UserInformation
-    // 当显示用户信息时，用户可能还未登录，这时候，需要先跳转到登录界面，登录结束后，会调用这个方法，我们会刷新用户的信息
-    if (helper.isLogined) {
-        [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
-        
-        self.imageAvatar.layer.cornerRadius = 30.0;
-        self.imageAvatar.layer.borderWidth = 0;
-        self.imageAvatar.clipsToBounds = YES;
-        
-        self.labelID.text = helper.user.userID;
-        self.labelNick.text = helper.user.userNick;
-        self.labelLevel.text = [helper.user getLifeLevel];
-        
-        taskType = 0;
-        userID = helper.user.userID;
-        [self startAsyncTask];
-    }
-}
 
 
 @end

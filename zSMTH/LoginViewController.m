@@ -34,6 +34,11 @@
     self.switchAutoLogin.on = setting.bAutoLogin;
     self.switchSavePassword.on = setting.bSavePassword;
     
+    if(setting.bAutoLogin){
+        self.progressTitle = @"自动登录中...";
+        [self startAsyncTask];
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated

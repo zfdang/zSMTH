@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ExtendedTableViewController.h"
-#import "LoginCompletionProtocol.h"
 
-@interface FavoriteTableViewController : ExtendedTableViewController <LoginCompletionProtocol>
+@interface FavoriteTableViewController : ExtendedTableViewController
 
 @property (nonatomic) long favoriteRootID;
 @property (strong, nonatomic) NSString *favoriteRootName;

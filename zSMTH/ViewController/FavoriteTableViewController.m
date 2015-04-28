@@ -298,11 +298,4 @@ typedef enum {
 }
 
 
-#pragma mark - LoginCompletionProtocol
-
-- (void)refreshViewAfterLogin
-{
-    [self startAsyncTask:nil];
-}
-
 @end
