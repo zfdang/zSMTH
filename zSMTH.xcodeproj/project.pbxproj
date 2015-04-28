@@ -56,7 +56,6 @@
 		69F4EAA91AB06D1D00A82B50 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAA81AB06D1D00A82B50 /* LoginViewController.m */; };
 		69F4EAAD1AB1780A00A82B50 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAAC1AB1780A00A82B50 /* Reachability.m */; };
 		69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */; };
-		69F4EAB51AB1C13C00A82B50 /* SMTHHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAB41AB1C13C00A82B50 /* SMTHHelperTests.m */; };
 		69F4EAB71AB1EFE800A82B50 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */; };
 		69F5E3C31AC0DFE4000F394D /* PostContentLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F5E3C21AC0DFE4000F394D /* PostContentLabel.m */; };
 		69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF2D1AA9CE97007C9EFB /* main.m */; };
@@ -184,7 +183,6 @@
 		69F4EAAC1AB1780A00A82B50 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		69F4EAAE1AB1792000A82B50 /* SMTHHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMTHHelper.h; path = zSMTH/libSMTH/SMTHHelper.h; sourceTree = SOURCE_ROOT; };
 		69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMTHHelper.m; path = zSMTH/libSMTH/SMTHHelper.m; sourceTree = SOURCE_ROOT; };
-		69F4EAB41AB1C13C00A82B50 /* SMTHHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHHelperTests.m; sourceTree = "<group>"; };
 		69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		69F5E3C11AC0DFE4000F394D /* PostContentLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostContentLabel.h; path = ViewController/PostContentLabel.h; sourceTree = "<group>"; };
 		69F5E3C21AC0DFE4000F394D /* PostContentLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostContentLabel.m; path = ViewController/PostContentLabel.m; sourceTree = "<group>"; };
@@ -451,7 +449,6 @@
 			isa = PBXGroup;
 			children = (
 				69FCBF471AA9CE98007C9EFB /* zSMTHTests.m */,
-				69F4EAB41AB1C13C00A82B50 /* SMTHHelperTests.m */,
 				69FCBF451AA9CE98007C9EFB /* Supporting Files */,
 			);
 			path = zSMTHTests;
@@ -688,7 +685,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				69FCBF481AA9CE98007C9EFB /* zSMTHTests.m in Sources */,
-				69F4EAB51AB1C13C00A82B50 /* SMTHHelperTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
