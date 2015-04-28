@@ -75,7 +75,7 @@
     
     //快速枚举遍历所有Value的值
     for (NSObject *object in enumeratorValue) {
-        NSLog(@"遍历Value的值: %@",object);
+        NSLog(@"遍历Value的值: %@", object);
     }
 }
 
