@@ -53,7 +53,7 @@
         // reply post, set subject & conent at the beginning
         [self.txtSubject  setText:quotedSubject];
         [self.txtContent setText:quotedContent];
-        self.txtSummary.text = [NSString stringWithFormat:@"%ld", quotedContent.length];
+        self.txtSummary.text = [NSString stringWithFormat:@"%lu", (unsigned long)quotedContent.length];
     }
 }
 
@@ -139,7 +139,7 @@
         int index = 1;
         for (id item in self.mAttachments) {
             // set progress bar title
-            progressBar.labelText = [NSString stringWithFormat:@"上载图片%d/%ld...", index, [self.mAttachments count]];
+            progressBar.labelText = [NSString stringWithFormat:@"上载图片%d/%lu...", index, (unsigned long)[self.mAttachments count]];
             
             ALAsset *asset = (ALAsset*)item;
             ALAssetRepresentation* representation = [asset defaultRepresentation];
@@ -228,7 +228,7 @@
 
 -(void)textViewDidChange:(UITextView *)textView
 {
-    self.txtSummary.text = [NSString stringWithFormat:@"%ld",textView.text.length];
+    self.txtSummary.text = [NSString stringWithFormat:@"%lu",(unsigned long)textView.text.length];
 }
 
 #pragma mark - UpdateAttachmentsProtocol
@@ -238,7 +238,7 @@
     self.mAttachments = [NSMutableArray arrayWithArray:attachments];
     if(self.mAttachments)
     {
-        self.txtAttach.text = [NSString stringWithFormat:@"共有%ld个附件",[self.mAttachments count]];
+        self.txtAttach.text = [NSString stringWithFormat:@"共有%lu个附件",(unsigned long)[self.mAttachments count]];
     } else {
         self.txtAttach.text = @"无附件";
     }

@@ -537,7 +537,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     if(!loaded){
         // 从cache加载没成功，从服务器上加载
         [self getFavoritesFromServer:favorites rootid:fid];
-        NSLog(@"Favorites boards loaded from Server: %ld", [favorites count]);
+        NSLog(@"Favorites boards loaded from Server: %lu", (unsigned long)[favorites count]);
         
         // save boards to cache server
         [self saveFavoritesToCache:favorites rootid:fid];
@@ -568,7 +568,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
             [favorites addObject:board];
         }
 
-        NSLog(@"Favorite boards loaded from Cache %ld", [favorites count]);
+        NSLog(@"Favorite boards loaded from Cache %lu", (unsigned long)[favorites count]);
         [db close];
     }
 
@@ -595,7 +595,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
                 NSLog(@"failed to write board to cache: %@, fid=%ld", board.chsName, fid);
             }
         }
-        NSLog(@"Write board to cache: %ld", [favorites count]);
+        NSLog(@"Write board to cache: %lu", (unsigned long)[favorites count]);
         
         [self updateCacheStatus:@"FAVORITE" RootID:fid];
         
@@ -667,7 +667,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         // get raw list of all boards from server
         // 1. duplicated 2. unsorted
         [self getAllBoardsFromServer:0 Result:boards BoardPath:nil isSection:NO];
-        NSLog(@"Raw records loaded from Server: %ld", [boards count]);
+        NSLog(@"Raw records loaded from Server: %lu", (unsigned long)[boards count]);
         
         // de-duplicate
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -707,7 +707,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         // save back
         [boards removeAllObjects];
         [boards addObjectsFromArray:sortedBoards];
-        NSLog(@"Refined records loaded from Server: %ld", [boards count]);
+        NSLog(@"Refined records loaded from Server: %lu", (unsigned long)[boards count]);
 
         // save boards to cache server
         [self saveAllBoardToCache:boards];
@@ -744,7 +744,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         [boards removeAllObjects];
         [boards addObjectsFromArray:sortedBoards];
         
-        NSLog(@"Records loaded from Cache %ld", [boards count]);
+        NSLog(@"Records loaded from Cache %lu", (unsigned long)[boards count]);
         [db close];
     }
     if([boards count] == 0)
@@ -771,7 +771,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
                 NSLog(@"Failt to write board to cache: %@", board.chsName);
             }
         }
-        NSLog(@"Write board to cache: %ld", [boards count]);
+        NSLog(@"Write board to cache: %lu", (unsigned long)[boards count]);
 
         [self updateCacheStatus:@"BOARD" RootID:0];
         
