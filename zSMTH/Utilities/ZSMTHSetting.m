@@ -92,6 +92,6 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"login = %d, save = %d,",self.bAutoLogin, self.bSavePassword];
+    return [NSString stringWithFormat:@"user = %@, login = %d, save = %d,", self.username, self.bAutoLogin, self.bSavePassword];
 }
 @end

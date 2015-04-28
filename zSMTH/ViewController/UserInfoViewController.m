@@ -93,12 +93,11 @@
 {
     if(taskType == 1 && !helper.isLogined) {
         // 当上一个任务是退出，并且用户已经退出时，显示登录窗口
-        LoginViewController *login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-        [self.navigationController pushViewController:login animated:YES];
+        [self.frostedViewController dismissViewControllerAnimated:YES completion:nil];
         return;
     }
     
-    // update top information
+    // 更新查询到的用户信息
     [self.imageAvatar sd_setImageWithURL:[user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
     self.imageAvatar.layer.cornerRadius = 30.0;
     self.imageAvatar.layer.borderWidth = 0;

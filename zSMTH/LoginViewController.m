@@ -33,18 +33,18 @@
     }
     self.switchAutoLogin.on = setting.bAutoLogin;
     self.switchSavePassword.on = setting.bSavePassword;
-    
+    NSLog(@"Setting status: %@", setting);
+
+    // 自动登录
     if(setting.bAutoLogin){
         self.progressTitle = @"自动登录中...";
         [self startAsyncTask];
     }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     // show network connection status
-//    SMTHHelper *helper = [SMTHHelper sharedManager];
     [helper updateNetworkStatus];
     if(helper.nNetworkStatus == -1){
         [self.netStatus setText:@"没有网络"];
@@ -74,25 +74,38 @@
 
 - (IBAction)clickAutoLogin:(id)sender {
     if(self.switchAutoLogin.on){
+        // “自动登录”会强制打开“保存密码”
         self.switchSavePassword.on = YES;
+    }
+}
+
+- (void) saveStatus {
+    // 保存设置
+    setting.bSavePassword = self.switchSavePassword.on;
+    setting.bAutoLogin = self.switchAutoLogin.on;
+
+    // 保存用户名
+    setting.username = [self.editUsername text];
+
+    // 如果设置了保存密码，则保存；否则清空保存的密码
+    if(setting.bSavePassword){
+        setting.password = [self.editPassword text];
+    } else {
+        setting.password = @"";
     }
 }
 
 - (IBAction)login:(id)sender
 {
+    [self saveStatus];
+
     self.progressTitle = @"登录中...";
     [self startAsyncTask];
 }
 
 - (void)asyncTask
 {
-    setting.username = [self.editUsername text];
-    setting.password = [self.editPassword text];
-    setting.bSavePassword = self.switchSavePassword.on;
-    setting.bAutoLogin = self.switchAutoLogin.on;
-    
     NSLog(@"%@", setting);
-    
     [helper login:[self.editUsername text] password:[self.editPassword text]];
 }
 
@@ -118,8 +131,9 @@
 
 
 - (IBAction)cancel:(id)sender {
-    // 回到rootView
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self saveStatus];
+
+    // 退出
     [self exitApplication];
 }
 
