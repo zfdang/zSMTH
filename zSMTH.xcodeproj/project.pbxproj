@@ -28,6 +28,7 @@
 		6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F71AB4927600548BD2 /* ExtendedTableViewController.m */; };
 		6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6FA1AB579E900548BD2 /* SMTHBoard.m */; };
 		6984F6FE1AB5D53800548BD2 /* BoardListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6984F6FC1AB5D53800548BD2 /* BoardListTableViewCell.xib */; };
+		698A27461AEF1C98007872A0 /* ExtendNSLogFunctionality.m in Sources */ = {isa = PBXBuildFile; fileRef = 698A27451AEF1C98007872A0 /* ExtendNSLogFunctionality.m */; };
 		69949CD61AD5214100970E60 /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 69949CC41AD5214100970E60 /* arrow_down.png */; };
 		69949CD71AD5214100970E60 /* arrow_down1.png in Resources */ = {isa = PBXBuildFile; fileRef = 69949CC51AD5214100970E60 /* arrow_down1.png */; };
 		69949CD81AD5214100970E60 /* arrow_down1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69949CC61AD5214100970E60 /* arrow_down1@2x.png */; };
@@ -123,6 +124,8 @@
 		6984F6F91AB579E900548BD2 /* SMTHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHBoard.h; sourceTree = "<group>"; };
 		6984F6FA1AB579E900548BD2 /* SMTHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHBoard.m; sourceTree = "<group>"; };
 		6984F6FD1AB5D53800548BD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = zSMTH/Base.lproj/BoardListTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		698A27441AEF1C98007872A0 /* ExtendNSLogFunctionality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendNSLogFunctionality.h; sourceTree = "<group>"; };
+		698A27451AEF1C98007872A0 /* ExtendNSLogFunctionality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendNSLogFunctionality.m; sourceTree = "<group>"; };
 		699019801ADA053D00AA3D7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PostListTableViewCell.strings"; sourceTree = "<group>"; };
 		699019811ADA053D00AA3D7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PostContentTableViewCell.strings"; sourceTree = "<group>"; };
 		699019821ADA053D00AA3D7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GuidancePostTableViewCell.strings"; sourceTree = "<group>"; };
@@ -375,6 +378,8 @@
 		69F4EAAA1AB1780A00A82B50 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				698A27441AEF1C98007872A0 /* ExtendNSLogFunctionality.h */,
+				698A27451AEF1C98007872A0 /* ExtendNSLogFunctionality.m */,
 				69A38B891ADE234A0090BB6C /* UINavigationController+MethodSwizzling.h */,
 				69A38B8A1ADE234A0090BB6C /* UINavigationController+MethodSwizzling.m */,
 				69A38B8B1ADE234A0090BB6C /* UIViewController+MethodSwizzling.h */,
@@ -667,6 +672,7 @@
 				69A38B911ADE550C0090BB6C /* SettingViewController.m in Sources */,
 				69FE90AA1AB66EC400E72720 /* BoardListTableViewCell.m in Sources */,
 				69FE90B91AB71A7700E72720 /* SMTHPost.m in Sources */,
+				698A27461AEF1C98007872A0 /* ExtendNSLogFunctionality.m in Sources */,
 				6984F6F21AB3DC1D00548BD2 /* NavigationViewController.m in Sources */,
 				69F5E3C31AC0DFE4000F394D /* PostContentLabel.m in Sources */,
 				693FACE31ABE50D900BD8200 /* PostContentTableViewController.m in Sources */,

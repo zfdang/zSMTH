@@ -11,6 +11,7 @@
 #import "SMTHHelper.h"
 #import "ZSMTHSetting.h"
 #import "REFrostedViewController.h"
+#import "ExtendNSLogFunctionality.h"
 
 @interface ExtendedTableViewController : UITableViewController <MBProgressHUDDelegate>
 {

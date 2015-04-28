@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SMTHURLConnection.h"
 #import "REFrostedViewController.h"
+#import "ExtendNSLogFunctionality.h"
 
 @interface REFrostedRootViewController : REFrostedViewController <SMTHURLConnectionDelegate>
 
