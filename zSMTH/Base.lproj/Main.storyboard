@@ -9,7 +9,7 @@
         <!--REFrosted Root Controller-->
         <scene sceneID="FoE-BP-JOL">
             <objects>
-                <viewController title="REFrosted Root Controller" id="l22-2R-Y2i" userLabel="REFrosted Root Controller" customClass="REFrostedRootViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="REFrostedRootViewController" title="REFrosted Root Controller" id="l22-2R-Y2i" userLabel="REFrosted Root Controller" customClass="REFrostedRootViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GLE-fr-eVS"/>
                         <viewControllerLayoutGuide type="bottom" id="Z42-Sk-eXm"/>

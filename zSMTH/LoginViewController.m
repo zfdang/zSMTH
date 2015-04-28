@@ -9,8 +9,15 @@
 #import "LoginViewController.h"
 #import "SMTHHelper.h"
 #import "ZSMTHSetting.h"
+#import "REFrostedRootViewController.h"
+#import "LeftMenuViewController.h"
+#import "NavigationViewController.h"
+#import "GuidanceTableViewController.h"
 
 @interface LoginViewController ()
+{
+    REFrostedRootViewController *rootView;
+}
 
 @end
 
@@ -92,12 +99,10 @@
         [self performSelector:@selector(hideLoginFeedbackLater) withObject:nil afterDelay:2.0f];
     }
     else {
-        if(self.delegate){
-            [self.delegate refreshViewAfterLogin];
+        if(!rootView){
+            rootView = [self.storyboard instantiateViewControllerWithIdentifier:@"REFrostedRootViewController"];
         }
-        
-        // return to upstream view
-        [self.navigationController popViewControllerAnimated:YES];
+        [self presentViewController:rootView animated:YES completion:nil];
     }
 }
 
