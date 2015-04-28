@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="76" id="VBc-Y0-mE0" customClass="BoardListTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BoardListTableViewCell" rowHeight="76" id="VBc-Y0-mE0" customClass="BoardListTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VBc-Y0-mE0" id="1nu-iY-M69">
@@ -94,11 +93,11 @@
                         <exclude reference="JOr-VG-Ji5"/>
                         <exclude reference="SQc-Yb-nIc"/>
                         <exclude reference="mV2-tj-sXe"/>
+                        <exclude reference="wlM-uc-uyb"/>
                         <exclude reference="1Db-kk-uYV"/>
                         <exclude reference="JKw-GI-Aa2"/>
                         <exclude reference="N28-J5-aud"/>
                         <exclude reference="N5d-pY-X3A"/>
-                        <exclude reference="wlM-uc-uyb"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
