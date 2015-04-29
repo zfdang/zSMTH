@@ -99,6 +99,7 @@ typedef enum {
                                                                 position:CSToastPositionCenter];
                     
                 }
+                [weakSelf.tableView.infiniteScrollingView stopAnimating];
             });
         }
     });
@@ -147,6 +148,11 @@ typedef enum {
     return 0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 66;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"PostListTableViewCell";
@@ -157,6 +163,12 @@ typedef enum {
         NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
         cell = (PostListTableViewCell*)[nibArray objectAtIndex:0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        // hide unnecessary item
+        [cell.labelReply setHidden:YES];
+        [cell.labelReplyTime setHidden:YES];
+        [cell.labelReplyCount setHidden:YES];
+        [cell.imageAttachs setHidden:YES];
     }
     
     if (indexPath.section == 0) {
@@ -172,9 +184,7 @@ typedef enum {
         cell.labelUserID.text = post.author;
         cell.labelPostTime.text = post.postDate;
         
-        if(![post hasAttachment]){
-            [cell.imageAttachs setHidden:YES];
-        }
+        cell.labelCount.text = [NSString stringWithFormat:@"信件ID:%ld", post.postPosition];
     }
     
     return cell;
@@ -224,5 +234,10 @@ typedef enum {
 */
 
 - (IBAction)clickRightButton:(id)sender {
+    self.progressTitle = @"刷新中...";
+    taskType = TASK_MAIL_INBOX;
+    self.tableView.showsInfiniteScrolling = NO;
+    [self startAsyncTask:nil];
 }
+
 @end

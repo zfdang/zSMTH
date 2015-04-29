@@ -12,9 +12,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelSubject;
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *labelPostTime;
+@property (weak, nonatomic) IBOutlet UILabel *labelReply;
 @property (weak, nonatomic) IBOutlet UILabel *labelReplyTime;
+@property (weak, nonatomic) IBOutlet UILabel *labelReplyCount;
 @property (weak, nonatomic) IBOutlet UILabel *labelCount;
 @property (weak, nonatomic) IBOutlet UILabel *labelUserID;
 @property (weak, nonatomic) IBOutlet UIImageView *imageAttachs;
+
 
 @end

@@ -146,15 +146,13 @@ typedef enum {
                     [mPosts addObjectsFromArray:posts];
                     [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
                     [weakSelf.tableView endUpdates];
-
-                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
                 } else {
                     [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的帖子了..."
                                                                 duration:0.5
                                                                 position:CSToastPositionCenter];
                     
                 }
-
+                [weakSelf.tableView.infiniteScrollingView stopAnimating];
                 weakSelf.tableView.showsPullToRefresh = YES;
             });
         }

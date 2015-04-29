@@ -940,34 +940,52 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 {
     NSMutableArray *mails = [[NSMutableArray alloc] init];
     NSArray *results;
-    if(type == 1){
-        results = [smth net_LoadMailList:from*mailNumberinOnePage :mailNumberinOnePage];
+    
+    // 邮件的列表是从最老的开始排列的，所以加载的时候，需要从尾部往头加载，所以需要知道总mail的数量
+    if(totalMailCount == -1) {
+        // 还没有从hasNewMail中获得过总数量，现在获取
+        [self hasNewMail];
     }
-    for (id result in results) {
-        NSLog(@"%@", result);
-//        "attachment_list" =     (
-//        );
-//        attachments = 0;
-//        "author_id" = mozilla;
-//        body = "";
-//        flags = "  ";
-//        position = 0;
-//        subject = "[Mar 16 09:52] \U6240\U6709\U8baf\U606f\U5907\U4efd";
-//        time = 1079401960;
-        
-        //        NSLog(@"%@", result);
-        NSDictionary *dict = (NSDictionary*)result;
-        SMTHPost *post = [[SMTHPost alloc] init];
-        post.author = [dict objectForKey:@"author_id"];
-        post.postSubject = [dict objectForKey:@"subject"];
-        post.postDate = [self getRelativeDateString:[[result objectForKey:@"time"] doubleValue]];
-        post.postFlags = [dict objectForKey:@"flags"];
-        NSLog(@"%@", [dict objectForKey:@"position"]);
-        post.postPosition = [[dict objectForKey:@"position"] longValue];
-        
-        [mails addObject:post];
+    // from 是需要加载的页，每页的数量为mailNumberinOnePage
+    // 需要计算出对应的from -- 帖子序号，和size: 加载的数量来
+    long start_pos = totalMailCount - mailNumberinOnePage * (from + 1);
+    if(start_pos < 0){
+        start_pos = 0;
     }
-    NSLog(@"%@", mails);
+    long previous_pos = totalMailCount - mailNumberinOnePage * from;
+    if(previous_pos < 0){
+        previous_pos = 0;
+    }
+    long length = previous_pos - start_pos;
+
+    // 如果还有剩余的帖子要加载，才会从服务器上取
+    if(length > 0)
+    {
+        if(type == 1){
+            results = [smth net_LoadMailList:start_pos :length];
+        }
+        for (id result in results) {
+            //        "attachment_list" =     (
+            //        );
+            //        attachments = 0;
+            //        "author_id" = mozilla;
+            //        body = "";
+            //        flags = "  ";
+            //        position = 0;
+            //        subject = "[Mar 16 09:52] \U6240\U6709\U8baf\U606f\U5907\U4efd";
+            //        time = 1079401960;
+            //        NSLog(@"%@", result);
+            NSDictionary *dict = (NSDictionary*)result;
+            SMTHPost *post = [[SMTHPost alloc] init];
+            post.author = [dict objectForKey:@"author_id"];
+            post.postSubject = [dict objectForKey:@"subject"];
+            post.postDate = [self getRelativeDateString:[[result objectForKey:@"time"] doubleValue]];
+            post.postFlags = [dict objectForKey:@"flags"];
+            post.postPosition = [[dict objectForKey:@"position"] longValue];
+            
+            [mails insertObject:post atIndex:0];
+        }
+    }
     return mails;
 }
 
