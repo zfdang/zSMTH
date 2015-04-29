@@ -99,7 +99,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"Update left menu before show");
-    if(helper.isLogined) {
+    if(helper.user) {
         // update avatar & userID when necessary
         NSComparisonResult result = [labelUser.text compare:helper.user.userID];
         if(result != NSOrderedSame){
@@ -120,7 +120,7 @@
 -(void)switchViewto:(SMTHVIEW)target
 {
     // 如果用户未登录，或者登录状态已超时，则显示登录界面
-    if(! helper.isLogined)
+    if(! helper.user)
     {
         [self dismissViewControllerAnimated:YES completion:nil];
         return;
@@ -139,27 +139,14 @@
         }
         favorite.favoriteRootID = 0;
         favorite.favoriteRootName = @"个人收藏夹";
-        
         [navigationController popToRootViewControllerAnimated:NO];
-
-
+        [navigationController pushViewController:favorite animated:YES];
     } else if (target == VIEW_USER_INFO) {
         if(userinfo == nil){
             userinfo = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
         }
         [navigationController popToRootViewControllerAnimated:NO];
-
-        // user logined?
-        if(! helper.isLogined)
-        {
-            [navigationController pushViewController:userinfo animated:NO];
-            if(login == nil){
-                login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-            }
-            [navigationController pushViewController:login animated:YES];
-        } else {
-            [navigationController pushViewController:userinfo animated:YES];
-        }
+        [navigationController pushViewController:userinfo animated:YES];
     } else if (target == VIEW_BOARD_LIST) {
         if(boardlist == nil){
             boardlist = [self.storyboard instantiateViewControllerWithIdentifier:@"boardlistController"];
@@ -167,7 +154,10 @@
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:boardlist animated:YES];
     } else if(target == VIEW_MAIL) {
-        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [helper logout];
+        });
+
     } else if(target == VIEW_NOTIFICATION) {
         
     } else if(target == VIEW_SETTING) {

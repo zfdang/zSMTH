@@ -50,12 +50,13 @@
 - (void)asyncTask:(NSMutableDictionary*) params
 {
     self.tableView.showsPullToRefresh = NO;
+
+    // 这个加载的过程，需要实现分节加载
     m_sections = [helper getGuidancePosts];
 }
 
 - (void)finishAsyncTask:(NSDictionary*) resultParams
 {
-    
     [self.tableView reloadData];
     self.tableView.showsPullToRefresh = YES;
 }

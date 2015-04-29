@@ -59,6 +59,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         
         // init sections
         sectionList = @[@"全站热点", @"国内院校", @"休闲娱乐", @"五湖四海", @"游戏运动", @"社会信息", @"知性感性", @"文化人文", @"学术科学", @"电脑技术"];
+//        sectionList = @[@"全站热点"];
 
         // init setting to load post list
         brcmode = 0;
@@ -121,7 +122,6 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 - (void) login:(NSString*)username password:(NSString*)password
 {
     [smth reset_status];
-    user = nil;
     int status = [smth net_LoginBBS:username :password];
     if(status == 1)
     {
@@ -134,21 +134,11 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (void) logout
 {
+    NSLog(@"logout");
     [smth net_LogoutBBS];
+    
     // 退出成功
     user = nil;
-}
-
-
-- (BOOL)isLogined
-{
-    // 由于API的限制，必须得登录之后才能查看首页导读
-    if(user == nil)
-        return NO;
-    if([@"" compare:user.userID] == NSOrderedSame)
-        return NO;
-
-    return YES;
 }
 
 - (NSURL*) getFaceURLByUserID:(NSString*)userID
@@ -240,7 +230,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
             results = [smth net_LoadSectionHot:i];
         else
             results = [smth net_LoadSectionHot:i+1];
-//        NSLog(@"--------- %@ ---------", [self.sectionList objectAtIndex:i]);
+        NSLog(@"--------- %@ ---------", [self.sectionList objectAtIndex:i]);
         for (id result in results) {
             //        "author_id" = GuoTie;
             //        board = Universal;

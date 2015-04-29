@@ -30,16 +30,14 @@
     self.tableView.delegate = self;
     
     // set userinfo
-    if (helper.isLogined) {
-        [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
-        self.imageAvatar.layer.cornerRadius = 30.0;
-        self.imageAvatar.layer.borderWidth = 0;
-        self.imageAvatar.clipsToBounds = YES;
-        
-        self.labelID.text = helper.user.userID;
-        self.labelNick.text = helper.user.userNick;
-        self.labelLevel.text = [helper.user getLifeLevel];
-    }
+    [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
+    self.imageAvatar.layer.cornerRadius = 30.0;
+    self.imageAvatar.layer.borderWidth = 0;
+    self.imageAvatar.clipsToBounds = YES;
+    
+    self.labelID.text = helper.user.userID;
+    self.labelNick.text = helper.user.userNick;
+    self.labelLevel.text = [helper.user getLifeLevel];
     
     taskType = 0;
     self.progressTitle = @"加载信息中...";
@@ -91,7 +89,7 @@
 
 - (void)finishAsyncTask
 {
-    if(taskType == 1 && !helper.isLogined) {
+    if(taskType == 1) {
         // 当上一个任务是退出，并且用户已经退出时，显示登录窗口
         [self.frostedViewController dismissViewControllerAnimated:YES completion:nil];
         return;

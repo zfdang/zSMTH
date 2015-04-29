@@ -100,47 +100,41 @@ typedef enum {
 
 - (void)asyncTask:(NSMutableDictionary*) params
 {
-    if(helper.isLogined)
-    {
-        if(taskType == TASK_RELOAD){
-            favorites = [NSMutableArray arrayWithArray:[helper getFavorites:favoriteRootID]];
-        } else if (taskType == TASK_DELETE){
-            taskResult = [helper removeFavorite:toBeDeletedFavoriteBoardEngName];
-        }
+    if(taskType == TASK_RELOAD){
+        favorites = [NSMutableArray arrayWithArray:[helper getFavorites:favoriteRootID]];
+    } else if (taskType == TASK_DELETE){
+        taskResult = [helper removeFavorite:toBeDeletedFavoriteBoardEngName];
     }
 }
 
 - (void)finishAsyncTask:(NSDictionary*) resultParams
 {
-    if(helper.isLogined)
-    {
-        if(taskType == TASK_RELOAD){
-            [self.tableView reloadData];
-        } else if (taskType == TASK_DELETE){
-            // invalid cache for this favorite folder
-            [helper clearCacheStatus:@"FAVORITE" RootID:self.favoriteRootID];
+    if(taskType == TASK_RELOAD){
+        [self.tableView reloadData];
+    } else if (taskType == TASK_DELETE){
+        // invalid cache for this favorite folder
+        [helper clearCacheStatus:@"FAVORITE" RootID:self.favoriteRootID];
+        
+        if(taskResult){
+            // delete selected board from array and server
+            [favorites removeObjectAtIndex:toBeDeletedIndex.row];
             
-            if(taskResult){
-                // delete selected board from array and server
-                [favorites removeObjectAtIndex:toBeDeletedIndex.row];
-                
-                // delete selected board from tableview
-                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:toBeDeletedIndex] withRowAnimation:UITableViewRowAnimationLeft];
-                
-                UIAlertView *altview = [[UIAlertView alloc] initWithTitle:@"删除成功"
-                                                                  message:[NSString stringWithFormat:@"删除版面%@成功",toBeDeletedFavoriteBoardEngName]
-                                                                 delegate:nil
-                                                        cancelButtonTitle:@"确定"
-                                                        otherButtonTitles:nil];
-                [altview show];
-            } else {
-                UIAlertView *altview = [[UIAlertView alloc] initWithTitle:@"删除失败"
-                                                                  message:[NSString stringWithFormat:@"删除版面%@失败",toBeDeletedFavoriteBoardEngName]
-                                                                 delegate:nil
-                                                        cancelButtonTitle:@"确定"
-                                                        otherButtonTitles:nil];
-                [altview show];
-            }
+            // delete selected board from tableview
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:toBeDeletedIndex] withRowAnimation:UITableViewRowAnimationLeft];
+            
+            UIAlertView *altview = [[UIAlertView alloc] initWithTitle:@"删除成功"
+                                                              message:[NSString stringWithFormat:@"删除版面%@成功",toBeDeletedFavoriteBoardEngName]
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"确定"
+                                                    otherButtonTitles:nil];
+            [altview show];
+        } else {
+            UIAlertView *altview = [[UIAlertView alloc] initWithTitle:@"删除失败"
+                                                              message:[NSString stringWithFormat:@"删除版面%@失败",toBeDeletedFavoriteBoardEngName]
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"确定"
+                                                    otherButtonTitles:nil];
+            [altview show];
         }
     }
 }

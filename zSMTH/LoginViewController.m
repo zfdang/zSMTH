@@ -23,6 +23,7 @@
     NSTimer *myTimer;
     BOOL isConnectionActive;
     BOOL hasNewMail;
+    BOOL isReconnectSuccsss;
 }
 
 @end
@@ -125,7 +126,7 @@
 
 - (void)finishAsyncTask
 {
-    if(!helper.isLogined) {
+    if(helper.user == nil) {
         [self.loginFeedback setHidden:NO];
         [self performSelector:@selector(hideLoginFeedbackLater) withObject:nil afterDelay:2.0f];
     } else {
@@ -173,7 +174,7 @@
     // 开启定时器，检查新邮件
     if(myTimer == nil){
         //每120秒运行一次function方法。
-        myTimer =  [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerTask) userInfo:nil repeats:YES];
+        myTimer =  [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerTask) userInfo:nil repeats:YES];
     } else {
         //重启定时器
         [myTimer setFireDate:[NSDate distantPast]];
@@ -187,27 +188,59 @@
 }
 
 - (void) timerTask {
+    // 只有当login view被放置在后台时，做定时的检查
+    if(self.presentedViewController == nil){
+        NSLog(@"in Login view, skip background checking.");
+        return;
+    }
+
     // 异步的方式运行，防止阻塞主线程
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        if(helper.isLogined) {
-            // 检查登录状态
-            isConnectionActive = [helper isConnectionActive];
-            NSLog(@"Status of Login Token: %d", isConnectionActive);
+        isConnectionActive = [helper isConnectionActive];
+        NSLog(@"Login Token: %d, helper.user is %@", isConnectionActive, helper.user);
 
-            // 检查新邮件
+        if(!isConnectionActive){
+            // 连接已经失效，清空用户，在LeftMenuViewController里会做响应
+            helper.user = nil;
+        }
+
+        isReconnectSuccsss = NO;
+        // 如果连接已经失效，并且允许自动登录，则自动登录
+        // 有时候isConnectionActive == YES, 但是user并没有生成，所以这时候，需要再次登录一次，以获取用户信息
+        if(!isConnectionActive || helper.user == nil) {
+            if(setting.bAutoLogin) {
+                [helper login:[self.editUsername text] password:[self.editPassword text]];
+                if(helper.user) {
+                    // 设置自动重连成功的提示信息
+                    isReconnectSuccsss = YES;
+                }
+            }
+        }
+
+        // 检查新邮件, 等到token状态是YES时再检查
+        if(isConnectionActive) {
             hasNewMail = [helper hasNewMail];
             NSLog(@"Status of newMail: %d", hasNewMail);
-
-            // 结果放到主线程里展示
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf postTimerTask];
-            });
+        } else {
+            hasNewMail = NO;
         }
+
+        // 结果放到主线程里展示
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf postTimerTask];
+        });
     });
 }
 
 - (void) postTimerTask {
+    if(isReconnectSuccsss) {
+        [JDStatusBarNotification showWithStatus:@"自动重新登录成功!"
+                                   dismissAfter:3.0
+                                      styleName:JDStatusBarStyleSuccess];
+        return;
+    }
+
     if(isConnectionActive == NO){
         [JDStatusBarNotification showWithStatus:@"当前连接已失效，请重新登录!"
                                    dismissAfter:3.0
@@ -218,7 +251,7 @@
     if(hasNewMail){
         [JDStatusBarNotification showWithStatus:@"您有新邮件，请及时查看!"
                                    dismissAfter:3.0
-                                      styleName:JDStatusBarStyleError];
+                                      styleName:JDStatusBarStyleSuccess];
         return;
     }
 }

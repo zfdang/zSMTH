@@ -22,16 +22,14 @@
 @property (readonly, strong, nonatomic) SMTHURLConnection *smth;
 @property (readonly, nonatomic) int nNetworkStatus;
 @property (readonly, strong, nonatomic) NSArray *sectionList;
-@property (readonly, strong, nonatomic) SMTHUser *user;
-@property (readonly) BOOL isLogined;
+@property (strong, nonatomic) SMTHUser *user;
 
 - (void) updateNetworkStatus;
 - (NSURL*) getFaceURLByUserID:(NSString*)userID;
 - (int) checkVersion;
 
 // returned value should not be used to judge whether user is logined or not.
-// 有的时候会用内置帐号登录，但是应该认为真正用户还没有登录
-// 使用isLogined来判断真实用户是否登录
+// 根据user == nil来判断是否有活跃用户
 - (void) login:(NSString*)username password:(NSString*)password;
 - (void) logout;
 - (BOOL) isConnectionActive;
