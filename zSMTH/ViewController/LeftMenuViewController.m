@@ -57,7 +57,7 @@
         // 我们使用修改过menuView的大小，宽度为180
         // 头像区域为一个180 * 180的正方形
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 180.0f)];
-        
+
         // user avatar
         // http://images.newsmth.net/nForum/uploadFace/M/mozilla.jpg
         imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
@@ -78,9 +78,6 @@
         labelUser.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
         labelUser.backgroundColor = [UIColor clearColor];
         labelUser.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
-//        [labelUser sizeToFit];
-//        labelUser.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-
         
         // enable single tap on imager
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userAvatarClicked)];
@@ -100,15 +97,36 @@
     });
 }
 
--(void)userAvatarClicked{
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"Update left menu before show");
+    if(helper.isLogined) {
+        // update avatar & userID when necessary
+        NSComparisonResult result = [labelUser.text compare:helper.user.userID];
+        if(result != NSOrderedSame){
+            [imageView sd_setImageWithURL:[helper.user getFaceURL]];
+            labelUser.text = helper.user.userID;
+        }
+    } else {
+        imageView.image = [UIImage imageNamed:@"avatar"];
+        labelUser.text = @"点击登录";
+    }
+}
+
+-(void)userAvatarClicked {
 //    NSLog(@"single Tap on user avatar or username");
     [self switchViewto:VIEW_USER_INFO];
 }
 
 -(void)switchViewto:(SMTHVIEW)target
 {
+    // 如果用户未登录，或者登录状态已超时，则显示登录界面
+    if(! helper.isLogined)
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+
     NavigationViewController *navigationController = (NavigationViewController*)self.frostedViewController.contentViewController;
-    
     if (target == VIEW_GUIDANCE) {
         // top view is guidance view
         if( guidance == nil){
@@ -124,17 +142,6 @@
         
         [navigationController popToRootViewControllerAnimated:NO];
 
-        // user logined?
-        if(! helper.isLogined)
-        {
-            [navigationController pushViewController:favorite animated:NO];
-            if(login == nil){
-                login = [self.storyboard instantiateViewControllerWithIdentifier:@"loginController"];
-            }
-            [navigationController pushViewController:login animated:YES];
-        } else {
-            [navigationController pushViewController:favorite animated:YES];
-        }
 
     } else if (target == VIEW_USER_INFO) {
         if(userinfo == nil){
@@ -172,19 +179,6 @@
     }
 
     [self.frostedViewController hideMenuViewController];
-}
-
-- (void)refreshTableHeadView
-{
-    if(helper.isLogined){
-        NSComparisonResult result = [labelUser.text compare:helper.user.userID];
-        if(result != NSOrderedSame){
-//            NSLog(@"Label=%@, userID=%@", labelUser.text, helper.user.userID);
-            // update avatar & userID when necessary
-            [imageView sd_setImageWithURL:[helper.user getFaceURL]];
-            labelUser.text = helper.user.userID;
-        }
-    }
 }
 
 #pragma mark -

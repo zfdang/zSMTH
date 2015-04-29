@@ -50,14 +50,6 @@
 - (void)asyncTask:(NSMutableDictionary*) params
 {
     self.tableView.showsPullToRefresh = NO;
-    if(helper.user == nil){
-        // 因为API的限制，想看10大必须得登录，如果用户没有登录，则用内置的帐号获取10大
-        if(setting.bAutoLogin) {
-            [helper login:setting.username password:setting.password];
-        } else {
-            [helper login:@"zSMTHDev" password:@"newsmth2012"];
-        }
-    }
     m_sections = [helper getGuidancePosts];
 }
 

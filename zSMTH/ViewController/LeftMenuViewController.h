@@ -23,6 +23,5 @@ typedef enum {
 @interface LeftMenuViewController : ExtendedTableViewController
 
 -(void)switchViewto:(SMTHVIEW)target;
--(void)refreshTableHeadView;
 
 @end
