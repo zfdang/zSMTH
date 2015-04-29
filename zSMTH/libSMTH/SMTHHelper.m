@@ -127,7 +127,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     {
         user = [self getUserInfo:username];
     }
-    NSLog(@"Login Status %d", user != nil);
+    NSLog(@"Login result: %d", user != nil);
 
     return;
 }
@@ -142,13 +142,12 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (BOOL)isLogined
 {
-    // 由于API的限制，必须得登录之后才能查看首页导读，所以内置了zSMTHDev的帐号
-    // 但是如果是zSMTHDev的用户名，我们认为是未登录
-    if( user == nil)
+    // 由于API的限制，必须得登录之后才能查看首页导读
+    if(user == nil)
         return NO;
-    if([@"zSMTHDev" compare:user.userID] == NSOrderedSame)
-//      if([@"zSMTHDevAA" compare:user.userID] == NSOrderedSame)
+    if([@"" compare:user.userID] == NSOrderedSame)
         return NO;
+
     return YES;
 }
 

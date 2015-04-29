@@ -22,4 +22,6 @@
 - (IBAction)login:(id)sender;
 - (IBAction)cancel:(id)sender;
 
+- (void) postTimerTask;
+
 @end
