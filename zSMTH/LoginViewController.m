@@ -50,11 +50,24 @@
                                              selector:@selector(applicationDidEnterBackground)
                                                  name:UIApplicationDidEnterBackgroundNotification object:nil];
 
+    // enable click on banner
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bannerClick)];
+    singleTap.numberOfTapsRequired = 1;
+    [self.imageBanner setUserInteractionEnabled:YES];
+    [self.imageBanner addGestureRecognizer:singleTap];
+
     // 自动登录
     if(setting.bAutoLogin){
         self.progressTitle = @"自动登录中...";
         [self startAsyncTask];
     }
+}
+
+
+- (void) bannerClick
+{
+    NSString* url = @"http://zsmth.zfdang.com";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -166,6 +179,7 @@
         exit(0);
     }
 }
+
 
 #pragma mark - Periodical Checking Tasks
 

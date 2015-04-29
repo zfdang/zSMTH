@@ -997,18 +997,12 @@
                         </variation>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="登录" id="OfV-V7-rtv">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="6el-P6-EKl">
-                            <connections>
-                                <action selector="showLeftMenu:" destination="IdG-nZ-lWU" id="syx-Ny-3bG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="editPassword" destination="DA4-Z2-yxY" id="mnz-qO-oAE"/>
                         <outlet property="editUsername" destination="H9c-sD-YH3" id="kxB-Or-S4l"/>
+                        <outlet property="imageBanner" destination="COD-bt-qP9" id="9M7-Tv-McU"/>
                         <outlet property="loginFeedback" destination="32Y-Y2-Mfk" id="4Rb-Tc-cuL"/>
                         <outlet property="netStatus" destination="HPN-sc-Lji" id="ui6-Ex-94K"/>
                         <outlet property="switchAutoLogin" destination="eJ2-ND-sjm" id="nbI-35-pql"/>

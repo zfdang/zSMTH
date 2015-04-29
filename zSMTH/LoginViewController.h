@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *loginFeedback;
 @property (weak, nonatomic) IBOutlet UISwitch *switchSavePassword;
 @property (weak, nonatomic) IBOutlet UISwitch *switchAutoLogin;
+@property (weak, nonatomic) IBOutlet UIImageView *imageBanner;
 - (IBAction)clickAutoLogin:(id)sender;
 
 - (IBAction)login:(id)sender;
