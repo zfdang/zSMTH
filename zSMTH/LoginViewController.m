@@ -141,7 +141,7 @@
 {
     if(helper.user == nil) {
         [self.loginFeedback setHidden:NO];
-        [self performSelector:@selector(hideLoginFeedbackLater) withObject:nil afterDelay:2.0f];
+        [self performSelector:@selector(hideLoginFeedbackLater) withObject:nil afterDelay:3.0f];
     } else {
         // 进入主界面
         if(!rootView) {

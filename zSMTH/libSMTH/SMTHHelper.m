@@ -15,6 +15,7 @@
 
 const int postNumberinOnePage = 20; // 版面列表：一页显示多少个帖子数
 const int replyNumberinOnePost = 20; // 文章内容：一页显示多少回复数
+const int mailNumberinOnePage = 20; // 文章内容：一页显示多少回复数
 const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 @interface SMTHHelper ()
@@ -23,6 +24,9 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     int brcmode;
     
     FMDatabase *db;
+    
+    // this number will be updated in hasNewMail periodical checking
+    long totalMailCount;
 }
 @end
 
@@ -71,7 +75,9 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         NSString* docsdir = [NSSearchPathForDirectoriesInDomains( NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString* dbpath = [docsdir stringByAppendingPathComponent:@"zSMTH.sqlite"];
         db = [FMDatabase databaseWithPath:dbpath];
-        
+
+        totalMailCount = -1;
+
         [self initDatabaseStructure];
     }
     return self;
@@ -920,12 +926,51 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     }
 
     int new_count = [[dict objectForKey:@"new_count"] intValue];
-//    NSLog(@"%@, %d", dict, new_count);
+    // update totalMailCount, it will be used in getMailsFrom method
+    totalMailCount = [[dict objectForKey:@"total_count"] intValue];
+    NSLog(@"Mail count: new = %d, total = %d", new_count, totalMailCount);
     if(new_count > 0)
         return YES;
     
     return NO;
 }
+
+
+- (NSArray*) getMailsFrom:(int)type from:(int)from
+{
+    NSMutableArray *mails = [[NSMutableArray alloc] init];
+    NSArray *results;
+    if(type == 1){
+        results = [smth net_LoadMailList:from*mailNumberinOnePage :mailNumberinOnePage];
+    }
+    for (id result in results) {
+        NSLog(@"%@", result);
+//        "attachment_list" =     (
+//        );
+//        attachments = 0;
+//        "author_id" = mozilla;
+//        body = "";
+//        flags = "  ";
+//        position = 0;
+//        subject = "[Mar 16 09:52] \U6240\U6709\U8baf\U606f\U5907\U4efd";
+//        time = 1079401960;
+        
+        //        NSLog(@"%@", result);
+        NSDictionary *dict = (NSDictionary*)result;
+        SMTHPost *post = [[SMTHPost alloc] init];
+        post.author = [dict objectForKey:@"author_id"];
+        post.postSubject = [dict objectForKey:@"subject"];
+        post.postDate = [self getRelativeDateString:[[result objectForKey:@"time"] doubleValue]];
+        post.postFlags = [dict objectForKey:@"flags"];
+        NSLog(@"%@", [dict objectForKey:@"position"]);
+        post.postPosition = [[dict objectForKey:@"position"] longValue];
+        
+        [mails addObject:post];
+    }
+    NSLog(@"%@", mails);
+    return mails;
+}
+
 
 #pragma mark - Other methods
 

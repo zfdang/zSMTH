@@ -27,6 +27,7 @@
 @synthesize replyAuthor;
 
 @synthesize replyIndex;
+@synthesize postPosition;
 
 -(BOOL) isDing
 {

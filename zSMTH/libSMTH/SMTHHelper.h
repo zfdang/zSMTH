@@ -56,5 +56,6 @@
 - (long) getBoardID:(NSString*) engName;
 
 - (BOOL) hasNewMail;
+- (NSArray*) getMailsFrom:(int)type from:(int)from;
 
 @end

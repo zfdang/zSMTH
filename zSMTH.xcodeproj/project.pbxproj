@@ -20,6 +20,7 @@
 		693FACE01ABE4FA700BD8200 /* PostContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FACDF1ABE4FA700BD8200 /* PostContentTableViewCell.m */; };
 		693FACE31ABE50D900BD8200 /* PostContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FACE21ABE50D900BD8200 /* PostContentTableViewController.m */; };
 		6943AEBB1AEFE366007BA2ED /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6943AEBA1AEFE366007BA2ED /* LoginViewController.m */; };
+		6943AEBE1AF0C117007BA2ED /* MailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6943AEBD1AF0C117007BA2ED /* MailTableViewController.m */; };
 		695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */; };
 		6957CC491ADA6F5700B522A4 /* ContentEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6957CC481ADA6F5700B522A4 /* ContentEditViewController.m */; };
 		6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */; };
@@ -107,6 +108,8 @@
 		693FACE21ABE50D900BD8200 /* PostContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostContentTableViewController.m; path = ViewController/PostContentTableViewController.m; sourceTree = "<group>"; };
 		6943AEB91AEFE366007BA2ED /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6943AEBA1AEFE366007BA2ED /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6943AEBC1AF0C117007BA2ED /* MailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MailTableViewController.h; path = ViewController/MailTableViewController.h; sourceTree = "<group>"; };
+		6943AEBD1AF0C117007BA2ED /* MailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MailTableViewController.m; path = ViewController/MailTableViewController.m; sourceTree = "<group>"; };
 		695226941AB2D4140060E5B3 /* ExtendedUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendedUIViewController.h; sourceTree = "<group>"; };
 		695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendedUIViewController.m; sourceTree = "<group>"; };
 		6957CC471ADA6F5700B522A4 /* ContentEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentEditViewController.h; path = ViewController/ContentEditViewController.h; sourceTree = "<group>"; };
@@ -269,34 +272,36 @@
 				69A38B901ADE550C0090BB6C /* SettingViewController.m */,
 				69949CE11AD6813400970E60 /* TapImageView.h */,
 				69949CE21AD6813400970E60 /* TapImageView.m */,
+				690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */,
+				690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */,
+				690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */,
+				690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */,
 				69FE90B41AB6FCD700E72720 /* GuidanceTableViewController.h */,
 				69FE90B51AB6FCD700E72720 /* GuidanceTableViewController.m */,
 				69FE90BD1AB7296200E72720 /* GuidancePostTableViewCell.h */,
 				69FE90BE1AB7296200E72720 /* GuidancePostTableViewCell.m */,
 				6984F6F31AB48FA400548BD2 /* FavoriteTableViewController.h */,
 				6984F6F41AB48FA400548BD2 /* FavoriteTableViewController.m */,
+				69D196D51ACF76A00004D614 /* BoardListTableViewController.h */,
+				69D196D61ACF76A00004D614 /* BoardListTableViewController.m */,
 				69FE90A81AB66EC400E72720 /* BoardListTableViewCell.h */,
 				69FE90A91AB66EC400E72720 /* BoardListTableViewCell.m */,
-				690D5D1C1AB838E200DB45C8 /* UserInfoViewController.h */,
-				690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */,
-				690B922C1ABADEA300AAED0D /* UserInfoTableViewCell.h */,
-				690B922D1ABADEA300AAED0D /* UserInfoTableViewCell.m */,
+				692576681ABBDDC800097DBC /* PostListTableViewController.h */,
+				692576691ABBDDC800097DBC /* PostListTableViewController.m */,
+				692576651ABBDCF600097DBC /* PostListTableViewCell.h */,
+				692576661ABBDCF600097DBC /* PostListTableViewCell.m */,
 				693FACE11ABE50D900BD8200 /* PostContentTableViewController.h */,
 				693FACE21ABE50D900BD8200 /* PostContentTableViewController.m */,
 				693FACDE1ABE4FA700BD8200 /* PostContentTableViewCell.h */,
 				693FACDF1ABE4FA700BD8200 /* PostContentTableViewCell.m */,
 				69F5E3C11AC0DFE4000F394D /* PostContentLabel.h */,
 				69F5E3C21AC0DFE4000F394D /* PostContentLabel.m */,
-				692576681ABBDDC800097DBC /* PostListTableViewController.h */,
-				692576691ABBDDC800097DBC /* PostListTableViewController.m */,
-				692576651ABBDCF600097DBC /* PostListTableViewCell.h */,
-				692576661ABBDCF600097DBC /* PostListTableViewCell.m */,
-				69D196D51ACF76A00004D614 /* BoardListTableViewController.h */,
-				69D196D61ACF76A00004D614 /* BoardListTableViewController.m */,
 				6957CC471ADA6F5700B522A4 /* ContentEditViewController.h */,
 				6957CC481ADA6F5700B522A4 /* ContentEditViewController.m */,
 				69A38B821ADBB52C0090BB6C /* AttachSelectorTableViewController.h */,
 				69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */,
+				6943AEBC1AF0C117007BA2ED /* MailTableViewController.h */,
+				6943AEBD1AF0C117007BA2ED /* MailTableViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -664,6 +669,7 @@
 				6984F6F81AB4927600548BD2 /* ExtendedTableViewController.m in Sources */,
 				690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */,
 				69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */,
+				6943AEBE1AF0C117007BA2ED /* MailTableViewController.m in Sources */,
 				691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */,
 				69A38B8E1ADE234A0090BB6C /* UIViewController+MethodSwizzling.m in Sources */,
 				69949CE01AD5214100970E60 /* UIColor+Extension.m in Sources */,

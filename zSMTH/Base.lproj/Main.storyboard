@@ -1286,11 +1286,50 @@
                         <segue destination="smG-sq-R6O" kind="push" id="jbZ-yr-MKY"/>
                         <segue destination="mPj-8k-k6C" kind="push" id="sAS-cT-DcI"/>
                         <segue destination="tNM-e1-qdM" kind="push" id="eYL-y9-wk9"/>
+                        <segue destination="FQK-xF-Asv" kind="push" id="uVE-h0-mis"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKF-hL-bC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-793" y="579"/>
+            <point key="canvasLocation" x="-731" y="619"/>
+        </scene>
+        <!--MailTableViewController-->
+        <scene sceneID="DRa-t4-AAD">
+            <objects>
+                <tableViewController storyboardIdentifier="mailController" id="FQK-xF-Asv" userLabel="MailTableViewController" customClass="MailTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="I6G-Bc-Yza">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DummyMailTableViewCell" id="XAB-Ut-myP">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XAB-Ut-myP" id="L2c-Jc-4on">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="FQK-xF-Asv" id="dW2-Bb-7Ei"/>
+                            <outlet property="delegate" destination="FQK-xF-Asv" id="FY1-xS-cYP"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="收件箱" id="8S2-8s-QKC">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="zFg-vw-eD1" userLabel="Menu">
+                            <connections>
+                                <action selector="showLeftMenu:" destination="FQK-xF-Asv" id="iQE-1h-sWa"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="refresh" id="Inl-ti-5CR" userLabel="Refresh">
+                            <connections>
+                                <action selector="clickRightButton:" destination="FQK-xF-Asv" id="PZu-P6-Shr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kgJ-QA-lA8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="177" y="788"/>
         </scene>
         <!--Left Menu View Controller-->
         <scene sceneID="VfI-jq-qLB">
@@ -1316,7 +1355,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hsZ-N1-w05" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="25" y="573"/>
+            <point key="canvasLocation" x="-173" y="-290"/>
         </scene>
         <!--Guidance-->
         <scene sceneID="CZ8-S5-Gxc">

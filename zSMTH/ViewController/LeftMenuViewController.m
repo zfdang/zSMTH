@@ -19,6 +19,7 @@
 #import "PostListTableViewController.h"
 #import "BoardListTableViewController.h"
 #import "SettingViewController.h"
+#import "MailTableViewController.h"
 
 
 @interface LeftMenuViewController ()
@@ -33,6 +34,7 @@
     LoginViewController *login;
     BoardListTableViewController *boardlist;
     SettingViewController *setting;
+    MailTableViewController *mail;
 }
 @end
 
@@ -156,10 +158,11 @@
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:boardlist animated:YES];
     } else if(target == VIEW_MAIL) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [helper logout];
-        });
-
+        if( mail == nil) {
+            mail = [self.storyboard instantiateViewControllerWithIdentifier:@"mailController"];
+        }
+        [navigationController popToRootViewControllerAnimated:NO];
+        [navigationController pushViewController:mail animated:YES];
     } else if(target == VIEW_NOTIFICATION) {
         
     } else if(target == VIEW_SETTING) {

@@ -53,6 +53,7 @@
 
 
 @property (nonatomic) long replyIndex;
+@property (nonatomic) long postPosition;
 
 -(BOOL) isDing;
 -(BOOL) isUnread;
