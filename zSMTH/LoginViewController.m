@@ -174,7 +174,7 @@
     // 开启定时器，检查新邮件
     if(myTimer == nil){
         //每120秒运行一次function方法。
-        myTimer =  [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerTask) userInfo:nil repeats:YES];
+        myTimer =  [NSTimer scheduledTimerWithTimeInterval:180.0 target:self selector:@selector(timerTask) userInfo:nil repeats:YES];
     } else {
         //重启定时器
         [myTimer setFireDate:[NSDate distantPast]];

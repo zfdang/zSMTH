@@ -98,6 +98,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
     NSLog(@"Update left menu before show");
     if(helper.user) {
         // update avatar & userID when necessary

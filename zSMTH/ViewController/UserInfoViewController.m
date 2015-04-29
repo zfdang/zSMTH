@@ -113,7 +113,7 @@
         // 显示的是登录用户的信息，显示退出按钮
         [self.buttonRight setImage:[UIImage imageNamed:@"logout"]];
     } else {
-        [self.buttonRight setImage:[UIImage imageNamed:@"return"]];
+        [self.buttonRight setImage:[UIImage imageNamed:@"revert"]];
     }
 }
 
