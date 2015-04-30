@@ -126,6 +126,7 @@
         long currentNumber = [mPosts count];
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.tableView.infiniteScrollingView stopAnimating];
                 if ([posts count] > 0) {
                     NSMutableArray *array = [[NSMutableArray alloc] init];
                     for (int i = 0; i < [posts count]; i++) {
@@ -136,16 +137,12 @@
                     [mPosts addObjectsFromArray:posts];
                     [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
                     [weakSelf.tableView endUpdates];
-
-                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
                 } else {
-                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
-
                     [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
                                 duration:0.5
                                 position:CSToastPositionCenter];
                 }
-
+                // 重新打开下拉刷新
                 weakSelf.tableView.showsPullToRefresh = YES;
             });
         }
