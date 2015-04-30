@@ -57,5 +57,6 @@
 
 - (BOOL) hasNewMail;
 - (NSArray*) getMailsFrom:(int)type from:(int)from;
+- (id) getMailContent:(int)type position:(int)pos;
 
 @end

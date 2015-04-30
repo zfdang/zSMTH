@@ -133,7 +133,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     {
         user = [self getUserInfo:username];
     }
-    NSLog(@"Login result: %d", user != nil);
+    NSLog(@"Login result: status = %d, net_error = %d, user is %d", status, smth->net_error, user != nil);
 
     return;
 }
@@ -987,6 +987,55 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         }
     }
     return mails;
+}
+
+- (id) getMailContent:(int)type position:(int)pos
+{
+    NSDictionary *result;
+    if(type == 1){
+        result = [smth net_GetMail:pos];
+    } else {
+        
+    }
+
+//    "attachment_list" =     (
+//    );
+//    attachments = 0;
+//    "author_id" = Madoka;
+//    body = "内容";
+//    flags = "  ";
+//    position = 229;
+//    subject = "Re: zsmth";
+//    time = 1430097682;
+
+    NSLog(@"%@", result);
+
+    NSDictionary *dict = (NSDictionary*)result;
+    SMTHPost *post = [[SMTHPost alloc] init];
+    
+    post.author = [dict objectForKey:@"author_id"];
+    post.postSubject = [dict objectForKey:@"subject"];
+    post.postContent = [dict objectForKey:@"body"];
+    post.postDate = [self getAbsoluteDateString:[[result objectForKey:@"time"] doubleValue]];
+    
+    post.postFlags = [dict objectForKey:@"flags"];
+    
+    NSArray *attachs = [dict objectForKey:@"attachment_list"];
+    if(attachs != nil && [attachs count] > 0){
+        post.attachments = [[NSMutableArray alloc] init];
+        
+        for (id attach in attachs) {
+            NSDictionary *items = (NSDictionary*) attach;
+            SMTHAttachment *att = [[SMTHAttachment alloc] init];
+            att.attName = [items objectForKey:@"name"];
+            att.attPos = [[items objectForKey:@"pos"] longValue];
+            att.attSize = [[items objectForKey:@"size"] longValue];
+            
+            [post.attachments addObject:att];
+        }
+    }
+    
+    return post;
 }
 
 
