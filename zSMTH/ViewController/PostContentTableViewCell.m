@@ -52,6 +52,17 @@ const CGFloat PaddingBetweenImages = 5.0;
     // set content
     [self.postContent setContentInfo:post.postContent];
 
+    // 因为cell可能会被重用，所以要先清除之前可能添加进去的图片附件
+    NSArray *subviews = [self.cellView subviews];
+    for (id subview in subviews) {
+//        NSLog(@"%@", subview);
+        if([subview isKindOfClass:[TapImageView class]]){
+            UIView *view = (UIView*) subview;
+            [view removeFromSuperview];
+        }
+    }
+    mImgHeights = nil;
+
     //show image
     if([post.attachments count] > 0){
         mImgHeights = [[NSMutableArray alloc] init];
