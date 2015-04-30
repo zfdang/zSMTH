@@ -769,7 +769,7 @@
                                     <action selector="clickAutoLogin:" destination="IdG-nZ-lWU" eventType="valueChanged" id="0Hy-z6-TPH"/>
                                 </connections>
                             </switch>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-bO-I7T">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-bO-I7T" userLabel="退出">
                                 <rect key="frame" x="98" y="316" width="80" height="30"/>
                                 <color key="backgroundColor" red="0.95294123890000004" green="0.94901967050000002" blue="0.81960791349999995" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
@@ -832,7 +832,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WLAN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPN-sc-Lji" userLabel="networkStatus">
-                                <rect key="frame" x="198" y="561" width="49" height="21"/>
+                                <rect key="frame" x="199" y="561" width="49" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -909,6 +909,7 @@
                             <constraint firstItem="MsE-Ct-UGS" firstAttribute="leading" secondItem="NqN-uq-h8a" secondAttribute="leading" id="hVq-Hv-HXP"/>
                             <constraint firstItem="MsE-Ct-UGS" firstAttribute="top" secondItem="NqN-uq-h8a" secondAttribute="bottom" constant="15" id="hhr-Ju-Ao7"/>
                             <constraint firstAttribute="centerX" secondItem="4Mx-wr-FJw" secondAttribute="centerX" constant="-50" id="iCO-4b-VVN"/>
+                            <constraint firstItem="HPN-sc-Lji" firstAttribute="leading" secondItem="wRx-Dd-yaE" secondAttribute="trailing" constant="5" id="iwo-9E-yDe"/>
                             <constraint firstItem="DA4-Z2-yxY" firstAttribute="leading" secondItem="H9c-sD-YH3" secondAttribute="leading" id="j1z-Vw-mjL"/>
                             <constraint firstAttribute="centerX" secondItem="vpz-nb-XwU" secondAttribute="centerX" id="jd4-UP-52T"/>
                             <constraint firstItem="iqx-yk-L5O" firstAttribute="top" secondItem="vpz-nb-XwU" secondAttribute="bottom" constant="10" id="jtm-ZW-7lu"/>
@@ -1001,6 +1002,7 @@
                                 <exclude reference="FEd-WF-kP0"/>
                                 <exclude reference="Gun-t8-Iue"/>
                                 <exclude reference="d7d-p3-wfv"/>
+                                <exclude reference="o7h-rW-30m"/>
                                 <exclude reference="yfS-Tm-A40"/>
                                 <exclude reference="jzB-Cs-W5C"/>
                                 <exclude reference="fKQ-sQ-mzz"/>
