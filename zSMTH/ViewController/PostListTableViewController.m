@@ -304,11 +304,13 @@ typedef enum {
         cell.labelSubject.text = post.postSubject;
         if([post isDing]){
             cell.backgroundColor = [UIColor lightGrayColor];
+        } else {
+            cell.backgroundColor = [UIColor whiteColor];
         }
         cell.labelUserID.text = post.author;
         cell.labelPostTime.text = post.postDate;
         cell.labelReplyTime.text = post.replyPostDate;
-        cell.labelCount.text = post.postCount;
+        cell.labelCount.text = [NSString stringWithFormat:@"%d", [post.postCount intValue] - 1];
         
         if(![post hasAttachment]){
             [cell.imageAttachs setHidden:YES];

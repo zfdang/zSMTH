@@ -13,9 +13,9 @@
 #import "SMTHAttachment.h"
 #import "FMDB.h"
 
-const int postNumberinOnePage = 30; // 版面列表：一页显示多少个帖子数
-const int replyNumberinOnePost = 30; // 文章内容：一页显示多少回复数
-const int mailNumberinOnePage = 30; // 文章内容：一页显示多少回复数
+const int postNumberinOnePage = 20; // 版面列表：一页显示多少个帖子数
+const int replyNumberinOnePost = 20; // 文章内容：一页显示多少回复数
+const int mailNumberinOnePage = 20; // 文章内容：一页显示多少回复数
 const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 @interface SMTHHelper ()
