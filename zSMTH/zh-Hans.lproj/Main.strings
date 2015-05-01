@@ -51,7 +51,7 @@
 "eYU-eR-ZyE.placeholder" = "输入中英文版名过滤列表";
 
 /* Class = "UIButton"; normalTitle = "取消"; ObjectID = "fa9-bO-I7T"; */
-"fa9-bO-I7T.normalTitle" = "退出";
+"fa9-bO-I7T.normalTitle" = "清除";
 
 /* Class = "UIViewController"; title = "REFrosted Root Controller"; ObjectID = "l22-2R-Y2i"; */
 "l22-2R-Y2i.title" = "REFrosted Root Controller";

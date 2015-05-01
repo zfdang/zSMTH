@@ -84,6 +84,10 @@
     [super viewWillAppear:animated];
 }
 
+// 此viewcontroller禁止旋转
+- (BOOL)shouldAutorotate {
+    return NO;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -134,7 +138,8 @@
 - (void)asyncTask
 {
     NSLog(@"%@", setting);
-    [helper login:[self.editUsername text] password:[self.editPassword text]];
+    NSString *username = [[self.editUsername text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    [helper login:username password:[self.editPassword text]];
 }
 
 - (void)finishAsyncTask
@@ -158,27 +163,28 @@
 
 
 - (IBAction)cancel:(id)sender {
+    self.editUsername.text = @"";
+    self.editPassword.text = @"";
+
     [self saveStatus];
-
-    // 退出
-    [self exitApplication];
 }
 
-- (void)exitApplication {
-    [UIView beginAnimations:@"exitApplication" context:nil];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view.window cache:NO];
-    [UIView setAnimationDidStopSelector:@selector(animationFinished:finished:context:)];
-    self.view.window.bounds = CGRectMake(0, 0, 0, 0);
-    [UIView commitAnimations];
-}
-
-- (void)animationFinished:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-    if ([animationID compare:@"exitApplication"] == 0) {
-        exit(0);
-    }
-}
+// 退出程序的方法，但是已经不被提倡了
+//- (void)exitApplication {
+//    [UIView beginAnimations:@"exitApplication" context:nil];
+//    [UIView setAnimationDuration:0.5];
+//    [UIView setAnimationDelegate:self];
+//    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view.window cache:NO];
+//    [UIView setAnimationDidStopSelector:@selector(animationFinished:finished:context:)];
+//    self.view.window.bounds = CGRectMake(0, 0, 0, 0);
+//    [UIView commitAnimations];
+//}
+//
+//- (void)animationFinished:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+//    if ([animationID compare:@"exitApplication"] == 0) {
+//        exit(0);
+//    }
+//}
 
 
 #pragma mark - Periodical Checking Tasks

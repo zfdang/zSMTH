@@ -778,7 +778,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="GGl-bX-Cej"/>
                                     <constraint firstAttribute="height" constant="80" id="QHm-Pg-Yyn"/>
                                 </constraints>
-                                <state key="normal" title="退出">
+                                <state key="normal" title="清除">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
