@@ -48,13 +48,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="回帖:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-jA-SUy">
-                        <rect key="frame" x="214" y="57" width="28" height="15"/>
+                        <rect key="frame" x="360" y="57" width="28" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="128" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNH-um-IeO" userLabel="Count">
-                        <rect key="frame" x="244" y="57" width="21" height="15"/>
+                        <rect key="frame" x="390" y="57" width="21" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -75,7 +75,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="5wb-jA-SUy" secondAttribute="trailing" constant="35" id="Onz-Et-7tJ"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" constant="2" id="Qqs-bj-sg2"/>
                     <constraint firstItem="igt-nh-T1W" firstAttribute="leading" secondItem="mtN-tG-h7e" secondAttribute="leading" constant="6" id="SKp-yt-NmM"/>
-                    <constraint firstItem="5wb-jA-SUy" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" constant="130" id="TU0-eR-giM"/>
+                    <constraint firstItem="5wb-jA-SUy" firstAttribute="leading" secondItem="Qm2-1D-u80" secondAttribute="trailing" constant="140" id="TU0-eR-giM"/>
                     <constraint firstItem="SO4-cb-6T6" firstAttribute="leading" secondItem="mtN-tG-h7e" secondAttribute="leadingMargin" constant="50" id="UmI-I2-4Z3"/>
                     <constraint firstItem="iNH-um-IeO" firstAttribute="leading" secondItem="5wb-jA-SUy" secondAttribute="trailing" constant="2" id="XZY-CG-FRf"/>
                     <constraint firstAttribute="bottom" secondItem="Qm2-1D-u80" secondAttribute="bottom" constant="4" id="Ym3-4O-d4r"/>
@@ -90,6 +90,7 @@
                     <constraint firstItem="5wb-jA-SUy" firstAttribute="centerY" secondItem="qTb-JF-7Fg" secondAttribute="centerY" id="hQ0-lB-P01"/>
                     <constraint firstItem="SO4-cb-6T6" firstAttribute="top" secondItem="mtN-tG-h7e" secondAttribute="top" constant="2" id="jH3-If-vFR"/>
                     <constraint firstItem="qTb-JF-7Fg" firstAttribute="centerY" secondItem="Qm2-1D-u80" secondAttribute="centerY" id="lxA-6O-bXS"/>
+                    <constraint firstItem="5wb-jA-SUy" firstAttribute="trailing" secondItem="SO4-cb-6T6" secondAttribute="trailing" constant="-50" id="oc7-GS-KYS"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iNH-um-IeO" secondAttribute="trailing" constant="12" id="psT-9z-lrJ"/>
                     <constraint firstItem="igt-nh-T1W" firstAttribute="top" secondItem="mtN-tG-h7e" secondAttribute="top" constant="6" id="qXX-wb-uPb"/>
                     <constraint firstItem="Qm2-1D-u80" firstAttribute="top" secondItem="SO4-cb-6T6" secondAttribute="bottom" constant="6" id="sL4-dD-WqV"/>
@@ -118,6 +119,7 @@
                         <exclude reference="acw-5o-y4M"/>
                         <exclude reference="Nmd-Vn-5Gu"/>
                         <exclude reference="Onz-Et-7tJ"/>
+                        <exclude reference="TU0-eR-giM"/>
                         <exclude reference="da5-hb-7tW"/>
                         <exclude reference="hQ0-lB-P01"/>
                         <exclude reference="vXP-0N-Ksp"/>
