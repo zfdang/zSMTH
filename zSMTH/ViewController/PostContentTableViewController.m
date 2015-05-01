@@ -83,7 +83,13 @@
     [self startAsyncTask:nil];
 }
 
-
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+    // bug: height of header is not adjusted correctly after reload, need to be fixed
+    [self.tableView reloadData];
+}
 
 -(void) setBoardInfo:(long)boardid chsName:(NSString*)chsname engName:(NSString*) engname;
 {
