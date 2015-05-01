@@ -28,7 +28,9 @@
 
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
     // set userinfo
     [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
     self.imageAvatar.layer.cornerRadius = 30.0;
@@ -44,7 +46,6 @@
     userID = helper.user.userID;
     [self startAsyncTask];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
