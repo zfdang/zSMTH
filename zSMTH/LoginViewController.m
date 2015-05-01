@@ -100,7 +100,7 @@
             [self.netStatus setText:@"无网络"];
             break;
         case ReachableViaWiFi:
-            [self.netStatus setText:@"WLAN"];
+            [self.netStatus setText:@"WIFI"];
             break;
         case ReachableViaWWAN:
             [self.netStatus setText:@"Mobile"];
