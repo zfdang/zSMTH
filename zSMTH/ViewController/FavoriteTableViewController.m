@@ -186,7 +186,9 @@ typedef enum {
         
         if(board.type == GROUP){
             cell.boardCategory.text = @"[目录]";
-            [cell.imageFolder setHidden:false];
+            [cell.imageFolder setHidden:NO];
+        } else {
+            [cell.imageFolder setHidden:YES];
         }
     }
     
