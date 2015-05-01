@@ -1080,26 +1080,6 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 }
 
 
-- (void) updateNetworkStatus
-{
-    Reachability *reach = [Reachability reachabilityWithHostName:@"www.baidu.com"];
-    
-    switch ([reach currentReachabilityStatus]) {
-        case NotReachable:
-            nNetworkStatus = -1;
-            break;
-        case ReachableViaWiFi:
-            nNetworkStatus = 0;
-            break;
-        case ReachableViaWWAN:
-            nNetworkStatus = 1;
-            break;
-        default:
-            break;
-    }
-}
-
-
 - (NSString*) getDateString_internal:(NSTimeInterval) time :(NSTimeInterval)cur_time :(int)after
 {
     if(cur_time == 0){

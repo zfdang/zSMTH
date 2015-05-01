@@ -13,7 +13,8 @@
 #import "LeftMenuViewController.h"
 #import "NavigationViewController.h"
 #import "GuidanceTableViewController.h"
-#include "JDStatusBarNotification.h"
+#import "JDStatusBarNotification.h"
+#import "Reachability.h"
 
 @interface LoginViewController ()
 {
@@ -24,6 +25,8 @@
     BOOL isConnectionActive;
     BOOL hasNewMail;
     BOOL isReconnectSuccsss;
+
+    Reachability *reach;
 }
 
 @end
@@ -45,10 +48,26 @@
     // 监听激活、暂停的消息
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive)
-                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidEnterBackground)
-                                                 name:UIApplicationDidEnterBackgroundNotification object:nil];
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+
+
+    // 开始监控网络状态
+    // Initialize Reachability
+    reach = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+    // Start Monitoring
+    BOOL notifier = [reach startNotifier];
+    NSLog(@"%d", notifier);
+    //to catch network status.
+//    NSLog(@"%@", kReachabilityChangedNotification);
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityDidChange:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
 
     // enable click on banner
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bannerClick)];
@@ -63,25 +82,38 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    // show network connection status
+    [self updateNetworkStatus:[reach currentReachabilityStatus]];
+
+    [super viewWillAppear:animated];
+}
+
+- (void)reachabilityDidChange:(NSNotification *)notification {
+    [self updateNetworkStatus:[reach currentReachabilityStatus]];
+}
+
+- (void) updateNetworkStatus:(NetworkStatus) nstatus {
+    switch (nstatus) {
+        case NotReachable:
+            [self.netStatus setText:@"无网络"];
+            break;
+        case ReachableViaWiFi:
+            [self.netStatus setText:@"WLAN"];
+            break;
+        case ReachableViaWWAN:
+            [self.netStatus setText:@"Mobile"];
+            break;
+        default:
+            break;
+    }
+}
 
 - (void) bannerClick
 {
     NSString* url = @"http://zsmth.zfdang.com";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    // show network connection status
-    [helper updateNetworkStatus];
-    if(helper.nNetworkStatus == -1){
-        [self.netStatus setText:@"没有网络"];
-    } else if(helper.nNetworkStatus == 0){
-        [self.netStatus setText:@"WLAN"];
-    } else if(helper.nNetworkStatus == 1){
-        [self.netStatus setText:@"移动网络"];
-    }
-    [super viewWillAppear:animated];
 }
 
 // 此viewcontroller禁止旋转
@@ -109,6 +141,8 @@
         // “自动登录”会强制打开“保存密码”
         self.switchSavePassword.on = YES;
     }
+    setting.bSavePassword = self.switchSavePassword.on;
+    setting.bAutoLogin = self.switchAutoLogin.on;
 }
 
 - (void) saveStatus {

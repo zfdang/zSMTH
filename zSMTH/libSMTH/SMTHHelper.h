@@ -7,10 +7,8 @@
 //
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "Reachability.h"
 #import "SMTHURLConnection.h"
 #import "SMTHUser.h"
-
 
 @interface SMTHHelper : NSObject <SMTHURLConnectionDelegate>
 {
@@ -38,7 +36,6 @@
 - (NSArray*) getAllBoards;
 - (NSString*) getCacheUpdateTime:(NSString*) type RootID:(long)rootid;
 - (void) clearCacheStatus:(NSString*) type RootID:(long)rootid;
-- (BOOL) updateCacheStatus:(NSString*) type RootID:(long)rootid;
 
 - (NSArray*) getFavorites:(long)fid;
 - (BOOL) addFavorite:(NSString*)engName;
