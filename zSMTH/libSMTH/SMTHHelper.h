@@ -18,11 +18,9 @@
 + (id)sharedManager;
 
 @property (readonly, strong, nonatomic) SMTHURLConnection *smth;
-@property (readonly, nonatomic) int nNetworkStatus;
 @property (readonly, strong, nonatomic) NSArray *sectionList;
 @property (strong, nonatomic) SMTHUser *user;
 
-- (void) updateNetworkStatus;
 - (NSURL*) getFaceURLByUserID:(NSString*)userID;
 - (int) checkVersion;
 

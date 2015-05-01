@@ -13,9 +13,9 @@
 #import "SMTHAttachment.h"
 #import "FMDB.h"
 
-const int postNumberinOnePage = 20; // 版面列表：一页显示多少个帖子数
-const int replyNumberinOnePost = 20; // 文章内容：一页显示多少回复数
-const int mailNumberinOnePage = 20; // 文章内容：一页显示多少回复数
+const int postNumberinOnePage = 30; // 版面列表：一页显示多少个帖子数
+const int replyNumberinOnePost = 30; // 文章内容：一页显示多少回复数
+const int mailNumberinOnePage = 30; // 文章内容：一页显示多少回复数
 const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 @interface SMTHHelper ()
@@ -32,7 +32,6 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 @implementation SMTHHelper
 
-@synthesize nNetworkStatus;
 @synthesize smth;
 @synthesize sectionList;
 @synthesize user;
@@ -57,9 +56,6 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         
         // 未登录
         user = nil;
-        
-        // network initial status
-        nNetworkStatus = -1;
         
         // init sections
         sectionList = @[@"全站热点", @"国内院校", @"休闲娱乐", @"五湖四海", @"游戏运动", @"社会信息", @"知性感性", @"文化人文", @"学术科学", @"电脑技术"];

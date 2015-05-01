@@ -197,7 +197,7 @@ typedef enum {
     NSLog(@"Click on Mail: Author = %@, subject = %@", post.author, post.postSubject);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [helper getMailContent:1 position:post.postPosition];
+        [helper getMailContent:1 position:(int)post.postPosition];
     });
 }
 

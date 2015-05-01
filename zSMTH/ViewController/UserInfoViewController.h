@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ExtendedUIViewController.h"
+#import "VPImageCropperViewController.h"
 
-@interface UserInfoViewController : ExtendedUIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface UserInfoViewController : ExtendedUIViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, VPImageCropperDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *labelID;
