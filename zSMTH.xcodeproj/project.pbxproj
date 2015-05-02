@@ -23,7 +23,6 @@
 		6943AEBE1AF0C117007BA2ED /* MailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6943AEBD1AF0C117007BA2ED /* MailTableViewController.m */; };
 		695226961AB2D4140060E5B3 /* ExtendedUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 695226951AB2D4140060E5B3 /* ExtendedUIViewController.m */; };
 		6957CC491ADA6F5700B522A4 /* ContentEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6957CC481ADA6F5700B522A4 /* ContentEditViewController.m */; };
-		6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */; };
 		6984F6EF1AB3D3F700548BD2 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6EE1AB3D3F700548BD2 /* LeftMenuViewController.m */; };
 		6984F6F21AB3DC1D00548BD2 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F11AB3DC1D00548BD2 /* NavigationViewController.m */; };
 		6984F6F51AB48FA400548BD2 /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6984F6F41AB48FA400548BD2 /* FavoriteTableViewController.m */; };
@@ -54,13 +53,14 @@
 		69C506B11AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AC1AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.m */; };
 		69C506B21AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C506AE1AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		69D196D71ACF76A00004D614 /* BoardListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D196D61ACF76A00004D614 /* BoardListTableViewController.m */; };
+		69D238D51AF59B22001942BB /* ZSMTHSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D238D41AF59B22001942BB /* ZSMTHSetting.m */; };
+		69D238D81AF59B4C001942BB /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D238D71AF59B4C001942BB /* VPImageCropperViewController.m */; };
 		69F4EAA31AAFF9FF00A82B50 /* libSMTH_0.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		69F4EAA61AAFFA5100A82B50 /* client_signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAA51AAFFA5100A82B50 /* client_signature.m */; };
 		69F4EAAD1AB1780A00A82B50 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAAC1AB1780A00A82B50 /* Reachability.m */; };
 		69F4EAB01AB1792000A82B50 /* SMTHHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F4EAAF1AB1792000A82B50 /* SMTHHelper.m */; };
 		69F4EAB71AB1EFE800A82B50 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */; };
 		69F5E3C31AC0DFE4000F394D /* PostContentLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F5E3C21AC0DFE4000F394D /* PostContentLabel.m */; };
-		69F62C811AF38C1F00C5C690 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F62C801AF38C1F00C5C690 /* VPImageCropperViewController.m */; };
 		69FCBF2E1AA9CE97007C9EFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF2D1AA9CE97007C9EFB /* main.m */; };
 		69FCBF311AA9CE97007C9EFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF301AA9CE97007C9EFB /* AppDelegate.m */; };
 		69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FCBF331AA9CE97007C9EFB /* REFrostedRootViewController.m */; };
@@ -116,8 +116,6 @@
 		6957CC471ADA6F5700B522A4 /* ContentEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentEditViewController.h; path = ViewController/ContentEditViewController.h; sourceTree = "<group>"; };
 		6957CC481ADA6F5700B522A4 /* ContentEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentEditViewController.m; path = ViewController/ContentEditViewController.m; sourceTree = "<group>"; };
 		6979903F1ACCC5DC002570EE /* zSMTH-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zSMTH-prefix.pch"; sourceTree = "<group>"; };
-		6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSMTHSetting.h; sourceTree = "<group>"; };
-		6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSMTHSetting.m; sourceTree = "<group>"; };
 		6984F6ED1AB3D3F700548BD2 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftMenuViewController.h; path = ViewController/LeftMenuViewController.h; sourceTree = "<group>"; };
 		6984F6EE1AB3D3F700548BD2 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftMenuViewController.m; path = ViewController/LeftMenuViewController.m; sourceTree = "<group>"; };
 		6984F6F01AB3DC1D00548BD2 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
@@ -180,6 +178,10 @@
 		69C506AE1AD20C4C0044B6B9 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		69D196D51ACF76A00004D614 /* BoardListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardListTableViewController.h; path = ViewController/BoardListTableViewController.h; sourceTree = "<group>"; };
 		69D196D61ACF76A00004D614 /* BoardListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardListTableViewController.m; path = ViewController/BoardListTableViewController.m; sourceTree = "<group>"; };
+		69D238D31AF59B22001942BB /* ZSMTHSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSMTHSetting.h; sourceTree = "<group>"; };
+		69D238D41AF59B22001942BB /* ZSMTHSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSMTHSetting.m; sourceTree = "<group>"; };
+		69D238D61AF59B4C001942BB /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VPImageCropperViewController.h; path = VPImageCropper/VPImageCropperViewController.h; sourceTree = "<group>"; };
+		69D238D71AF59B4C001942BB /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VPImageCropperViewController.m; path = VPImageCropper/VPImageCropperViewController.m; sourceTree = "<group>"; };
 		69F4EAA01AAFF9FF00A82B50 /* libSMTH_0.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSMTH_0.2.3.a; sourceTree = "<group>"; };
 		69F4EAA11AAFF9FF00A82B50 /* smth_netop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smth_netop.h; sourceTree = "<group>"; };
 		69F4EAA21AAFF9FF00A82B50 /* SMTHURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHURLConnection.h; sourceTree = "<group>"; };
@@ -192,8 +194,6 @@
 		69F4EAB61AB1EFE800A82B50 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		69F5E3C11AC0DFE4000F394D /* PostContentLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostContentLabel.h; path = ViewController/PostContentLabel.h; sourceTree = "<group>"; };
 		69F5E3C21AC0DFE4000F394D /* PostContentLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostContentLabel.m; path = ViewController/PostContentLabel.m; sourceTree = "<group>"; };
-		69F62C7F1AF38C1F00C5C690 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
-		69F62C801AF38C1F00C5C690 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		69FCBF281AA9CE97007C9EFB /* zSMTH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zSMTH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69FCBF2C1AA9CE97007C9EFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69FCBF2D1AA9CE97007C9EFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -373,6 +373,8 @@
 				6984F6FA1AB579E900548BD2 /* SMTHBoard.m */,
 				69FE90B71AB71A7700E72720 /* SMTHPost.h */,
 				69FE90B81AB71A7700E72720 /* SMTHPost.m */,
+				69D238D31AF59B22001942BB /* ZSMTHSetting.h */,
+				69D238D41AF59B22001942BB /* ZSMTHSetting.m */,
 				69C392FE1AC62BFB000F2652 /* SMTHAttachment.h */,
 				69C392FF1AC62BFB000F2652 /* SMTHAttachment.m */,
 			);
@@ -393,8 +395,6 @@
 				69A38B871ADC81B20090BB6C /* UIImage+Resize.m */,
 				69F4EAAB1AB1780A00A82B50 /* Reachability.h */,
 				69F4EAAC1AB1780A00A82B50 /* Reachability.m */,
-				6984F6E91AB3D37900548BD2 /* ZSMTHSetting.h */,
-				6984F6EA1AB3D37900548BD2 /* ZSMTHSetting.m */,
 				69949CC21AD5214100970E60 /* NavigationMenuView */,
 				69C506A61AD20C4C0044B6B9 /* TPKeyboardAvoiding */,
 			);
@@ -404,8 +404,8 @@
 		69F62C7E1AF38BE500C5C690 /* VPImageCropper */ = {
 			isa = PBXGroup;
 			children = (
-				69F62C7F1AF38C1F00C5C690 /* VPImageCropperViewController.h */,
-				69F62C801AF38C1F00C5C690 /* VPImageCropperViewController.m */,
+				69D238D61AF59B4C001942BB /* VPImageCropperViewController.h */,
+				69D238D71AF59B4C001942BB /* VPImageCropperViewController.m */,
 			);
 			name = VPImageCropper;
 			sourceTree = "<group>";
@@ -655,11 +655,10 @@
 				69949CDA1AD5214100970E60 /* SICellSelection.m in Sources */,
 				69FCBF341AA9CE97007C9EFB /* REFrostedRootViewController.m in Sources */,
 				69C506B11AD20C4C0044B6B9 /* TPKeyboardAvoidingTableView.m in Sources */,
-				69F62C811AF38C1F00C5C690 /* VPImageCropperViewController.m in Sources */,
+				69D238D81AF59B4C001942BB /* VPImageCropperViewController.m in Sources */,
 				69C506B01AD20C4C0044B6B9 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				69FE90BF1AB7296200E72720 /* GuidancePostTableViewCell.m in Sources */,
 				692576671ABBDCF600097DBC /* PostListTableViewCell.m in Sources */,
-				6984F6EB1AB3D37900548BD2 /* ZSMTHSetting.m in Sources */,
 				69949CE31AD6813400970E60 /* TapImageView.m in Sources */,
 				6943AEBB1AEFE366007BA2ED /* LoginViewController.m in Sources */,
 				6957CC491ADA6F5700B522A4 /* ContentEditViewController.m in Sources */,
@@ -700,6 +699,7 @@
 				69949CDD1AD5214100970E60 /* SIMenuConfiguration.m in Sources */,
 				6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */,
 				693FACE01ABE4FA700BD8200 /* PostContentTableViewCell.m in Sources */,
+				69D238D51AF59B22001942BB /* ZSMTHSetting.m in Sources */,
 				6984F6EF1AB3D3F700548BD2 /* LeftMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

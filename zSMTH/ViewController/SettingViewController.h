@@ -16,6 +16,7 @@
 
 - (IBAction)clickLeftButton:(id)sender;
 - (IBAction)switchUserAvatar:(id)sender;
+- (IBAction)switchAutoRotate:(id)sender;
 - (IBAction)clearCache:(id)sender;
 
 @end
