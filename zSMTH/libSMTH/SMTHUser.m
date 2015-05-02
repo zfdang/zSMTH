@@ -42,13 +42,20 @@
 
     NSString *url = nil;
 
+    // default avatar, don't have to query user info to get the result
     // http://images.newsmth.net/nForum/uploadFace/Z/zSMTHDev.jpg
+    // if we query user and get exact user information, we will use faceURL as avatar, it might be different with default avatar
+    // http://images.newsmth.net/nForum/uploadFace/Z/zSMTHDev.4279.jpg
     if(!forcemode){
-        url = [NSString stringWithFormat:@"http://images.newsmth.net/nForum/uploadFace/%@/%@.jpg", [[_userID substringToIndex:1] uppercaseString], _userID];
+        if(self.faceURL){
+            url = [NSString stringWithFormat:@"http://images.newsmth.net/nForum/uploadFace/%@/%@", [[_userID substringToIndex:1] uppercaseString], self.faceURL];
+        } else {
+            url = [NSString stringWithFormat:@"http://images.newsmth.net/nForum/uploadFace/%@/%@.jpg", [[_userID substringToIndex:1] uppercaseString], _userID];
+        }
     }else{
         url = [NSString stringWithFormat:@"http://images.newsmth.net/nForum/uploadFace/%@/%@", [[_userID substringToIndex:1] uppercaseString], _userID];
     }
-//    NSLog(@"userID = %@, URL=%@", self.userID, url);
+//    NSLog(@"userID = %@, URL=%@, faceurl = %@", self.userID, url, self.faceURL);
 
     return [NSURL URLWithString:url];
 }

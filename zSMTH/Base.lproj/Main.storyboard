@@ -584,6 +584,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="SZB-PZ-QOf" secondAttribute="centerY" constant="-32" id="89A-oN-oq3"/>
                             <constraint firstAttribute="trailing" secondItem="SZB-PZ-QOf" secondAttribute="trailing" constant="10" id="9L6-Gj-Wy9"/>
                             <constraint firstItem="arC-IB-Q8S" firstAttribute="leading" secondItem="RYl-3z-hth" secondAttribute="leading" id="Bkv-X3-Thb"/>
                             <constraint firstItem="IIB-BS-PrY" firstAttribute="top" secondItem="SZB-PZ-QOf" secondAttribute="bottom" id="Fm5-QK-cUT"/>
@@ -606,7 +607,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Ugb-hw-xiQ"/>
+                                <exclude reference="89A-oN-oq3"/>
                                 <exclude reference="9L6-Gj-Wy9"/>
                                 <exclude reference="K0T-DG-PYg"/>
                                 <exclude reference="SCF-Vq-f2A"/>
@@ -615,6 +616,7 @@
                                 <exclude reference="u0w-9S-mtG"/>
                                 <exclude reference="g1M-1y-60q"/>
                                 <exclude reference="rlX-oy-BUU"/>
+                                <exclude reference="Ugb-hw-xiQ"/>
                             </mask>
                         </variation>
                     </view>

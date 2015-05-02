@@ -11,6 +11,7 @@
 #import "UserInfoTableViewCell.h"
 #import "LoginViewController.h"
 @import MobileCoreServices;
+#import "UIImage+Resize.h"
 
 @interface UserInfoViewController ()
 {
@@ -43,10 +44,12 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     // set userinfo
-    [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
-    
+    [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL]
+                        placeholderImage:[UIImage imageNamed:@"anonymous"]
+                                 options:SDWebImageRefreshCached];
+
     self.labelID.text = helper.user.userID;
     self.labelNick.text = helper.user.userNick;
     self.labelLevel.text = [helper.user getLifeLevel];
@@ -314,7 +317,44 @@
 #pragma mark - VPImageCropperDelegate
 
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
-    self.imageAvatar.image = editedImage;
+
+    // 得到裁剪后的图片
+    NSString *tempfile = [setting getAttachmentFilepath:@"avatar.jpg"];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSError *error;
+    BOOL result = [manager removeItemAtPath:tempfile error:&error];
+    NSLog(@"tempfile for avatar is %@, removal is %d", tempfile, result);
+
+    CGSize size = CGSizeMake(500, 500);
+    UIImage *sizedImage = [UIImage imageWithImage:editedImage scaledToFitToSize:size];
+    NSLog(@"Image resized from %f*%f ==> %f*%f", editedImage.size.width, editedImage.size.height, sizedImage.size.width, sizedImage.size.height);
+
+    // find proper compression ratio
+    CGFloat qs = 1.0f;
+    CGFloat max_size = 200 * 1024; // 200k
+    NSData * data = UIImageJPEGRepresentation(sizedImage, 1.0);
+    int cur_size = (int)[data length];
+    //            int resized_size = cur_size;
+    while(cur_size > max_size && qs > 0.1f){
+        qs -= 0.1f;
+        data = UIImageJPEGRepresentation(sizedImage, qs);
+        cur_size = (int)[data length];
+    }
+    
+    // write image to temp file
+    [UIImageJPEGRepresentation(sizedImage, qs) writeToFile:tempfile atomically:YES];
+
+    // 上载到服务器
+    typeof(self) __weak weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSDictionary* dict = [helper.smth net_modifyFace:tempfile];
+//        NSLog(@"%@, net_error = %d", dict, helper.smth->net_error);
+        // 更新头像
+        [weakSelf.imageAvatar sd_setImageWithURL:[helper.user getFaceURL]
+                                placeholderImage:[UIImage imageNamed:@"anonymous"]
+                                         options:SDWebImageRefreshCached];
+    });
+
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
         // TO DO
     }];

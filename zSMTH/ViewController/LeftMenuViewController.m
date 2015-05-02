@@ -107,7 +107,9 @@
         // update avatar & userID when necessary
         NSComparisonResult result = [labelUser.text compare:helper.user.userID];
         if(result != NSOrderedSame){
-            [imageView sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
+            [imageView sd_setImageWithURL:[helper.user getFaceURL]
+                         placeholderImage:[UIImage imageNamed:@"anonymous"]
+                                  options:SDWebImageRefreshCached];
             labelUser.text = helper.user.userID;
         }
     } else {
