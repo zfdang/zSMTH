@@ -275,10 +275,13 @@
         cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 
-        UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
-                                              initWithTarget:self action:@selector(handleLongPress:)];
-        lpgr.minimumPressDuration = 0.6; //seconds
-        [cell addGestureRecognizer:lpgr];
+        if(contentType == CONTENT_POST) {
+            // 显示的是文章时，才显示菜单
+            UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                                  initWithTarget:self action:@selector(handleLongPress:)];
+            lpgr.minimumPressDuration = 0.6; //seconds
+            [cell addGestureRecognizer:lpgr];
+        }
     }
     
     if (indexPath.section == 0) {

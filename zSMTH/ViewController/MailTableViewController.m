@@ -53,7 +53,21 @@ typedef enum {
     
     // 防止tableview的顶部被navigation bar挡住
     self.navigationController.navigationBar.translucent = NO;
-    
+
+    // add dropdown menu for navigation bar
+    // 有一个bug, 当点击了navigation bar的其他按钮后，如果菜单处于弹出状态，居然也不消失
+    // 在viewwilldisappear里手动隐藏菜单
+    if (self.navigationItem) {
+        CGRect frame = CGRectMake(0.0, 0.0, 200.0, self.navigationController.navigationBar.bounds.size.height);
+        SINavigationMenuView *menu = [[SINavigationMenuView alloc] initWithFrame:frame title:@"邮箱"];
+        //Set in which view we will display a menu
+        [menu displayMenuInView:self.navigationController.view];
+        //Create array of items
+        menu.items = @[@"收件箱", @"发件箱"];
+        menu.delegate = self;
+        self.navigationItem.titleView = menu;
+    }
+
     // 开始异步加载帖子列表
     mPosts = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
@@ -65,6 +79,16 @@ typedef enum {
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
+    if (menu.menuButton.isActive) {
+        //        NSLog(@"dropdown menu is active, turn off it now");
+        [menu onHideMenu];
+    }
+    [super viewWillDisappear:animated];
 }
 
 -(void)loadMoreMailList
@@ -244,6 +268,17 @@ typedef enum {
     taskType = TASK_MAIL_INBOX;
     self.tableView.showsInfiniteScrolling = NO;
     [self startAsyncTask:nil];
+}
+
+#pragma mark - SINavigationMenuDelegate
+
+-(void)didSelectItemAtIndex:(NSUInteger)index
+{
+    if(index == 1){
+        NSLog(@"切换到收件箱");
+    } else if (index == 0){
+        NSLog(@"切换到发件箱");
+    }
 }
 
 @end

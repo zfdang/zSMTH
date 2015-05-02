@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ExtendedTableViewController.h"
+#import "SINavigationMenuView.h"
 
-@interface MailTableViewController : ExtendedTableViewController
+@interface MailTableViewController : ExtendedTableViewController <SINavigationMenuDelegate>
 
 - (IBAction)clickRightButton:(id)sender;
 
