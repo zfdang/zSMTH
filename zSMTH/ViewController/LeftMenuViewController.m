@@ -69,12 +69,13 @@
         imageView.layer.cornerRadius = 30.0;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         imageView.layer.borderWidth = 0;
-        imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
-        imageView.layer.shouldRasterize = YES;
+//        imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+//        imageView.layer.shouldRasterize = YES;
         imageView.clipsToBounds = YES;
         
         // user name
         labelUser = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 180, 24)];
+        labelUser.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         labelUser.textAlignment = NSTextAlignmentCenter;
         labelUser.text = @"点击登录";
         labelUser.font = [UIFont fontWithName:@"HelveticaNeue" size:16];

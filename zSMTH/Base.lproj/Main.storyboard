@@ -607,6 +607,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Ugb-hw-xiQ"/>
                                 <exclude reference="89A-oN-oq3"/>
                                 <exclude reference="9L6-Gj-Wy9"/>
                                 <exclude reference="K0T-DG-PYg"/>
@@ -616,7 +617,6 @@
                                 <exclude reference="u0w-9S-mtG"/>
                                 <exclude reference="g1M-1y-60q"/>
                                 <exclude reference="rlX-oy-BUU"/>
-                                <exclude reference="Ugb-hw-xiQ"/>
                             </mask>
                         </variation>
                     </view>
