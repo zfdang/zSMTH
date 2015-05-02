@@ -20,7 +20,7 @@
 #import "BoardListTableViewController.h"
 #import "SettingViewController.h"
 #import "MailTableViewController.h"
-
+#import "JDStatusBarNotification.h"
 
 @interface LeftMenuViewController ()
 {
@@ -167,7 +167,9 @@
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:mail animated:YES];
     } else if(target == VIEW_NOTIFICATION) {
-        
+        [JDStatusBarNotification showWithStatus:@"暂未实现\"文章提醒\"!"
+                                   dismissAfter:1.0
+                                      styleName:JDStatusBarStyleWarning];
     } else if(target == VIEW_SETTING) {
         if(setting == nil){
             setting = [self.storyboard instantiateViewControllerWithIdentifier:@"settingController"];
