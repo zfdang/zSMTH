@@ -42,6 +42,8 @@
 
 
 - (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     // set userinfo
     [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
     
@@ -229,12 +231,14 @@
 
 -(void)userAvatarClicked {
     NSLog(@"single Tap on user avatar or username");
-    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:@"更改头像"
-                                                             delegate:self
-                                                    cancelButtonTitle:@"取消"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"拍照", @"从相册中选取", nil];
-    [choiceSheet showInView:self.view];
+    if([user.userID compare:helper.user.userID] == NSOrderedSame) {
+        UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:@"更改头像"
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"取消"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"拍照", @"从相册中选取", nil];
+        [choiceSheet showInView:self.view];
+    }
 }
 
 
