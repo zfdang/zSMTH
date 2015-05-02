@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SMTHURLConnection.h"
 #import "SMTHUser.h"
+#import "SMTHPost.h"
 
 @interface SMTHHelper : NSObject <SMTHURLConnectionDelegate>
 {
@@ -52,6 +53,6 @@
 
 - (BOOL) hasNewMail;
 - (NSArray*) getMailsFrom:(int)type from:(int)from;
-- (id) getMailContent:(int)type position:(int)pos;
+- (SMTHPost*) getMailContent:(int)type position:(int)pos;
 
 @end

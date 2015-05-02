@@ -18,10 +18,9 @@
 #import "SMTHAttachment.h"
 #import "ContentEditViewController.h"
 
-#define LABEL_WIDTH 300
-
 @interface PostContentTableViewController () <TapImageViewDelegate, MWPhotoBrowserDelegate>
 {
+    ContentType contentType;
     NSMutableArray *mPosts;
     NSMutableDictionary *mHeights;
     int mPageIndex;
@@ -31,6 +30,8 @@
     NSString *chsName;
     NSString *engName;
     long boardID;
+
+    long mailPosition;
 }
 
 @end
@@ -47,11 +48,6 @@
     mPosts = [[NSMutableArray alloc] init];
     mHeights = [[NSMutableDictionary alloc] init];
     iHeaderHeight  = 22.0;
-    if(chsName){
-        self.title = [NSString stringWithFormat:@"%@(%@)",chsName, engName];
-    } else {
-        self.title = engName;
-    }
 
     // hide right button if this view is not initiated from Guidance
     if(! self.isFromGuidance){
@@ -63,23 +59,35 @@
     self.tableView.allowsSelection = NO;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin| UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight;
 
-    // add pull to refresh function at the top & bottom
-    __weak typeof(self) weakSelf = self;
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [weakSelf refreshPostContent];
-    }];
-    
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [weakSelf loadMorePostList];
-    }];
-
     // change translucent, otherwise, tableview will be partially hidden
     self.navigationController.navigationBar.translucent = NO;
-    
+
+    if(contentType == CONTENT_POST) {
+        if(chsName){
+            self.title = [NSString stringWithFormat:@"%@(%@)",chsName, engName];
+        } else {
+            self.title = engName;
+        }
+
+        // add pull to refresh function at the top & bottom
+        __weak typeof(self) weakSelf = self;
+        [self.tableView addPullToRefreshWithActionHandler:^{
+            [weakSelf refreshPostContent];
+        }];
+
+        [self.tableView addInfiniteScrollingWithActionHandler:^{
+            [weakSelf loadMorePostList];
+        }];
+    } else if (contentType == CONTENT_INBOX) {
+        self.title = @"收件箱";
+    }
+
     // loading content now
     self.progressTitle = @"加载中...";
-    self.tableView.showsPullToRefresh = NO;
-    self.tableView.showsInfiniteScrolling = NO;
+    if(contentType == CONTENT_POST) {
+        self.tableView.showsPullToRefresh = NO;
+        self.tableView.showsInfiniteScrolling = NO;
+    }
     [self startAsyncTask:nil];
 }
 
@@ -93,6 +101,7 @@
 
 -(void) setBoardInfo:(long)boardid chsName:(NSString*)chsname engName:(NSString*) engname;
 {
+    contentType = CONTENT_POST;
     // 从首页导读调用的时候，没有boardid, 没有chsname
     boardID = boardid;
     engName = engname;
@@ -104,11 +113,20 @@
         chsName = [helper getChsBoardName:engName];
         boardID = [helper getBoardID:engName];
     }
+
+}
+
+-(void) setMailInfo:(ContentType)type position:(long)position subject:(NSString*)subject
+{
+    contentType = type;
+    mailPosition = position;
+    self.postSubject = subject;
 }
 
 #pragma mark - Loading Tasks
 
 - (void) refreshPostContent {
+    // only valid for CONTENT_POST
     __weak typeof(self) weakSelf = self;
     int64_t delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -123,6 +141,7 @@
 }
 
 - (void) loadMorePostList {
+    // only valid for CONTENT_POST
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         weakSelf.tableView.showsPullToRefresh = NO;
@@ -157,10 +176,16 @@
 
 - (void)asyncTask:(NSMutableDictionary*) params
 {
-    mPageIndex = 0;
-    NSArray *results = [helper getPostContents:engName postID:postID from:mPageIndex];
-    [mPosts removeAllObjects];
-    [mPosts addObjectsFromArray:results];
+    if(contentType == CONTENT_POST) {
+        mPageIndex = 0;
+        NSArray* results = [helper getPostContents:engName postID:postID from:mPageIndex];
+        [mPosts removeAllObjects];
+        [mPosts addObjectsFromArray:results];
+    } else if(contentType == CONTENT_INBOX) {
+        SMTHPost *post  = [helper getMailContent:1 position:(int)mailPosition];
+        [mPosts removeAllObjects];
+        [mPosts addObject:post];
+    }
 }
 
 
@@ -168,8 +193,10 @@
 {
     [self.tableView reloadData];
 
-    self.tableView.showsPullToRefresh = YES;
-    self.tableView.showsInfiniteScrolling = YES;
+    if(contentType == CONTENT_POST) {
+        self.tableView.showsPullToRefresh = YES;
+        self.tableView.showsInfiniteScrolling = YES;
+    }
 }
 
 
@@ -260,6 +287,10 @@
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
         post.postBoard = engName;
         [cell setCellContent:post];
+
+        if(contentType == CONTENT_INBOX) {
+            cell.postIndex.text = @"发件人";
+        }
        
         CGFloat height = [cell getCellHeight];
         [mHeights setObject:[NSNumber numberWithFloat:height] forKey:indexPath];

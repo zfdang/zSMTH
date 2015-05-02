@@ -12,6 +12,7 @@
 #import "UIView+Toast.h"
 #import "PostListTableViewCell.h"
 #import "SMTHPost.h"
+#import "PostContentTableViewController.h"
 
 typedef enum {
     TASK_MAIL_INBOX = 0,
@@ -94,7 +95,7 @@ typedef enum {
                     
                     [weakSelf.tableView.infiniteScrollingView stopAnimating];
                 } else {
-                    [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的帖子了..."
+                    [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的邮件了..."
                                                                 duration:0.5
                                                                 position:CSToastPositionCenter];
                     
@@ -195,10 +196,11 @@ typedef enum {
     long postIdx = indexPath.row;
     SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:postIdx];
     NSLog(@"Click on Mail: Author = %@, subject = %@", post.author, post.postSubject);
+
+    PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [helper getMailContent:1 position:(int)post.postPosition];
-    });
+    [postcontent setMailInfo:CONTENT_INBOX position:post.postPosition subject:post.postSubject];
+    [self.navigationController pushViewController:postcontent animated:YES];
 }
 
 /*

@@ -74,8 +74,17 @@
         return nil;
     
     SMTHAttachment *attach = [self.attachments objectAtIndex:index];
-    NSString * url = [NSString stringWithFormat:@"http://att.newsmth.net/nForum/att/%@/%@/%ld", self.postBoard, self.postID,
-                      attach.attPos];    
+    // 两种情形，一种是文章，一种是邮件，附件的地址也不一样
+    // http://www.newsmth.net/nForum/att/inbox/230/168581
+    NSString * url;
+    if(self.postBoard) {
+        url = [NSString stringWithFormat:@"http://att.newsmth.net/nForum/att/%@/%@/%ld", self.postBoard, self.postID,
+                          attach.attPos];
+    } else {
+        // 这个当前还没有用到, 因为信件中的attachs被忽略掉了
+        url = [NSString stringWithFormat:@"http://www.newsmth.net/nForum/att/inbox/%ld/%ld", self.postPosition,
+               attach.attPos];
+    }
     return [NSURL URLWithString:url];
 }
 

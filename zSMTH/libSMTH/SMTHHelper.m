@@ -938,10 +938,9 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     NSArray *results;
     
     // 邮件的列表是从最老的开始排列的，所以加载的时候，需要从尾部往头加载，所以需要知道总mail的数量
-    if(totalMailCount == -1) {
-        // 还没有从hasNewMail中获得过总数量，现在获取
-        [self hasNewMail];
-    }
+    // the following method will update totalMailCount
+    [self hasNewMail];
+    
     // from 是需要加载的页，每页的数量为mailNumberinOnePage
     // 需要计算出对应的from -- 帖子序号，和size: 加载的数量来
     long start_pos = totalMailCount - mailNumberinOnePage * (from + 1);
@@ -985,7 +984,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     return mails;
 }
 
-- (id) getMailContent:(int)type position:(int)pos
+- (SMTHPost*) getMailContent:(int)type position:(int)pos
 {
     NSDictionary *result;
     if(type == 1){
@@ -993,10 +992,35 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     } else {
         
     }
-
 //    "attachment_list" =     (
-//    );
-//    attachments = 0;
+//                             {
+//                                 name = "0df431adcbef7609393953a12ddda3cc7cd99eda.jpg";
+//                                 pos = 900;
+//                                 size = 155534;
+//                             },
+//                             {
+//                                 name = "458aa0f2c7274409de860.jpg";
+//                                 pos = 156491;
+//                                 size = 12052;
+//                             },
+//                             {
+//                                 name = "ac345982b2b7d0a262e9cea3c8ef76094b369ae8.jpg";
+//                                 pos = 168581;
+//                                 size = 388479;
+//                             },
+//                             {
+//                                 name = "d833c895d143ad4b3b0f8cfe81025aafa40f06ef.jpg";
+//                                 pos = 557117;
+//                                 size = 218235;
+//                             },
+//                             {
+//                                 name = "Snap23.jpg";
+//                                 pos = 775409;
+//                                 size = 36216;
+//                             }
+//                             );
+//    attachments = 5;
+//    
 //    "author_id" = Madoka;
 //    body = "内容";
 //    flags = "  ";
@@ -1004,7 +1028,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 //    subject = "Re: zsmth";
 //    time = 1430097682;
 
-    NSLog(@"%@", result);
+//    NSLog(@"%@", result);
 
     NSDictionary *dict = (NSDictionary*)result;
     SMTHPost *post = [[SMTHPost alloc] init];
@@ -1015,21 +1039,22 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     post.postDate = [self getAbsoluteDateString:[[result objectForKey:@"time"] doubleValue]];
     
     post.postFlags = [dict objectForKey:@"flags"];
-    
-    NSArray *attachs = [dict objectForKey:@"attachment_list"];
-    if(attachs != nil && [attachs count] > 0){
-        post.attachments = [[NSMutableArray alloc] init];
-        
-        for (id attach in attachs) {
-            NSDictionary *items = (NSDictionary*) attach;
-            SMTHAttachment *att = [[SMTHAttachment alloc] init];
-            att.attName = [items objectForKey:@"name"];
-            att.attPos = [[items objectForKey:@"pos"] longValue];
-            att.attSize = [[items objectForKey:@"size"] longValue];
-            
-            [post.attachments addObject:att];
-        }
-    }
+
+    // skip attachments at the moment
+//    NSArray *attachs = [dict objectForKey:@"attachment_list"];
+//    if(attachs != nil && [attachs count] > 0){
+//        post.attachments = [[NSMutableArray alloc] init];
+//        
+//        for (id attach in attachs) {
+//            NSDictionary *items = (NSDictionary*) attach;
+//            SMTHAttachment *att = [[SMTHAttachment alloc] init];
+//            att.attName = [items objectForKey:@"name"];
+//            att.attPos = [[items objectForKey:@"pos"] longValue];
+//            att.attSize = [[items objectForKey:@"size"] longValue];
+//
+//            [post.attachments addObject:att];
+//        }
+//    }
     
     return post;
 }
