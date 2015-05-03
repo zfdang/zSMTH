@@ -7,8 +7,12 @@
 //
 
 #import "NavigationViewController.h"
+#import "ZSMTHSetting.h"
 
 @interface NavigationViewController ()
+{
+    ZSMTHSetting *setting;
+}
 
 @end
 
@@ -16,12 +20,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
+    setting = [ZSMTHSetting sharedManager];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// http://stackoverflow.com/questions/12996293/io6-doesnt-call-boolshouldautorotate
+- (BOOL)shouldAutorotate {
+    NSLog(@"Auto Rotate = %d", setting.bAutoRotate);
+    return setting.bAutoRotate;
 }
 
 /*
