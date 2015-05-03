@@ -12,6 +12,7 @@
 #import "SMTHPost.h"
 #import "SMTHAttachment.h"
 #import "FMDB.h"
+#import "ZSMTHSetting.h"
 
 const int postNumberinOnePage = 20; // 版面列表：一页显示多少个帖子数
 const int replyNumberinOnePost = 20; // 文章内容：一页显示多少回复数
@@ -26,7 +27,10 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     FMDatabase *db;
     
     // this number will be updated in hasNewMail periodical checking
-    long totalMailCount;
+    long totalInboxMailCount;
+    long totalOutboxMailCount;
+
+    ZSMTHSetting *setting;
 }
 @end
 
@@ -57,6 +61,8 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         // 未登录
         user = nil;
         
+        setting = [ZSMTHSetting sharedManager];
+
         // init sections
         sectionList = @[@"全站热点", @"国内院校", @"休闲娱乐", @"五湖四海", @"游戏运动", @"社会信息", @"知性感性", @"文化人文", @"学术科学", @"电脑技术"];
 //        sectionList = @[@"全站热点"];
@@ -72,7 +78,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         NSString* dbpath = [docsdir stringByAppendingPathComponent:@"zSMTH.sqlite"];
         db = [FMDatabase databaseWithPath:dbpath];
 
-        totalMailCount = -1;
+        totalInboxMailCount = -1;
 
         [self initDatabaseStructure];
     }
@@ -145,9 +151,14 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (NSURL*) getFaceURLByUserID:(NSString*)userID
 {
-    SMTHUser *u = [[SMTHUser alloc] init];
-    u.userID = userID;
-    return [u getFaceURL];
+    if(! setting.bShowAvatar) {
+        // 不显示用户头像，采用缺省的头像
+        return nil;
+    } else {
+        SMTHUser *u = [[SMTHUser alloc] init];
+        u.userID = userID;
+        return [u getFaceURL];
+    }
 }
 
 - (SMTHUser*) getUserInfo:(NSString*) userID
@@ -923,8 +934,8 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
     int new_count = [[dict objectForKey:@"new_count"] intValue];
     // update totalMailCount, it will be used in getMailsFrom method
-    totalMailCount = [[dict objectForKey:@"total_count"] intValue];
-    NSLog(@"Mail count: new = %d, total = %d", new_count, totalMailCount);
+    totalInboxMailCount = [[dict objectForKey:@"total_count"] intValue];
+    NSLog(@"Mail count: new = %d, total = %d", new_count, totalInboxMailCount);
     if(new_count > 0)
         return YES;
     
@@ -943,11 +954,11 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     
     // from 是需要加载的页，每页的数量为mailNumberinOnePage
     // 需要计算出对应的from -- 帖子序号，和size: 加载的数量来
-    long start_pos = totalMailCount - mailNumberinOnePage * (from + 1);
+    long start_pos = totalInboxMailCount - mailNumberinOnePage * (from + 1);
     if(start_pos < 0){
         start_pos = 0;
     }
-    long previous_pos = totalMailCount - mailNumberinOnePage * from;
+    long previous_pos = totalInboxMailCount - mailNumberinOnePage * from;
     if(previous_pos < 0){
         previous_pos = 0;
     }

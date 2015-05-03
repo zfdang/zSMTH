@@ -100,6 +100,7 @@ const CGFloat PaddingBetweenImages = 5.0;
             [imageview sd_setImageWithURL: [post getAttachedImageURL:i]
                          placeholderImage:[UIImage imageNamed:@"loading"]
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                    // 需要检查下载的结果，如果没有错误的话，可以继续代码，否则应该设置错误提示
                                     CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;
                                     // update the exact image height
                                     [mImgHeights replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:curImageHeight]];
@@ -111,7 +112,9 @@ const CGFloat PaddingBetweenImages = 5.0;
                                         float imgHeight = [[mImgHeights objectAtIndex:j] floatValue];
                                         curImageOffset += imgHeight + PaddingBetweenImages;
                                     }
-                                    imageview.frame = CGRectMake(rect.origin.x, curImageOffset, rect.size.width, curImageHeight);
+                                    CGRect frame = CGRectMake(rect.origin.x, curImageOffset, rect.size.width, curImageHeight);
+                                    NSLog(@"frame: %f, %f, %f, %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
+                                    imageview.frame = frame;
                                     
                                     // if image was not loaded before, refresh tableview
                                     if(self.delegate && att.loaded == NO){
