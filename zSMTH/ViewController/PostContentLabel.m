@@ -7,11 +7,9 @@
 //
 
 #import "PostContentLabel.h"
-#import "UIView+Toast.h"
-
 static CGFloat kEspressoDescriptionTextFontSize = 17;
 
-@interface PostContentLabel() <TTTAttributedLabelDelegate, UIActionSheetDelegate>
+@interface PostContentLabel()
 {
 }
 @end
@@ -23,7 +21,6 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
     // 设置TTT label的一些属性
     self.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
     self.lineBreakMode = NSLineBreakByWordWrapping;
-    self.delegate = self;
     if(text.length < 2000){
         // 当文本太长时，不做链接的检查，否则性能会太差
         self.enabledTextCheckingTypes = NSTextCheckingTypeLink;
@@ -190,54 +187,6 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
 
     CGFloat result =  sizeWithFont.height + padding;
     return result;
-}
-
-#pragma mark - TTTAttributedLabelDelegate
-
-- (void)attributedLabel:(__unused TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
-{
-    [[[UIActionSheet alloc] initWithTitle:[url absoluteString]
-                                 delegate:self
-                        cancelButtonTitle:NSLocalizedString(@"取消", nil)
-                   destructiveButtonTitle:nil
-                        otherButtonTitles:NSLocalizedString(@"复制链接", nil), NSLocalizedString(@"在浏览器中打开", nil),nil
-      ]
-     showInView:self];
-}
-
-- (void)attributedLabel:(__unused TTTAttributedLabel *)label didLongPressLinkWithURL:(__unused NSURL *)url atPoint:(__unused CGPoint)point
-{
-    // 长按链接，直接打开URL
-    [[UIApplication sharedApplication] openURL:url];
-}
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == actionSheet.cancelButtonIndex) {
-        return;
-    } else if (buttonIndex == actionSheet.firstOtherButtonIndex){
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        [pasteboard setURL:[NSURL URLWithString:actionSheet.title]];
-        
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGFloat screenWidth = screenRect.size.width;
-        CGFloat screenHeight = screenRect.size.height;
-
-        // 找到最上层的tableview, 这样好确定toast的位置
-        UIView *view = self.superview;
-        while (! [view isKindOfClass:[UITableView class]]){
-            view = view.superview;
-        }
-        UITableView *tableview = (UITableView*) view;
-        [tableview  makeToast:@"URL已复制到剪切板!"
-                duration:0.8
-                position:[NSValue valueWithCGPoint:CGPointMake(screenWidth*0.5, tableview.contentOffset.y + screenHeight*0.7)]];
-    
-    } else{
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:actionSheet.title]];
-    }
-    
 }
 
 // http://www.jamesvandyne.com/improve-performance-and-draw-your-own-strings-on-iphone/

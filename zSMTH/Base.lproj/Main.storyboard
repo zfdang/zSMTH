@@ -1310,6 +1310,46 @@
             </objects>
             <point key="canvasLocation" x="1090" y="1848"/>
         </scene>
+        <!--Browser-->
+        <scene sceneID="MAC-hs-szk">
+            <objects>
+                <viewController storyboardIdentifier="browserController" id="e7C-Zj-kpz" userLabel="Browser" customClass="BrowserViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1T9-UW-XVR"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qgj-KL-Ayh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hVk-gq-TSp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XoM-l6-mSF">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XoM-l6-mSF" firstAttribute="width" secondItem="hVk-gq-TSp" secondAttribute="width" id="21Q-Y5-oUS"/>
+                            <constraint firstAttribute="centerY" secondItem="XoM-l6-mSF" secondAttribute="centerY" id="Im2-nb-poY"/>
+                            <constraint firstAttribute="centerX" secondItem="XoM-l6-mSF" secondAttribute="centerX" id="bvf-AK-Ri4"/>
+                            <constraint firstItem="XoM-l6-mSF" firstAttribute="height" secondItem="hVk-gq-TSp" secondAttribute="height" id="f9c-KF-s52"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bN6-Rn-HcG">
+                        <barButtonItem key="leftBarButtonItem" image="return" id="SFV-vJ-6sl">
+                            <connections>
+                                <action selector="clickLeftButton:" destination="e7C-Zj-kpz" id="Fmc-Gz-t9L"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webview" destination="XoM-l6-mSF" id="pfK-bw-Xmb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="87p-Lu-TFi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1085" y="2542"/>
+        </scene>
         <!--REFrosted Content Navigator Controller-->
         <scene sceneID="rdw-OG-Ca7">
             <objects>
@@ -1332,6 +1372,7 @@
                         <segue destination="mPj-8k-k6C" kind="push" id="sAS-cT-DcI"/>
                         <segue destination="tNM-e1-qdM" kind="push" id="eYL-y9-wk9"/>
                         <segue destination="FQK-xF-Asv" kind="push" id="uVE-h0-mis"/>
+                        <segue destination="e7C-Zj-kpz" kind="push" id="AIY-ul-Jm2"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKF-hL-bC2" userLabel="First Responder" sceneMemberID="firstResponder"/>

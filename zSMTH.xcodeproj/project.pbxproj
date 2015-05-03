@@ -42,6 +42,7 @@
 		69949CDF1AD5214100970E60 /* SINavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD31AD5214100970E60 /* SINavigationMenuView.m */; };
 		69949CE01AD5214100970E60 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CD51AD5214100970E60 /* UIColor+Extension.m */; };
 		69949CE31AD6813400970E60 /* TapImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 69949CE21AD6813400970E60 /* TapImageView.m */; };
+		6994CA8B1AF6E3820035C16F /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6994CA8A1AF6E3820035C16F /* BrowserViewController.m */; };
 		69A38B841ADBB52C0090BB6C /* AttachSelectorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */; };
 		69A38B881ADC81B20090BB6C /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B871ADC81B20090BB6C /* UIImage+Resize.m */; };
 		69A38B8D1ADE234A0090BB6C /* UINavigationController+MethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A38B8A1ADE234A0090BB6C /* UINavigationController+MethodSwizzling.m */; };
@@ -155,6 +156,8 @@
 		69949CD51AD5214100970E60 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
 		69949CE11AD6813400970E60 /* TapImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TapImageView.h; path = ViewController/TapImageView.h; sourceTree = "<group>"; };
 		69949CE21AD6813400970E60 /* TapImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TapImageView.m; path = ViewController/TapImageView.m; sourceTree = "<group>"; };
+		6994CA891AF6E3820035C16F /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BrowserViewController.h; path = ViewController/BrowserViewController.h; sourceTree = "<group>"; };
+		6994CA8A1AF6E3820035C16F /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BrowserViewController.m; path = ViewController/BrowserViewController.m; sourceTree = "<group>"; };
 		69A38B821ADBB52C0090BB6C /* AttachSelectorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttachSelectorTableViewController.h; path = ViewController/AttachSelectorTableViewController.h; sourceTree = "<group>"; };
 		69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttachSelectorTableViewController.m; path = ViewController/AttachSelectorTableViewController.m; sourceTree = "<group>"; };
 		69A38B851ADBD0470090BB6C /* UpdateAttachmentsProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UpdateAttachmentsProtocol.h; path = ViewController/UpdateAttachmentsProtocol.h; sourceTree = "<group>"; };
@@ -305,6 +308,8 @@
 				69A38B831ADBB52C0090BB6C /* AttachSelectorTableViewController.m */,
 				6943AEBC1AF0C117007BA2ED /* MailTableViewController.h */,
 				6943AEBD1AF0C117007BA2ED /* MailTableViewController.m */,
+				6994CA891AF6E3820035C16F /* BrowserViewController.h */,
+				6994CA8A1AF6E3820035C16F /* BrowserViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -699,6 +704,7 @@
 				69949CDD1AD5214100970E60 /* SIMenuConfiguration.m in Sources */,
 				6984F6FB1AB579E900548BD2 /* SMTHBoard.m in Sources */,
 				693FACE01ABE4FA700BD8200 /* PostContentTableViewCell.m in Sources */,
+				6994CA8B1AF6E3820035C16F /* BrowserViewController.m in Sources */,
 				69D238D51AF59B22001942BB /* ZSMTHSetting.m in Sources */,
 				6984F6EF1AB3D3F700548BD2 /* LeftMenuViewController.m in Sources */,
 			);

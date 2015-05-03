@@ -347,8 +347,7 @@
     // 上载到服务器
     typeof(self) __weak weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSDictionary* dict = [helper.smth net_modifyFace:tempfile];
-//        NSLog(@"%@, net_error = %d", dict, helper.smth->net_error);
+        [helper.smth net_modifyFace:tempfile];
         // 更新头像
         [weakSelf.imageAvatar sd_setImageWithURL:[helper.user getFaceURL]
                                 placeholderImage:[UIImage imageNamed:@"anonymous"]

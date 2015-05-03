@@ -20,14 +20,8 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Last NewSMTH BBS Client on IOS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEM-Ov-NAf">
-                    <rect key="frame" x="57" y="360" width="300" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="水木社区BBS的开源IOS客户端" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jK-7J-hwW">
-                    <rect key="frame" x="90" y="401" width="234" height="21"/>
+                    <rect key="frame" x="90" y="380" width="234" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -38,6 +32,7 @@
                 <constraint firstAttribute="centerX" secondItem="HC6-DA-mMW" secondAttribute="centerX" id="2zu-Xg-O7j"/>
                 <constraint firstAttribute="centerY" secondItem="HC6-DA-mMW" secondAttribute="centerY" id="3zP-Fa-sIk"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" id="5cJ-9S-tgC"/>
+                <constraint firstItem="2jK-7J-hwW" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="40" id="7lA-vb-oXy"/>
                 <constraint firstItem="HC6-DA-mMW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="100" id="G0n-Iq-pDv"/>
                 <constraint firstAttribute="centerY" secondItem="kId-c2-rCX" secondAttribute="centerY" constant="50" id="Gkb-pR-s5w"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="HC6-DA-mMW" secondAttribute="bottom" constant="60" id="HeJ-DX-aHh"/>
@@ -48,10 +43,7 @@
                 <constraint firstAttribute="centerY" secondItem="HC6-DA-mMW" secondAttribute="centerY" id="eMW-bz-1LB"/>
                 <constraint firstAttribute="centerY" secondItem="kId-c2-rCX" secondAttribute="centerY" constant="121.5" id="eg1-G4-CqN"/>
                 <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
-                <constraint firstAttribute="centerX" secondItem="QEM-Ov-NAf" secondAttribute="centerX" id="jUd-7N-L8Y"/>
                 <constraint firstItem="HC6-DA-mMW" firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="r8Y-N6-3AR"/>
-                <constraint firstItem="2jK-7J-hwW" firstAttribute="top" secondItem="QEM-Ov-NAf" secondAttribute="bottom" constant="20" id="yNf-Ih-gLM"/>
-                <constraint firstItem="QEM-Ov-NAf" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="20" id="yle-UZ-YuP"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>

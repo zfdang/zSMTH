@@ -17,8 +17,10 @@
 #import "MWPhotoBrowser.h"
 #import "SMTHAttachment.h"
 #import "ContentEditViewController.h"
+#import "PostContentLabel.h"
+#import "BrowserViewController.h"
 
-@interface PostContentTableViewController () <TapImageViewDelegate, MWPhotoBrowserDelegate>
+@interface PostContentTableViewController () <TapImageViewDelegate, MWPhotoBrowserDelegate, TTTAttributedLabelDelegate, UIActionSheetDelegate>
 {
     ContentType contentType;
     NSMutableArray *mPosts;
@@ -282,6 +284,9 @@
             lpgr.minimumPressDuration = 0.6; //seconds
             [cell addGestureRecognizer:lpgr];
         }
+
+        // 接收来自TTTAttributedLabel的对链接的信息
+        cell.postContent.delegate = self;
     }
     
     if (indexPath.section == 0) {
@@ -510,6 +515,54 @@
     
     // Present
     [self.navigationController pushViewController:browser animated:YES];
+}
+
+#pragma mark - TTTAttributedLabelDelegate
+
+- (void)attributedLabel:(__unused TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
+{
+    [[[UIActionSheet alloc] initWithTitle:[url absoluteString]
+                                 delegate:self
+                        cancelButtonTitle:NSLocalizedString(@"取消", nil)
+                   destructiveButtonTitle:nil
+                        otherButtonTitles:NSLocalizedString(@"复制链接", nil),
+      NSLocalizedString(@"浏览器打开", nil),
+      NSLocalizedString(@"外部浏览器打开", nil),
+      nil
+      ]
+     showInView:self.view];
+}
+
+- (void)attributedLabel:(__unused TTTAttributedLabel *)label didLongPressLinkWithURL:(__unused NSURL *)url atPoint:(__unused CGPoint)point
+{
+    // 长按链接，直接打开URL
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    } else if (buttonIndex == actionSheet.firstOtherButtonIndex){
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        [pasteboard setURL:[NSURL URLWithString:actionSheet.title]];
+
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        CGFloat screenHeight = screenRect.size.height;
+
+        UITableView *tableview = self.tableView;
+        [tableview  makeToast:@"URL已复制到剪切板!"
+                     duration:0.8
+                     position:[NSValue valueWithCGPoint:CGPointMake(screenWidth*0.5, tableview.contentOffset.y + screenHeight*0.7)]];
+    } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1) {
+        BrowserViewController *browser = [self.storyboard instantiateViewControllerWithIdentifier:@"browserController"];
+        browser.targetURL = [NSURL URLWithString:actionSheet.title];
+        [self.navigationController pushViewController:browser animated:YES];
+    } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 2) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:actionSheet.title]];
+    }
 }
 
 @end
