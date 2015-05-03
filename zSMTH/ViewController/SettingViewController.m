@@ -32,7 +32,7 @@
     // Load git version from plist
     // http://feinstruktur.com/blog/2010/12/29/integrating-git-version-info-in-ioscocoa-apps
     NSString *version = [[[NSBundle mainBundle] infoDictionary]
-                         objectForKey:@"CFBundleVersion"];
+                         objectForKey:@"CFBundleShortVersionString"];
     self.txtVersion.text = version;
 
     // read initial values from settings
