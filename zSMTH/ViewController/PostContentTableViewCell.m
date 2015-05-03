@@ -12,6 +12,7 @@
 #import "SVPullToRefresh.h"
 #import "SMTHAttachment.h"
 #import "TapImageView.h"
+#import "UIImage+Resize.h"
 
 const CGFloat PaddingBetweenContentAndImage = 5.0;
 const CGFloat PaddingBetweenImages = 5.0;
@@ -55,7 +56,6 @@ const CGFloat PaddingBetweenImages = 5.0;
     // 因为cell可能会被重用，所以要先清除之前可能添加进去的图片附件
     NSArray *subviews = [self.cellView subviews];
     for (id subview in subviews) {
-//        NSLog(@"%@", subview);
         if([subview isKindOfClass:[TapImageView class]]){
             UIView *view = (UIView*) subview;
             [view removeFromSuperview];
@@ -100,26 +100,39 @@ const CGFloat PaddingBetweenImages = 5.0;
             [imageview sd_setImageWithURL: [post getAttachedImageURL:i]
                          placeholderImage:[UIImage imageNamed:@"loading"]
                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                    // 需要检查下载的结果，如果没有错误的话，可以继续代码，否则应该设置错误提示
-                                    CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;
-                                    // update the exact image height
-                                    [mImgHeights replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:curImageHeight]];
-                                    
-                                    // find current image offset
-                                    CGFloat curImageOffset = imgOffset;
-                                    for (int j = 0; j < i; j++) {
-                                        // calculate sum of previous images's height
-                                        float imgHeight = [[mImgHeights objectAtIndex:j] floatValue];
-                                        curImageOffset += imgHeight + PaddingBetweenImages;
-                                    }
-                                    CGRect frame = CGRectMake(rect.origin.x, curImageOffset, rect.size.width, curImageHeight);
-                                    NSLog(@"frame: %f, %f, %f, %f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
-                                    imageview.frame = frame;
-                                    
-                                    // if image was not loaded before, refresh tableview
-                                    if(self.delegate && att.loaded == NO){
-                                        att.loaded = YES;
-                                        [self.delegate RefreshTableView];
+                                    if(error != nil) {
+                                        // 下载失败，使用loadingfailure图片来替代原来的placeholder image
+                                        NSLog(@"failed to download %@, error is %@", imageURL, error);
+                                        image = [UIImage imageNamed:@"loadingfailure"];
+                                        imageview.image = image;
+                                    } else {
+                                        // 下载成功, 计算满宽情况下，图片的高度
+                                        CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;
+                                        // update the exact image height
+                                        [mImgHeights replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:curImageHeight]];
+
+                                        // 缩小图片，否则占用内存会太大
+                                        if(image.size.height > curImageHeight) {
+                                            NSLog(@"resize image, from %f * %f ==> %f * %f", image.size.width, image.size.height, rect.size.width, curImageHeight);
+                                            CGSize size = CGSizeMake(rect.size.width, curImageHeight);
+                                            image = [UIImage imageWithImage:image scaledToFitToSize:size];
+                                        }
+
+                                        // find current image y offset
+                                        CGFloat curImageOffset = imgOffset;
+                                        for (int j = 0; j < i; j++) {
+                                            // calculate sum of previous images's height
+                                            float imgHeight = [[mImgHeights objectAtIndex:j] floatValue];
+                                            curImageOffset += imgHeight + PaddingBetweenImages;
+                                        }
+                                        CGRect frame = CGRectMake(rect.origin.x, curImageOffset, rect.size.width, curImageHeight);
+                                        imageview.frame = frame;
+
+                                        // if image was not loaded before, refresh tableview
+                                        if(self.delegate && att.loaded == NO){
+                                            att.loaded = YES;
+                                            [self.delegate RefreshTableView];
+                                        }
                                     }
                                 }];
 
