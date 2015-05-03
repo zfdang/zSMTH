@@ -58,7 +58,7 @@
     SDImageCache *imageCache = [SDImageCache sharedImageCache];
     [imageCache calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
         NSLog(@"SDWebImage cache size = %lu", (unsigned long)totalSize);
-        weakSelf.txtCacheSize.text = [NSString stringWithFormat:@"%6luM", (unsigned long)totalSize/1024/1024];
+        weakSelf.txtCacheSize.text = [NSString stringWithFormat:@"%luM", (unsigned long)totalSize/1024/1024];
     }];
 }
 
