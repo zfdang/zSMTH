@@ -10,13 +10,14 @@
 
 @interface ZSMTHSetting : NSObject
 
++ (id)sharedManager;
+- (NSString*) getAttachmentFilepath:(NSString*)fname;
+
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
 @property (nonatomic) BOOL bAutoLogin;
 @property (nonatomic) BOOL bSavePassword;
-
-+ (id)sharedManager;
-
-- (NSString*) getAttachmentFilepath:(NSString*)fname;
+@property (nonatomic) BOOL bShowAvatar;
+@property (nonatomic) BOOL bAutoRotate;
 
 @end

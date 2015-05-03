@@ -9,8 +9,13 @@
 #import "SettingViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIView+Toast.h"
+#import "ZSMTHSetting.h"
+
 
 @interface SettingViewController ()
+{
+    ZSMTHSetting *setting;
+}
 
 @end
 
@@ -22,11 +27,17 @@
     
     self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1200);
     
+    setting = [ZSMTHSetting sharedManager];
+
     // Load git version from plist
     // http://feinstruktur.com/blog/2010/12/29/integrating-git-version-info-in-ioscocoa-apps
     NSString *version = [[[NSBundle mainBundle] infoDictionary]
                          objectForKey:@"CFBundleVersion"];
     self.txtVersion.text = version;
+
+    // read initial values from settings
+    self.bShowAvatar.on = setting.bShowAvatar;
+    self.bAutoRotate.on = setting.bAutoRotate;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,7 +58,7 @@
     SDImageCache *imageCache = [SDImageCache sharedImageCache];
     [imageCache calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
         NSLog(@"SDWebImage cache size = %lu", (unsigned long)totalSize);
-        weakSelf.txtCacheSize.text = [NSString stringWithFormat:@"图片缓存 (%6luM)", (unsigned long)totalSize/1024/1024];
+        weakSelf.txtCacheSize.text = [NSString stringWithFormat:@"%6luM", (unsigned long)totalSize/1024/1024];
     }];
 }
 
@@ -58,10 +69,13 @@
 #pragma mark - Setting Buttons
 
 - (IBAction)switchUserAvatar:(id)sender {
-    
+    setting.bShowAvatar = self.bShowAvatar.on;
+    NSLog(@"Setting = %@", setting);
 }
 
 - (IBAction)switchAutoRotate:(id)sender {
+    setting.bAutoRotate = self.bAutoRotate.on;
+    NSLog(@"Setting = %@", setting);
 }
 
 - (IBAction)clearCache:(id)sender {

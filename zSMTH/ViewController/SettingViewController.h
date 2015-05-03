@@ -19,4 +19,7 @@
 - (IBAction)switchAutoRotate:(id)sender;
 - (IBAction)clearCache:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UISwitch *bShowAvatar;
+@property (weak, nonatomic) IBOutlet UISwitch *bAutoRotate;
+
 @end

@@ -90,6 +90,18 @@
     [super viewWillAppear:animated];
 }
 
+// 此viewcontroller禁止旋转
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Reachability monitoring
+
 - (void)reachabilityDidChange:(NSNotification *)notification {
     [self updateNetworkStatus:[reach currentReachabilityStatus]];
 }
@@ -110,31 +122,14 @@
     }
 }
 
+#pragma mark - Login buttons
+
 - (void) bannerClick
 {
     NSString* url = @"http://zsmth.zfdang.com";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
-// 此viewcontroller禁止旋转
-- (BOOL)shouldAutorotate {
-    return NO;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)clickAutoLogin:(id)sender {
     if(self.switchAutoLogin.on){
@@ -169,6 +164,15 @@
     [self startAsyncTask];
 }
 
+- (IBAction)clear:(id)sender {
+    self.editUsername.text = @"";
+    self.editPassword.text = @"";
+
+    [self saveStatus];
+}
+
+#pragma mark - Async tasks
+
 - (void)asyncTask
 {
     NSLog(@"%@", setting);
@@ -193,14 +197,6 @@
 - (void)hideLoginFeedbackLater
 {
     [self.loginFeedback setHidden:YES];
-}
-
-
-- (IBAction)cancel:(id)sender {
-    self.editUsername.text = @"";
-    self.editPassword.text = @"";
-
-    [self saveStatus];
 }
 
 // 退出程序的方法，但是已经不被提倡了

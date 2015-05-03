@@ -75,6 +75,26 @@
     [user setBool:bAutoLogin forKey:@"bAutoLogin"];
 }
 
+- (BOOL)bShowAvatar
+{
+    return [user boolForKey:@"bShowAvatar"];
+}
+
+- (void)setBShowAvatar:(BOOL)bShowAvatar
+{
+    [user setBool:bShowAvatar forKey:@"bShowAvatar"];
+}
+
+- (BOOL)bAutoRotate
+{
+    return [user boolForKey:@"bAutoRotate"];
+}
+
+- (void)setBAutoRotate:(BOOL)bAutoRotate
+{
+    [user setBool:bAutoRotate forKey:@"bAutoRotate"];
+}
+
 - (NSString*) getAttachmentFilepath:(NSString*) fname
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -92,6 +112,6 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"user = %@, login = %d, save = %d,", self.username, self.bAutoLogin, self.bSavePassword];
+    return [NSString stringWithFormat:@"user = %@, autoLogin = %d, savePassword = %d, showAvatar = %d, autoRotate = %d", self.username, self.bAutoLogin, self.bSavePassword, self.bShowAvatar, self.bAutoRotate];
 }
 @end

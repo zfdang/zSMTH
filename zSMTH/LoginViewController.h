@@ -21,7 +21,7 @@
 - (IBAction)clickAutoLogin:(id)sender;
 
 - (IBAction)login:(id)sender;
-- (IBAction)cancel:(id)sender;
+- (IBAction)clear:(id)sender;
 
 - (void) postTimerTask;
 
