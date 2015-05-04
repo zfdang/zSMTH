@@ -381,8 +381,11 @@
                                                               {
                                                                   [cell makeToast:@"版面ID未知，请先打开一次\"全部讨论区\"!"];
                                                               } else {
+                                                                  // 从浏览器中打开
                                                                   NSString* url = [NSString stringWithFormat:@"http://www.newsmth.net/bbscon.php?bid=%ld&id=%@", boardID, post.postID];
-                                                                  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+                                                                  BrowserViewController *browser = [self.storyboard instantiateViewControllerWithIdentifier:@"browserController"];
+                                                                  browser.targetURL = [NSURL URLWithString:url];
+                                                                  [self.navigationController pushViewController:browser animated:YES];
                                                               }
                                                               NSLog(@"%@, %@", @"2", post.postID);
                                                           }],
@@ -536,7 +539,9 @@
 - (void)attributedLabel:(__unused TTTAttributedLabel *)label didLongPressLinkWithURL:(__unused NSURL *)url atPoint:(__unused CGPoint)point
 {
     // 长按链接，直接打开URL
-    [[UIApplication sharedApplication] openURL:url];
+    BrowserViewController *browser = [self.storyboard instantiateViewControllerWithIdentifier:@"browserController"];
+    browser.targetURL = url;
+    [self.navigationController pushViewController:browser animated:YES];
 }
 
 #pragma mark - UIActionSheetDelegate

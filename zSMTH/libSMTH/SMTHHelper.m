@@ -163,7 +163,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (SMTHUser*) getUserInfo:(NSString*) userID
 {
-    [smth reset_status];
+//    [smth reset_status];
     NSDictionary* infos = [smth net_QueryUser:userID];
     if(smth->net_error == 0){
         // 没有错误
@@ -231,7 +231,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (NSArray *)getGuidancePosts
 {
-    [smth reset_status];
+//    [smth reset_status];
 
     NSMutableArray *sections = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.sectionList count]; i++) {
@@ -273,7 +273,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from
 {
-    [smth reset_status];
+//    [smth reset_status];
     NSMutableArray *posts = [[NSMutableArray alloc] init];
     NSArray *results = [smth net_LoadThreadList:boardID :from*postNumberinOnePage :postNumberinOnePage :brcmode];
     for (id result in results) {
@@ -313,7 +313,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (NSArray*) getFilteredPostsFromBoard:(NSString*)boardID title:(NSString*)title user:(NSString*)_user from:(int)from
 {
-    [smth reset_status];
+//    [smth reset_status];
     NSMutableArray *posts = [[NSMutableArray alloc] init];
     NSArray *results = [smth net_SearchArticle:boardID :title :_user :from*filterPostNumberinOnePage :filterPostNumberinOnePage];
     for (id result in results) {
@@ -354,7 +354,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (NSArray *)getPostContents:(NSString *)board_id postID:(long)article_id from:(long)from
 {
-    [smth reset_status];
+//    [smth reset_status];
     NSMutableArray *posts = [[NSMutableArray alloc] init];
     NSArray *results = [smth net_GetThread:board_id :article_id :from*replyNumberinOnePost :replyNumberinOnePost :replyOrder];
     long replyIndex = from*replyNumberinOnePost;
@@ -507,7 +507,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (BOOL) addFavorite:(NSString*)engName
 {
-    [smth reset_status];
+//    [smth reset_status];
     [smth net_AddFav:engName];
 
     // 清空最上一级收藏夹的缓存, 添加的新版总是在最上一级
@@ -521,7 +521,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (BOOL) removeFavorite:(NSString*)engName
 {
-    [smth reset_status];
+//    [smth reset_status];
     [smth net_DelFav:engName];
     
     if(smth->net_error == 0)
@@ -609,7 +609,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (BOOL)getFavoritesFromServer:(NSMutableArray*)favorites rootid:(long)fid
 {
-    [smth reset_status];
+//    [smth reset_status];
     
     NSArray *results = [smth net_LoadFavorites:fid];
     for(id result in results)
@@ -787,7 +787,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 - (BOOL)getAllBoardsFromServer:(long)groupid Result:(NSMutableArray*)boards BoardPath:(NSString*)path isSection:(BOOL)isSection
 {
-    [smth reset_status];
+//    [smth reset_status];
     
     NSArray *results = nil;
     
