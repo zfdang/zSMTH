@@ -11,6 +11,7 @@
 @interface BrowserViewController : UIViewController
 
 - (IBAction)clickLeftButton:(id)sender;
+- (IBAction)clickRightButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
 
 @property (strong, nonatomic) NSURL* targetURL;

@@ -1336,9 +1336,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bN6-Rn-HcG">
-                        <barButtonItem key="leftBarButtonItem" image="return" id="SFV-vJ-6sl">
+                        <barButtonItem key="leftBarButtonItem" image="return" id="SFV-vJ-6sl" userLabel="return">
                             <connections>
                                 <action selector="clickLeftButton:" destination="e7C-Zj-kpz" id="Fmc-Gz-t9L"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="refresh" id="zV7-so-95Z" userLabel="refresh">
+                            <connections>
+                                <action selector="clickRightButton:" destination="e7C-Zj-kpz" id="XJq-dx-2nq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

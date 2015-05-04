@@ -18,7 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
+    self.title = [self.targetURL absoluteString];
     NSURLRequest *request =[NSURLRequest requestWithURL:self.targetURL];
     [self.webview loadRequest:request];
 }
@@ -26,6 +28,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (bool) prefersStatusBarHidden {
+    return self.navigationController.navigationBarHidden;
 }
 
 /*
@@ -40,5 +46,9 @@
 
 - (IBAction)clickLeftButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)clickRightButton:(id)sender {
+    [self.webview reload];
 }
 @end

@@ -13,7 +13,7 @@
 
 @interface SMTHHelper : NSObject <SMTHURLConnectionDelegate>
 {
-    
+
 }
 
 + (id)sharedManager;
