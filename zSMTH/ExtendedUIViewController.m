@@ -37,8 +37,6 @@
 
 - (void)startAsyncTask
 {
-    [helper.smth reset_status];
-    
     progressBar = [[MBProgressHUD alloc] initWithView:self.view];
     progressBar.mode = MBProgressHUDModeIndeterminate;
     progressBar.delegate = self;

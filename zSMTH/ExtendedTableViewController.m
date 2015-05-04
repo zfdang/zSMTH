@@ -12,7 +12,6 @@
 #import "UINavigationController+MethodSwizzling.h"
 #import "UIViewController+MethodSwizzling.h"
 
-
 @interface ExtendedTableViewController () <UIGestureRecognizerDelegate>
 {
     MBProgressHUD *progressBar;
@@ -54,8 +53,6 @@
 
 - (void)startAsyncTask:(NSMutableDictionary*) params
 {
-    [helper.smth reset_status];
-    
     progressBar = [[MBProgressHUD alloc] initWithView:self.view];
     progressBar.mode = MBProgressHUDModeIndeterminate;
     progressBar.delegate = self;
