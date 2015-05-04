@@ -21,12 +21,14 @@
 #import "SettingViewController.h"
 #import "MailTableViewController.h"
 #import "JDStatusBarNotification.h"
+#import "SMTHHelper.h"
 
 @interface LeftMenuViewController ()
 {
     NSArray *leftMenu;
     UIImageView *imageView;
     UILabel *labelUser;
+    SMTHHelper *helper;
     
     GuidanceTableViewController *guidance;
     FavoriteTableViewController *favorite;
@@ -44,6 +46,8 @@
 {
     [super viewDidLoad];
     
+    helper = [SMTHHelper sharedManager];
+
     // init left menu
     leftMenu = @[@[@"节名", @"首页导读", @"个人收藏夹",  @"全部讨论区"],
                  @[@"我的水木", @"邮箱", @"文章提醒", @"设置"]];
