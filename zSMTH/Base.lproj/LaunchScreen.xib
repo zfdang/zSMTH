@@ -11,8 +11,24 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="109" placeholderIntrinsicHeight="48" image="SMTHLogo" translatesAutoresizingMaskIntoConstraints="NO" id="HC6-DA-mMW">
-                    <rect key="frame" x="153" y="100" width="109" height="48"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="109" placeholderIntrinsicHeight="48" image="NEWSMTH" translatesAutoresizingMaskIntoConstraints="NO" id="HC6-DA-mMW">
+                    <rect key="frame" x="169" y="100" width="76" height="76"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="76" id="Ek6-kN-Up4"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="152" id="Nhf-90-4EN"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="152" id="Ol1-x7-vvv"/>
+                        <constraint firstAttribute="width" constant="76" id="dGE-Oc-0Ie"/>
+                        <constraint firstAttribute="height" constant="76" id="fQW-uz-r88"/>
+                        <constraint firstAttribute="width" constant="152" id="u1e-2x-Z0q"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Ek6-kN-Up4"/>
+                            <exclude reference="Nhf-90-4EN"/>
+                            <exclude reference="Ol1-x7-vvv"/>
+                            <exclude reference="u1e-2x-Z0q"/>
+                        </mask>
+                    </variation>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="zSMTH" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
                     <rect key="frame" x="20" y="297" width="375" height="43"/>
@@ -63,6 +79,6 @@
         </view>
     </objects>
     <resources>
-        <image name="SMTHLogo" width="109" height="48"/>
+        <image name="NEWSMTH" width="76" height="76"/>
     </resources>
 </document>
