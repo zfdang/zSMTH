@@ -240,7 +240,7 @@
 - (void) timerTask {
     // 只有当login view被放置在后台时，做定时的检查
     if(self.presentedViewController == nil){
-        NSLog(@"in Login view, skip background checking.");
+        // NSLog(@"in Login view, skip background checking.");
         return;
     }
 

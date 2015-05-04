@@ -1354,6 +1354,7 @@
         <scene sceneID="rdw-OG-Ca7">
             <objects>
                 <navigationController storyboardIdentifier="navigationController" id="K9B-yB-ay4" userLabel="REFrosted Content Navigator Controller" customClass="NavigationViewController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6cr-0T-Pah">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

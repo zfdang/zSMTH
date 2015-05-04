@@ -31,6 +31,8 @@
     helper = [SMTHHelper sharedManager];
     setting = [ZSMTHSetting sharedManager];
     self.progressTitle = @"加载中...";
+    
+    self.navigationController.hidesBarsOnSwipe = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -44,6 +46,9 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
 
+- (bool) prefersStatusBarHidden {
+    return self.navigationController.navigationBarHidden;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

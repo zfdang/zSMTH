@@ -113,10 +113,9 @@ const CGFloat PaddingBetweenImages = 5.0;
 
                                         // 缩小图片，否则占用内存会太大
                                         if(image.size.height > curImageHeight) {
-                                            NSLog(@"resize image, from %f * %f ==> %f * %f", image.size.width, image.size.height, rect.size.width, curImageHeight);
+                                            // NSLog(@"resize image, from %f * %f ==> %f * %f", image.size.width, image.size.height, rect.size.width, curImageHeight);
                                             CGSize size = CGSizeMake(rect.size.width, curImageHeight);
                                             image = [UIImage imageWithImage:image scaledToFitToSize:size];
-//                                            imageview.image = image;
                                         }
 
                                         // find current image y offset
