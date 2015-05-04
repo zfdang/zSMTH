@@ -29,7 +29,10 @@ typedef enum {
     
     // 当前async task的类型
     TASKTYPE taskType;
-    BOOL asyncTaskResult;    
+    BOOL asyncTaskResult;
+
+    UIColor *readedColor;
+    UIColor *unreadedColor;
 }
 
 @end
@@ -67,6 +70,10 @@ typedef enum {
         menu.delegate = self;
         self.navigationItem.titleView = menu;
     }
+
+    // initialize color
+    unreadedColor = [UIColor colorWithRed:255/255.0 green:245/255.0 blue:238/255.0 alpha:1.0];
+    readedColor = [UIColor whiteColor];
 
     // 开始异步加载帖子列表
     mPosts = [[NSMutableArray alloc] init];
@@ -209,6 +216,12 @@ typedef enum {
         cell.labelUserID.text = post.author;
         cell.labelPostTime.text = post.postDate;
         
+        if([post isMailUnread]) {
+            cell.backgroundColor = unreadedColor;
+        } else {
+            cell.backgroundColor = readedColor;
+        }
+        
         cell.labelCount.text = [NSString stringWithFormat:@"信件ID:%ld", post.postPosition];
     }
     
@@ -221,8 +234,13 @@ typedef enum {
     SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:postIdx];
     NSLog(@"Click on Mail: Author = %@, subject = %@", post.author, post.postSubject);
 
+    // mark mail as read
+    [post markMailAsRead];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundColor = readedColor;
+
+    // show mail content
     PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
-    
     [postcontent setMailInfo:CONTENT_INBOX position:post.postPosition subject:post.postSubject];
     [self.navigationController pushViewController:postcontent animated:YES];
 }

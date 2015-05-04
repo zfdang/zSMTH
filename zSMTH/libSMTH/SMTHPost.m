@@ -51,6 +51,23 @@
     return NO;
 }
 
+-(BOOL) isMailUnread
+{
+    //     flags = "N ";
+    if(postFlags && postFlags.length > 0){
+        NSString * flag0 = [postFlags substringToIndex:1];
+        if([flag0 isEqualToString:@"N"]){
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(void) markMailAsRead
+{
+    postFlags = @" ";
+}
+
 -(BOOL) hasAttachment
 {
     if(postFlags && postFlags.length > 0){

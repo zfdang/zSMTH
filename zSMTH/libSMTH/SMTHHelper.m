@@ -980,7 +980,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
             //        position = 0;
             //        subject = "[Mar 16 09:52] \U6240\U6709\U8baf\U606f\U5907\U4efd";
             //        time = 1079401960;
-            //        NSLog(@"%@", result);
+            // NSLog(@"%@", result);
             NSDictionary *dict = (NSDictionary*)result;
             SMTHPost *post = [[SMTHPost alloc] init];
             post.author = [dict objectForKey:@"author_id"];

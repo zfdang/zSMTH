@@ -57,7 +57,10 @@
 
 -(BOOL) isDing;
 -(BOOL) isUnread;
+-(BOOL) isMailUnread;
 -(BOOL) hasAttachment;
+
+-(void) markMailAsRead;
 
 - (NSURL*) getAttachedImageURL:(int) index;
 
