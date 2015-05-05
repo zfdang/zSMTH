@@ -226,14 +226,20 @@ typedef enum {
     SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:postIdx];
     NSLog(@"Click on Mail: Author = %@, subject = %@", post.author, post.postSubject);
 
-    // mark mail as read
-    [post markMailAsRead];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.backgroundColor = readedColor;
+    // mark mail as read if it's unreaded
+    if([post isMailUnread]) {
+        [post markMailAsRead];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.backgroundColor = readedColor;
+    }
 
     // show mail content
     PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
-    [postcontent setMailInfo:CONTENT_INBOX position:post.postPosition subject:post.postSubject];
+    if(taskType == TASK_MAIL_INBOX) {
+        [postcontent setMailInfo:CONTENT_INBOX position:post.postPosition subject:post.postSubject];
+    } else if (taskType == TASK_MAIL_OUTBOX) {
+        [postcontent setMailInfo:CONTENT_OUTBOX position:post.postPosition subject:post.postSubject];
+    }
     [self.navigationController pushViewController:postcontent animated:YES];
 }
 

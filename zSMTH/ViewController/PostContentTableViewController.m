@@ -187,6 +187,10 @@
         SMTHPost *post  = [helper getMailContent:1 position:(int)mailPosition];
         [mPosts removeAllObjects];
         [mPosts addObject:post];
+    } else if(contentType == CONTENT_OUTBOX) {
+        SMTHPost *post  = [helper getMailContent:2 position:(int)mailPosition];
+        [mPosts removeAllObjects];
+        [mPosts addObject:post];
     }
 }
 

@@ -1011,8 +1011,8 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     NSDictionary *result;
     if(type == 1){
         result = [smth net_GetMail:pos];
-    } else {
-        
+    } else if(type == 2) {
+        result = [smth net_GetMailSent:pos];
     }
 //    "attachment_list" =     (
 //                             {
