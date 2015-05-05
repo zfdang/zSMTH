@@ -14,7 +14,6 @@
 
 @interface ExtendedTableViewController () <UIGestureRecognizerDelegate>
 {
-    MBProgressHUD *progressBar;
     NSDictionary *resultParams;
 }
 @end
@@ -58,13 +57,13 @@
 
 - (void)startAsyncTask:(NSMutableDictionary*) params
 {
-    progressBar = [[MBProgressHUD alloc] initWithView:self.view];
-    progressBar.mode = MBProgressHUDModeIndeterminate;
-    progressBar.delegate = self;
-    progressBar.labelText = self.progressTitle;
+    self.progressBar = [[MBProgressHUD alloc] initWithView:self.view];
+    self.progressBar.mode = MBProgressHUDModeIndeterminate;
+    self.progressBar.delegate = self;
+    self.progressBar.labelText = self.progressTitle;
     
-    [self.view addSubview:progressBar];
-    [progressBar showWhileExecuting:@selector(asyncTask:) onTarget:self withObject:params animated:YES];
+    [self.view addSubview:self.progressBar];
+    [self.progressBar showWhileExecuting:@selector(asyncTask:) onTarget:self withObject:params animated:YES];
 }
 
 

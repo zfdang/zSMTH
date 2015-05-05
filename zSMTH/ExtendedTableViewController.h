@@ -19,6 +19,7 @@
 }
 
 @property (strong, nonatomic) NSString* progressTitle;
+@property (strong, nonatomic) MBProgressHUD *progressBar;
 /*
  * default: init m_progressBar;
  * subclass: don't overwrite this in most cases.
