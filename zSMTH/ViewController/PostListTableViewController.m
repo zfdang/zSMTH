@@ -135,7 +135,7 @@ typedef enum {
         if(! showDingPosts)
             currentNumber -= iNumberOfDing;
         if (posts != nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 if([posts count] > 0){
                     NSMutableArray *array = [[NSMutableArray alloc] init];
                     for (int i = 0; i < [posts count]; i++) {

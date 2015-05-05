@@ -152,7 +152,7 @@
         NSArray *posts = [helper getPostContents:engName postID:postID from:mPageIndex];
         long currentNumber = [mPosts count];
         if (posts != nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [weakSelf.tableView.infiniteScrollingView stopAnimating];
                 if ([posts count] > 0) {
                     NSMutableArray *array = [[NSMutableArray alloc] init];
