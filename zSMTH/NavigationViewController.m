@@ -32,7 +32,7 @@
 
 // http://stackoverflow.com/questions/12996293/io6-doesnt-call-boolshouldautorotate
 - (BOOL)shouldAutorotate {
-    NSLog(@"Auto Rotate = %d", setting.bAutoRotate);
+//    NSLog(@"Auto Rotate = %d", setting.bAutoRotate);
     return setting.bAutoRotate;
 }
 

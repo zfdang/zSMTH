@@ -127,17 +127,18 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 #pragma mark - User
 
-- (void) login:(NSString*)username password:(NSString*)password
+- (int) login:(NSString*)username password:(NSString*)password
 {
     [smth reset_status];
     int status = [smth net_LoginBBS:username :password];
+    int net_error = smth->net_error;
     if(status == 1)
     {
         user = [self getUserInfo:username];
     }
-    NSLog(@"Login result: status = %d, net_error = %d, user is %d", status, smth->net_error, user != nil);
+    NSLog(@"Login result: status = %d, net_error = %d, user is %d", status, net_error, user != nil);
 
-    return;
+    return net_error;
 }
 
 - (void) logout

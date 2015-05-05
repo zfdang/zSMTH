@@ -27,7 +27,7 @@
 
 // returned value should not be used to judge whether user is logined or not.
 // 根据user == nil来判断是否有活跃用户
-- (void) login:(NSString*)username password:(NSString*)password;
+- (int) login:(NSString*)username password:(NSString*)password;
 - (void) logout;
 - (BOOL) isConnectionActive;
 

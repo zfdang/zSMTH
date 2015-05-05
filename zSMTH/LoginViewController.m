@@ -27,6 +27,9 @@
     BOOL isReconnectSuccsss;
 
     Reachability *reach;
+
+    // 保存登录的结果，用来显示错误信息
+    int loginResult;
 }
 
 @end
@@ -177,12 +180,23 @@
 {
     NSLog(@"%@", setting);
     NSString *username = [[self.editUsername text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    [helper login:username password:[self.editPassword text]];
+    loginResult = [helper login:username password:[self.editPassword text]];
 }
 
 - (void)finishAsyncTask
 {
     if(helper.user == nil) {
+        // 登录失败，显示错误信息
+        // http://trac.kcn.cn/kbs/wiki/smthappDevAPIError
+        if(loginResult == -1){
+            self.loginFeedback.text = @"网络错误，请稍后重试...";
+        } else if(loginResult <=-2 && loginResult >= -10) {
+            self.loginFeedback.text = @"服务器错误，请稍后重试...";
+        } else if(loginResult == 10010) {
+            self.loginFeedback.text = @"帐号密码错误，请重试...";
+        } else {
+            self.loginFeedback.text = @"登录失败，错误类型未知，请重试...";
+        }
         [self.loginFeedback setHidden:NO];
         [self performSelector:@selector(hideLoginFeedbackLater) withObject:nil afterDelay:3.0f];
     } else {
