@@ -52,7 +52,7 @@
 - (long) getBoardID:(NSString*) engName;
 
 - (BOOL) hasNewMail;
-- (NSArray*) getMailsFrom:(int)type from:(int)from;
+- (NSArray*) getMailList:(int)type from:(int)from;
 - (SMTHPost*) getMailContent:(int)type position:(int)pos;
 
 @end

@@ -16,7 +16,7 @@
 
 const int postNumberinOnePage = 20; // 版面列表：一页显示多少个帖子数
 const int replyNumberinOnePost = 20; // 文章内容：一页显示多少回复数
-const int mailNumberinOnePage = 20; // 文章内容：一页显示多少回复数
+const int mailNumberinOnePage = 20; // 邮件数量：一页显示多少邮件列表
 const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 @interface SMTHHelper ()
@@ -944,22 +944,30 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 }
 
 
-- (NSArray*) getMailsFrom:(int)type from:(int)from
+- (NSArray*) getMailList:(int)type from:(int)from
 {
     NSMutableArray *mails = [[NSMutableArray alloc] init];
     NSArray *results;
     
     // 邮件的列表是从最老的开始排列的，所以加载的时候，需要从尾部往头加载，所以需要知道总mail的数量
     // the following method will update totalMailCount
-    [self hasNewMail];
-    
+    long totalCount;
+    if(type == 1) {
+        // update totalInboxMailCount
+        [self hasNewMail];
+        totalCount = totalInboxMailCount;
+    } else {
+        totalOutboxMailCount = [smth net_GetMailCountSent];
+        totalCount = totalOutboxMailCount;
+    }
+
     // from 是需要加载的页，每页的数量为mailNumberinOnePage
     // 需要计算出对应的from -- 帖子序号，和size: 加载的数量来
-    long start_pos = totalInboxMailCount - mailNumberinOnePage * (from + 1);
+    long start_pos = totalCount - mailNumberinOnePage * (from + 1);
     if(start_pos < 0){
         start_pos = 0;
     }
-    long previous_pos = totalInboxMailCount - mailNumberinOnePage * from;
+    long previous_pos = totalCount - mailNumberinOnePage * from;
     if(previous_pos < 0){
         previous_pos = 0;
     }
@@ -970,6 +978,8 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     {
         if(type == 1){
             results = [smth net_LoadMailList:start_pos :length];
+        } else {
+            results = [smth net_LoadMailSentList:start_pos :length];
         }
         for (id result in results) {
             //        "attachment_list" =     (

@@ -15,7 +15,7 @@
 #import "PostContentTableViewController.h"
 
 typedef enum {
-    TASK_MAIL_INBOX = 0,
+    TASK_MAIL_INBOX = 1,
     TASK_MAIL_OUTBOX,
     TASK_NOTIFICATION,
 } TASKTYPE;
@@ -105,10 +105,8 @@ typedef enum {
         weakSelf.tableView.showsPullToRefresh = NO;
         
         NSArray *posts;
-        if(taskType == TASK_MAIL_INBOX){
-            mPageIndex += 1;
-            posts = [helper getMailsFrom:1 from:mPageIndex];
-        }
+        mPageIndex += 1;
+        posts = [helper getMailList:taskType from:mPageIndex];
 
         long currentNumber = [mPosts count];
         if (posts != nil) {
@@ -142,22 +140,16 @@ typedef enum {
 {
     // this function will only load first page
     NSArray* posts;
-    if(taskType == TASK_MAIL_INBOX){
-        mPageIndex = 0;
-        posts = [helper getMailsFrom:1 from:mPageIndex];
-        [mPosts removeAllObjects];
-        [mPosts addObjectsFromArray:posts];
-    } else if (taskType == TASK_MAIL_OUTBOX){
-        // empty here
-    }
+    mPageIndex = 0;
+    posts = [helper getMailList:taskType from:mPageIndex];
+    [mPosts removeAllObjects];
+    [mPosts addObjectsFromArray:posts];
 }
 
 
 -(void)finishAsyncTask:(NSDictionary *)resultParams
 {
-    if(taskType == TASK_MAIL_INBOX){
-        [self.tableView reloadData];
-    }
+    [self.tableView reloadData];
     self.tableView.showsInfiniteScrolling = YES;
 }
 
@@ -283,7 +275,7 @@ typedef enum {
 
 - (IBAction)clickRightButton:(id)sender {
     self.progressTitle = @"刷新中...";
-    taskType = TASK_MAIL_INBOX;
+//    taskType = TASK_MAIL_INBOX;
     self.tableView.showsInfiniteScrolling = NO;
     [self startAsyncTask:nil];
 }
@@ -292,10 +284,18 @@ typedef enum {
 
 -(void)didSelectItemAtIndex:(NSUInteger)index
 {
-    if(index == 1){
+    if(index == 0){
         NSLog(@"切换到收件箱");
-    } else if (index == 0){
+        self.progressTitle = @"加载中...";
+        taskType = TASK_MAIL_INBOX;
+        self.tableView.showsInfiniteScrolling = NO;
+        [self startAsyncTask:nil];
+    } else if (index == 1){
         NSLog(@"切换到发件箱");
+        self.progressTitle = @"加载中...";
+        taskType = TASK_MAIL_OUTBOX;
+        self.tableView.showsInfiniteScrolling = NO;
+        [self startAsyncTask:nil];
     }
 }
 
