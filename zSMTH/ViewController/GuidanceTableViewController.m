@@ -16,7 +16,7 @@
 
 @interface GuidanceTableViewController ()
 {
-    NSArray *m_sections;
+    NSMutableArray *m_sections;
 }
 
 @end
@@ -42,7 +42,7 @@
     }];
 
     // load content now
-    m_sections = nil;
+    m_sections = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
     [self startAsyncTask:nil];
 }
@@ -51,14 +51,38 @@
 {
     self.tableView.showsPullToRefresh = NO;
 
-    // 这个加载的过程，需要实现分节加载
-    m_sections = [helper getGuidancePosts];
+    // 首先加载全站十大话题，然后在finishAsyncTask里加载剩余的分区话题
+    NSArray *posts = [helper getGuidancePosts:0];
+    [m_sections removeAllObjects];
+    [m_sections addObject:posts];
 }
 
 - (void)finishAsyncTask:(NSDictionary*) resultParams
 {
+    // 显示全站十大话题
     [self.tableView reloadData];
-    self.tableView.showsPullToRefresh = YES;
+
+    // 继续加载各分区的十大话题
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSArray* sectionList = [helper sectionList];
+        for (int i = 1; i < [sectionList count]; i++) {
+            NSLog(@"Loading guidance posts in section %@", [sectionList objectAtIndex:i]);
+            NSArray *posts = [helper getGuidancePosts:i];
+
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            for (int j = 0; j < [posts count]; j++) {
+                [array addObject:[NSIndexPath indexPathForRow:j inSection:i]];
+            }
+            // 开始更新tableview, 将新获取的分区十大显示出来
+            [weakSelf.tableView beginUpdates];
+            [m_sections addObject:posts];
+            [weakSelf.tableView insertSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationTop];
+            [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+            [weakSelf.tableView endUpdates];
+        }
+        weakSelf.tableView.showsPullToRefresh = YES;
+    });
 }
 
 - (void) refreshPostList {

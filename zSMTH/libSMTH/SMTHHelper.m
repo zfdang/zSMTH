@@ -230,46 +230,42 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 #pragma mark - Posts
 
-- (NSArray *)getGuidancePosts
+- (NSArray *)getGuidancePosts:(int)section
 {
-//    [smth reset_status];
-
-    NSMutableArray *sections = [[NSMutableArray alloc] init];
-    for (int i = 0; i < [self.sectionList count]; i++) {
-        NSMutableArray *posts = [[NSMutableArray alloc] init];
-
-        // find all posts in one section
-        NSArray *results;
-        if( i == 0)
-            results = [smth net_LoadSectionHot:i];
-        else
-            results = [smth net_LoadSectionHot:i+1];
-        NSLog(@"--------- %@ ---------", [self.sectionList objectAtIndex:i]);
-        for (id result in results) {
-            //        "author_id" = GuoTie;
-            //        board = Universal;
-            //        count = 70;
-            //        id = 39889;
-            //        subject = "";
-            //        time = 1426511802;
-
-            SMTHPost *post = [[SMTHPost alloc] init];
-            post.author = [result objectForKey:@"author_id"];
-            post.postBoard = [result objectForKey:@"board"];
-            // convert SA%2ETHU ==> SA.THU
-            post.postBoard = [post.postBoard stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            post.postID = [result objectForKey:@"id"];
-            post.postSubject = [result objectForKey:@"subject"];
-            post.postCount = [result objectForKey:@"count"];
-            NSDate *d = [[NSDate alloc] initWithTimeIntervalSince1970:[[result objectForKey:@"time"] doubleValue]];
-            post.postDate = [d description];
-
-            [posts addObject:post];
-        }
-        [sections addObject:posts];
+    NSMutableArray *posts = [[NSMutableArray alloc] init];
+    
+    // find all posts in one section
+    NSArray *results;
+    if(section == 0) {
+        results = [smth net_LoadSectionHot:section];
+    } else {
+        // 国内院校 的id是2， sectionid = 1的被跳过了
+        results = [smth net_LoadSectionHot:section+1];
+    }
+    NSLog(@"Get guidanceposts for section: %@", [self.sectionList objectAtIndex:section]);
+    for (id result in results) {
+        //        "author_id" = GuoTie;
+        //        board = Universal;
+        //        count = 70;
+        //        id = 39889;
+        //        subject = "";
+        //        time = 1426511802;
+        
+        SMTHPost *post = [[SMTHPost alloc] init];
+        post.author = [result objectForKey:@"author_id"];
+        post.postBoard = [result objectForKey:@"board"];
+        // convert SA%2ETHU ==> SA.THU
+        post.postBoard = [post.postBoard stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        post.postID = [result objectForKey:@"id"];
+        post.postSubject = [result objectForKey:@"subject"];
+        post.postCount = [result objectForKey:@"count"];
+        NSDate *d = [[NSDate alloc] initWithTimeIntervalSince1970:[[result objectForKey:@"time"] doubleValue]];
+        post.postDate = [d description];
+        
+        [posts addObject:post];
     }
 
-    return sections;
+    return posts;
 }
 
 - (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from
