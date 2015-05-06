@@ -67,6 +67,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSArray* sectionList = [helper sectionList];
         for (int i = 1; i < [sectionList count]; i++) {
+//            [NSThread sleepForTimeInterval:1.0f]; 
             NSLog(@"Loading guidance posts in section %@", [sectionList objectAtIndex:i]);
             NSArray *posts = [helper getGuidancePosts:i];
 
@@ -75,13 +76,17 @@
                 [array addObject:[NSIndexPath indexPathForRow:j inSection:i]];
             }
             // 开始更新tableview, 将新获取的分区十大显示出来
-            [weakSelf.tableView beginUpdates];
-            [m_sections addObject:posts];
-            [weakSelf.tableView insertSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationTop];
-            [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
-            [weakSelf.tableView endUpdates];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [weakSelf.tableView beginUpdates];
+                [m_sections addObject:posts];
+                [weakSelf.tableView insertSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationTop];
+                [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+                [weakSelf.tableView endUpdates];
+            });
         }
-        weakSelf.tableView.showsPullToRefresh = YES;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            weakSelf.tableView.showsPullToRefresh = YES;
+        });
     });
 }
 
