@@ -36,6 +36,7 @@
     return setting.bAutoRotate;
 }
 
+
 /*
 #pragma mark - Navigation
 

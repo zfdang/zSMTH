@@ -24,6 +24,10 @@
 //    NSString *version = [[[NSBundle mainBundle] infoDictionary]
 //                         objectForKey:@"CFBundleVersion"];
 //    [MobClick setAppVersion:version];
+
+    // force app to launch in portrait mode only
+    // this mode will be changed later after guidance view is loaded
+    self.supportedOrientations = UIInterfaceOrientationMaskPortrait;
     return YES;
 }
 
@@ -49,4 +53,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    return self.supportedOrientations;
+}
 @end

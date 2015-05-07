@@ -12,7 +12,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "PostContentTableViewController.h"
 #import "SVPullToRefresh.h"
-
+#import "AppDelegate.h"
 
 @interface GuidanceTableViewController ()
 {
@@ -45,6 +45,10 @@
     m_sections = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
     [self startAsyncTask:nil];
+
+    // enable AppDelegate portrait + Landscape mode
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.supportedOrientations = UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 - (void)asyncTask:(NSMutableDictionary*) params
