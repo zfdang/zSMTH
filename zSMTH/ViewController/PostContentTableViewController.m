@@ -398,6 +398,30 @@
                                                            title:@"转寄到信箱"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"3", post.postID);
+                                                              __weak typeof(self) weakSelf = self;
+                                                              dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                                                                  // 将信件转寄到用户信箱
+                                                                  NSLog(@"Mail to: %@, %ld, %@", post.postBoard, [post.postID doubleValue], helper.user.userID);
+                                                                  long result = [helper.smth net_ForwardArticle:post.postBoard :[post.postID doubleValue] :helper.user.userID];
+                                                                  NSLog(@"result = %ld, error code = %ld", result, helper.smth->net_error);
+                                                                  if(helper.smth->net_error == 0) {
+                                                                      dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                          CGRect bounds = [[UIScreen mainScreen] bounds];
+                                                                          [weakSelf.tableView  makeToast:@"已转寄到个人信箱!"
+                                                                                                duration:0.8
+                                                                                                position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
+                                                                          
+                                                                      });
+                                                                  } else {
+                                                                      dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                          CGRect bounds = [[UIScreen mainScreen] bounds];
+                                                                          [weakSelf.tableView  makeToast:@"转寄失败，请稍后重试!"
+                                                                                                duration:0.8
+                                                                                                position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
+                                                                      });
+                                                                      
+                                                                  }
+                                                              });
                                                           }],
                            
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"reply"]
@@ -449,6 +473,31 @@
         av.menuStyle = RNGridMenuStyleGrid;
         [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
     }
+}
+
+-(void) mailPostToUser:(NSString*)boardid postID:(long)postid user:(NSString*)user
+{
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        // 将信件转寄到用户信箱
+        long result = [helper.smth net_ForwardArticle:boardid :postid :user];
+        NSLog(@"result = %ld, error code = %ld", result, helper.smth->net_error);
+        if(helper.smth->net_error == 0) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                CGRect bounds = [[UIScreen mainScreen] bounds];
+                [weakSelf.tableView  makeToast:@"已转寄到个人信箱!"
+                                      duration:0.8
+                                      position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
+            });
+        } else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                CGRect bounds = [[UIScreen mainScreen] bounds];
+                [weakSelf.tableView  makeToast:@"转寄失败，请稍后重试!"
+                                      duration:0.8
+                                      position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
+            });
+        }
+    });
 }
 
 -(void) replyPost:(SMTHPost*) post
