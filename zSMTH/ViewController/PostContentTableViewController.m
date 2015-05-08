@@ -398,30 +398,7 @@
                                                            title:@"转寄到信箱"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"3", post.postID);
-                                                              __weak typeof(self) weakSelf = self;
-                                                              dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                                                                  // 将信件转寄到用户信箱
-                                                                  NSLog(@"Mail to: %@, %ld, %@", post.postBoard, [post.postID doubleValue], helper.user.userID);
-                                                                  long result = [helper.smth net_ForwardArticle:post.postBoard :[post.postID doubleValue] :helper.user.userID];
-                                                                  NSLog(@"result = %ld, error code = %ld", result, helper.smth->net_error);
-                                                                  if(helper.smth->net_error == 0) {
-                                                                      dispatch_sync(dispatch_get_main_queue(), ^{
-                                                                          CGRect bounds = [[UIScreen mainScreen] bounds];
-                                                                          [weakSelf.tableView  makeToast:@"已转寄到个人信箱!"
-                                                                                                duration:0.8
-                                                                                                position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
-                                                                          
-                                                                      });
-                                                                  } else {
-                                                                      dispatch_sync(dispatch_get_main_queue(), ^{
-                                                                          CGRect bounds = [[UIScreen mainScreen] bounds];
-                                                                          [weakSelf.tableView  makeToast:@"转寄失败，请稍后重试!"
-                                                                                                duration:0.8
-                                                                                                position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
-                                                                      });
-                                                                      
-                                                                  }
-                                                              });
+                                                              [self mailPostToUser:post.postBoard postID:[post.postID doubleValue] user:helper.user.userID];
                                                           }],
                            
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"reply"]
@@ -449,6 +426,19 @@
                                                            title:@"转寄给他人"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"6", post.postID);
+                                                              UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"转寄给他人" message:@"将帖子内容转寄到他人信箱" preferredStyle:UIAlertControllerStyleAlert];
+                                                              UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+                                                              UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"转寄" style:UIAlertActionStyleDefault handler:
+                                                                                         ^(UIAlertAction *action) {
+                                                                                             UITextField *user = alertController.textFields.firstObject;
+                                                                                             [self mailPostToUser:post.postBoard postID:[post.postID doubleValue] user:user.text];
+                                                                                         }];
+                                                              [alertController addAction:cancelAction];
+                                                              [alertController addAction:okAction];
+                                                              [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+                                                                  textField.placeholder = @"用户ID";
+                                                              }];
+                                                              [self presentViewController:alertController animated:YES completion:nil];
                                                           }],
                            
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"queryUser"]
@@ -485,15 +475,15 @@
         if(helper.smth->net_error == 0) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 CGRect bounds = [[UIScreen mainScreen] bounds];
-                [weakSelf.tableView  makeToast:@"已转寄到个人信箱!"
-                                      duration:0.8
+                [weakSelf.tableView  makeToast:[NSString stringWithFormat:@"已转寄到%@信箱!", user]
+                                      duration:1.5
                                       position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
             });
         } else {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 CGRect bounds = [[UIScreen mainScreen] bounds];
                 [weakSelf.tableView  makeToast:@"转寄失败，请稍后重试!"
-                                      duration:0.8
+                                      duration:1.5
                                       position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
             });
         }
