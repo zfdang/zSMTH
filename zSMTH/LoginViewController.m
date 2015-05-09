@@ -238,7 +238,7 @@
     // 开启定时器，检查新邮件
     if(myTimer == nil){
         //每120秒运行一次function方法。
-        myTimer =  [NSTimer scheduledTimerWithTimeInterval:180.0 target:self selector:@selector(timerTask) userInfo:nil repeats:YES];
+        myTimer =  [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerTask) userInfo:nil repeats:YES];
     } else {
         //重启定时器
         [myTimer setFireDate:[NSDate distantPast]];
@@ -313,9 +313,21 @@
     }
 
     if(hasNewMail){
+        // 使用状态栏提示
         [JDStatusBarNotification showWithStatus:@"您有新邮件，请及时查看!"
                                    dismissAfter:3.0
                                       styleName:JDStatusBarStyleSuccess];
+
+        //获取当前所有的本地通知
+        // 当没有localNotification的时候，显示notification
+        // TODO
+//        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+//        //        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:15];
+//        //        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+//        localNotification.alertBody = [NSString stringWithFormat:@"您有新邮件，请及时查看!"];
+//        localNotification.soundName = UILocalNotificationDefaultSoundName;
+//        //        localNotification.applicationIconBadgeNumber = 1;
+//        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         return;
     }
 }
