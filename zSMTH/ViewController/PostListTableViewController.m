@@ -142,18 +142,18 @@ typedef enum {
                         [array addObject:[NSIndexPath indexPathForRow:currentNumber+i inSection:0]];
                     }
 
-                    [weakSelf.tableView beginUpdates];
+                    [self.tableView beginUpdates];
                     [mPosts addObjectsFromArray:posts];
-                    [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
-                    [weakSelf.tableView endUpdates];
+                    [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+                    [self.tableView endUpdates];
                 } else {
-                    [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的帖子了..."
+                    [self.tableView.infiniteScrollingView  makeToast:@"没有更多的帖子了..."
                                                                 duration:0.5
                                                                 position:CSToastPositionCenter];
                     
                 }
-                [weakSelf.tableView.infiniteScrollingView stopAnimating];
-                weakSelf.tableView.showsPullToRefresh = YES;
+                [self.tableView.infiniteScrollingView stopAnimating];
+                self.tableView.showsPullToRefresh = YES;
             });
         }
     });

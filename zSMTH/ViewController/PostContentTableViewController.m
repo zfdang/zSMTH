@@ -153,24 +153,24 @@
         long currentNumber = [mPosts count];
         if (posts != nil) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                [self.tableView.infiniteScrollingView stopAnimating];
                 if ([posts count] > 0) {
                     NSMutableArray *array = [[NSMutableArray alloc] init];
                     for (int i = 0; i < [posts count]; i++) {
                         [array addObject:[NSIndexPath indexPathForRow:currentNumber+i inSection:0]];
                     }
 
-                    [weakSelf.tableView beginUpdates];
+                    [self.tableView beginUpdates];
                     [mPosts addObjectsFromArray:posts];
-                    [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
-                    [weakSelf.tableView endUpdates];
+                    [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+                    [self.tableView endUpdates];
                 } else {
-                    [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
+                    [self.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
                                 duration:0.5
                                 position:CSToastPositionCenter];
                 }
                 // 重新打开下拉刷新
-                weakSelf.tableView.showsPullToRefresh = YES;
+                self.tableView.showsPullToRefresh = YES;
             });
         }
     });

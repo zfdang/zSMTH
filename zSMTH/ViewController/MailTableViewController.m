@@ -117,19 +117,19 @@ typedef enum {
                         [array addObject:[NSIndexPath indexPathForRow:currentNumber+i inSection:0]];
                     }
                     
-                    [weakSelf.tableView beginUpdates];
+                    [self.tableView beginUpdates];
                     [mPosts addObjectsFromArray:posts];
-                    [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
-                    [weakSelf.tableView endUpdates];
+                    [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+                    [self.tableView endUpdates];
                     
-                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                    [self.tableView.infiniteScrollingView stopAnimating];
                 } else {
-                    [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的邮件了..."
+                    [self.tableView.infiniteScrollingView  makeToast:@"没有更多的邮件了..."
                                                                 duration:0.5
                                                                 position:CSToastPositionCenter];
                     
                 }
-                [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                [self.tableView.infiniteScrollingView stopAnimating];
             });
         }
     });
