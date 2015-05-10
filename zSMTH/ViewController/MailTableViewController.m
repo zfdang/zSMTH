@@ -33,6 +33,8 @@ typedef enum {
 
     UIColor *readedColor;
     UIColor *unreadedColor;
+    
+    SINavigationMenuView *menu;
 }
 
 @end
@@ -62,7 +64,7 @@ typedef enum {
     // 在viewwilldisappear里手动隐藏菜单
     if (self.navigationItem) {
         CGRect frame = CGRectMake(0.0, 0.0, 200.0, self.navigationController.navigationBar.bounds.size.height);
-        SINavigationMenuView *menu = [[SINavigationMenuView alloc] initWithFrame:frame title:@"邮箱"];
+        menu = [[SINavigationMenuView alloc] initWithFrame:frame title:@"邮箱"];
         //Set in which view we will display a menu
         [menu displayMenuInView:self.navigationController.view];
         //Create array of items
@@ -90,7 +92,7 @@ typedef enum {
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
+//    SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
     if (menu.menuButton.isActive) {
         //        NSLog(@"dropdown menu is active, turn off it now");
         [menu onHideMenu];

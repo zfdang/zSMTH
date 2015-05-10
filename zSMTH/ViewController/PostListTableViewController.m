@@ -41,6 +41,8 @@ typedef enum {
     int mFilterPageIndex;
     NSString* filterTitle;
     NSString* filterAuthor;
+    
+    SINavigationMenuView *menu;
 }
 
 @end
@@ -68,7 +70,7 @@ typedef enum {
     // 在viewwilldisappear里手动隐藏菜单
     if (self.navigationItem) {
         CGRect frame = CGRectMake(0.0, 0.0, 200.0, self.navigationController.navigationBar.bounds.size.height);
-        SINavigationMenuView *menu = [[SINavigationMenuView alloc] initWithFrame:frame title:navTitle];
+        menu = [[SINavigationMenuView alloc] initWithFrame:frame title:navTitle];
         //Set in which view we will display a menu
         [menu displayMenuInView:self.navigationController.view];
         //Create array of items
@@ -249,7 +251,7 @@ typedef enum {
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
+//    SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
     if (menu.menuButton.isActive) {
 //        NSLog(@"dropdown menu is active, turn off it now");
         [menu onHideMenu];
