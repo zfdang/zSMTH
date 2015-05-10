@@ -93,16 +93,16 @@
     });
 }
 
+// http://stackoverflow.com/questions/21987067/using-weak-self-in-dispatch-async-function
 - (void) refreshPostList {
-    __weak typeof(self) weakSelf = self;
     int64_t delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [weakSelf.tableView.pullToRefreshView stopAnimating];
-        
-        weakSelf.progressTitle = @"刷新中...";
-        weakSelf.tableView.showsPullToRefresh = NO;
-        [weakSelf startAsyncTask:nil];
+        [self.tableView.pullToRefreshView stopAnimating];
+
+        self.progressTitle = @"刷新中...";
+        self.tableView.showsPullToRefresh = NO;
+        [self startAsyncTask:nil];
     });
 }
 
