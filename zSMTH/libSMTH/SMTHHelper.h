@@ -51,7 +51,7 @@
 - (NSString*) getChsBoardName:(NSString*) engName;
 - (long) getBoardID:(NSString*) engName;
 
-- (BOOL) hasNewMail;
+- (int) hasNewMail;
 - (NSArray*) getMailList:(int)type from:(int)from;
 - (SMTHPost*) getMailContent:(int)type position:(int)pos;
 

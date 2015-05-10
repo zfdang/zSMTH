@@ -911,7 +911,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 
 #pragma mark - mail and notification
 
-- (BOOL) hasNewMail
+- (int) hasNewMail
 {
 //    [smth reset_status];
     
@@ -924,7 +924,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 //        "new_count" = 1;
 //        "total_count" = 233;
 //    }
-    
+//    NSLog(@"%@", dict);
     if(smth->net_error != 0){
         return NO;
     }
@@ -933,10 +933,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     // update totalMailCount, it will be used in getMailsFrom method
     totalInboxMailCount = [[dict objectForKey:@"total_count"] intValue];
     NSLog(@"Mail count: new = %d, total = %d", new_count, totalInboxMailCount);
-    if(new_count > 0)
-        return YES;
-    
-    return NO;
+    return new_count;
 }
 
 

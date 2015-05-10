@@ -44,6 +44,7 @@
     // load content now
     m_sections = [[NSMutableArray alloc] init];
     self.progressTitle = @"加载中...";
+    self.tableView.showsPullToRefresh = NO;
     [self startAsyncTask:nil];
 
     // enable AppDelegate portrait + Landscape mode
@@ -53,8 +54,6 @@
 
 - (void)asyncTask:(NSMutableDictionary*) params
 {
-    self.tableView.showsPullToRefresh = NO;
-
     // 首先加载全站十大话题，然后在finishAsyncTask里加载剩余的分区话题
     NSArray *posts = [helper getGuidancePosts:0];
     [m_sections removeAllObjects];
@@ -67,7 +66,7 @@
     [self.tableView reloadData];
 
     // 继续加载各分区的十大话题
-    __weak typeof(self) weakSelf = self;
+    // __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSArray* sectionList = [helper sectionList];
         for (int i = 1; i < [sectionList count]; i++) {
@@ -81,15 +80,15 @@
             }
             // 开始更新tableview, 将新获取的分区十大显示出来
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [weakSelf.tableView beginUpdates];
+                [self.tableView beginUpdates];
                 [m_sections addObject:posts];
-                [weakSelf.tableView insertSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationTop];
-                [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
-                [weakSelf.tableView endUpdates];
+                [self.tableView insertSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationTop];
+                [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+                [self.tableView endUpdates];
             });
         }
         dispatch_sync(dispatch_get_main_queue(), ^{
-            weakSelf.tableView.showsPullToRefresh = YES;
+            self.tableView.showsPullToRefresh = YES;
         });
     });
 }
@@ -102,6 +101,7 @@
         [weakSelf.tableView.pullToRefreshView stopAnimating];
         
         weakSelf.progressTitle = @"刷新中...";
+        weakSelf.tableView.showsPullToRefresh = NO;
         [weakSelf startAsyncTask:nil];
     });
 }

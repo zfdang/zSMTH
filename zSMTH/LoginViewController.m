@@ -23,7 +23,7 @@
     // 定期任务需要的参数
     NSTimer *myTimer;
     BOOL isConnectionActive;
-    BOOL hasNewMail;
+    int newMailCount;
     BOOL isReconnectSuccsss;
 
     Reachability *reach;
@@ -284,10 +284,10 @@
 
         // 检查新邮件, 等到token状态是YES时再检查
         if(isConnectionActive) {
-            hasNewMail = [helper hasNewMail];
-            NSLog(@"Status of newMail: %d", hasNewMail);
+            newMailCount = [helper hasNewMail];
+            NSLog(@"Status of newMail: %d", newMailCount);
         } else {
-            hasNewMail = NO;
+            newMailCount = 0;
         }
 
         // 结果放到主线程里展示
@@ -312,24 +312,28 @@
         return;
     }
 
-    if(hasNewMail){
+    if(newMailCount > 0){
         // 使用状态栏提示
         [JDStatusBarNotification showWithStatus:@"您有新邮件，请及时查看!"
                                    dismissAfter:3.0
                                       styleName:JDStatusBarStyleSuccess];
 
-        //获取当前所有的本地通知
-        // 当没有localNotification的时候，显示notification
-        // TODO
-//        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-//        //        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:15];
-//        //        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-//        localNotification.alertBody = [NSString stringWithFormat:@"您有新邮件，请及时查看!"];
-//        localNotification.soundName = UILocalNotificationDefaultSoundName;
-//        //        localNotification.applicationIconBadgeNumber = 1;
-//        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-        return;
+        // 根据newMailCount来决定是否要增加新的notification
+        if(newMailCount > [UIApplication sharedApplication].applicationIconBadgeNumber) {
+            UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+            // localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:15];
+            // localNotification.timeZone = [NSTimeZone defaultTimeZone];
+            localNotification.alertBody = [NSString stringWithFormat:@"您有%d封新邮件，请及时查看!",newMailCount];
+            localNotification.soundName = UILocalNotificationDefaultSoundName;
+            // localNotification.applicationIconBadgeNumber = newMailCount;
+            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        }
     }
+    // 更新badgeNumber
+    if(newMailCount != [UIApplication sharedApplication].applicationIconBadgeNumber) {
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:newMailCount];
+    }
+    return;
 }
 
 @end
