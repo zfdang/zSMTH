@@ -57,8 +57,9 @@
     } else if (taskType == 2) {
         // 隐藏左按钮，右按钮显示revert图标
         [self.navigationItem setLeftBarButtonItem:nil];
-        [self.navigationItem setRightBarButtonItem:nil];
-//        [self.buttonRight setImage:[UIImage imageNamed:@"revert"]];
+        [self.navigationItem setHidesBackButton:YES];
+//        [self.navigationItem setRightBarButtonItem:nil];
+        [self.buttonRight setImage:[UIImage imageNamed:@"revert"]];
         self.editUserID.enabled = NO;
     }
 }
@@ -113,7 +114,6 @@
         [self startAsyncTask];
     } else if(taskType == 2) {
         // 从帖子处查询用户信息，按钮的作用是关闭用户信息view
-        // this part will never be called
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
