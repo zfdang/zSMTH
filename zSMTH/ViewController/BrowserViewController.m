@@ -22,6 +22,7 @@
     // Do any additional setup after loading the view.
     self.title = [self.targetURL absoluteString];
     NSURLRequest *request =[NSURLRequest requestWithURL:self.targetURL];
+    self.webview.scalesPageToFit = YES;
     [self.webview loadRequest:request];
 }
 
