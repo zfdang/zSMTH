@@ -19,6 +19,7 @@
 #import "ContentEditViewController.h"
 #import "PostContentLabel.h"
 #import "BrowserViewController.h"
+#import "UserInfoViewController.h"
 
 @interface PostContentTableViewController () <TapImageViewDelegate, MWPhotoBrowserDelegate, TTTAttributedLabelDelegate, UIActionSheetDelegate>
 {
@@ -440,11 +441,14 @@
                                                               }];
                                                               [self presentViewController:alertController animated:YES completion:nil];
                                                           }],
-                           
+
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"queryUser"]
                                                            title:@"查询作者"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"7", post.postID);
+                                                              UserInfoViewController *userinfo = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
+                                                              [userinfo setQueryTask:2 userID:post.author];
+                                                              [self.navigationController pushViewController:userinfo animated:YES];
                                                           }],
                            
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"share"]

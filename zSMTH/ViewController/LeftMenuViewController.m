@@ -156,6 +156,7 @@
         if(userinfo == nil){
             userinfo = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
         }
+        [userinfo setQueryTask:0 userID:nil];
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:userinfo animated:YES];
     } else if (target == VIEW_BOARD_LIST) {

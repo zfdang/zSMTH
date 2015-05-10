@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelNick;
 @property (weak, nonatomic) IBOutlet UILabel *labelLevel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonRight;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *buttonLeft;
 
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -24,5 +25,7 @@
 
 - (IBAction)clickRightButton:(id)sender;
 - (IBAction)doSearch:(id)sender;
+
+- (void) setQueryTask:(int)taskType userID:(NSString*) userID;
 
 @end

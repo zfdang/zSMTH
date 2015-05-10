@@ -1297,6 +1297,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buttonLeft" destination="z7Z-AI-s4o" id="1Ja-OV-x9Y"/>
                         <outlet property="buttonRight" destination="gmg-Wi-BE0" id="UcZ-hs-5eQ"/>
                         <outlet property="editUserID" destination="lPw-th-jk7" id="y94-Az-nqU"/>
                         <outlet property="imageAvatar" destination="1j3-lG-jcT" id="37w-c5-FUn"/>

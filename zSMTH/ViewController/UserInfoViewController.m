@@ -15,14 +15,26 @@
 
 @interface UserInfoViewController ()
 {
+    // 0: 显示当前登录用户的信息
+    // 1: 在用户信息界面，查询其他用户的信息 ==> 这个只会从内部触发
+    // 2: 在帖子内容处，点击查询用户信息按钮
+    // 3: 退出当前登录用户 ==> 这个只会从内部触发
     int taskType;
-    SMTHUser *user;
     NSString* userID;
+
+    SMTHUser *user;
 }
 
 @end
 
 @implementation UserInfoViewController
+
+- (void) setQueryTask:(int)_taskType userID:(NSString*) _userID
+{
+    // taskType 只会是0或者2
+    taskType = _taskType;
+    userID = _userID;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +51,16 @@
     singleTap.numberOfTapsRequired = 1;
     [self.imageAvatar setUserInteractionEnabled:YES];
     [self.imageAvatar addGestureRecognizer:singleTap];
+    
+    if(taskType == 0) {
+        // do nothing here
+    } else if (taskType == 2) {
+        // 隐藏左按钮，右按钮显示revert图标
+        [self.navigationItem setLeftBarButtonItem:nil];
+        [self.navigationItem setRightBarButtonItem:nil];
+//        [self.buttonRight setImage:[UIImage imageNamed:@"revert"]];
+        self.editUserID.enabled = NO;
+    }
 }
 
 
@@ -46,18 +68,28 @@
     [super viewWillAppear:animated];
 
     // set userinfo
-    [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL]
-                        placeholderImage:[UIImage imageNamed:@"anonymous"]
-                                 options:SDWebImageRefreshCached];
+    if(taskType == 0) {
+        // 查询当前登录用户的详细信息, 这时候userID is nil
+        [self.imageAvatar sd_setImageWithURL:[helper.user getFaceURL]
+                            placeholderImage:[UIImage imageNamed:@"anonymous"]
+                                     options:SDWebImageRefreshCached];
 
-    self.labelID.text = helper.user.userID;
-    self.labelNick.text = helper.user.userNick;
-    self.labelLevel.text = [helper.user getLifeLevel];
-    
-    taskType = 0;
-    self.progressTitle = @"加载信息中...";
-    userID = helper.user.userID;
-    [self startAsyncTask];
+        self.labelID.text = helper.user.userID;
+        self.labelNick.text = helper.user.userNick;
+        self.labelLevel.text = [helper.user getLifeLevel];
+
+        self.progressTitle = @"加载信息中...";
+        userID = helper.user.userID;
+        [self startAsyncTask];
+    } else if (taskType == 2) {
+        // 查询传递进来的用户ID的详细信息
+        [self.imageAvatar sd_setImageWithURL:[helper getFaceURLByUserID:userID]
+                            placeholderImage:[UIImage imageNamed:@"anonymous"]
+                                     options:SDWebImageRefreshCached];
+        self.labelID.text = userID;
+        self.progressTitle = @"查询信息中...";
+        [self startAsyncTask];
+    }
 }
 
 
@@ -67,22 +99,31 @@
 }
 
 - (IBAction)clickRightButton:(id)sender {
-    if([user.userID compare:helper.user.userID] == NSOrderedSame) {
+    if(taskType == 0) {
         // 显示的是当前用户的信息，按钮的作用是退出
-        taskType = 1;
+        taskType = 3;
         self.progressTitle = @"退出中...";
         [self startAsyncTask];
-    } else {
+    } else if(taskType == 1) {
+        // 在用户信息页查询其他用户信息
         // 显示的是查询用户的信息，按钮的作用是返回到当前用户信息页
         taskType = 0;
         self.progressTitle = @"加载信息中...";
         userID = helper.user.userID;
         [self startAsyncTask];
+    } else if(taskType == 2) {
+        // 从帖子处查询用户信息，按钮的作用是关闭用户信息view
+        // this part will never be called
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
 - (IBAction)doSearch:(id)sender {
-    taskType = 0;
+    if(taskType == 2) {
+        // 在帖子处查询用户时，禁止再做查询
+        return;
+    }
+    taskType = 1;
     self.progressTitle = @"查询用户中...";
     userID = self.editUserID.text;
     [self startAsyncTask];
@@ -94,9 +135,9 @@
 {
     // now different async task is distinguished by taskType, which is unsafe
     // it's better to add parameter to startAsyncTask->asyncTask->finishAsyncTask
-    if(taskType == 0){
+    if(taskType == 0 || taskType == 1 || taskType == 2){
         user = [helper getUserInfo:userID];
-    } else if(taskType == 1)
+    } else if(taskType == 3)
     {
         [helper logout];
     }
@@ -104,12 +145,12 @@
 
 - (void)finishAsyncTask
 {
-    if(taskType == 1) {
+    if(taskType == 3) {
         // 当上一个任务是退出，并且用户已经退出时，显示登录窗口
         [self.frostedViewController dismissViewControllerAnimated:YES completion:nil];
         return;
     }
-    
+
     // 更新查询到的用户信息
     [self.imageAvatar sd_setImageWithURL:[user getFaceURL] placeholderImage:[UIImage imageNamed:@"anonymous"]];
     self.imageAvatar.layer.cornerRadius = 30.0;
@@ -124,10 +165,13 @@
     [self.tableView reloadData];
     
     // update icon of right button
-    if([user.userID compare:helper.user.userID] == NSOrderedSame){
+    if(taskType == 0){
         // 显示的是登录用户的信息，显示退出按钮
         [self.buttonRight setImage:[UIImage imageNamed:@"logout"]];
     } else {
+        // 从信息页查询其他用户
+        // 或者从帖子出查询其他用户
+        // 都显示revert按钮
         [self.buttonRight setImage:[UIImage imageNamed:@"revert"]];
     }
 }
