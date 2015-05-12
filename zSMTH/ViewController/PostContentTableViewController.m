@@ -154,8 +154,8 @@
         long currentNumber = [mPosts count];
         if (posts != nil) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.tableView.infiniteScrollingView stopAnimating];
                 if ([posts count] > 0) {
+                    [self.tableView.infiniteScrollingView stopAnimating];
                     NSMutableArray *array = [[NSMutableArray alloc] init];
                     for (int i = 0; i < [posts count]; i++) {
                         [array addObject:[NSIndexPath indexPathForRow:currentNumber+i inSection:0]];
@@ -166,9 +166,13 @@
                     [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
                     [self.tableView endUpdates];
                 } else {
-                    [self.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
-                                duration:0.5
-                                position:CSToastPositionCenter];
+                    if(self.tableView.infiniteScrollingView) {
+                        // check availability of infiniteScrollingView before making toast
+                        [self.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
+                                                                duration:0.5
+                                                                position:CSToastPositionCenter];
+                    }
+                    [self.tableView.infiniteScrollingView stopAnimating];
                 }
                 // 重新打开下拉刷新
                 self.tableView.showsPullToRefresh = YES;
