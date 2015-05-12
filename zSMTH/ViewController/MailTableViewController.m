@@ -114,6 +114,8 @@ typedef enum {
         if (posts != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if([posts count] > 0){
+                    [self.tableView.infiniteScrollingView stopAnimating];
+
                     NSMutableArray *array = [[NSMutableArray alloc] init];
                     for (int i = 0; i < [posts count]; i++) {
                         [array addObject:[NSIndexPath indexPathForRow:currentNumber+i inSection:0]];
@@ -123,15 +125,12 @@ typedef enum {
                     [mPosts addObjectsFromArray:posts];
                     [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
                     [self.tableView endUpdates];
-                    
-                    [self.tableView.infiniteScrollingView stopAnimating];
                 } else {
                     [self.tableView.infiniteScrollingView  makeToast:@"没有更多的邮件了..."
                                                                 duration:0.5
                                                                 position:CSToastPositionCenter];
-                    
+                    [self.tableView.infiniteScrollingView stopAnimating];
                 }
-                [self.tableView.infiniteScrollingView stopAnimating];
             });
         }
     });
