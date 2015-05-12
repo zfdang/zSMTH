@@ -26,8 +26,6 @@ typedef enum {
 {
     // array of all posts
     NSMutableArray *mPosts;
-    // the current loaded page index
-    int mPageIndex;
     // number of 置顶的帖子数
     int iNumberOfDing;
     // 如果是YES, 则跳过置顶的帖子
@@ -38,7 +36,6 @@ typedef enum {
     BOOL asyncTaskResult;
 
     // 搜索结果的当前页面
-    int mFilterPageIndex;
     NSString* filterTitle;
     NSString* filterAuthor;
     
@@ -126,11 +123,9 @@ typedef enum {
 
         NSArray *posts;
         if(taskType == TASK_RELOAD){
-            mPageIndex += 1;
-            posts = [helper getPostsFromBoard:engName from:mPageIndex];
+            posts = [helper getPostsFromBoard:engName from:[mPosts count]];
         } else if(taskType == TASK_SEARCH) {
-            mFilterPageIndex += 1;
-            posts = [helper getFilteredPostsFromBoard:engName title:filterTitle user:filterAuthor from:mFilterPageIndex];
+            posts = [helper getFilteredPostsFromBoard:engName title:filterTitle user:filterAuthor from:[mPosts count]];
         }
         
         long currentNumber = [mPosts count];
@@ -166,13 +161,11 @@ typedef enum {
     // this function will only load first page
     NSArray* posts;
     if(taskType == TASK_RELOAD){
-        mPageIndex = 0;
-        posts = [helper getPostsFromBoard:engName from:mPageIndex];
+        posts = [helper getPostsFromBoard:engName from:0];
         [mPosts removeAllObjects];
         [mPosts addObjectsFromArray:posts];
     } else if (taskType == TASK_SEARCH){
-        mFilterPageIndex = 0;
-        posts = [helper getFilteredPostsFromBoard:engName title:filterTitle user:filterAuthor from:mFilterPageIndex];
+        posts = [helper getFilteredPostsFromBoard:engName title:filterTitle user:filterAuthor from:0];
         [mPosts removeAllObjects];
         [mPosts addObjectsFromArray:posts];
     } else if(taskType == TASK_ADD_FAVORITE){

@@ -268,11 +268,11 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     return posts;
 }
 
-- (NSArray*) getPostsFromBoard:(NSString*)boardID from:(int)from
+- (NSArray*) getPostsFromBoard:(NSString*)boardID from:(long)from
 {
 //    [smth reset_status];
     NSMutableArray *posts = [[NSMutableArray alloc] init];
-    NSArray *results = [smth net_LoadThreadList:boardID :from*postNumberinOnePage :postNumberinOnePage :brcmode];
+    NSArray *results = [smth net_LoadThreadList:boardID :from :postNumberinOnePage :brcmode];
     for (id result in results) {
 //        "author_id" = Kazoo;
 //        id = 410834;
@@ -308,11 +308,11 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
     return posts;
 }
 
-- (NSArray*) getFilteredPostsFromBoard:(NSString*)boardID title:(NSString*)title user:(NSString*)_user from:(int)from
+- (NSArray*) getFilteredPostsFromBoard:(NSString*)boardID title:(NSString*)title user:(NSString*)_user from:(long)from
 {
 //    [smth reset_status];
     NSMutableArray *posts = [[NSMutableArray alloc] init];
-    NSArray *results = [smth net_SearchArticle:boardID :title :_user :from*filterPostNumberinOnePage :filterPostNumberinOnePage];
+    NSArray *results = [smth net_SearchArticle:boardID :title :_user :from :filterPostNumberinOnePage];
     for (id result in results) {
         //        "author_id" = Kazoo;
         //        id = 410834;
