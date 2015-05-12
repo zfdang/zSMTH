@@ -26,7 +26,6 @@
     ContentType contentType;
     NSMutableArray *mPosts;
     NSMutableDictionary *mHeights;
-    int mPageIndex;
     CGFloat iHeaderHeight;
     NSMutableArray *mPhotos;
     
@@ -34,6 +33,7 @@
     NSString *engName;
     long boardID;
 
+    // mailPosition is actually the unique ID of one mail
     long mailPosition;
 }
 
@@ -145,12 +145,12 @@
 
 - (void) loadMorePostList {
     // only valid for CONTENT_POST
+    NSLog(@"loadMorePostList");
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         weakSelf.tableView.showsPullToRefresh = NO;
         
-        mPageIndex += 1;
-        NSArray *posts = [helper getPostContents:engName postID:postID from:mPageIndex];
+        NSArray *posts = [helper getPostContents:engName postID:postID from:[mPosts count]];
         long currentNumber = [mPosts count];
         if (posts != nil) {
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -184,8 +184,7 @@
 - (void)asyncTask:(NSMutableDictionary*) params
 {
     if(contentType == CONTENT_POST) {
-        mPageIndex = 0;
-        NSArray* results = [helper getPostContents:engName postID:postID from:mPageIndex];
+        NSArray* results = [helper getPostContents:engName postID:postID from:0];
         [mPosts removeAllObjects];
         [mPosts addObjectsFromArray:results];
     } else if(contentType == CONTENT_INBOX) {
@@ -302,6 +301,7 @@
         cell.idxPost = indexPath.row;
 
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        post.replyIndex = indexPath.row;
         post.postBoard = engName;
         [cell setCellContent:post];
 

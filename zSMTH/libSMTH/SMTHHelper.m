@@ -353,8 +353,7 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
 {
 //    [smth reset_status];
     NSMutableArray *posts = [[NSMutableArray alloc] init];
-    NSArray *results = [smth net_GetThread:board_id :article_id :from*replyNumberinOnePost :replyNumberinOnePost :replyOrder];
-    long replyIndex = from*replyNumberinOnePost;
+    NSArray *results = [smth net_GetThread:board_id :article_id :from :replyNumberinOnePost :replyOrder];
     for (id result in results) {
 //        "attachment_list" =     (
 //                                 {
@@ -384,7 +383,6 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         post.postContent = [dict objectForKey:@"body"];
 
         post.postFlags = [dict objectForKey:@"flags"];
-        post.replyIndex = replyIndex;
 
         [posts addObject:post];
         
@@ -401,12 +399,9 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
                 
                 [post.attachments addObject:att];
             }
-            
         }
-
-        replyIndex += 1;
     }
-    
+
     return posts;
 }
 
