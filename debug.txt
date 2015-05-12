@@ -1,0 +1,61 @@
+http://lieyunye.github.io/blog/2013/09/10/how-to-analyse-ios-crash-log/
+
+===========================
+
+Application received signal SIGSEGV
+(null)
+(
+    0   CoreFoundation                      0x00000001849265b8 <redacted> + 160
+    1   libobjc.A.dylib                     0x00000001950380e4 objc_exception_throw + 60
+    2   CoreFoundation                      0x00000001849264dc <redacted> + 0
+    3   zSMTH                               0x100050168 UmengSignalHandler + 144
+    4   libsystem_platform.dylib            0x000000019585494c _sigtramp + 52
+    5   UIKit                               0x000000018939721c <redacted> + 712
+    6   UIKit                               0x000000018910d724 <redacted> + 44
+    7   UIKit                               0x00000001890d1f44 <redacted> + 140
+    8   QuartzCore                          0x0000000188a2ce88 <redacted> + 104
+    9   QuartzCore                          0x0000000188a2286c <redacted> + 100
+    10  QuartzCore                          0x0000000188a226d8 <redacted> + 176
+    11  QuartzCore                          0x0000000188a249c4 <redacted> + 240
+    12  QuartzCore                          0x0000000188a248c8 <redacted> + 48
+    13  QuartzCore                          0x0000000188a24858 <redacted> + 456
+    14  UIKit                               0x00000001890d1be0 <redacted> + 292
+    15  UIKit                               0x00000001891c1ef4 <redacted> + 1232
+    16  UIKit                               0x00000001893c3cc0 <redacted> + 2900
+    17  UIKit                               0x00000001891b8ce8 <redacted> + 172
+    18  UIKit                               0x00000001890d5648 <redacted> + 572
+    19  QuartzCore                          0x0000000188a2d994 <redacted> + 168
+    20  QuartzCore                          0x0000000188a28564 <redacted> + 320
+    21  QuartzCore                          0x0000000188a28408 <redacted> + 32
+    22  QuartzCore                          0x0000000188a27c08 <redacted> + 276
+    23  QuartzCore                          0x0000000188a2798c <redacted> + 436
+    24  QuartzCore                          0x0000000188a7d1d8 <redacted> + 516
+    25  IOKit                               0x0000000185a758d0 IODispatchCalloutFromCFMessage + 376
+    26  CoreFoundation                      0x00000001848c95e4 <redacted> + 180
+    27  CoreFoundation                      0x00000001848de200 <redacted> + 56
+    28  CoreFoundation                      0x00000001848de160 <redacted> + 436
+    29  CoreFoundation                      0x00000001848dc0e0 <redacted> + 1640
+    30  CoreFoundation                      0x00000001848090a4 CFRunLoopRunSpecific + 396
+    31  GraphicsServices                    0x000000018d9b35a4 GSEventRunModal + 168
+    32  UIKit                               0x000000018913e3c0 UIApplicationMain + 1488
+    33  zSMTH                               0x100024614 main + 124
+    34  libdyld.dylib                       0x00000001956a6a08 <redacted> + 4
+)
+
+dSYM UUID: 90D2A1BD-CEEA-324E-8CEB-064C2B7E0173
+CPU Type: arm64
+Slide Address: 0x0000000100000000
+Binary Image: zSMTH
+Base Address: 0x0000000100094000
+
+===========================
+
+/Users/zfdang/workspaces/zSMTH/build/Debug-iphoneos
+
+$ dwarfdump --uuid zsmth.app.dSYM
+UUID: 90D2A1BD-CEEA-324E-8CEB-064C2B7E0173 (arm64) zsmth.app.dSYM/Contents/Resources/DWARF/zSMTH
+
+$ dwarfdump --arch=arm64 --lookup 0x1000502e8 zSMTH.app.dSYM/Contents/Resources/DWARF/zSMTH
+
+
+

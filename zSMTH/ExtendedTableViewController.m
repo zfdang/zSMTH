@@ -32,6 +32,8 @@
     self.progressTitle = @"加载中...";
     
     self.navigationController.hidesBarsOnSwipe = YES;
+    
+    [self.navigationItem setHidesBackButton:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
