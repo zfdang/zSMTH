@@ -328,14 +328,69 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="dAw-Qj-N5w">
-                                <rect key="frame" x="120" y="84" width="120" height="120"/>
+                                <rect key="frame" x="120" y="74" width="120" height="120"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版本号: 1.2 (204)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cd0-0T-z9G">
+                                <rect key="frame" x="124" y="199" width="127" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvs-b9-FbT" userLabel="Help">
+                                <rect key="frame" x="26" y="240" width="323" height="336"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration" label=""/>
+                                <mutableString key="text">本软件是基于水木社区API实现的一个IOS平台的客户端，具有如下的功能:
+1.用户登录
+2.用户信息的查询
+3.用户头像的显示、修改
+4.导读帖子的加载和刷新
+5.个人收藏夹的加载,及本地缓存
+6.个人收藏夹的增加、删除
+7.所有版面的加载/搜索，及本地缓存（下滑更新）
+8.版面文章列表的显示,显示/隐藏置顶
+9.文章内容的显示，和上划加载更多的回复
+10.看帖时，图片的放大查看和保存
+回帖
+11.发新文章，上载图片附件(受限于API, 只能上载一个图片)
+12.看帖时，帖子中超链接的点击
+13.搜索帖子
+14.个人信件阅读，支持收件箱和发件箱</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iei-tl-g2C">
+                                <rect key="frame" x="144" y="596" width="88" height="30"/>
+                                <state key="normal" title="Visit Website">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="visitWebsite:" destination="5hf-Lx-qQX" eventType="touchUpInside" id="r1a-RV-iJn"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2015 zfdang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNj-nu-U1z">
+                                <rect key="frame" x="91" y="636" width="194" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gvs-b9-FbT" firstAttribute="top" secondItem="cd0-0T-z9G" secondAttribute="bottom" constant="20" id="2qA-tq-j9D"/>
+                            <constraint firstItem="gvs-b9-FbT" firstAttribute="leading" secondItem="jBb-nf-ADT" secondAttribute="leadingMargin" constant="10" id="404-NM-nkT"/>
                             <constraint firstAttribute="centerX" secondItem="dAw-Qj-N5w" secondAttribute="centerX" constant="8" id="9Nl-CA-9gx"/>
                             <constraint firstItem="aLb-UQ-XWh" firstAttribute="top" secondItem="dAw-Qj-N5w" secondAttribute="bottom" constant="-63" id="Oaf-8I-d8j"/>
-                            <constraint firstItem="dAw-Qj-N5w" firstAttribute="top" secondItem="aLb-UQ-XWh" secondAttribute="bottom" constant="20" id="qI7-hf-PRV"/>
+                            <constraint firstItem="Iei-tl-g2C" firstAttribute="top" secondItem="gvs-b9-FbT" secondAttribute="bottom" constant="20" id="ZPg-Qy-OHQ"/>
+                            <constraint firstAttribute="centerX" secondItem="wNj-nu-U1z" secondAttribute="centerX" id="ctr-Nt-di7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gvs-b9-FbT" secondAttribute="trailing" constant="10" id="i3w-F2-EL7"/>
+                            <constraint firstItem="B1w-el-to8" firstAttribute="top" secondItem="wNj-nu-U1z" secondAttribute="bottom" constant="10" id="i7g-gG-f98"/>
+                            <constraint firstItem="cd0-0T-z9G" firstAttribute="top" secondItem="dAw-Qj-N5w" secondAttribute="bottom" constant="5" id="lsR-A8-Rsf"/>
+                            <constraint firstItem="wNj-nu-U1z" firstAttribute="top" secondItem="Iei-tl-g2C" secondAttribute="bottom" constant="10" id="oCD-Y8-yXJ"/>
+                            <constraint firstItem="dAw-Qj-N5w" firstAttribute="top" secondItem="aLb-UQ-XWh" secondAttribute="bottom" constant="10" id="qI7-hf-PRV"/>
+                            <constraint firstAttribute="centerX" secondItem="cd0-0T-z9G" secondAttribute="centerX" id="qtT-j9-Q7U"/>
+                            <constraint firstAttribute="centerX" secondItem="Iei-tl-g2C" secondAttribute="centerX" id="tBg-hP-vfp"/>
+                            <constraint firstAttribute="centerX" secondItem="gvs-b9-FbT" secondAttribute="centerX" id="zvh-nT-GuG"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -351,6 +406,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="textVersion" destination="cd0-0T-z9G" id="jzh-0R-Eac"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r85-R0-qiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

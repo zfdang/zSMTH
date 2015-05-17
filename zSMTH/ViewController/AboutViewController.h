@@ -10,6 +10,8 @@
 #import "ExtendedUIViewController.h"
 
 @interface AboutViewController : ExtendedUIViewController
+@property (weak, nonatomic) IBOutlet UILabel *textVersion;
 
+- (IBAction)visitWebsite:(id)sender;
 
 @end

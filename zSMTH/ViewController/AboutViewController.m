@@ -17,6 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    NSString *version = [[[NSBundle mainBundle] infoDictionary]
+                         objectForKey:@"CFBundleShortVersionString"];
+    NSString *build = [[[NSBundle mainBundle] infoDictionary]
+                       objectForKey:@"CFBundleVersion"];
+    self.textVersion.text = [NSString stringWithFormat:@"版本号: %@ (%@)", version, build];
 }
 
 
@@ -41,4 +47,7 @@
 }
 */
 
+- (IBAction)visitWebsite:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://zsmth.zfdang.com"]];
+}
 @end
