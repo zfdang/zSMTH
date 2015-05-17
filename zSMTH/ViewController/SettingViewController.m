@@ -33,7 +33,9 @@
     // http://feinstruktur.com/blog/2010/12/29/integrating-git-version-info-in-ioscocoa-apps
     NSString *version = [[[NSBundle mainBundle] infoDictionary]
                          objectForKey:@"CFBundleShortVersionString"];
-    self.txtVersion.text = version;
+    NSString *build = [[[NSBundle mainBundle] infoDictionary]
+                         objectForKey:@"CFBundleVersion"];
+    self.txtVersion.text = [NSString stringWithFormat:@"%@(%@)", version, build];
 
     // read initial values from settings
     self.bShowAvatar.on = setting.bShowAvatar;

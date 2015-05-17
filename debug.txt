@@ -58,4 +58,11 @@ UUID: 90D2A1BD-CEEA-324E-8CEB-064C2B7E0173 (arm64) zsmth.app.dSYM/Contents/Resou
 $ dwarfdump --arch=arm64 --lookup 0x1000502e8 zSMTH.app.dSYM/Contents/Resources/DWARF/zSMTH
 
 
+export dSYMPath="$(find /Users/zfdang/workspaces/zSMTH/build/Debug-iphoneos -iname '*.dSYM' -print0 | xargs -0 dwarfdump -u | grep 8ABA2DB7-609A-35E2-9413-04899192280B | sed -E 's/^[^/]+//' | head -n 1)";dwarfdump --arch=arm64 --lookup 0x10004f638 "$dSYMPath"
+
+
+
+export dSYMPath="$(find /Users/zfdang/workspaces/zSMTH/build/Debug-iphoneos -iname '*.dSYM' -print0 | xargs -0 dwarfdump -u | grep 8ABA2DB7-609A-35E2-9413-04899192280B | sed -E 's/^[^/]+//' | head -n 1)";dwarfdump --arch=arm64 --lookup 0x1000239d4 "$dSYMPath"
+
+
 
