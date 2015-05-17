@@ -20,6 +20,7 @@
 #import "BoardListTableViewController.h"
 #import "SettingViewController.h"
 #import "MailTableViewController.h"
+#import "AboutViewController.h"
 #import "JDStatusBarNotification.h"
 #import "SMTHHelper.h"
 
@@ -37,6 +38,7 @@
     BoardListTableViewController *boardlist;
     SettingViewController *setting;
     MailTableViewController *mail;
+    AboutViewController *about;
 }
 @end
 
@@ -50,7 +52,7 @@
 
     // init left menu
     leftMenu = @[@[@"节名", @"首页导读", @"个人收藏夹",  @"全部讨论区"],
-                 @[@"我的水木", @"邮箱", @"文章提醒", @"设置"]];
+                 @[@"我的水木", @"邮箱", @"文章提醒", @"设置", @"关于"]];
     
     // create table view
     self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:1.0f];
@@ -181,6 +183,12 @@
         }
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:setting animated:YES];
+    } else if(target == VIEW_ABOUT) {
+        if(about == nil){
+            about = [self.storyboard instantiateViewControllerWithIdentifier:@"aboutController"];
+        }
+        [navigationController popToRootViewControllerAnimated:NO];
+        [navigationController pushViewController:about animated:YES];
     }
 
     [self.frostedViewController hideMenuViewController];
@@ -242,6 +250,8 @@
         [self switchViewto:VIEW_NOTIFICATION];
     } else if (indexPath.section == 1 && indexPath.row == 2){
         [self switchViewto:VIEW_SETTING];
+    } else if (indexPath.section == 1 && indexPath.row == 3){
+        [self switchViewto:VIEW_ABOUT];
     }
 }
 

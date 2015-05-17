@@ -14,6 +14,7 @@
 		690D5D1E1AB838E200DB45C8 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 690D5D1D1AB838E200DB45C8 /* UserInfoViewController.m */; };
 		6915D4A01AB2785C00B3FB53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6915D49F1AB2785C00B3FB53 /* Foundation.framework */; };
 		691B0AD61AB8882500010FC3 /* SMTHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 691B0AD51AB8882500010FC3 /* SMTHUser.m */; };
+		691EEB911B08931B0034B01D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EEB901B08931B0034B01D /* AboutViewController.m */; };
 		692576671ABBDCF600097DBC /* PostListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 692576661ABBDCF600097DBC /* PostListTableViewCell.m */; };
 		6925766A1ABBDDC800097DBC /* PostListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 692576691ABBDDC800097DBC /* PostListTableViewController.m */; };
 		693FACDD1ABE4F7900BD8200 /* PostContentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693FACDB1ABE4F7900BD8200 /* PostContentTableViewCell.xib */; };
@@ -99,6 +100,8 @@
 		6915D49F1AB2785C00B3FB53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		691B0AD41AB8882500010FC3 /* SMTHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTHUser.h; sourceTree = "<group>"; };
 		691B0AD51AB8882500010FC3 /* SMTHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTHUser.m; sourceTree = "<group>"; };
+		691EEB8F1B08931B0034B01D /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutViewController.h; path = ViewController/AboutViewController.h; sourceTree = "<group>"; };
+		691EEB901B08931B0034B01D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutViewController.m; path = ViewController/AboutViewController.m; sourceTree = "<group>"; };
 		692576651ABBDCF600097DBC /* PostListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostListTableViewCell.h; path = ViewController/PostListTableViewCell.h; sourceTree = "<group>"; };
 		692576661ABBDCF600097DBC /* PostListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostListTableViewCell.m; path = ViewController/PostListTableViewCell.m; sourceTree = "<group>"; };
 		692576681ABBDDC800097DBC /* PostListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostListTableViewController.h; path = ViewController/PostListTableViewController.h; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 				6943AEBD1AF0C117007BA2ED /* MailTableViewController.m */,
 				6994CA891AF6E3820035C16F /* BrowserViewController.h */,
 				6994CA8A1AF6E3820035C16F /* BrowserViewController.m */,
+				691EEB8F1B08931B0034B01D /* AboutViewController.h */,
+				691EEB901B08931B0034B01D /* AboutViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -666,6 +671,7 @@
 				692576671ABBDCF600097DBC /* PostListTableViewCell.m in Sources */,
 				69949CE31AD6813400970E60 /* TapImageView.m in Sources */,
 				6943AEBB1AEFE366007BA2ED /* LoginViewController.m in Sources */,
+				691EEB911B08931B0034B01D /* AboutViewController.m in Sources */,
 				6957CC491ADA6F5700B522A4 /* ContentEditViewController.m in Sources */,
 				69FE90B61AB6FCD700E72720 /* GuidanceTableViewController.m in Sources */,
 				69A38B881ADC81B20090BB6C /* UIImage+Resize.m in Sources */,

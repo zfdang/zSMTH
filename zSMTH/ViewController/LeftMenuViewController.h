@@ -17,7 +17,8 @@ typedef enum {
     VIEW_BOARD_LIST,
     VIEW_MAIL,
     VIEW_NOTIFICATION,
-    VIEW_SETTING
+    VIEW_SETTING,
+    VIEW_ABOUT,
 } SMTHVIEW;
 
 @interface LeftMenuViewController : UITableViewController
