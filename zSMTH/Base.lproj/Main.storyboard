@@ -315,7 +315,7 @@
             </objects>
             <point key="canvasLocation" x="132" y="2796"/>
         </scene>
-        <!--About View Controller-->
+        <!--关于-->
         <scene sceneID="uQ0-Zv-MhG">
             <objects>
                 <viewController storyboardIdentifier="aboutController" id="5hf-Lx-qQX" customClass="AboutViewController" sceneMemberID="viewController">
@@ -326,9 +326,24 @@
                     <view key="view" contentMode="scaleToFill" id="jBb-nf-ADT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="dAw-Qj-N5w">
+                                <rect key="frame" x="120" y="84" width="120" height="120"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="dAw-Qj-N5w" secondAttribute="centerX" constant="8" id="9Nl-CA-9gx"/>
+                            <constraint firstItem="aLb-UQ-XWh" firstAttribute="top" secondItem="dAw-Qj-N5w" secondAttribute="bottom" constant="-63" id="Oaf-8I-d8j"/>
+                            <constraint firstItem="dAw-Qj-N5w" firstAttribute="top" secondItem="aLb-UQ-XWh" secondAttribute="bottom" constant="20" id="qI7-hf-PRV"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Oaf-8I-d8j"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="yPx-uR-s5i">
+                    <navigationItem key="navigationItem" title="关于" id="yPx-uR-s5i">
                         <barButtonItem key="leftBarButtonItem" image="menu" id="Mav-Ps-2mr">
                             <connections>
                                 <action selector="showLeftMenu:" destination="5hf-Lx-qQX" id="GcP-E2-rGn"/>
@@ -1497,6 +1512,7 @@
     <resources>
         <image name="compose" width="20" height="20"/>
         <image name="enterBoard" width="20" height="20"/>
+        <image name="logo" width="120" height="120"/>
         <image name="logout" width="20" height="20"/>
         <image name="menu" width="20" height="20"/>
         <image name="refresh" width="20" height="20"/>
