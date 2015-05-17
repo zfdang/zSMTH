@@ -25,17 +25,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1200);
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 600);
     
     setting = [ZSMTHSetting sharedManager];
-
-    // Load git version from plist
-    // http://feinstruktur.com/blog/2010/12/29/integrating-git-version-info-in-ioscocoa-apps
-    NSString *version = [[[NSBundle mainBundle] infoDictionary]
-                         objectForKey:@"CFBundleShortVersionString"];
-    NSString *build = [[[NSBundle mainBundle] infoDictionary]
-                         objectForKey:@"CFBundleVersion"];
-    self.txtVersion.text = [NSString stringWithFormat:@"%@(%@)", version, build];
 
     // read initial values from settings
     self.bShowAvatar.on = setting.bShowAvatar;
@@ -67,7 +59,7 @@
 }
 
 - (IBAction)clickLeftButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [super showLeftMenu:sender];
 }
 
 #pragma mark - Setting Buttons

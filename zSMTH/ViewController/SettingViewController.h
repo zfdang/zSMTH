@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExtendedUIViewController.h"
 
-@interface SettingViewController : UIViewController
+@interface SettingViewController : ExtendedUIViewController
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *txtCacheSize;
-@property (weak, nonatomic) IBOutlet UILabel *txtVersion;
 
 - (IBAction)clickLeftButton:(id)sender;
 - (IBAction)switchUserAvatar:(id)sender;
