@@ -43,6 +43,13 @@
     self.searchBar.delegate = self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    self.navigationController.hidesBarsOnSwipe = NO;
+}
+
+
 - (void)asyncTask:(NSMutableDictionary*) params
 {
     NSArray *results = [helper getAllBoards];

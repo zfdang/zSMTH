@@ -64,6 +64,13 @@ typedef enum {
     }];
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    self.navigationController.hidesBarsOnSwipe = NO;
+}
+
 - (IBAction)showLeftMenu:(id)sender {
     
     if(favoriteRootID == 0){

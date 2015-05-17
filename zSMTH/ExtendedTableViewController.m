@@ -30,10 +30,13 @@
     helper = [SMTHHelper sharedManager];
     setting = [ZSMTHSetting sharedManager];
     self.progressTitle = @"加载中...";
-    
-    self.navigationController.hidesBarsOnSwipe = YES;
-    
+
     [self.navigationItem setHidesBackButton:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.hidesBarsOnSwipe = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
