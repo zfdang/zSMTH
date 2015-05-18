@@ -163,6 +163,7 @@
 {
     [self saveStatus];
 
+    [self.loginFeedback setHidden:YES];
     self.progressTitle = @"登录中...";
     [self startAsyncTask];
 }
@@ -198,7 +199,7 @@
             self.loginFeedback.text = @"登录失败，错误类型未知，请重试...";
         }
         [self.loginFeedback setHidden:NO];
-        [self performSelector:@selector(hideLoginFeedbackLater) withObject:nil afterDelay:3.0f];
+        [self performSelector:@selector(hideLoginFeedbackLater) withObject:nil afterDelay:15.0f];
     } else {
         // 进入主界面
         if(!rootView) {

@@ -340,22 +340,12 @@
                                 <rect key="frame" x="26" y="240" width="323" height="336"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <mutableString key="text">本软件是基于水木社区API实现的一个IOS平台的客户端，具有如下的功能:
-1.用户登录
-2.用户信息的查询
-3.用户头像的显示、修改
-4.导读帖子的加载和刷新
-5.个人收藏夹的加载,及本地缓存
-6.个人收藏夹的增加、删除
-7.所有版面的加载/搜索，及本地缓存（下滑更新）
-8.版面文章列表的显示,显示/隐藏置顶
-9.文章内容的显示，和上划加载更多的回复
-10.看帖时，图片的放大查看和保存
-回帖
-11.发新文章，上载图片附件(受限于API, 只能上载一个图片)
-12.看帖时，帖子中超链接的点击
-13.搜索帖子
-14.个人信件阅读，支持收件箱和发件箱</mutableString>
+                                <mutableString key="text">本软件是基于水木社区API实现的一个IOS平台的客户端。一些使用的技巧:
+1.在用户信息查询页面，点击头像可以修改自己的头像
+2.在列表界面，使用下拉的手势可以刷新内容；在底部的时候，使用上划的手势可以加载更多的内容
+3.查看帖子时，长按帖子会弹出操作菜单，其中包括回复帖子，转寄帖子等操作
+4.点击图片附件，可以进入全屏看图模式；然后点击右上的图标，可以分享或者保存图片
+5. 长按超链接将直接在内置浏览器中打开链接；短按超链接将弹出菜单，可以选择复制URL或者在外部浏览器中打开链接  更多的使用方法，请访问zSMTH网站: http://zSMTH.zfdang.com</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
