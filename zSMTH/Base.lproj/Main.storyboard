@@ -315,10 +315,10 @@
             </objects>
             <point key="canvasLocation" x="132" y="2796"/>
         </scene>
-        <!--关于-->
+        <!--About-->
         <scene sceneID="uQ0-Zv-MhG">
             <objects>
-                <viewController storyboardIdentifier="aboutController" id="5hf-Lx-qQX" customClass="AboutViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="aboutController" id="5hf-Lx-qQX" userLabel="About" customClass="AboutViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aLb-UQ-XWh"/>
                         <viewControllerLayoutGuide type="bottom" id="B1w-el-to8"/>
