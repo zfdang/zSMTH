@@ -125,7 +125,8 @@
     }
     taskType = 1;
     self.progressTitle = @"查询用户中...";
-    userID = self.editUserID.text;
+    NSString *username = [[self.editUserID text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    userID = username;
     [self startAsyncTask];
 }
 
