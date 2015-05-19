@@ -48,7 +48,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
         text = [text substringToIndex:3500];
         truncated = YES;
     }
-    
+
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:@""];
     
     // create font for attString

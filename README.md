@@ -1,21 +1,19 @@
 # zSMTH
-水木社区的IOS 客户端
+水木社区论坛的开源IOS客户端
 
-## 已实现的功能
-1. 用户登录, 用户信息的查询, 用户头像的显示、修改
-2. 十大导读/分区热贴的加载、下拉刷新、阅读
-3. 收藏夹的加载(本地缓存)、下拉刷新、增加(在版面主题列表处增加)和删除
-4. 所有版面列表的加载(本地缓存)、手工刷新、快速搜索
-5. 版面主题列表，下拉刷新、上划加载更多主题
-6. 版面操作：显示/隐藏置顶、文章搜索、收藏版面
-7. 文章内容的显示，下拉刷新、上划加载更多回复、长按帖子弹出操作菜单；
-8. 文章内容中超链接的自动识别，复制URL、用浏览器打开、用外部浏览器打开
-9. 文章中图片附件的全屏查看、缩放、分享和保存
-10. 回帖，发文，上载图片附件(受限于API, 每次只能上载一个图片)
-11. 信件阅读，支持收件箱和发件箱
+# Dependency
 
-## 待实现的功能
-* 回信、发信
-* 提醒
+This project is using the following pods:
 
-
+* pod 'MBProgressHUD', '~> 0.9.1'
+* pod 'REFrostedViewController', '~> 2.4.7'
+* pod 'SVPullToRefresh', :git => 'https://github.com/zfdang/SVPullToRefresh.git'
+* pod 'SDWebImage', '~>3.6'
+* pod 'Toast', '~> 2.4'
+* pod 'FMDB'
+* pod 'RNGridMenu', '~> 0.1.2'
+* pod 'MWPhotoBrowser'
+* pod 'CTAssetsPickerController',  '~> 2.9.0'
+* pod 'TTTAttributedLabel'
+* pod 'JDStatusBarNotification'
+* pod 'UMengAnalytics-NO-IDFA'
