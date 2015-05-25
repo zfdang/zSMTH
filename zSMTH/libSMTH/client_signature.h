@@ -1,18 +1,14 @@
 //
 //  client_signature.h
-//  BBSAdmin
-//
-//  Created by HE BIAO on 1/17/14.
-//  Copyright (c) 2014 newsmth. All rights reserved.
 //
 
 //#ifndef BBSAdmin_client_signature_h
 //#define BBSAdmin_client_signature_h
 
 
-// TO BE UPDATED
-#define CLIENT_SIGNATURE @"4da4774bea90f3509293d112eb6a24cd"
-#define CLIENT_SECRET @"0055a40712ee09f74f70d193c5e8dbc3"
-#define CLIENT_USERID @"testapp"
+// applied from stiger @ newsmth
+#define CLIENT_SIGNATURE @"6f20d67cd45af41c5d969a20fa329147"
+#define CLIENT_SECRET @"a5d22e0c92c005ccb3bd5add3453aa99"
+#define CLIENT_USERID @"zsmth"
 
 //#endif
