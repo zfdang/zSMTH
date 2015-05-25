@@ -371,12 +371,38 @@
         
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
         NSArray *items = @[
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"retweet"]
-                                                           title:@"转发到版面"
+//                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"retweet"]
+//                                                           title:@"转发到版面"
+//                                                          action:^{
+//                                                              NSLog(@"%@, %@", @"0", post.postID);
+//                                                          }],
+
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"forward"]
+                                                           title:@"转寄到信箱"
                                                           action:^{
-                                                              NSLog(@"%@, %@", @"0", post.postID);
+                                                              NSLog(@"%@, %@", @"3", post.postID);
+                                                              [self mailPostToUser:post.postBoard postID:[post.postID doubleValue] user:helper.user.userID];
                                                           }],
-                           
+
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"toUser"]
+                                                           title:@"转寄给他人"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"6", post.postID);
+                                                              UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"转寄给他人" message:@"将帖子内容转寄到他人信箱" preferredStyle:UIAlertControllerStyleAlert];
+                                                              UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+                                                              UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"转寄" style:UIAlertActionStyleDefault handler:
+                                                                                         ^(UIAlertAction *action) {
+                                                                                             UITextField *user = alertController.textFields.firstObject;
+                                                                                             [self mailPostToUser:post.postBoard postID:[post.postID doubleValue] user:user.text];
+                                                                                         }];
+                                                              [alertController addAction:cancelAction];
+                                                              [alertController addAction:okAction];
+                                                              [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
+                                                                  textField.placeholder = @"用户ID";
+                                                              }];
+                                                              [self presentViewController:alertController animated:YES completion:nil];
+                                                          }],
+
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"email"]
                                                            title:@"回信给作者"
                                                           action:^{
@@ -399,12 +425,6 @@
                                                               NSLog(@"%@, %@", @"2", post.postID);
                                                           }],
                            
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"forward"]
-                                                           title:@"转寄到信箱"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"3", post.postID);
-                                                              [self mailPostToUser:post.postBoard postID:[post.postID doubleValue] user:helper.user.userID];
-                                                          }],
                            
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"reply"]
                                                            title:@"回复"
@@ -425,25 +445,6 @@
                                                                                 duration:0.8
                                                                                 position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
 
-                                                          }],
-                           
-                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"toUser"]
-                                                           title:@"转寄给他人"
-                                                          action:^{
-                                                              NSLog(@"%@, %@", @"6", post.postID);
-                                                              UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"转寄给他人" message:@"将帖子内容转寄到他人信箱" preferredStyle:UIAlertControllerStyleAlert];
-                                                              UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-                                                              UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"转寄" style:UIAlertActionStyleDefault handler:
-                                                                                         ^(UIAlertAction *action) {
-                                                                                             UITextField *user = alertController.textFields.firstObject;
-                                                                                             [self mailPostToUser:post.postBoard postID:[post.postID doubleValue] user:user.text];
-                                                                                         }];
-                                                              [alertController addAction:cancelAction];
-                                                              [alertController addAction:okAction];
-                                                              [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField){
-                                                                  textField.placeholder = @"用户ID";
-                                                              }];
-                                                              [self presentViewController:alertController animated:YES completion:nil];
                                                           }],
 
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"queryUser"]
