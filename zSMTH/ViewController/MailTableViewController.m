@@ -231,7 +231,7 @@ typedef enum {
         // hide unnecessary item
         [cell.labelReply setHidden:YES];
         [cell.labelReplyTime setHidden:YES];
-        [cell.labelReplyCount setHidden:YES];
+//        [cell.labelReplyCount setHidden:YES];
         [cell.imageAttachs setHidden:YES];
     }
     
@@ -254,7 +254,8 @@ typedef enum {
             cell.backgroundColor = readedColor;
         }
         
-        cell.labelCount.text = [NSString stringWithFormat:@"信件ID:%ld", post.postPosition];
+        cell.labelReplyCount.text = @"信件ID:";
+        cell.labelCount.text = [NSString stringWithFormat:@"%ld", post.postPosition];
     }
     
     return cell;
