@@ -91,8 +91,10 @@
         self.progressTitle = @"查询信息中...";
         [self startAsyncTask];
     }
-}
 
+    // disable swipe to hide
+    self.navigationController.hidesBarsOnSwipe = NO;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

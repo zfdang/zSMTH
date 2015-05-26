@@ -20,6 +20,8 @@
 @interface ContentEditViewController () <UITextViewDelegate, UpdateAttachmentsProtocol>
 {
     long replyID;
+    int mailPosition;
+
     NSString *origSubject;
     NSString *origContent;
     NSString *author;
@@ -32,25 +34,49 @@
 @implementation ContentEditViewController
 
 @synthesize engName;
+@synthesize recipient;
 @synthesize mAttachments;
+@synthesize actionType;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // set editor title
-    NSString *title;
-    if(replyID != 0){
-        title = [NSString stringWithFormat:@"回帖 @ %@", self.engName];
-    } else {
-        title = [NSString stringWithFormat:@"发帖 @ %@", self.engName];
+    // 两种模式，发文/回文，或者发信/回信
+    // 发信又分为两种情形，一种是在信箱里开始写新邮件，另一种是在文章内容时，直接回信给作者
+    if(self.actionType == ACTION_REPLY_POST) {
+        self.title = @"回复文章";
+        self.txtAction.text = [NSString stringWithFormat:@"回帖 @ %@", self.engName];
+        [self.navigationItem.rightBarButtonItem setTitle:@"回帖"];
+    } else if (self.actionType == ACTION_NEW_POST) {
+        self.title = @"发表文章";
+        self.txtAction.text = [NSString stringWithFormat:@"发帖 @ %@", self.engName];
+        [self.navigationItem.rightBarButtonItem setTitle:@"发贴"];
+    } else if(self.actionType == ACTION_REPLY_POST_TO_MAIL) {
+        // 在文章内容处，直接回信给作者
+        self.title = @"回信给作者";
+        self.txtAction.text = [NSString stringWithFormat:@"回信 => %@", self.recipient];
+        self.btAttachment.enabled = NO;
+        [self.navigationItem.rightBarButtonItem setTitle:@"回信"];
+    } else if(self.actionType == ACTION_REPLY_MAIL) {
+        // 在信箱里，回复邮件
+        self.title = @"回复邮件";
+        self.txtAction.text = [NSString stringWithFormat:@"回信 => %@", self.recipient];
+        self.btAttachment.enabled = NO;
+        [self.navigationItem.rightBarButtonItem setTitle:@"回信"];
+    } else if(self.actionType == ACTION_NEW_MAIL){
+        // 在信箱里，开始写新邮件
+        self.title = @"写新邮件";
+        self.txtAction.text = @"";
+        [self.txtAction setEnabled:YES];
+        self.btAttachment.enabled = NO;
+        [self.navigationItem.rightBarButtonItem setTitle:@"发信"];
     }
-    self.title = title;
 
     // receive content updating message
     self.txtContent.delegate = self;
-    
-    if(replyID != 0) {
-        // reply post, set subject & conent at the beginning
+
+    // reply post, set subject & conent at the beginning
+    if(quotedContent) {
         [self.txtSubject  setText:quotedSubject];
         [self.txtContent setText:quotedContent];
         self.txtSummary.text = [NSString stringWithFormat:@"%lu", (unsigned long)quotedContent.length];
@@ -109,6 +135,17 @@
     quotedContent = bodyRef;
 }
 
+- (void) setOrigMailInfo:(int)position recipient:(NSString*)_recipient subject:(NSString*)_origSubject content:(NSString*)_origContent;
+{
+    // 设置好subject和content
+    [self setOrigPostInfo:0 subject:_origSubject author:_recipient content:_origContent];
+    
+    // 在邮箱处发信，recipient和mailposition都为空/0
+    // 在邮箱处回信，mailposition不为0
+    // 在文章出回信，recipient不为空
+    self.recipient = _recipient;
+    mailPosition = position;
+}
 
 - (IBAction)editAttachments:(id)sender {
     // this implementation is bad, these two controllers are tightly combined
@@ -194,32 +231,54 @@
 
     NSString *title = self.txtSubject.text;
     NSString *content = [NSString stringWithFormat:@"%@\n#发送自zSMTH@IOS", self.txtContent.text];
+    NSString *target = [self.txtAction.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    if(replyID != 0){
+    if(self.actionType == ACTION_REPLY_POST){
         progressBar.labelText = @"发表回复中...";
         article_id = [helper.smth net_ReplyArticle:self.engName :replyID :title :content];
-    } else {
+    } else if (self.actionType == ACTION_NEW_POST){
         progressBar.labelText = @"发表文章中...";
         article_id = [helper.smth net_PostArticle:self.engName :title :content];
-    }
-    if(helper.smth->net_error != 0)
-    {
-//        NSLog(@"Post articile failure: %d, %@", helper.smth->net_error, helper.smth->net_error_desc);
-        NSString * errlog = @"文章发表失败!请稍后重试...";
-        UIAlertView *altview = [[UIAlertView alloc]initWithTitle:@"发表失败" message:errlog delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [altview show];
-        return;
+    } else if (self.actionType == ACTION_NEW_MAIL){
+        progressBar.labelText = @"寄信中...";
+        article_id = [helper.smth net_PostMail:target :title :content];
+    } else if (self.actionType == ACTION_REPLY_MAIL){
+        progressBar.labelText = @"回信中...";
+        article_id = [helper.smth net_ReplyMail:mailPosition :title :content];
+    } else if (self.actionType == ACTION_REPLY_POST_TO_MAIL){
+        progressBar.labelText = @"回信到作者中...";
+        article_id = [helper.smth net_PostMail:recipient :title :content];
     }
 }
 
 - (void)finishAsyncTask
 {
-    if(article_id != 0)
-    {
-        NSString *message = [NSString stringWithFormat:@"文章发表成功, id = %ld", article_id];
-        UIAlertView *altview = [[UIAlertView alloc]initWithTitle:@"发表成功!" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [altview show];
-        [self.navigationController popViewControllerAnimated:YES];
+    if(self.actionType == ACTION_REPLY_POST || self.actionType == ACTION_NEW_POST) {
+        if(helper.smth->net_error != 0)
+        {
+            NSLog(@"Post articile failure: %d, %@", helper.smth->net_error, helper.smth->net_error_desc);
+            NSString * errlog = [NSString stringWithFormat:@"文章发表失败(%d, %@)!请稍后重试...", helper.smth->net_error, helper.smth->net_error_desc];
+            UIAlertView *altview = [[UIAlertView alloc]initWithTitle:@"发表失败" message:errlog delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [altview show];
+        } else {
+            NSString *message = [NSString stringWithFormat:@"文章发表成功, id = %ld", article_id];
+            UIAlertView *altview = [[UIAlertView alloc]initWithTitle:@"发表成功!" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [altview show];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else {
+        if(helper.smth->net_error != 0)
+        {
+            NSLog(@"Send mail failure: %d, %@", helper.smth->net_error, helper.smth->net_error_desc);
+            NSString * errlog = [NSString stringWithFormat:@"发信失败(%d, %@)!请稍后重试...", helper.smth->net_error, helper.smth->net_error_desc];
+            UIAlertView *altview = [[UIAlertView alloc]initWithTitle:@"发信失败" message:errlog delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [altview show];
+        } else {
+            NSString *message = [NSString stringWithFormat:@"信件发送成功"];
+            UIAlertView *altview = [[UIAlertView alloc]initWithTitle:@"发信成功!" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [altview show];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 

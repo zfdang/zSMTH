@@ -53,7 +53,11 @@
     iHeaderHeight  = 22.0;
 
     // hide right button if this view is not initiated from Guidance
-    if(! self.isFromGuidance){
+    if(! self.isFromGuidance && contentType == CONTENT_POST) {
+        [self.navigationItem setRightBarButtonItem:nil];
+    } else if(contentType == CONTENT_INBOX) {
+        [self.navigationItem.rightBarButtonItem setImage: [UIImage imageNamed:@"reply_mail"]];
+    } else if(contentType == CONTENT_OUTBOX) {
         [self.navigationItem setRightBarButtonItem:nil];
     }
 
@@ -350,10 +354,23 @@
 #pragma mark - Content Actions
 
 - (IBAction)clickRightButton:(id)sender {
-    PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
-    postlist.chsName = chsName;  // this field might be null
-    postlist.engName = engName;
-    [self.navigationController pushViewController:postlist animated:YES];
+    if(contentType == CONTENT_POST) {
+        // 进入版面列表
+        PostListTableViewController *postlist = [self.storyboard instantiateViewControllerWithIdentifier:@"postlistController"];
+        postlist.chsName = chsName;  // this field might be null
+        postlist.engName = engName;
+        [self.navigationController pushViewController:postlist animated:YES];
+    } else if(contentType == CONTENT_INBOX) {
+        // 回复邮件
+        ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
+        if([mPosts count] > 0) {
+            SMTHPost *mail = mPosts[0];
+            // 信箱里的回信
+            editor.actionType = ACTION_REPLY_MAIL;
+            [editor setOrigMailInfo:(int)mailPosition recipient:mail.author subject:mail.postSubject content:mail.postContent];
+            [self.navigationController pushViewController:editor animated:YES];
+        }
+    }
 }
 
 - (void) handleLongPress:(UILongPressGestureRecognizer *)gesture
@@ -407,6 +424,11 @@
                                                            title:@"回信给作者"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"1", post.postID);
+                                                              ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
+                                                              // 回信给作者
+                                                              editor.actionType = ACTION_REPLY_POST_TO_MAIL;
+                                                              [editor setOrigMailInfo:0 recipient:post.author subject:post.postSubject content:post.postContent];
+                                                              [self.navigationController pushViewController:editor animated:YES];
                                                           }],
                            
                            [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"openInBrowser"]
@@ -504,6 +526,7 @@
     ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
     
     editor.engName = engName;
+    editor.actionType = ACTION_REPLY_POST;
     [editor setOrigPostInfo:[post.postID doubleValue] subject:post.postSubject author:post.author content:post.postContent];
     [self.navigationController pushViewController:editor animated:YES];
 }

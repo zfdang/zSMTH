@@ -13,6 +13,7 @@
 #import "PostListTableViewCell.h"
 #import "SMTHPost.h"
 #import "PostContentTableViewController.h"
+#import "ContentEditViewController.h"
 
 typedef enum {
     TASK_MAIL_INBOX = 1,
@@ -54,6 +55,11 @@ typedef enum {
     __weak typeof(self) weakSelf = self;
     [self.tableView addInfiniteScrollingWithActionHandler:^{
         [weakSelf loadMoreMailList];
+    }];
+
+    // add pull to refresh function at the top & bottom
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [weakSelf refreshPostList];
     }];
     
     // 防止tableview的顶部被navigation bar挡住
@@ -100,11 +106,23 @@ typedef enum {
 {
 //    SINavigationMenuView *menu = (SINavigationMenuView*) self.navigationItem.titleView;
     if (menu.menuButton.isActive) {
-        //        NSLog(@"dropdown menu is active, turn off it now");
         [menu onHideMenu];
     }
     [super viewWillDisappear:animated];
 }
+
+- (void) refreshPostList {
+    int64_t delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.tableView.pullToRefreshView stopAnimating];
+        
+        self.progressTitle = @"刷新中...";
+        self.tableView.showsPullToRefresh = NO;
+        [self startAsyncTask:nil];
+    });
+}
+
 
 -(void)loadMoreMailList
 {
@@ -139,8 +157,21 @@ typedef enum {
                 }
             });
         }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.tableView.showsPullToRefresh = YES;
+        });
     });
     
+}
+
+
+- (IBAction)clickRightButton:(id)sender {
+    ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
+    
+    // 新邮件，所以都是空的
+//    [editor setOrigMailInfo:0 recipient:nil subject:nil content:nil];
+    editor.actionType = ACTION_NEW_MAIL;
+    [self.navigationController pushViewController:editor animated:YES];
 }
 
 -(void)asyncTask:(NSMutableDictionary *)params
@@ -151,6 +182,8 @@ typedef enum {
     posts = [helper getMailList:taskType from:mPageIndex];
     [mPosts removeAllObjects];
     [mPosts addObjectsFromArray:posts];
+
+    self.tableView.showsPullToRefresh = YES;
 }
 
 
@@ -286,12 +319,6 @@ typedef enum {
 }
 */
 
-- (IBAction)clickRightButton:(id)sender {
-    self.progressTitle = @"刷新中...";
-//    taskType = TASK_MAIL_INBOX;
-    self.tableView.showsInfiniteScrolling = NO;
-    [self startAsyncTask:nil];
-}
 
 #pragma mark - SINavigationMenuDelegate
 
