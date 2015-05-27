@@ -79,7 +79,7 @@
     [self.imageBanner addGestureRecognizer:singleTap];
 
     // 自动登录
-    if(setting.bAutoLogin){
+    if(setting.bAutoLogin && setting.username && setting.password){
         self.progressTitle = @"自动登录中...";
         [self startAsyncTask];
     }

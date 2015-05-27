@@ -26,8 +26,16 @@
 {
     self = [super init];
     if (self) {
-        // empty statements
+        // create default value for settings
+        NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"YES", @"bSavePassword",
+                                     @"YES", @"bAutoLogin",
+                                     @"YES", @"bShowAvatar",
+                                     @"NO", @"bAutoRotate",
+                                     nil];
+
         user = [NSUserDefaults standardUserDefaults];
+        [user registerDefaults:appDefaults];
     }
     return self;
 }
