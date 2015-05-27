@@ -181,6 +181,9 @@
                 // 重新打开下拉刷新
                 self.tableView.showsPullToRefresh = YES;
             });
+        } else {
+            // 重新打开下拉刷新
+            weakSelf.tableView.showsPullToRefresh = YES;
         }
     });
 }

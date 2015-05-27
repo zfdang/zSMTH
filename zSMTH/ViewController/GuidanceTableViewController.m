@@ -146,7 +146,19 @@
     {
         sectionHeaderView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:headerReuseIdentifier];
     }
-    sectionHeaderView.textLabel.text = [helper.sectionList objectAtIndex:section];
+    // 如果加载section内容失败，显示提示信息
+    BOOL isSectionLoaded = NO;
+    if([m_sections count] > section) {
+        NSArray *posts = [m_sections objectAtIndex:section];
+        if(posts && [posts count] > 0){
+            isSectionLoaded = YES;
+        }
+    }
+    if(isSectionLoaded){
+        sectionHeaderView.textLabel.text = [helper.sectionList objectAtIndex:section];
+    } else {
+        sectionHeaderView.textLabel.text = [NSString stringWithFormat:@"%@(加载失败)",[helper.sectionList objectAtIndex:section]];
+    }
     
     return sectionHeaderView;
 }
