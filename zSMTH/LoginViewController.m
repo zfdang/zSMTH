@@ -239,7 +239,7 @@
     // 开启定时器，检查新邮件
     if(myTimer == nil){
         //每120秒运行一次function方法。
-        myTimer =  [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerTask) userInfo:nil repeats:YES];
+        myTimer =  [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(timerTask) userInfo:nil repeats:YES];
     } else {
         //重启定时器
         [myTimer setFireDate:[NSDate distantPast]];
@@ -314,10 +314,17 @@
     }
 
     if(newMailCount > 0){
-        // 使用状态栏提示
-        [JDStatusBarNotification showWithStatus:@"您有新邮件，请及时查看!"
-                                   dismissAfter:3.0
-                                      styleName:JDStatusBarStyleSuccess];
+        // 使用状态栏来提示新邮件，每隔5次查询提醒一次
+        static int alert_counter = 0;
+        if(alert_counter == 0) {
+            [JDStatusBarNotification showWithStatus:@"您有新邮件，请及时查看!"
+                                       dismissAfter:3.0
+                                          styleName:JDStatusBarStyleSuccess];
+        }
+        alert_counter += 1;
+        if(alert_counter == 5) {
+            alert_counter = 0;
+        }
 
         // 根据newMailCount来决定是否要增加新的notification
         if(newMailCount > [UIApplication sharedApplication].applicationIconBadgeNumber) {
