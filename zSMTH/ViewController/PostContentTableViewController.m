@@ -20,6 +20,7 @@
 #import "PostContentLabel.h"
 #import "BrowserViewController.h"
 #import "UserInfoViewController.h"
+#import "UMSocial.h"
 
 @interface PostContentTableViewController () <TapImageViewDelegate, MWPhotoBrowserDelegate, TTTAttributedLabelDelegate, UIActionSheetDelegate>
 {
@@ -485,6 +486,7 @@
                                                            title:@"分享"
                                                           action:^{
                                                               NSLog(@"%@, %@", @"8", post.postID);
+                                                              [self sharePost:post];
                                                           }],
                            ];
         RNGridMenu *av = [[RNGridMenu alloc] initWithItems:items];
@@ -497,6 +499,51 @@
         av.menuStyle = RNGridMenuStyleGrid;
         [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
     }
+}
+
+- (void)sharePost:(SMTHPost*) post
+{
+    UMSocialUrlResource *urlResource;
+    if([post.attachments count] > 0) {
+        // 使用第一个附件图片的URL
+        urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:[[post getAttachedImageURL:0] absoluteString]];
+    } else {
+        // 使用zSMTH的logo
+        urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"http://zsmth.zfdang.com/zsmth.png"];
+    }
+    NSString *shareText = [NSString stringWithFormat:@"[%@] %@ @ 水木社区", post.postBoard, post.postSubject];
+    NSString* postURL = [NSString stringWithFormat:@"http://www.newsmth.net/bbscon.php?bid=%ld&id=%@", boardID, post.postID];
+    NSString *shareTextWithURL = [NSString stringWithFormat:@"%@\n%@", shareText, postURL];
+
+    // 设置新浪微博的一些属性
+    [UMSocialData defaultData].extConfig.sinaData.shareText = shareTextWithURL;
+    [UMSocialData defaultData].extConfig.sinaData.urlResource = urlResource;
+
+    // 设置微信好友的一些属性
+    [UMSocialData defaultData].extConfig.wechatSessionData.urlResource = urlResource;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = postURL;
+
+    // 设置朋友圈的一些属性
+    [UMSocialData defaultData].extConfig.wechatTimelineData.urlResource = urlResource;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = postURL;
+
+    // 人人
+    [UMSocialData defaultData].extConfig.renrenData.url = postURL;
+    [UMSocialData defaultData].extConfig.renrenData.appName = @"zSMTH";
+
+    // email
+    [UMSocialData defaultData].extConfig.emailData.title = @"推荐水木的一个帖子";
+    [UMSocialData defaultData].extConfig.emailData.shareText = shareTextWithURL;
+
+    // SMS
+    [UMSocialData defaultData].extConfig.smsData.shareText = shareTextWithURL;
+
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:nil
+                                      shareText:shareText
+                                     shareImage:nil
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline, UMShareToSina, UMShareToRenren, UMShareToDouban, UMShareToEmail, UMShareToSms, UMShareToFacebook, UMShareToTwitter, nil]
+                                       delegate:nil];
 }
 
 -(void) mailPostToUser:(NSString*)boardid postID:(long)postid user:(NSString*)user

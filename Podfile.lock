@@ -1,5 +1,5 @@
 PODS:
-  - CTAssetsPickerController (2.9.3)
+  - CTAssetsPickerController (2.9.4)
   - DACircularProgress (2.3.1)
   - FMDB (2.5):
     - FMDB/standard (= 2.5)
@@ -22,7 +22,7 @@ PODS:
   - SVPullToRefresh (0.4.1)
   - Toast (2.4)
   - TTTAttributedLabel (1.13.3)
-  - UMengAnalytics-NO-IDFA (3.4.7)
+  - UMengAnalytics-NO-IDFA (3.5.9)
 
 DEPENDENCIES:
   - CTAssetsPickerController (~> 2.9.0)
@@ -48,7 +48,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/zfdang/SVPullToRefresh.git
 
 SPEC CHECKSUMS:
-  CTAssetsPickerController: 56a4a228dcb48a9375ab8d4922e82ac74af74aa1
+  CTAssetsPickerController: 3030dc60f5d1a3c4e5b1c0aa9f069220d5bf7008
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   JDStatusBarNotification: a36d09ccbb047217572b074a61e7ca10dddc5f0a
@@ -61,6 +61,6 @@ SPEC CHECKSUMS:
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
   TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
-  UMengAnalytics-NO-IDFA: 68a71671c10067315339fc3fd1283be416f02a8b
+  UMengAnalytics-NO-IDFA: c5302a2246061c356641bb3056e89dfbdeb37424
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.37.1

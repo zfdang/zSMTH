@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 #import "MobClick.h"
+#import "UMSocial.h"
+#import "UMSocialConfig.h"
+#import "UMSocialWechatHandler.h"
+
 
 @interface AppDelegate ()
 
@@ -19,6 +23,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [MobClick startWithAppkey:@"553c8da267e58e541b00334f" reportPolicy:BATCH   channelId:nil];
+    [UMSocialData setAppKey:@"553c8da267e58e541b00334f"];
+
+    // 由于苹果审核政策需求，建议大家对未安装客户端平台进行隐藏，在设置QQ、微信AppID之前调用下面的方法
+    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToQzone, UMShareToWechatSession, UMShareToWechatTimeline]];
+    // 添加微信及朋友圈到分享列表
+    [UMSocialWechatHandler setWXAppId:@"wx9c391da83dcb85ea" appSecret:@"4eed35a5647938b35ea9a0ecef01e549" url:@"http://zsmth.zfdang.com"];
 
     // 使用git version作为版本号
     NSString *version = [[[NSBundle mainBundle] infoDictionary]
