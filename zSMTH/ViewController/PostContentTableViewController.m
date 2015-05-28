@@ -25,7 +25,6 @@
 @interface PostContentTableViewController () <TapImageViewDelegate, MWPhotoBrowserDelegate, TTTAttributedLabelDelegate, UIActionSheetDelegate>
 {
     ContentType contentType;
-    NSMutableArray *mPosts;
     NSMutableDictionary *mHeights;
     CGFloat iHeaderHeight;
     NSMutableArray *mPhotos;
@@ -38,6 +37,9 @@
     long mailPosition;
 }
 
+@property (strong, nonatomic) NSMutableArray *mPosts;
+
+
 @end
 
 @implementation PostContentTableViewController
@@ -49,7 +51,7 @@
     [super viewDidLoad];
 
     // load first page
-    mPosts = [[NSMutableArray alloc] init];
+    self.mPosts = [[NSMutableArray alloc] init];
     mHeights = [[NSMutableDictionary alloc] init];
     iHeaderHeight  = 22.0;
 
@@ -155,32 +157,32 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         weakSelf.tableView.showsPullToRefresh = NO;
         
-        NSArray *posts = [helper getPostContents:engName postID:postID from:[mPosts count]];
-        long currentNumber = [mPosts count];
+        NSArray *posts = [helper getPostContents:engName postID:postID from:[weakSelf.mPosts count]];
+        long currentNumber = [weakSelf.mPosts count];
         if (posts != nil) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 if ([posts count] > 0) {
-                    [self.tableView.infiniteScrollingView stopAnimating];
+                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
                     NSMutableArray *array = [[NSMutableArray alloc] init];
                     for (int i = 0; i < [posts count]; i++) {
                         [array addObject:[NSIndexPath indexPathForRow:currentNumber+i inSection:0]];
                     }
 
-                    [self.tableView beginUpdates];
-                    [mPosts addObjectsFromArray:posts];
-                    [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
-                    [self.tableView endUpdates];
+                    [weakSelf.tableView beginUpdates];
+                    [weakSelf.mPosts addObjectsFromArray:posts];
+                    [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+                    [weakSelf.tableView endUpdates];
                 } else {
-                    if(self.tableView.infiniteScrollingView) {
+                    if(weakSelf.tableView.infiniteScrollingView) {
                         // check availability of infiniteScrollingView before making toast
-                        [self.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
+                        [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
                                                                 duration:0.5
                                                                 position:CSToastPositionCenter];
                     }
-                    [self.tableView.infiniteScrollingView stopAnimating];
+                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
                 }
                 // 重新打开下拉刷新
-                self.tableView.showsPullToRefresh = YES;
+                weakSelf.tableView.showsPullToRefresh = YES;
             });
         } else {
             // 重新打开下拉刷新
@@ -193,16 +195,16 @@
 {
     if(contentType == CONTENT_POST) {
         NSArray* results = [helper getPostContents:engName postID:postID from:0];
-        [mPosts removeAllObjects];
-        [mPosts addObjectsFromArray:results];
+        [self.mPosts removeAllObjects];
+        [self.mPosts addObjectsFromArray:results];
     } else if(contentType == CONTENT_INBOX) {
         SMTHPost *post  = [helper getMailContent:1 position:(int)mailPosition];
-        [mPosts removeAllObjects];
-        [mPosts addObject:post];
+        [self.mPosts removeAllObjects];
+        [self.mPosts addObject:post];
     } else if(contentType == CONTENT_OUTBOX) {
         SMTHPost *post  = [helper getMailContent:2 position:(int)mailPosition];
-        [mPosts removeAllObjects];
-        [mPosts addObject:post];
+        [self.mPosts removeAllObjects];
+        [self.mPosts addObject:post];
     }
 }
 
@@ -222,7 +224,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [mPosts count];
+    return [self.mPosts count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -308,7 +310,7 @@
     if (indexPath.section == 0) {
         cell.idxPost = indexPath.row;
 
-        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        SMTHPost *post = (SMTHPost*)[self.mPosts objectAtIndex:indexPath.row];
         post.replyIndex = indexPath.row;
         post.postBoard = engName;
         [cell setCellContent:post];
@@ -367,8 +369,8 @@
     } else if(contentType == CONTENT_INBOX) {
         // 回复邮件
         ContentEditViewController *editor = [self.storyboard instantiateViewControllerWithIdentifier:@"contenteditController"];
-        if([mPosts count] > 0) {
-            SMTHPost *mail = mPosts[0];
+        if([self.mPosts count] > 0) {
+            SMTHPost *mail = self.mPosts[0];
             // 信箱里的回信
             editor.actionType = ACTION_REPLY_MAIL;
             [editor setOrigMailInfo:(int)mailPosition recipient:mail.author subject:mail.postSubject content:mail.postContent];
@@ -390,7 +392,7 @@
         // now start our action on long press
 //        NSLog(@"Long click on post %ld, %ld", indexPath.section, indexPath.row);
         
-        SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:indexPath.row];
+        SMTHPost *post = (SMTHPost*)[self.mPosts objectAtIndex:indexPath.row];
         NSArray *items = @[
 //                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"retweet"]
 //                                                           title:@"转发到版面"
@@ -603,7 +605,7 @@
 - (void)tappedWithObject:(id)sender
 {
     TapImageView *view = (TapImageView*) sender;
-    SMTHPost* post = [mPosts objectAtIndex:view.idxPost];
+    SMTHPost* post = [self.mPosts objectAtIndex:view.idxPost];
     NSArray* attachs = post.attachments;
     
     // Create array of MWPhoto objects
