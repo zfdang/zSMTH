@@ -102,24 +102,22 @@ typedef enum {
 }
 
 - (void) refreshPostList {
-    __weak typeof(self) weakSelf = self;
     int64_t delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [weakSelf.tableView.pullToRefreshView stopAnimating];
+        [self.tableView.pullToRefreshView stopAnimating];
 
-        weakSelf.progressTitle = @"刷新中...";
-        weakSelf.tableView.showsPullToRefresh = NO;
-        weakSelf.tableView.showsInfiniteScrolling = NO;
-        [weakSelf startAsyncTask:nil];
+        self.progressTitle = @"刷新中...";
+        self.tableView.showsPullToRefresh = NO;
+        self.tableView.showsInfiniteScrolling = NO;
+        [self startAsyncTask:nil];
     });
 }
 
 
 - (void) loadMorePostList {
-    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        weakSelf.tableView.showsPullToRefresh = NO;
+        self.tableView.showsPullToRefresh = NO;
 
         NSArray *posts;
         if(taskType == TASK_RELOAD){

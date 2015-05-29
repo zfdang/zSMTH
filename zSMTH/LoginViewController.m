@@ -260,7 +260,6 @@
     }
 
     // 异步的方式运行，防止阻塞主线程
-    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         isConnectionActive = [helper isConnectionActive];
         NSLog(@"Login Token: %d, helper.user is %@", isConnectionActive, helper.user);
@@ -293,7 +292,7 @@
 
         // 结果放到主线程里展示
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf postTimerTask];
+            [self postTimerTask];
         });
     });
 }

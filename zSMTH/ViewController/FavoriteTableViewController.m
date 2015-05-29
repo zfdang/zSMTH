@@ -93,15 +93,14 @@ typedef enum {
     // clear cache
     [helper clearCacheStatus:@"FAVORITE" RootID:self.favoriteRootID];
 
-    __weak typeof(self) weakSelf = self;
     int64_t delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [weakSelf.tableView.pullToRefreshView stopAnimating];
+        [self.tableView.pullToRefreshView stopAnimating];
         
-        weakSelf.progressTitle = @"刷新中...";
+        self.progressTitle = @"刷新中...";
         taskType = TASK_RELOAD;
-        [weakSelf startAsyncTask:nil];
+        [self startAsyncTask:nil];
     });
 }
 

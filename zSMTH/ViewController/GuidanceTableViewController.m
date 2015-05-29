@@ -66,7 +66,6 @@
     [self.tableView reloadData];
 
     // 继续加载各分区的十大话题
-    // __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSArray* sectionList = [helper sectionList];
         for (int i = 1; i < [sectionList count]; i++) {

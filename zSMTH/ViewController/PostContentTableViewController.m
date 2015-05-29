@@ -137,56 +137,55 @@
 
 - (void) refreshPostContent {
     // only valid for CONTENT_POST
-    __weak typeof(self) weakSelf = self;
+    NSLog(@"refreshPostContent");
     int64_t delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [weakSelf.tableView.pullToRefreshView stopAnimating];
+        [self.tableView.pullToRefreshView stopAnimating];
         
-        weakSelf.progressTitle = @"刷新中...";
-        weakSelf.tableView.showsPullToRefresh = NO;
-        weakSelf.tableView.showsInfiniteScrolling = NO;
-        [weakSelf startAsyncTask:nil];
+        self.progressTitle = @"刷新中...";
+        self.tableView.showsPullToRefresh = NO;
+        self.tableView.showsInfiniteScrolling = NO;
+        [self startAsyncTask:nil];
     });
 }
 
 - (void) loadMorePostList {
     // only valid for CONTENT_POST
     NSLog(@"loadMorePostList");
-    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        weakSelf.tableView.showsPullToRefresh = NO;
-        
-        NSArray *posts = [helper getPostContents:engName postID:postID from:[weakSelf.mPosts count]];
-        long currentNumber = [weakSelf.mPosts count];
+        self.tableView.showsPullToRefresh = NO;
+
+        NSArray *posts = [helper getPostContents:engName postID:postID from:[self.mPosts count]];
+        long currentNumber = [self.mPosts count];
         if (posts != nil) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 if ([posts count] > 0) {
-                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                    [self.tableView.infiniteScrollingView stopAnimating];
                     NSMutableArray *array = [[NSMutableArray alloc] init];
                     for (int i = 0; i < [posts count]; i++) {
                         [array addObject:[NSIndexPath indexPathForRow:currentNumber+i inSection:0]];
                     }
 
-                    [weakSelf.tableView beginUpdates];
-                    [weakSelf.mPosts addObjectsFromArray:posts];
-                    [weakSelf.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
-                    [weakSelf.tableView endUpdates];
+                    [self.tableView beginUpdates];
+                    [self.mPosts addObjectsFromArray:posts];
+                    [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationTop];
+                    [self.tableView endUpdates];
                 } else {
-                    if(weakSelf.tableView.infiniteScrollingView) {
+                    if(self.tableView.infiniteScrollingView) {
                         // check availability of infiniteScrollingView before making toast
-                        [weakSelf.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
+                        [self.tableView.infiniteScrollingView  makeToast:@"没有更多的回复了..."
                                                                 duration:0.5
                                                                 position:CSToastPositionCenter];
                     }
-                    [weakSelf.tableView.infiniteScrollingView stopAnimating];
+                    [self.tableView.infiniteScrollingView stopAnimating];
                 }
                 // 重新打开下拉刷新
-                weakSelf.tableView.showsPullToRefresh = YES;
+                self.tableView.showsPullToRefresh = YES;
             });
         } else {
             // 重新打开下拉刷新
-            weakSelf.tableView.showsPullToRefresh = YES;
+            self.tableView.showsPullToRefresh = YES;
         }
     });
 }
@@ -550,7 +549,6 @@
 
 -(void) mailPostToUser:(NSString*)boardid postID:(long)postid user:(NSString*)user
 {
-    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         // 将信件转寄到用户信箱
         long result = [helper.smth net_ForwardArticle:boardid :postid :user];
@@ -558,14 +556,14 @@
         if(helper.smth->net_error == 0) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 CGRect bounds = [[UIScreen mainScreen] bounds];
-                [weakSelf.tableView  makeToast:[NSString stringWithFormat:@"已转寄到%@信箱!", user]
+                [self.tableView  makeToast:[NSString stringWithFormat:@"已转寄到%@信箱!", user]
                                       duration:1.5
                                       position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
             });
         } else {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 CGRect bounds = [[UIScreen mainScreen] bounds];
-                [weakSelf.tableView  makeToast:@"转寄失败，请稍后重试!"
+                [self.tableView  makeToast:@"转寄失败，请稍后重试!"
                                       duration:1.5
                                       position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
             });

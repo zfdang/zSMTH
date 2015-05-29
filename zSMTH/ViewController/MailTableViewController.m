@@ -126,9 +126,8 @@ typedef enum {
 
 -(void)loadMoreMailList
 {
-    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        weakSelf.tableView.showsPullToRefresh = NO;
+        self.tableView.showsPullToRefresh = NO;
         
         NSArray *posts;
         mPageIndex += 1;
