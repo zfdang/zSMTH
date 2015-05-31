@@ -174,7 +174,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    if (m_sections !=nil) {
+    if (m_sections !=nil && indexPath.section < [m_sections count]) {
         NSArray *posts = [m_sections objectAtIndex:indexPath.section];
         SMTHPost* post = (SMTHPost*)[posts objectAtIndex:indexPath.row];
         
