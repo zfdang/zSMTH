@@ -291,7 +291,7 @@
         }
 
         // 结果放到主线程里展示
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
             [self postTimerTask];
         });
     });

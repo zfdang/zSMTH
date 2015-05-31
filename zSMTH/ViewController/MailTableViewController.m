@@ -129,7 +129,7 @@ typedef enum {
 
         long currentNumber = [mPosts count];
         if (posts != nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 if([posts count] > 0){
                     [self.tableView.infiniteScrollingView stopAnimating];
 

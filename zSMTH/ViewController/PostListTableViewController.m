@@ -156,6 +156,10 @@ typedef enum {
                 }
                 self.tableView.showsPullToRefresh = YES;
             });
+        } else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                self.tableView.showsPullToRefresh = YES;
+            });
         }
     });
 }
