@@ -101,6 +101,12 @@ typedef enum {
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.hidesBarsOnSwipe = YES;
+}
+
 - (void) refreshPostList {
     int64_t delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);

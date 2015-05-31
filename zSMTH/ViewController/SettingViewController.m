@@ -37,8 +37,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    self.navigationController.hidesBarsOnSwipe = NO;
     [self updateCacheSize];
 }
 

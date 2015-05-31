@@ -29,6 +29,15 @@
     self.progressTitle = @"加载中...";
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.hidesBarsOnSwipe = NO;
+}
+
+- (bool) prefersStatusBarHidden {
+    return self.navigationController.navigationBarHidden;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

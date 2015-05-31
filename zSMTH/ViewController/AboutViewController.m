@@ -25,13 +25,6 @@
     self.textVersion.text = [NSString stringWithFormat:@"版本号: %@ (%@)", version, build];
 }
 
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    self.navigationController.hidesBarsOnSwipe = NO;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
