@@ -109,7 +109,11 @@ const CGFloat PaddingBetweenImages = 5.0;
                                         // 下载成功, 计算满宽情况下，图片的高度
                                         CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;
                                         // update the exact image height
-                                        [mImgHeights replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:curImageHeight]];
+                                        if(i < [mImgHeights count]){
+                                            [mImgHeights replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:curImageHeight]];
+                                        } else {
+                                            [mImgHeights insertObject:[NSNumber numberWithFloat:curImageHeight] atIndex:i];
+                                        }
 
                                         // 缩小图片，否则占用内存会太大
                                         if(image.size.height > curImageHeight) {
