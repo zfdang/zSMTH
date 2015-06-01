@@ -289,11 +289,11 @@ typedef enum {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    if (indexPath.section == 0) {
-        long postIdx = indexPath.row;
-        if(!showDingPosts){
-            postIdx += iNumberOfDing;
-        }
+    long postIdx = indexPath.row;
+    if(!showDingPosts){
+        postIdx += iNumberOfDing;
+    }
+    if (indexPath.section == 0 && postIdx < [mPosts count]) {
         SMTHPost *post = (SMTHPost*)[mPosts objectAtIndex:postIdx];
         
         [cell.imageAvatar sd_setImageWithURL:[helper getFaceURLByUserID:[post author]] placeholderImage:[UIImage imageNamed:@"anonymous"]];
