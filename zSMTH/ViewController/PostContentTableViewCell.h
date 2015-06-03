@@ -13,15 +13,15 @@
 
 @interface PostContentTableViewCell : UITableViewCell
 {
-    NSMutableArray *mImgHeights;
+    NSMutableArray *mSubviewHeights;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *postTime;
 @property (weak, nonatomic) IBOutlet UILabel *postIndex;
 @property (weak, nonatomic) IBOutlet UILabel *postAuthor;
-@property (weak, nonatomic) IBOutlet PostContentLabel *postContent;
 @property (weak, nonatomic) IBOutlet UIView *cellView;
+@property (weak, nonatomic) IBOutlet UILabel *postContentHeader;
 @property (weak, nonatomic) id delegate;
 
 -(void) setCellContent:(SMTHPost*)post;

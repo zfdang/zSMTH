@@ -19,6 +19,7 @@ typedef enum {
     VIEW_NOTIFICATION,
     VIEW_SETTING,
     VIEW_ABOUT,
+    VIEW_TEST,
 } SMTHVIEW;
 
 @interface LeftMenuViewController : UITableViewController

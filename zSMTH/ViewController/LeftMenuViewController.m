@@ -23,6 +23,7 @@
 #import "AboutViewController.h"
 #import "JDStatusBarNotification.h"
 #import "SMTHHelper.h"
+#import "PostContentTableViewController.h"
 
 @interface LeftMenuViewController ()
 {
@@ -53,7 +54,7 @@
     // init left menu
     leftMenu = @[@[@"节名", @"首页导读", @"个人收藏夹",  @"全部讨论区"],
 //                 @[@"我的水木", @"邮箱", @"文章提醒", @"设置", @"关于"]];
-                  @[@"我的水木", @"邮箱", @"设置", @"关于"]];
+                  @[@"我的水木", @"邮箱", @"设置", @"关于", @"测试"]];
     
     // create table view
     self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:1.0f];
@@ -190,6 +191,17 @@
         }
         [navigationController popToRootViewControllerAnimated:NO];
         [navigationController pushViewController:about animated:YES];
+    } else if(target == VIEW_TEST) {
+
+        PostContentTableViewController *postcontent = [self.storyboard instantiateViewControllerWithIdentifier:@"postcontentController"];
+        // 首页导读页面，没有版面的ID和中文名，只有英文名
+        [postcontent setBoardInfo:0 chsName:nil engName:@"Test"];
+        postcontent.postID = 907144;
+        postcontent.postSubject = @"[Test]版主别删，是用来测试客户端的显示效果的";
+        postcontent.isFromGuidance = YES;
+
+        [navigationController popToRootViewControllerAnimated:NO];
+        [navigationController pushViewController:postcontent animated:YES];
     }
 
     [self.frostedViewController hideMenuViewController];
@@ -247,12 +259,12 @@
         [self switchViewto:VIEW_BOARD_LIST];
     } else if (indexPath.section == 1 && indexPath.row == 0) {
         [self switchViewto:VIEW_MAIL];
-    } else if (indexPath.section == 1 && indexPath.row == 3){
-        [self switchViewto:VIEW_NOTIFICATION];
     } else if (indexPath.section == 1 && indexPath.row == 1){
         [self switchViewto:VIEW_SETTING];
     } else if (indexPath.section == 1 && indexPath.row == 2){
         [self switchViewto:VIEW_ABOUT];
+    } else if (indexPath.section == 1 && indexPath.row == 3){
+        [self switchViewto:VIEW_TEST];
     }
 }
 

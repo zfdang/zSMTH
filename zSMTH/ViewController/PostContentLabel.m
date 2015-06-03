@@ -21,13 +21,9 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
     // 设置TTT label的一些属性
     self.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
     self.lineBreakMode = NSLineBreakByWordWrapping;
-    if(text.length < 2000){
-        // 当文本太长时，不做链接的检查，否则性能会太差
-        self.enabledTextCheckingTypes = NSTextCheckingTypeLink;
-    }
-
-    // 去除开始、结尾的空格、换行符
-    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    self.numberOfLines = 0;
+    // 当文本太长时，不做链接的检查，否则性能会太差
+    self.enabledTextCheckingTypes = NSTextCheckingTypeLink;
     
     if(text && [text length] > 0) {
         // 过滤ASCII控制符，参照
@@ -38,17 +34,6 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
                                                options:0
                                                  range:NSMakeRange(0, [text length])
                                           withTemplate:@""];
-    }
-
-    // UILabel has maximum height, if content size is too large, content will be invisible
-    //    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
-    //    http://stackoverflow.com/questions/1493895/uiview-what-are-the-maximum-bounds-dimensions-i-can-use
-    // 所以需要限制text的长度
-    // 截取前5000个字符
-    BOOL truncated = NO;
-    if(text.length > 3500){
-        text = [text substringToIndex:3500];
-        truncated = YES;
     }
 
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:@""];
@@ -156,18 +141,6 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
                                     nil];
             [attString appendAttributedString:[[NSAttributedString alloc] initWithString:subContent attributes:attrs]];
         }
-    }
-
-    // 加上被截取的提示信息
-    if(truncated) {
-        NSString *hint = @"\n\n帖子太长，阅读全文请在浏览器中打开...";
-        NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                (id)[UIColor redColor].CGColor, kCTForegroundColorAttributeName,
-                                font_ref, kCTFontAttributeName,
-                                [UIColor grayColor].CGColor, kCTStrokeColorAttributeName,
-                                [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
-                                nil];
-        [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",hint] attributes:attrs]];
     }
 
     CFRelease(font_ref);

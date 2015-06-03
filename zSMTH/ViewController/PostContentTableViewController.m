@@ -309,7 +309,7 @@
         }
 
         // 接收来自TTTAttributedLabel的对链接的信息
-        cell.postContent.delegate = self;
+//        cell.postContentHeader.delegate = self;
     }
     
     if (indexPath.section == 0) {
