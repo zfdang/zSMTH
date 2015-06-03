@@ -189,7 +189,9 @@
     if(helper.user == nil) {
         // 登录失败，显示错误信息
         // http://trac.kcn.cn/kbs/wiki/smthappDevAPIError
-        if(loginResult == -1){
+        if(loginResult == 0){
+            self.loginFeedback.text = @"帐号密码错误，请重试...";
+        } else if(loginResult == -1){
             self.loginFeedback.text = @"网络错误，请稍后重试...";
         } else if(loginResult <=-2 && loginResult >= -10) {
             self.loginFeedback.text = @"服务器错误，请稍后重试...";
