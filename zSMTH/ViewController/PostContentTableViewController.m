@@ -307,11 +307,8 @@
             lpgr.minimumPressDuration = 0.6; //seconds
             [cell addGestureRecognizer:lpgr];
         }
-
-        // 接收来自TTTAttributedLabel的对链接的信息
-//        cell.postContentHeader.delegate = self;
     }
-    
+
     if (indexPath.section == 0 && indexPath.row < [self.mPosts count]) {
         cell.idxPost = indexPath.row;
 

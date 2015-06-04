@@ -47,11 +47,11 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
             empty_line_counter = 0;
         }
 
-//        if([line hasPrefix:@"--"]){
-//            // 签名档，skip剩余的所有行
-//            *stop = YES;
-//            return;
-//        }
+        if([line compare:@"--"] == NSOrderedSame){
+            // 签名档，skip剩余的所有行
+            *stop = YES;
+            return;
+        }
 
         if([line hasPrefix:@": "])
         {
@@ -136,7 +136,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
 
 - (CGFloat)getContentHeight
 {
-    static CGFloat padding = 10.0;
+    static CGFloat padding = 0.0;
 
     UIFont *systemFont = [UIFont systemFontOfSize:kEspressoDescriptionTextFontSize];
 //    CGSize textSize = CGSizeMake(self.frame.size.width, CGFLOAT_MAX); // rough accessory size

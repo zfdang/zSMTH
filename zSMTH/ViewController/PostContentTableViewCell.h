@@ -12,9 +12,6 @@
 #import "RefreshTableViewProtocol.h"
 
 @interface PostContentTableViewCell : UITableViewCell
-{
-    NSMutableArray *mSubviewHeights;
-}
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *postTime;
