@@ -14,8 +14,7 @@
 #import "TapImageView.h"
 #import "UIImage+Resize.h"
 
-const CGFloat PaddingBetweenContentAndImage = 5.0;
-const CGFloat PaddingBetweenImages = 5.0;
+const CGFloat PaddingBetweenSubviews = 8.0;
 
 @implementation PostContentTableViewCell
 
@@ -33,7 +32,7 @@ const CGFloat PaddingBetweenImages = 5.0;
     // Configure the view for the selected state
 }
 
--(void) setCellContent:(SMTHPost*)post delegate:(id<TTTAttributedLabelDelegate>)obj
+-(void) setCellContent:(SMTHPost*)post
 
 {
     // 设置用户头像
@@ -139,8 +138,7 @@ const CGFloat PaddingBetweenImages = 5.0;
 
     // 每个subview的高度，清零
     mSubviewHeights = [[NSMutableArray alloc] init];
-    
-    // 将每个segment添加到cellView中去
+
     CGRect rect = self.postContentHeader.frame;
     // tableviewcell does not resize with UIScreen size, but I guess this issue can be fixed somehow
     // before we fix the issue, use UIScreen's width
@@ -150,15 +148,17 @@ const CGFloat PaddingBetweenImages = 5.0;
     // post content is 2 + 2 smaller than cellview;
     rect.size.width = rectScreen.size.width - 12;
 
+    float globalViewOffset = rect.origin.y + rect.size.height;
 
+    // 将每个segment添加到cellView中去
     for (int i = 0; i < [contentSegments count]; i++) {
         
         // 计算当前subview的垂直偏移量
-        float curSubviewOffset = rect.origin.y;
+        float curSubviewOffset = globalViewOffset;
         for (int j = 0; j < i; j++) {
             // calculate sum of previous images's height
             float subviewHeight = [[mSubviewHeights objectAtIndex:j] floatValue];
-            curSubviewOffset += subviewHeight + 5;
+            curSubviewOffset += subviewHeight + PaddingBetweenSubviews;
         }
 
         id item = [contentSegments objectAtIndex:i];
@@ -170,32 +170,32 @@ const CGFloat PaddingBetweenImages = 5.0;
             PostContentLabel * labelView = [[PostContentLabel alloc] init];
             if(post.postContent.length < 2000) {
                 labelView.enabledTextCheckingTypes = NSTextCheckingTypeLink;
-                labelView.delegate = obj;
+                labelView.delegate = self.delegate;
             } else {
                 // 当文本太长时，不做链接的检查，否则性能会太差
                 labelView.enabledTextCheckingTypes = 0;
             }
             [labelView setContentInfo:content];
-            CGFloat subviewHeight = [labelView getContentHeight];
-            labelView.frame = CGRectMake(rect.origin.x, curSubviewOffset, rect.size.width, subviewHeight);
-            [self.cellView addSubview:labelView];
-
-            [mSubviewHeights insertObject:[NSNumber numberWithFloat:subviewHeight] atIndex:i];
-            continue;
             
+            // 将高度保存下来
+            CGFloat selfHeight = [labelView getContentHeight];
+            [mSubviewHeights insertObject:[NSNumber numberWithFloat:selfHeight] atIndex:i];
+
+            // 设置view的尺寸
+            labelView.frame = CGRectMake(rect.origin.x, curSubviewOffset, rect.size.width, selfHeight);
+            [self.cellView addSubview:labelView];
         } else if ([item isKindOfClass:[NSNumber class]]) {
             // 这是帖子的一个附件
             NSNumber *num = (NSNumber*)item;
             NSLog(@"Attachment, index = %d", [num intValue]);
             
             SMTHAttachment *att = (SMTHAttachment*)[post.attachments objectAtIndex:[num intValue]];
-            
             if(![att isImage]){
                 // this is not an image
                 [mSubviewHeights insertObject:[NSNumber numberWithFloat:0.0] atIndex:i];
                 continue;
             }
-            
+
             // 创建图片附件subview
             TapImageView * imageview = [[TapImageView alloc] init];
             imageview.idxPost = self.idxPost;
@@ -232,13 +232,13 @@ const CGFloat PaddingBetweenImages = 5.0;
                                         }
 
                                         // find current image y offset
-                                        CGFloat curImageOffset = 0;
+                                        CGFloat curViewOffset = globalViewOffset;
                                         for (int j = 0; j < i; j++) {
                                             // calculate sum of previous subviews' height
                                             float subviewHeight = [[mSubviewHeights objectAtIndex:j] floatValue];
-                                            curImageOffset += subviewHeight + PaddingBetweenImages;
+                                            curViewOffset += subviewHeight + PaddingBetweenSubviews;
                                         }
-                                        CGRect frame = CGRectMake(rect.origin.x, curImageOffset, rect.size.width, curImageHeight);
+                                        CGRect frame = CGRectMake(rect.origin.x, curViewOffset, rect.size.width, curImageHeight);
                                         imageview.frame = frame;
                                         
                                         // if image was not loaded before, refresh tableview
@@ -248,7 +248,7 @@ const CGFloat PaddingBetweenImages = 5.0;
                                         }
                                     }
                                 }];
-            
+
             if(att.loaded == NO){
                 imageview.frame = CGRectMake(rect.origin.x, curSubviewOffset, 100, 20);
             }
@@ -273,7 +273,7 @@ const CGFloat PaddingBetweenImages = 5.0;
     
     // this is the image offset to post content
     CGFloat content_height = self.postContentHeader.frame.size.height;
-    CGFloat result = rect.origin.y + content_height + PaddingBetweenContentAndImage;
+    CGFloat result = rect.origin.y + content_height + PaddingBetweenSubviews;
     
 //    NSLog(@"header height is %f, content height = %f", rect.origin.y, content_height);
     if(mSubviewHeights != nil){
@@ -282,9 +282,9 @@ const CGFloat PaddingBetweenImages = 5.0;
             // calculate sum of previous images's height
             imageHeight = [[mSubviewHeights objectAtIndex:i] floatValue];
 //            NSLog(@"image index %d, height = %f", i, imageHeight);
-            result += imageHeight + PaddingBetweenImages;
+            result += imageHeight + PaddingBetweenSubviews;
         }
-        result += PaddingBetweenImages;
+        result += PaddingBetweenSubviews;
     }
 //    NSLog(@"Final result is %f", result);
     return result;

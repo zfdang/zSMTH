@@ -136,7 +136,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
 
 - (CGFloat)getContentHeight
 {
-    static CGFloat padding = 0.0;
+    static CGFloat padding = 10.0;
 
     UIFont *systemFont = [UIFont systemFontOfSize:kEspressoDescriptionTextFontSize];
 //    CGSize textSize = CGSizeMake(self.frame.size.width, CGFLOAT_MAX); // rough accessory size

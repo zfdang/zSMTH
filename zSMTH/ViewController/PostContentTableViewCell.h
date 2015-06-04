@@ -22,9 +22,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *postAuthor;
 @property (weak, nonatomic) IBOutlet UIView *cellView;
 @property (weak, nonatomic) IBOutlet UILabel *postContentHeader;
+
+// TapImageViewDelegate, TTTAttributedLabelDelegate
 @property (weak, nonatomic) id delegate;
 
--(void) setCellContent:(SMTHPost*)post delegate:(id<TTTAttributedLabelDelegate>)obj;
+-(void) setCellContent:(SMTHPost*)post;
 -(CGFloat) getCellHeight;
 @property (nonatomic) long idxPost;
 

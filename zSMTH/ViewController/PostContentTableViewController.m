@@ -318,7 +318,7 @@
         SMTHPost *post = (SMTHPost*)[self.mPosts objectAtIndex:indexPath.row];
         post.replyIndex = indexPath.row;
         post.postBoard = engName;
-        [cell setCellContent:post delegate:self];
+        [cell setCellContent:post];
 
         if(contentType == CONTENT_INBOX) {
             cell.postIndex.text = @"发件人";
