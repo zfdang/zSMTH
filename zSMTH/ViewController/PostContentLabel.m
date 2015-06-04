@@ -22,20 +22,9 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
     self.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
     self.lineBreakMode = NSLineBreakByWordWrapping;
     self.numberOfLines = 0;
-    
-    if(text && [text length] > 0) {
-        // 过滤ASCII控制符，参照
-        // http://www.newsmth.net/bbs0an.php?path=%2Fgroups%2Fsystem.faq%2FASCIIart%2Ffaq%2Ffaq02
-        NSError *error = nil;
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[[;0-9]*m" options:NSRegularExpressionCaseInsensitive error:&error];
-        text = [regex stringByReplacingMatchesInString:text
-                                               options:0
-                                                 range:NSMakeRange(0, [text length])
-                                          withTemplate:@""];
-    }
 
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:@""];
-    
+
     // create font for attString
     UIFont * font = [self font];
     kEspressoDescriptionTextFontSize = font.pointSize;

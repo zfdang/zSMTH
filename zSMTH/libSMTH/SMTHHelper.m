@@ -382,6 +382,17 @@ const int filterPostNumberinOnePage = 100; // 搜索结果一页显示的数量
         
         post.postContent = [dict objectForKey:@"body"];
 
+        // 过滤ASCII控制符，参照
+        if(post.postContent && [post.postContent length] > 0) {
+            // http://www.newsmth.net/bbs0an.php?path=%2Fgroups%2Fsystem.faq%2FASCIIart%2Ffaq%2Ffaq02
+            NSError *error = nil;
+            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\[[;0-9]*m" options:NSRegularExpressionCaseInsensitive error:&error];
+            post.postContent = [regex stringByReplacingMatchesInString:post.postContent
+                                                   options:0
+                                                     range:NSMakeRange(0, [post.postContent length])
+                                              withTemplate:@""];
+        }
+
         post.postFlags = [dict objectForKey:@"flags"];
 
         [posts addObject:post];
