@@ -33,7 +33,8 @@ const CGFloat PaddingBetweenImages = 5.0;
     // Configure the view for the selected state
 }
 
--(void) setCellContent:(SMTHPost*)post
+-(void) setCellContent:(SMTHPost*)post delegate:(id<TTTAttributedLabelDelegate>)obj
+
 {
     // 设置用户头像
     SMTHHelper *helper = [SMTHHelper sharedManager];
@@ -51,11 +52,11 @@ const CGFloat PaddingBetweenImages = 5.0;
         self.postIndex.text = [NSString stringWithFormat:@"%ld楼",post.replyIndex];
     }
     
-    NSLog(@"%@", post.postContent);
+//    NSLog(@"%@", post.postContent);
 
     NSMutableArray *contentSegments = [[NSMutableArray alloc] init];
     NSMutableIndexSet *attachIndex = [[NSMutableIndexSet alloc] init];
-    // 将内容分割
+    // 将内容分成不同的片段，单独显示
     // split post contents by [upload=1][/upload]
     NSRegularExpression *regex = [NSRegularExpression
                                   regularExpressionWithPattern:@"\\[upload=\\d+\\]\\[/upload\\]"
@@ -103,7 +104,7 @@ const CGFloat PaddingBetweenImages = 5.0;
             [contentSegments addObject:[NSNumber numberWithInt:i]];
         }
     }
-    
+
     // 如果某个内容过长，还需要对内容进一步进行拆分，避免单个content的高度太高
     // UILabel has maximum height, if content size is too large, content will be invisible
     //    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
@@ -148,6 +149,8 @@ const CGFloat PaddingBetweenImages = 5.0;
     // cellView is 4 + 4 smaller than screen
     // post content is 2 + 2 smaller than cellview;
     rect.size.width = rectScreen.size.width - 12;
+
+
     for (int i = 0; i < [contentSegments count]; i++) {
         
         // 计算当前subview的垂直偏移量
@@ -165,6 +168,13 @@ const CGFloat PaddingBetweenImages = 5.0;
             NSLog(@"Content, length = %d", content.length);
 
             PostContentLabel * labelView = [[PostContentLabel alloc] init];
+            if(post.postContent.length < 2000) {
+                labelView.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+                labelView.delegate = obj;
+            } else {
+                // 当文本太长时，不做链接的检查，否则性能会太差
+                labelView.enabledTextCheckingTypes = 0;
+            }
             [labelView setContentInfo:content];
             CGFloat subviewHeight = [labelView getContentHeight];
             labelView.frame = CGRectMake(rect.origin.x, curSubviewOffset, rect.size.width, subviewHeight);

@@ -22,8 +22,6 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
     self.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
     self.lineBreakMode = NSLineBreakByWordWrapping;
     self.numberOfLines = 0;
-    // 当文本太长时，不做链接的检查，否则性能会太差
-    self.enabledTextCheckingTypes = NSTextCheckingTypeLink;
     
     if(text && [text length] > 0) {
         // 过滤ASCII控制符，参照
@@ -60,11 +58,11 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
             empty_line_counter = 0;
         }
 
-        if([line hasPrefix:@"--"]){
-            // 签名档，skip剩余的所有行
-            *stop = YES;
-            return;
-        }
+//        if([line hasPrefix:@"--"]){
+//            // 签名档，skip剩余的所有行
+//            *stop = YES;
+//            return;
+//        }
 
         if([line hasPrefix:@": "])
         {

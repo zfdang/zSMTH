@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *postContentHeader;
 @property (weak, nonatomic) id delegate;
 
--(void) setCellContent:(SMTHPost*)post;
+-(void) setCellContent:(SMTHPost*)post delegate:(id<TTTAttributedLabelDelegate>)obj;
 -(CGFloat) getCellHeight;
 @property (nonatomic) long idxPost;
 

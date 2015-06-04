@@ -312,13 +312,13 @@
 //        cell.postContentHeader.delegate = self;
     }
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 && indexPath.row < [self.mPosts count]) {
         cell.idxPost = indexPath.row;
 
         SMTHPost *post = (SMTHPost*)[self.mPosts objectAtIndex:indexPath.row];
         post.replyIndex = indexPath.row;
         post.postBoard = engName;
-        [cell setCellContent:post];
+        [cell setCellContent:post delegate:self];
 
         if(contentType == CONTENT_INBOX) {
             cell.postIndex.text = @"发件人";
