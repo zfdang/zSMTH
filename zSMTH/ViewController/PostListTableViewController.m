@@ -104,7 +104,7 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationController.hidesBarsOnSwipe = YES;
+    self.navigationController.hidesBarsOnSwipe = NO;
 }
 
 - (void) refreshPostList {
