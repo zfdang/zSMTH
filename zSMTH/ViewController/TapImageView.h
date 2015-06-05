@@ -16,4 +16,6 @@
 @property (weak) id<TapImageViewDelegate> delegate;
 @property (nonatomic) long idxPost;
 @property (nonatomic) long idxImage;
+@property (nonatomic) BOOL loaded;
+
 @end

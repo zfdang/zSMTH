@@ -276,14 +276,14 @@ const CGFloat PaddingBetweenSubviews = 8.0;
                                             imageview.frame = frame;
                                             
                                             // if image was not loaded before, refresh tableview
-                                            if(self.delegate && att.loaded == NO){
-                                                att.loaded = YES;
+                                            if(self.delegate && imageview.loaded == NO){
+                                                imageview.loaded = YES;
                                                 [self.delegate RefreshTableView];
                                             }
                                         }
                                     }];
 
-                if(att.loaded == NO){
+                if(imageview.loaded == NO){
                     imageview.frame = CGRectMake(rect.origin.x, curSubviewOffset, 100, 20);
                 }
                 [self.cellView addSubview:imageview];

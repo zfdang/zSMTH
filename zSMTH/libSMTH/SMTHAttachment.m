@@ -14,13 +14,11 @@
 @synthesize attPos;
 @synthesize attSize;
 @synthesize imgHeight;
-@synthesize loaded;
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.loaded = NO;
     }
     return self;
 }

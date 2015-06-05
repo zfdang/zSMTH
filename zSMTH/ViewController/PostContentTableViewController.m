@@ -274,8 +274,8 @@
     {
         height = [((NSNumber*)result) floatValue];
     }
-    
-//    NSLog(@"%@ height=%f", indexPath, height);
+
+    NSLog(@"%d, %f", indexPath.row, height);
     return height;
 }
 
@@ -319,7 +319,7 @@
         if(contentType == CONTENT_INBOX) {
             cell.postIndex.text = @"发件人";
         }
-       
+
         CGFloat height = [cell getCellHeight];
         [mHeights setObject:[NSNumber numberWithFloat:height] forKey:indexPath];
     }
