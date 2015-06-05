@@ -21,7 +21,6 @@ const CGFloat PaddingBetweenSubviews = 8.0;
     long postID;
     NSMutableArray *contentSegments;
     NSMutableArray *contentSubviews;
-    NSMutableArray *mSubviewHeights;
 }
 @end
 
@@ -33,12 +32,113 @@ const CGFloat PaddingBetweenSubviews = 8.0;
 
 - (void)awakeFromNib {
     // Initialization code
+    contentSegments = [[NSMutableArray alloc] init];
+    contentSubviews = [[NSMutableArray alloc] init];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void) parseSingleContentSegment:(NSString*) segment
+{
+    // 去除开始、结尾的空格、换行符
+    segment = [segment stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+    // 检查segment是否为空
+    if(segment.length > 0){
+        // 如果某个内容过长，还需要对内容进一步进行拆分，避免单个content的高度太高
+        // UILabel has maximum height, if content size is too large, content will be invisible
+        //    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
+        //    http://stackoverflow.com/questions/1493895/uiview-what-are-the-maximum-bounds-dimensions-i-can-use
+        // 所以需要限制text的长度
+        while (segment.length > 5000) {
+            NSString *partialSegment = [segment substringToIndex:5000];
+            segment = [segment substringFromIndex:5000];
+            [contentSegments addObject:partialSegment];
+        }
+        [contentSegments addObject:segment];
+    }
+}
+
+- (void) parsePostIntoSegments:(SMTHPost*) post
+{
+    // saved images index which have been shown in content
+    NSMutableIndexSet *attachIndex = [[NSMutableIndexSet alloc] init];
+
+    // 将内容分成不同的片段，分别显示
+    // split post contents by [upload=1][/upload]
+    NSRegularExpression *regex = [NSRegularExpression
+                                  regularExpressionWithPattern:@"\\[upload=\\d+\\]\\[/upload\\]"
+                                  options:NSRegularExpressionCaseInsensitive
+                                  error:nil];
+    // 按照找到的upload, 将文章内容分节
+    __block NSRange preRange = NSMakeRange(0, 0);
+    [regex enumerateMatchesInString:post.postContent
+                            options:0
+                              range:NSMakeRange(0, [post.postContent length])
+                         usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop)
+     {
+         // 将upload前的内容放到数组里
+         NSRange ran = NSMakeRange(preRange.location + preRange.length,
+                                   match.range.location - preRange.location - preRange.length);
+         NSString *segment = [post.postContent substringWithRange:ran];
+
+         [self parseSingleContentSegment:segment];
+
+         // 将upload也放到数组里
+         NSString *matchedString = [post.postContent substringWithRange:match.range];
+         NSString *matchedIndex = [matchedString substringWithRange:NSMakeRange(8, matchedString.length - 18)];
+         // index是从1开始的, 但是图片附件是从0开始的
+         int imgIndex = [matchedIndex intValue] - 1;
+         if(imgIndex < [post.attachments count]) {
+             // 确保图片的index是有效的
+             [attachIndex addIndex:imgIndex];
+             [contentSegments addObject:[NSNumber numberWithInt:imgIndex]];
+         }
+         preRange = match.range;
+     }];
+    // 如果upload后面还有内容，也放到数组里
+    NSRange ran = NSMakeRange(preRange.location + preRange.length,
+                              post.postContent.length - preRange.location - preRange.length);
+    NSString *segment = [post.postContent substringWithRange:ran];
+    [self parseSingleContentSegment:segment];
+
+    // 如果有些图片附件不在文章内容里，还需要将对应图片放到后面去
+    for(int i=0; i<[post.attachments count]; i++){
+        if(![attachIndex containsIndex:i]){
+            [contentSegments addObject:[NSNumber numberWithInt:i]];
+        }
+    }
+
+    // 显示results里存储的结果
+    NSLog(@"-----------------------");
+    NSLog(@"Number of segments = %d", [contentSegments count]);
+    for (id item in contentSegments) {
+        if([item isKindOfClass:[NSString class]]) {
+            NSString *content = (NSString*) item;
+            NSLog(@"Content, length = %d", content.length);
+            //            NSLog(@"%@", content);
+        } else if ([item isKindOfClass:[NSNumber class]]) {
+            NSNumber *num = (NSNumber*)item;
+            NSLog(@"Attachment, index = %d", [num intValue]);
+        }
+    }
+}
+
+-(float) calculateContentOffsetForSubview:(int)index initialOffset:(float) initialOffset
+{
+    float result = initialOffset;
+    for (int j = 0; j < index; j++) {
+        // calculate sum of previous images's height
+        // 这里可以被优化，其实只看最后一个的位置就可以了
+        UIView *subview = (UIView*) [contentSubviews objectAtIndex:j];
+        float subviewHeight = subview.frame.size.height;
+        result += subviewHeight + PaddingBetweenSubviews;
+    }
+    return result;
 }
 
 -(void) setCellContent:(SMTHPost*)post
@@ -75,103 +175,29 @@ const CGFloat PaddingBetweenSubviews = 8.0;
         } else {
             self.postIndex.text = [NSString stringWithFormat:@"%ld楼",post.replyIndex];
         }
-        
-        contentSegments = [[NSMutableArray alloc] init];
-        contentSubviews = [[NSMutableArray alloc] init];
-        NSMutableIndexSet *attachIndex = [[NSMutableIndexSet alloc] init];
 
-        // 将内容分成不同的片段，分别显示
-        // split post contents by [upload=1][/upload]
-        NSRegularExpression *regex = [NSRegularExpression
-                                      regularExpressionWithPattern:@"\\[upload=\\d+\\]\\[/upload\\]"
-                                      options:NSRegularExpressionCaseInsensitive
-                                      error:nil];
-        // 按照找到的upload, 将文章内容分节
-        __block NSRange preRange = NSMakeRange(0, 0);
-        [regex enumerateMatchesInString:post.postContent
-                                options:0
-                                  range:NSMakeRange(0, [post.postContent length])
-                             usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop)
-         {
-             // 将upload前的内容放到数组里
-             NSRange ran = NSMakeRange(preRange.location + preRange.length,
-                                       match.range.location - preRange.location - preRange.length);
-             NSString *segment = [post.postContent substringWithRange:ran];
-             // 去除开始、结尾的空格、换行符
-             segment = [segment stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-             if(segment.length > 0){
-                 [contentSegments addObject:segment];
-             }
-
-             // 将upload也放到数组里
-             NSString *matchedString = [post.postContent substringWithRange:match.range];
-             NSString *matchedIndex = [matchedString substringWithRange:NSMakeRange(8, matchedString.length - 18)];
-             // index是从1开始的
-             int imgIndex = [matchedIndex intValue] - 1;
-             if(imgIndex < [post.attachments count]) {
-                 // 确保图片的index是有效的
-                 [attachIndex addIndex:imgIndex];
-                 [contentSegments addObject:[NSNumber numberWithInt:imgIndex]];
-             }
-             preRange = match.range;
-         }];
-        // 如果upload后面还有内容，也放到数组里
-        NSRange ran = NSMakeRange(preRange.location + preRange.length,
-                                  post.postContent.length - preRange.location - preRange.length);
-        NSString *segment = [post.postContent substringWithRange:ran];
-        if([segment length] > 0 ) {
-            [contentSegments addObject:segment];
-        }
-        // 如果有些图片附件不在文章内容里，还需要将对应图片放到后面去
-        for(int i=0; i<[post.attachments count]; i++){
-            if(![attachIndex containsIndex:i]){
-                [contentSegments addObject:[NSNumber numberWithInt:i]];
-            }
-        }
-
-        // 如果某个内容过长，还需要对内容进一步进行拆分，避免单个content的高度太高
-        // UILabel has maximum height, if content size is too large, content will be invisible
-        //    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
-        //    http://stackoverflow.com/questions/1493895/uiview-what-are-the-maximum-bounds-dimensions-i-can-use
-        // 所以需要限制text的长度
-        // TODO
-
-        // 显示results里存储的结果
-        NSLog(@"-----------------------");
-        NSLog(@"Number of segments = %d", [contentSegments count]);
-        for (id item in contentSegments) {
-            if([item isKindOfClass:[NSString class]]) {
-                NSString *content = (NSString*) item;
-                NSLog(@"Content, length = %d", content.length);
-                //            NSLog(@"%@", content);
-            } else if ([item isKindOfClass:[NSNumber class]]) {
-                NSNumber *num = (NSNumber*)item;
-                NSLog(@"Attachment, index = %d", [num intValue]);
-            }
-        }
+        // 将内容分成连续的segments
+        [contentSegments removeAllObjects];
+        [self parsePostIntoSegments:post];
 
         // 因为cell可能是被重用的，所以要先清除之前可能添加进去的subview
-        NSArray *subviews = [self.cellView subviews];
-        for (id subview in subviews) {
-            if([subview isKindOfClass:[TapImageView class]] || [subview isKindOfClass:[TTTAttributedLabel class]]){
-                UIView *view = (UIView*) subview;
-                [view removeFromSuperview];
-            }
+        //        NSArray *subviews = [self.cellView subviews];
+        //        for (id subview in subviews) {
+        //            if([subview isKindOfClass:[TapImageView class]] || [subview isKindOfClass:[TTTAttributedLabel class]]){
+        //                UIView *view = (UIView*) subview;
+        //                [view removeFromSuperview];
+        //            }
+        //        }
+        for (UIView *view in contentSubviews) {
+            [view removeFromSuperview];
         }
-
-        // 每个subview的高度，清零
-        mSubviewHeights = [[NSMutableArray alloc] init];
+        [contentSubviews removeAllObjects];
 
         NSLog(@"****************************");
         // 将每个segment添加到cellView中去
         for (int i = 0; i < [contentSegments count]; i++) {
             // 计算当前subview的垂直偏移量
-            float curSubviewOffset = initialViewOffset;
-            for (int j = 0; j < i; j++) {
-                // calculate sum of previous images's height
-                float subviewHeight = [[mSubviewHeights objectAtIndex:j] floatValue];
-                curSubviewOffset += subviewHeight + PaddingBetweenSubviews;
-            }
+            float curSubviewOffset = [self calculateContentOffsetForSubview:i initialOffset:initialViewOffset];
             
             id item = [contentSegments objectAtIndex:i];
             if([item isKindOfClass:[NSString class]]) {
@@ -188,27 +214,21 @@ const CGFloat PaddingBetweenSubviews = 8.0;
                 }
                 [labelView setContentInfo:content];
 
-                // 将高度保存下来
-                CGFloat selfHeight = [labelView getContentHeight];
-                [mSubviewHeights insertObject:[NSNumber numberWithFloat:selfHeight] atIndex:i];
-
                 // 设置view的尺寸
+                CGFloat selfHeight = [labelView getContentHeight];
                 labelView.frame = CGRectMake(rect.origin.x, curSubviewOffset, rect.size.width, selfHeight);
                 [self.cellView addSubview:labelView];
 
                 [contentSubviews addObject:labelView];
 
-                CGRect r = labelView.frame;
-                NSLog(@"Content view (%d): y = %f, height = %f", i, r.origin.y, r.size.height);
+                NSLog(@"Content view (%d): y = %f, height = %f", i, labelView.frame.origin.y, labelView.frame.size.height);
             } else if ([item isKindOfClass:[NSNumber class]]) {
                 // 这是帖子的一个附件
                 NSNumber *num = (NSNumber*)item;
-                NSLog(@"Attachment, index = %d", [num intValue]);
 
                 SMTHAttachment *att = (SMTHAttachment*)[post.attachments objectAtIndex:[num intValue]];
                 if(![att isImage]){
                     // this is not an image
-                    [mSubviewHeights insertObject:[NSNumber numberWithFloat:0.0] atIndex:i];
                     continue;
                 }
 
@@ -217,9 +237,6 @@ const CGFloat PaddingBetweenSubviews = 8.0;
                 imageview.idxPost = self.idxPost;
                 imageview.idxImage = [num intValue];
                 imageview.delegate = self.delegate;
-
-                // 20 is the height of placeholder image
-                [mSubviewHeights insertObject:[NSNumber numberWithFloat:20.0] atIndex:i];
 
                 // Here we use the new provided sd_setImageWithURL: method to load the web image
                 [imageview sd_setImageWithURL: [post getAttachedImageURL:[num intValue]]
@@ -233,12 +250,6 @@ const CGFloat PaddingBetweenSubviews = 8.0;
                                         } else {
                                             // 下载成功, 计算满宽情况下，图片的高度
                                             CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;
-                                            // update the exact image height
-                                            if(i < [mSubviewHeights count]){
-                                                [mSubviewHeights replaceObjectAtIndex:i withObject:[NSNumber numberWithFloat:curImageHeight]];
-                                            } else {
-                                                [mSubviewHeights insertObject:[NSNumber numberWithFloat:curImageHeight] atIndex:i];
-                                            }
                                             
                                             // 缩小图片，否则占用内存会太大
                                             if(image.size.height > curImageHeight) {
@@ -247,14 +258,10 @@ const CGFloat PaddingBetweenSubviews = 8.0;
                                                 image = [UIImage imageWithImage:image scaledToFitToSize:size];
                                             }
                                             
-                                            // find current image y offset
-                                            CGFloat curViewOffset = initialViewOffset;
-                                            for (int j = 0; j < i; j++) {
-                                                // calculate sum of previous subviews' height
-                                                float subviewHeight = [[mSubviewHeights objectAtIndex:j] floatValue];
-                                                curViewOffset += subviewHeight + PaddingBetweenSubviews;
-                                            }
-                                            CGRect frame = CGRectMake(rect.origin.x, curViewOffset, rect.size.width, curImageHeight);
+                                            // update height & width of imageview
+                                            CGRect frame = imageview.frame;
+                                            frame.size.height = curImageHeight;
+                                            frame.size.width = rect.size.width;
                                             imageview.frame = frame;
                                             
                                             // if image was not loaded before, refresh tableview
@@ -284,17 +291,12 @@ const CGFloat PaddingBetweenSubviews = 8.0;
         NSLog(@"############################");
         NSLog(@"Cell update, re-layout only");
 
-        float curSubviewOffset = initialViewOffset;
         for (int i = 0; i < [contentSubviews count]; i++) {
             UIView *subview = (UIView*) [contentSubviews objectAtIndex:i];
             CGRect rect = subview.frame;
-            rect.origin.y = curSubviewOffset;
+            rect.origin.y = [self calculateContentOffsetForSubview:i initialOffset:initialViewOffset];
             subview.frame = rect;
             NSLog(@"(%d): %f, %f, %f, %f", i, subview.frame.origin.x, subview.frame.origin.y, subview.frame.size.width, subview.frame.size.height);
-
-            // 计算下一个subview的垂直偏移量
-            float subviewHeight = [[mSubviewHeights objectAtIndex:i] floatValue];
-            curSubviewOffset += subviewHeight + PaddingBetweenSubviews;
         }
     }
 }
@@ -304,15 +306,13 @@ const CGFloat PaddingBetweenSubviews = 8.0;
     CGRect rect = self.postContentHeader.frame;
     CGFloat result = rect.origin.y + rect.size.height;
 
-    if(mSubviewHeights != nil){
-        CGFloat imageHeight = 0;
-        for (int i = 0; i < [mSubviewHeights count]; i++) {
-            // calculate sum of previous images's height
-            imageHeight = [[mSubviewHeights objectAtIndex:i] floatValue];
-            result += imageHeight + PaddingBetweenSubviews;
-        }
-        result += PaddingBetweenSubviews;
+    for (int i = 0; i < [contentSubviews count]; i++) {
+        // calculate sum of previous images's height
+        UIView *subview  = (UIView*)[contentSubviews objectAtIndex:i];
+        result += subview.frame.size.height + PaddingBetweenSubviews;
     }
+    result += PaddingBetweenSubviews;
+
     NSLog(@"Final result is %f", result);
     return result;
 }
