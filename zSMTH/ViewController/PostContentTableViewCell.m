@@ -53,11 +53,22 @@ const CGFloat PaddingBetweenSubviews = 8.0;
         // UILabel has maximum height, if content size is too large, content will be invisible
         //    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
         //    http://stackoverflow.com/questions/1493895/uiview-what-are-the-maximum-bounds-dimensions-i-can-use
-        // 所以需要限制text的长度
-        while (segment.length > 5000) {
-            NSString *partialSegment = [segment substringToIndex:5000];
-            segment = [segment substringFromIndex:5000];
+        // 所以需要限制segment的长度
+        const int maxLength = 3000;
+        while (segment.length > maxLength) {
+            NSRange range = NSMakeRange(maxLength - 100, segment.length - maxLength + 100);
+            NSRange result = [segment rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]
+                                                      options:0
+                                                        range:range];
+            if(result.location == NSNotFound) {
+                result.location = maxLength;
+                result.length = 0;
+            }
+            NSString *partialSegment = [segment substringToIndex:result.location];
             [contentSegments addObject:partialSegment];
+
+            // 继续处理剩下的文本
+            segment = [segment substringFromIndex:result.location + result.length];
         }
         [contentSegments addObject:segment];
     }
@@ -136,7 +147,7 @@ const CGFloat PaddingBetweenSubviews = 8.0;
         // 这里可以被优化，其实只看最后一个的位置就可以了
         UIView *subview = (UIView*) [contentSubviews objectAtIndex:j];
         float subviewHeight = subview.frame.size.height;
-        result += subviewHeight + PaddingBetweenSubviews;
+        result += subviewHeight;
     }
     return result;
 }
