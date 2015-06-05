@@ -154,13 +154,11 @@ typedef enum {
                                                                 position:CSToastPositionCenter];
                     [self.tableView.infiniteScrollingView stopAnimating];
                 }
-                self.tableView.showsPullToRefresh = YES;
-            });
-        } else {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                self.tableView.showsPullToRefresh = YES;
             });
         }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.tableView.showsPullToRefresh = YES;
+        });
     });
 }
 

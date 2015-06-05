@@ -147,7 +147,7 @@ const CGFloat PaddingBetweenSubviews = 8.0;
         // 这里可以被优化，其实只看最后一个的位置就可以了
         UIView *subview = (UIView*) [contentSubviews objectAtIndex:j];
         float subviewHeight = subview.frame.size.height;
-        result += subviewHeight;
+        result += subviewHeight + PaddingBetweenSubviews;
     }
     return result;
 }
@@ -324,7 +324,6 @@ const CGFloat PaddingBetweenSubviews = 8.0;
     }
     result += PaddingBetweenSubviews;
 
-    NSLog(@"Final result is %f", result);
     return result;
 }
 

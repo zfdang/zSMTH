@@ -157,9 +157,9 @@ static CGFloat kPostContentFontSize = 17;
 //manually. UILabel uses the drawInRect: or drawAtPoint: methods to draw anyways, calling
 //them directly saves your phone from a lot of unneeded calls. This equates to less execution
 //faster which in turn means more battery life for your users. A win for everybody.
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-}
+//- (void)drawRect:(CGRect)rect
+//{
+//    [super drawRect:rect];
+//}
 
 @end

@@ -186,13 +186,12 @@
                     }
                     [self.tableView.infiniteScrollingView stopAnimating];
                 }
-                // 重新打开下拉刷新
-                self.tableView.showsPullToRefresh = YES;
             });
-        } else {
+        }
+        dispatch_sync(dispatch_get_main_queue(), ^{
             // 重新打开下拉刷新
             self.tableView.showsPullToRefresh = YES;
-        }
+        });
     });
 }
 
