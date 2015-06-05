@@ -7,7 +7,7 @@
 //
 
 #import "PostContentLabel.h"
-static CGFloat kEspressoDescriptionTextFontSize = 17;
+static CGFloat kPostContentFontSize = 17;
 
 @interface PostContentLabel()
 {
@@ -26,10 +26,9 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:@""];
 
     // create font for attString
-    UIFont * font = [self font];
-    kEspressoDescriptionTextFontSize = font.pointSize;
-    CTFontRef font_ref = CTFontCreateWithName((CFStringRef)font.fontName, kEspressoDescriptionTextFontSize, nil);
-    
+    UIFont *font = [self font];
+    font = [UIFont fontWithName:font.fontName size:kPostContentFontSize];
+
     __block BOOL is_in_quota_mode = false;
     __block NSMutableString *subContent = [[NSMutableString alloc] initWithCapacity:2000];
     __block int empty_line_counter = 0;
@@ -72,7 +71,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
                     // 引文模式
                     NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                             (id)[UIColor grayColor].CGColor, kCTForegroundColorAttributeName,
-                                            font_ref, kCTFontAttributeName,
+                                            font, NSFontAttributeName,
                                             [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
                                             [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
                                             nil];
@@ -82,7 +81,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
                     // 正文模式
                     NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                             (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
-                                            font_ref, kCTFontAttributeName,
+                                            font, NSFontAttributeName,
                                             [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
                                             [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
                                             nil];
@@ -112,7 +111,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
             // 引文模式
             NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                     (id)[UIColor grayColor].CGColor, kCTForegroundColorAttributeName,
-                                    font_ref, kCTFontAttributeName,
+                                    font, NSFontAttributeName,
                                     [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
                                     [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
                                     nil];
@@ -122,7 +121,7 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
             // 正文模式
             NSDictionary * attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                     (id)[UIColor blackColor].CGColor, kCTForegroundColorAttributeName,
-                                    font_ref, kCTFontAttributeName,
+                                    font, NSFontAttributeName,
                                     [UIColor whiteColor].CGColor, kCTStrokeColorAttributeName,
                                     [NSNumber numberWithFloat:0.0f], kCTStrokeWidthAttributeName,
                                     nil];
@@ -130,25 +129,26 @@ static CGFloat kEspressoDescriptionTextFontSize = 17;
         }
     }
 
-    CFRelease(font_ref);
     self.text = attString;
 }
 
 - (CGFloat)getContentHeight
 {
-    static CGFloat padding = 0.0;
+    // create font for attString
+    UIFont *font = [self font];
+    font = [UIFont fontWithName:font.fontName size:kPostContentFontSize];
 
-    UIFont *systemFont = [UIFont systemFontOfSize:kEspressoDescriptionTextFontSize];
-//    CGSize textSize = CGSizeMake(self.frame.size.width, CGFLOAT_MAX); // rough accessory size
     // tableviewcell does not resize with UIScreen size, but I guess this issue can be fixed somehow
     // before we fix the issue, use UIScreen's width
     CGRect rect = [UIScreen mainScreen].bounds;
     // 12 is the trailing and leading to cellview -> contentview
-    CGSize textSize = CGSizeMake(rect.size.width - 12, CGFLOAT_MAX); // rough accessory size
-    CGSize sizeWithFont = [self.text sizeWithFont:systemFont constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
-
-    CGFloat result =  sizeWithFont.height + padding;
-    return result;
+    // CGSize frameSize = CGSizeMake(rect.size.width - 12, CGFLOAT_MAX);
+    CGSize frameSize = CGSizeMake(rect.size.width, CGFLOAT_MAX);
+    CGRect newSize = [self.text boundingRectWithSize:frameSize
+                                  options:NSStringDrawingUsesLineFragmentOrigin
+                               attributes:@{NSFontAttributeName:font}
+                                  context:nil];
+    return newSize.size.height;
 }
 
 // http://www.jamesvandyne.com/improve-performance-and-draw-your-own-strings-on-iphone/
