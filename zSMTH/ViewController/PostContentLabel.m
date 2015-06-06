@@ -11,6 +11,7 @@ static CGFloat kPostContentFontSize = 17;
 
 @interface PostContentLabel()
 {
+    NSMutableAttributedString *attString;
 }
 @end
 
@@ -23,7 +24,7 @@ static CGFloat kPostContentFontSize = 17;
     self.lineBreakMode = NSLineBreakByWordWrapping;
     self.numberOfLines = 0;
 
-    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:@""];
+    attString = [[NSMutableAttributedString alloc] initWithString:@""];
 
     // create font for attString
     UIFont *font = [self font];
@@ -143,12 +144,15 @@ static CGFloat kPostContentFontSize = 17;
     CGRect rect = [UIScreen mainScreen].bounds;
     // 12 is the trailing and leading to cellview -> contentview
     // CGSize frameSize = CGSizeMake(rect.size.width - 12, CGFLOAT_MAX);
-    CGSize frameSize = CGSizeMake(rect.size.width, CGFLOAT_MAX);
-    CGRect newSize = [self.text boundingRectWithSize:frameSize
-                                  options:NSStringDrawingUsesLineFragmentOrigin
-                               attributes:@{NSFontAttributeName:font}
-                                  context:nil];
-    return newSize.size.height;
+    CGSize frameSize = CGSizeMake(rect.size.width - 12, CGFLOAT_MAX);
+    // 采用 TTTAttributedLabel 提供的方法来算高度
+//    CGRect newSize = [self.text boundingRectWithSize:frameSize
+//                                  options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine
+//                               attributes:@{NSFontAttributeName:font}
+//                                  context:nil];
+    
+    CGSize size = [TTTAttributedLabel sizeThatFitsAttributedString:attString withConstraints:frameSize limitedToNumberOfLines:0];
+    return ceil(size.height);
 }
 
 // http://www.jamesvandyne.com/improve-performance-and-draw-your-own-strings-on-iphone/

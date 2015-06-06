@@ -14,7 +14,7 @@
 #import "TapImageView.h"
 #import "UIImage+Resize.h"
 
-const CGFloat PaddingBetweenSubviews = 8.0;
+const CGFloat PaddingBetweenSubviews = 4.0;
 
 @interface PostContentTableViewCell()
 {
@@ -145,9 +145,13 @@ const CGFloat PaddingBetweenSubviews = 8.0;
     for (int j = 0; j < index; j++) {
         // calculate sum of previous images's height
         // 这里可以被优化，其实只看最后一个的位置就可以了
-        UIView *subview = (UIView*) [contentSubviews objectAtIndex:j];
-        float subviewHeight = subview.frame.size.height;
-        result += subviewHeight + PaddingBetweenSubviews;
+        if(j < [contentSubviews count]) {
+            UIView *subview = (UIView*) [contentSubviews objectAtIndex:j];
+            float subviewHeight = subview.frame.size.height;
+            result += subviewHeight + PaddingBetweenSubviews;
+        } else {
+            result += PaddingBetweenSubviews;
+        }
     }
     return result;
 }
@@ -324,6 +328,7 @@ const CGFloat PaddingBetweenSubviews = 8.0;
     }
     result += PaddingBetweenSubviews;
 
+    // NSLog(@"Cell Height = %f", result);
     return result;
 }
 
