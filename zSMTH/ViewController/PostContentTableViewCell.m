@@ -328,7 +328,7 @@ const CGFloat PaddingBetweenSubviews = 4.0;
     }
     result += PaddingBetweenSubviews;
 
-    // NSLog(@"Cell Height = %f", result);
+//    NSLog(@"Cell Height = %f", result);
     return result;
 }
 
