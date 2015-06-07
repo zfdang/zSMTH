@@ -340,12 +340,12 @@
                                 <rect key="frame" x="26" y="239.5" width="323" height="337"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <accessibility key="accessibilityConfiguration" label=""/>
-                                <string key="text">本软件是基于水木社区API实现的一个IOS平台的客户端。  一些使用的技巧:
+                                <mutableString key="text">本软件是基于水木社区API实现的一个IOS平台的客户端。  一些使用的技巧:
 1.在用户信息查询页面，点击头像可以修改自己的头像
 2.在列表界面，使用下拉的手势可以刷新内容；在底部的时候，使用上划的手势可以加载更多的内容
 3.查看帖子时，长按帖子会弹出操作菜单，其中包括回复帖子，转寄帖子等操作
 4.点击图片附件，可以进入全屏看图模式；然后点击右上的图标，可以分享或者保存图片
-5. 长按超链接将直接在内置浏览器中打开链接；短按超链接将弹出菜单，可以选择复制URL或者在外部浏览器中打开链接  更多信息，请访问zSMTH网站: http://zSMTH.zfdang.com</string>
+5. 点击超链接将直接在内置浏览器中打开链接；长按超链接将弹出菜单，可以选择复制URL或者在外部浏览器中打开链接  更多信息，请访问zSMTH网站: http://zSMTH.zfdang.com</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
