@@ -651,6 +651,15 @@
 
 - (void)attributedLabel:(__unused TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
+    // 点击链接，直接打开URL
+    BrowserViewController *browser = [self.storyboard instantiateViewControllerWithIdentifier:@"browserController"];
+    browser.targetURL = url;
+    [self.navigationController pushViewController:browser animated:YES];
+}
+
+- (void)attributedLabel:(__unused TTTAttributedLabel *)label didLongPressLinkWithURL:(__unused NSURL *)url atPoint:(__unused CGPoint)point
+{
+    // 长按，弹出菜单
     [[[UIActionSheet alloc] initWithTitle:[url absoluteString]
                                  delegate:self
                         cancelButtonTitle:NSLocalizedString(@"取消", nil)
@@ -661,14 +670,6 @@
       nil
       ]
      showInView:self.view];
-}
-
-- (void)attributedLabel:(__unused TTTAttributedLabel *)label didLongPressLinkWithURL:(__unused NSURL *)url atPoint:(__unused CGPoint)point
-{
-    // 长按链接，直接打开URL
-    BrowserViewController *browser = [self.storyboard instantiateViewControllerWithIdentifier:@"browserController"];
-    browser.targetURL = url;
-    [self.navigationController pushViewController:browser animated:YES];
 }
 
 #pragma mark - UIActionSheetDelegate
