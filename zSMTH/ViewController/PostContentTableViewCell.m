@@ -54,9 +54,9 @@ const CGFloat PaddingBetweenSubviews = 4.0;
         //    http://stackoverflow.com/questions/14125563/uilabel-view-disappear-when-the-height-greater-than-8192
         //    http://stackoverflow.com/questions/1493895/uiview-what-are-the-maximum-bounds-dimensions-i-can-use
         // 所以需要限制segment的长度
-        const int maxLength = 3000;
+        const int maxLength = 2000;
         while (segment.length > maxLength) {
-            NSRange range = NSMakeRange(maxLength - 100, segment.length - maxLength + 100);
+            NSRange range = NSMakeRange(maxLength, segment.length - maxLength);
             NSRange result = [segment rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]
                                                       options:0
                                                         range:range];
@@ -171,8 +171,7 @@ const CGFloat PaddingBetweenSubviews = 4.0;
     float initialViewOffset = rect.origin.y + rect.size.height;
 
     if(post.postID == nil || [post.postID doubleValue] != postID) {
-        NSLog(@"new cell, or re-used cell");
-        postID = [post.postID doubleValue];
+        NSLog(@"new cell or re-used cell, parse content into segments");
 
         // cell被重用了，或者是新的cell, 我们需要清理cell的信息
         // 设置用户头像
@@ -195,123 +194,112 @@ const CGFloat PaddingBetweenSubviews = 4.0;
         [contentSegments removeAllObjects];
         [self parsePostIntoSegments:post];
 
-        // 因为cell可能是被重用的，所以要先清除之前可能添加进去的subview
-        //        NSArray *subviews = [self.cellView subviews];
-        //        for (id subview in subviews) {
-        //            if([subview isKindOfClass:[TapImageView class]] || [subview isKindOfClass:[TTTAttributedLabel class]]){
-        //                UIView *view = (UIView*) subview;
-        //                [view removeFromSuperview];
-        //            }
-        //        }
-        for (UIView *view in contentSubviews) {
-            [view removeFromSuperview];
-        }
-        [contentSubviews removeAllObjects];
-
-        NSLog(@"****************************");
-        // 将每个segment添加到cellView中去
-        for (int i = 0; i < [contentSegments count]; i++) {
-            // 计算当前subview的垂直偏移量
-            float curSubviewOffset = [self calculateContentOffsetForSubview:i initialOffset:initialViewOffset];
-            
-            id item = [contentSegments objectAtIndex:i];
-            if([item isKindOfClass:[NSString class]]) {
-                // 这是帖子内容的一个片段
-                NSString *content = (NSString*) item;
-
-                PostContentLabel * labelView = [[PostContentLabel alloc] init];
-                if(post.postContent.length < 2000) {
-                    labelView.enabledTextCheckingTypes = NSTextCheckingTypeLink;
-                    labelView.delegate = self.delegate;
-                } else {
-                    // 当文本太长时，不做链接的检查，否则性能会太差
-                    labelView.enabledTextCheckingTypes = 0;
-                }
-                [labelView setContentInfo:content];
-
-                // 设置view的尺寸
-                CGFloat selfHeight = [labelView getContentHeight];
-                labelView.frame = CGRectMake(rect.origin.x, curSubviewOffset, rect.size.width, selfHeight);
-                [self.cellView addSubview:labelView];
-
-                [contentSubviews addObject:labelView];
-
-                NSLog(@"Content view (%d): y = %f, height = %f", i, labelView.frame.origin.y, labelView.frame.size.height);
-            } else if ([item isKindOfClass:[NSNumber class]]) {
-                // 这是帖子的一个附件
-                NSNumber *num = (NSNumber*)item;
-
-                SMTHAttachment *att = (SMTHAttachment*)[post.attachments objectAtIndex:[num intValue]];
-                if(![att isImage]){
-                    // this is not an image
-                    continue;
-                }
-
-                // 创建图片附件subview
-                TapImageView * imageview = [[TapImageView alloc] init];
-                imageview.idxPost = self.idxPost;
-                imageview.idxImage = [num intValue];
-                imageview.delegate = self.delegate;
-
-                // Here we use the new provided sd_setImageWithURL: method to load the web image
-                [imageview sd_setImageWithURL: [post getAttachedImageURL:[num intValue]]
-                             placeholderImage:[UIImage imageNamed:@"loading"]
-                                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                        if(error != nil) {
-                                            // 下载失败，使用loadingfailure图片来替代原来的placeholder image
-                                            NSLog(@"failed to download %@, error is %@", imageURL, error);
-                                            image = [UIImage imageNamed:@"loadingfailure"];
-                                            imageview.image = image;
-                                        } else {
-                                            // 下载成功, 计算满宽情况下，图片的高度
-                                            CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;
-                                            
-                                            // 缩小图片，否则占用内存会太大
-                                            if(image.size.height > curImageHeight) {
-                                                // NSLog(@"resize image, from %f * %f ==> %f * %f", image.size.width, image.size.height, rect.size.width, curImageHeight);
-                                                CGSize size = CGSizeMake(rect.size.width, curImageHeight);
-                                                image = [UIImage imageWithImage:image scaledToFitToSize:size];
-                                            }
-                                            
-                                            // update height & width of imageview
-                                            CGRect frame = imageview.frame;
-                                            frame.size.height = curImageHeight;
-                                            frame.size.width = rect.size.width;
-                                            imageview.frame = frame;
-                                            
-                                            // if image was not loaded before, refresh tableview
-                                            if(self.delegate && imageview.loaded == NO){
-                                                imageview.loaded = YES;
-                                                [self.delegate RefreshTableView];
-                                            }
-                                        }
-                                    }];
-
-                if(imageview.loaded == NO){
-                    imageview.frame = CGRectMake(rect.origin.x, curSubviewOffset, 100, 20);
-                }
-                [self.cellView addSubview:imageview];
-
-                [contentSubviews addObject:imageview];
-                NSLog(@"Image view (%d): %f, %f", i, imageview.frame.origin.y, imageview.frame.size.height);
-            }
-        }
+        // 将postID保存下来
+        postID = [post.postID doubleValue];
 
         // set cell border
         [self.cellView.layer setBorderColor:[UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1.0].CGColor];
         self.cellView.layer.cornerRadius = 5.0;
         [self.cellView.layer setBorderWidth:0.5f];
-    } else {
-        // Cell 没有被重用，只是table reload了，需要重新排版
-        NSLog(@"############################");
-        NSLog(@"Cell update, re-layout only");
+    }
+    
+    // 因为cell可能是被重用的，所以要先清除之前可能添加进去的subview
+    //        NSArray *subviews = [self.cellView subviews];
+    //        for (id subview in subviews) {
+    //            if([subview isKindOfClass:[TapImageView class]] || [subview isKindOfClass:[TTTAttributedLabel class]]){
+    //                UIView *view = (UIView*) subview;
+    //                [view removeFromSuperview];
+    //            }
+    //        }
+    for (UIView *view in contentSubviews) {
+        [view removeFromSuperview];
+    }
+    [contentSubviews removeAllObjects];
 
-        for (int i = 0; i < [contentSubviews count]; i++) {
-            UIView *subview = (UIView*) [contentSubviews objectAtIndex:i];
-            CGRect rect = subview.frame;
-            rect.origin.y = [self calculateContentOffsetForSubview:i initialOffset:initialViewOffset];
-            subview.frame = rect;
-            NSLog(@"(%d): %f, %f, %f, %f", i, subview.frame.origin.x, subview.frame.origin.y, subview.frame.size.width, subview.frame.size.height);
+    NSLog(@"****************************");
+    // 将每个segment添加到cellView中去
+    for (int i = 0; i < [contentSegments count]; i++) {
+        id item = [contentSegments objectAtIndex:i];
+        if([item isKindOfClass:[NSString class]]) {
+            // 这是帖子内容的一个片段
+            NSString *content = (NSString*) item;
+
+            PostContentLabel * labelView = [[PostContentLabel alloc] init];
+            if(post.postContent.length < 1000) {
+                labelView.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+                labelView.delegate = self.delegate;
+            } else {
+                // 当文本太长时，不做链接的检查，否则性能会太差
+                labelView.enabledTextCheckingTypes = 0;
+            }
+            [labelView setContentInfo:content];
+
+            // 设置view的尺寸
+            CGFloat selfHeight = [labelView getContentHeight];
+            labelView.frame = CGRectMake(rect.origin.x, [self calculateContentOffsetForSubview:i initialOffset:initialViewOffset], rect.size.width, selfHeight);
+            [self.cellView addSubview:labelView];
+
+            [contentSubviews addObject:labelView];
+
+            NSLog(@"Content view (%d): y = %f, height = %f", i, labelView.frame.origin.y, labelView.frame.size.height);
+        } else if ([item isKindOfClass:[NSNumber class]]) {
+            // 这是帖子的一个附件
+            NSNumber *num = (NSNumber*)item;
+
+            SMTHAttachment *att = (SMTHAttachment*)[post.attachments objectAtIndex:[num intValue]];
+            if(![att isImage]){
+                // this is not an image
+                continue;
+            }
+
+            // 创建图片附件subview
+            TapImageView * imageview = [[TapImageView alloc] init];
+            imageview.idxPost = self.idxPost;
+            imageview.idxImage = [num intValue];
+            imageview.delegate = self.delegate;
+
+            // Here we use the new provided sd_setImageWithURL: method to load the web image
+            [imageview sd_setImageWithURL: [post getAttachedImageURL:[num intValue]]
+                         placeholderImage:[UIImage imageNamed:@"loading"]
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                    if(error != nil) {
+                                        // 下载失败，使用loadingfailure图片来替代原来的placeholder image
+                                        NSLog(@"failed to download %@, error is %@", imageURL, error);
+                                        image = [UIImage imageNamed:@"loadingfailure"];
+                                        imageview.image = image;
+                                    } else {
+                                        // 下载成功, 计算满宽情况下，图片的高度
+                                        CGFloat curImageHeight = rect.size.width * image.size.height / image.size.width;
+                                        
+                                        // 缩小图片，否则占用内存会太大
+                                        if(image.size.height > curImageHeight) {
+                                            // NSLog(@"resize image, from %f * %f ==> %f * %f", image.size.width, image.size.height, rect.size.width, curImageHeight);
+                                            CGSize size = CGSizeMake(rect.size.width, curImageHeight);
+                                            image = [UIImage imageWithImage:image scaledToFitToSize:size];
+                                        }
+
+                                        // update height & width of imageview
+                                        CGRect frame = imageview.frame;
+                                        frame.origin.y = [self calculateContentOffsetForSubview:i initialOffset:initialViewOffset];
+                                        frame.size.height = curImageHeight;
+                                        frame.size.width = rect.size.width;
+                                        imageview.frame = frame;
+
+                                        // if image was not loaded before, refresh tableview
+                                        if(self.delegate && att.loaded == NO){
+                                            att.loaded = YES;
+                                            [self.delegate RefreshTableView];
+                                        }
+                                    }
+                                }];
+
+            if(att.loaded == NO){
+                imageview.frame = CGRectMake(rect.origin.x, [self calculateContentOffsetForSubview:i initialOffset:initialViewOffset], 100, 20);
+            }
+            [self.cellView addSubview:imageview];
+
+            [contentSubviews addObject:imageview];
+            NSLog(@"Image view (%d): %f, %f", i, imageview.frame.origin.y, imageview.frame.size.height);
         }
     }
 }

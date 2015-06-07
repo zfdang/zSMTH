@@ -16,6 +16,7 @@
 @property (nonatomic) long attPos;
 @property (nonatomic) long attSize;
 @property (nonatomic) CGFloat imgHeight;
+@property (nonatomic) BOOL loaded;
 
 -(BOOL) isImage;
 

@@ -32,7 +32,6 @@
         self.clipsToBounds = YES;
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.userInteractionEnabled = YES;
-        self.loaded = NO;
     }
     return self;
 }
