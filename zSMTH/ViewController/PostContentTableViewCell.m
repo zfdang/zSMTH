@@ -79,6 +79,8 @@ const CGFloat PaddingBetweenSubviews = 4.0;
     // saved images index which have been shown in content
     NSMutableIndexSet *attachIndex = [[NSMutableIndexSet alloc] init];
 
+    // 避免[img=http://xxxx.xxx][/img]的情形被detect错链接
+    post.postContent = [post.postContent stringByReplacingOccurrencesOfString:@"][/img]" withString:@" ][/img]"];
     // 将内容分成不同的片段，分别显示
     // split post contents by [upload=1][/upload]
     NSRegularExpression *regex = [NSRegularExpression

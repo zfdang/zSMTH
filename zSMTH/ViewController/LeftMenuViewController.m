@@ -54,7 +54,7 @@
     // init left menu
     leftMenu = @[@[@"节名", @"首页导读", @"个人收藏夹",  @"全部讨论区"],
 //                 @[@"我的水木", @"邮箱", @"文章提醒", @"设置", @"关于"]];
-                  @[@"我的水木", @"邮箱", @"设置", @"关于", @"测试"]];
+                  @[@"我的水木", @"邮箱", @"设置", @"关于"]];
     
     // create table view
     self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:1.0f];
