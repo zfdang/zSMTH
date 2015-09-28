@@ -1,5 +1,5 @@
 PODS:
-  - CTAssetsPickerController (2.9.4)
+  - CTAssetsPickerController (2.9.5)
   - DACircularProgress (2.3.1)
   - FMDB (2.5):
     - FMDB/standard (= 2.5)
@@ -8,21 +8,19 @@ PODS:
     - FMDB/common
   - JDStatusBarNotification (1.5.2)
   - MBProgressHUD (0.9.1)
-  - MWPhotoBrowser (1.4.1):
-    - DACircularProgress
-    - MBProgressHUD (~> 0.8)
-    - PSTCollectionView (~> 1.2)
-    - SDWebImage (~> 3.7)
-  - PSTCollectionView (1.2.3)
+  - MWPhotoBrowser (2.1.1):
+    - DACircularProgress (~> 2.3)
+    - MBProgressHUD (~> 0.9)
+    - SDWebImage (!= 3.7.2, ~> 3.7)
   - REFrostedViewController (2.4.8)
   - RNGridMenu (0.1.3)
-  - SDWebImage (3.7.2):
-    - SDWebImage/Core (= 3.7.2)
-  - SDWebImage/Core (3.7.2)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
   - SVPullToRefresh (0.4.1)
   - Toast (2.4)
-  - TTTAttributedLabel (1.13.3)
-  - UMengAnalytics-NO-IDFA (3.5.9)
+  - TTTAttributedLabel (1.13.4)
+  - UMengAnalytics-NO-IDFA (3.5.17)
 
 DEPENDENCIES:
   - CTAssetsPickerController (~> 2.9.0)
@@ -48,19 +46,18 @@ CHECKOUT OPTIONS:
     :git: https://github.com/zfdang/SVPullToRefresh.git
 
 SPEC CHECKSUMS:
-  CTAssetsPickerController: 3030dc60f5d1a3c4e5b1c0aa9f069220d5bf7008
+  CTAssetsPickerController: b413fece2194ae3dbf22fbc544cf6f2a6d516a4d
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   JDStatusBarNotification: a36d09ccbb047217572b074a61e7ca10dddc5f0a
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MWPhotoBrowser: 2531e682860d62b8a7ba8659de02eb9040e431e5
-  PSTCollectionView: 6749df92885353521f55279a7ce2b293762e2be4
+  MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
   REFrostedViewController: a893b4979ba1f200c547aef9ff4c3fd5a18f5923
   RNGridMenu: c58db81f87b5473936bb1b675dc3e947c409b51d
-  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
-  TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
-  UMengAnalytics-NO-IDFA: c5302a2246061c356641bb3056e89dfbdeb37424
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
+  UMengAnalytics-NO-IDFA: 601dab9ffe32f9de3fa0a6116768aed18a56f8a9
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.39.0.beta.4

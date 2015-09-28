@@ -226,7 +226,7 @@ const CGFloat PaddingBetweenSubviews = 4.0;
             // 这是帖子内容的一个片段
             NSString *content = (NSString*) item;
 
-            PostContentLabel * labelView = [[PostContentLabel alloc] init];
+            PostContentLabel * labelView = [[PostContentLabel alloc] initWithFrame:CGRectZero];
             if(post.postContent.length < 1000) {
                 labelView.enabledTextCheckingTypes = NSTextCheckingTypeLink;
                 labelView.delegate = self.delegate;
