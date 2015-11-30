@@ -300,9 +300,15 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
 
         if(contentType == CONTENT_POST) {
-            // 显示的是文章时，才显示菜单
+            // 显示的是文章时，显示帖子菜单
             UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
                                                   initWithTarget:self action:@selector(handleLongPress:)];
+            lpgr.minimumPressDuration = 0.6; //seconds
+            [cell addGestureRecognizer:lpgr];
+        } else if (contentType == CONTENT_INBOX) {
+            // 显示的邮件，显示邮件菜单
+            UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                                  initWithTarget:self action:@selector(handleLongPressInMail:)];
             lpgr.minimumPressDuration = 0.6; //seconds
             [cell addGestureRecognizer:lpgr];
         }
@@ -503,6 +509,59 @@
         [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
     }
 }
+
+- (void) handleLongPressInMail:(UILongPressGestureRecognizer *)gesture
+{
+    // only when gesture was recognized, not when ended
+    if (gesture.state == UIGestureRecognizerStateBegan)
+    {
+        // get affected cell
+        UITableViewCell *cell = (UITableViewCell *)[gesture view];
+        // get indexPath of cell
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        // now start our action on long press
+        //        NSLog(@"Long click on post %ld, %ld", indexPath.section, indexPath.row);
+        
+        SMTHPost *post = (SMTHPost*)[self.mPosts objectAtIndex:indexPath.row];
+        NSArray *items = @[
+                           
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"copy"]
+                                                           title:@"复制邮件内容"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"1", post.postID);
+                                                              UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                                                              [pasteboard setString:post.postContent];
+                                                              
+                                                              CGRect bounds = [[UIScreen mainScreen] bounds];
+                                                              [self.tableView  makeToast:@"邮件内容已复制到剪切板!"
+                                                                                duration:0.8
+                                                                                position:[NSValue valueWithCGPoint:CGPointMake(bounds.size.width * 0.5, self.tableView.contentOffset.y + bounds.size.height * 0.7)]];
+                                                              
+                                                          }],
+
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"queryUser"]
+                                                           title:@"查询作者"
+                                                          action:^{
+                                                              NSLog(@"%@, %@", @"2", post.postID);
+                                                              UserInfoViewController *userinfo = [self.storyboard instantiateViewControllerWithIdentifier:@"userinfoController"];
+                                                              [userinfo setQueryTask:2 userID:post.author];
+                                                              [self.navigationController pushViewController:userinfo animated:YES];
+                                                          }],
+
+                                                      ];
+        RNGridMenu *av = [[RNGridMenu alloc] initWithItems:items];
+        av.backgroundColor = [[UIColor alloc] initWithRed:235/255.0 green:1.0 blue:235/255.0 alpha:0.85];
+        av.itemTextColor = [UIColor darkTextColor];
+        av.itemTextAlignment = NSTextAlignmentCenter;
+        av.blurLevel = 0.1;
+        av.itemFont = [UIFont boldSystemFontOfSize:15];
+        av.itemSize = CGSizeMake(100, 100);
+        av.menuStyle = RNGridMenuStyleGrid;
+        [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
+    }
+}
+
 
 - (void)sharePost:(SMTHPost*) post
 {
