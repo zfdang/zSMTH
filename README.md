@@ -1,7 +1,7 @@
 # zSMTH
 水木社区论坛的开源IOS客户端
 
-[项目主页 - Project Home](http://zsmth.zfdang.com/)
+[项目主页 - Project Home](http://zsmth-ios.zfdang.com/)
 
 
 # Dependency
